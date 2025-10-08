@@ -1,0 +1,96 @@
+[build-system]
+# Use setuptools for now, easy to switch to poetry/uv later
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hafiscal"
+version = "0.1.0"
+description = "HAFiscal - research content repository"
+readme = "README.md"
+requires-python = ">=3.10,<3.12"
+license = "MIT"
+authors = [
+    {name = "HAFiscal Team", email = "hafiscal@example.com"}
+]
+keywords = ["economics", "computational", "fiscal-policy"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Economic Modeling",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+# Core dependencies only - same across all tools
+dependencies = [
+    "numpy>=1.24,<2",
+    "scipy>=1.10",
+    "pandas>=2.0",
+    "matplotlib>=3.7",
+    "econ-ark>=0.13",
+    "numba>=0.57",
+    "jupyter>=1.0",
+    "notebook>=7.0",
+    "ipykernel>=6.0",
+    "voila>=0.5.6",
+    "pyzmq>=27.1.0",
+]
+
+[project.optional-dependencies]
+# Development dependencies
+dev = [
+    "black>=23.0",
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "mypy>=1.0",
+    "ruff>=0.1.0",
+    "ipynb-py-convert>=0.4",
+]
+
+# HAFiscal-specific extras
+hafiscal = [
+    "statsmodels>=0.14",
+    "seaborn>=0.12",
+]
+
+
+[project.urls]
+Homepage = "https://github.com/econ-ark/HAFiscal"
+Documentation = "https://hafiscal.readthedocs.io"
+Repository = "https://github.com/econ-ark/HAFiscal"
+Issues = "https://github.com/econ-ark/HAFiscal/issues"
+
+# Tool configurations (works with multiple tools)
+[tool.black]
+line-length = 88
+target-version = ['py310', 'py311']
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "I"]
+target-version = "py310"
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+
+# Future: Poetry-specific configuration
+# [tool.poetry]
+# name = "hafiscal"
+# version = "0.1.0"
+# description = "HAFiscal - research content repository"
+
+# Future: uv-specific configuration
+# [tool.uv]
+# index-url = "https://pypi.org/simple"
+
+# Setuptools configuration for package discovery
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["hafiscal*"] 

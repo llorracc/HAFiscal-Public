@@ -1,0 +1,31 @@
+% -*- mode: LaTeX; TeX-PDF-mode: t; -*-
+% Detect project name programmatically
+% This file is loaded early (before \documentclass) so \ProjectName is available
+
+\makeatletter
+
+% First, ensure \texname is defined
+\providecommand{\texname}{\jobname}
+
+% Try to read from .project_container file in parent directory
+\def\@projectname{}
+\IfFileExists{../.project_container}{%
+	\openin\@inputcheck=../.project_container\relax
+	\ifeof\@inputcheck
+		% File is empty
+	\else
+		\read\@inputcheck to \@projectname
+		\closein\@inputcheck
+	\fi
+}{}
+
+% If we got a project name, use it; otherwise use texname as fallback
+\ifx\@projectname\@empty
+	\edef\@projectname{\texname}
+\fi
+
+% Define the project name macros
+\expandafter\gdef\expandafter\ProjectName\expandafter{\@projectname}
+\expandafter\gdef\expandafter\projectname\expandafter{\@projectname}
+
+\makeatother

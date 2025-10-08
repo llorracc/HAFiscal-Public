@@ -1,0 +1,21 @@
+\input{./_path-to-root.ltx}
+\documentclass[\PathToRoot/\ProjectName]{subfiles}
+\standaloneTableSetup
+
+\begin{document}
+
+\begin{table}[tb] 
+  \caption{MPC's across wealth quartiles and in total}
+  \whenintegrated{\label{tab:MPC-WQ}} 
+  \centering
+
+  % Configure \fbox to have invisible border (0pt rule width)
+  \setlength{\fboxrule}{0pt}
+  % Use \fbox{} with invisible outline for custom CSS styling
+  \fbox{\footnotesize Targeting $K/Y$ and avg MPC by quartile}
+  \vspace{0.5em}
+
+  \input{Tables/MPC_WealthQuartiles_Table}
+\end{table}
+
+\end{document}

@@ -1,0 +1,134 @@
+\input{@resources/tex-add-search-paths} % finds stuff in @local/ and @resources/
+\input{./_path-to-root.ltx}                  % Set paths to find resources
+
+\documentclass[titlepage, headings=optiontotocandhead]{econark} % embedded toc
+
+% Definitions unique to this paper
+\usepackage{@local/local}         % Local package definitions and setup
+\usepackage{local-qe}             % @local/local-qe gets pkgs req for qe
+\bibfilesfind{\texname}           % includes system.bib if it is found
+
+% in draft mode, show \labels of all labeled objects (figs, eqns, etc)
+\setboolean{draftmode}{false}
+
+\bibliographystyle{econark}       % based on econometrica
+
+% When compiling Web version of paper, construct targets/anchors
+\weborpdf{ % compiling web version
+  % execute this version if compiling with make4ht
+  \hypersetup{destlabel=true} % set up html labels
+
+}{
+  % execute this version if compiling with pdflatex
+  \provideboolean{showPageHead}{\setboolean{showPageHead}{true}}
+
+  % Enhanced PDF metadata for AI systems and cross-format discovery
+  \hypersetup{
+    pdftitle={Welfare and Spending Effects of Consumption Stimulus Policies},
+    pdfauthor={Carroll, Crawley, Dai, Frankovic, Tretvoll},
+    pdfsubject={Fiscal stimulus policy comparison with heterogeneous agent models},
+    pdfkeywords={fiscal policy, stimulus checks, unemployment insurance, tax cuts, heterogeneous agents, Content MathML, AI-readable}
+  }
+}
+
+\webonly{ % footnotes do not work when there is no page footer
+  % execute this version if compiling with make4ht
+  \section*{Endnotes}
+  \theendnotes
+}
+
+\begin{document}
+% \whenstandalone{content} - Execute content only when file compiled standalone
+% \whenintegrated{content} - Execute content only when integrated into main document
+
+\subfile{Subfiles/HAFiscal-titlepage}\pagebreak
+
+% Table of contents; to omit, \setboolean{TOC}{false} above 
+\ifthenelse{\boolean{TOC}}{\pagebreak
+  \let\LaTeXStandardContentsName\contentsname
+  \renewcommand{\contentsname}{}
+  \tableofcontents
+}{}
+
+% make the body of the paper
+\input{Subfiles.texinput} % all sections are subfiles enumerated here 
+
+\pagebreak
+
+\webonly{
+  % execute this version if compiling with make4ht
+  \section*{Endnotes}
+  \theendnotes
+}
+
+\addcontentsline{toc}{section}{References} % Add refs at end of TOC
+% Bibliography handled automatically by document structure (\entrypointbib in preamble)
+% This ensures proper bibliography handling in modular documents
+
+\clearpage
+
+\section*{Appendices}
+\addcontentsline{toc}{section}{Appendices}
+\markboth{APPENDICES}{APPENDICES}
+
+\appendix
+% Include appendices based on their type and OnlineAppendixHandling
+
+% A: No Splurge appendix (always include full content)
+\subfile{Subfiles/Appendix-NoSplurge}
+
+% B: HANK appendix processed for label crossrefs but doesn't appear in the PDF
+
+% Create visible stub page with full hierarchical structure
+% Reset section counter since hiddencontent already incremented it
+% \addtocounter{section}{-1}
+\FloatBarrier
+\phantomsection
+\section{\href{https://econ-ark.github.io/HAFiscal/\#sec:appendix-hank}{Details of the HANK and SAM Model}}
+\label{sec:appendix-hank}
+
+\noindent\textit{Full appendix PDF available at:}
+\href{https://github.com/econ-ark/HAFiscal/blob/master/Subfiles/Appendix-HANK.pdf}{\texttt{GitHub: Subfiles/Appendix-HANK.pdf}}
+
+\medskip
+\noindent\textit{Click any section title below to view it online in HTML:}
+
+\medskip
+
+\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-households}{Households}}
+\label{sec:hank-households}
+
+\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:goods-market}{Goods Market}}
+\label{sec:goods-market}
+
+\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-final-goods-producer}{Final Goods Producer}}
+\label{sec:hank-final-goods-producer}
+
+\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-intermediate-goods-producers}{Intermediate Goods Producers}}
+\label{sec:hank-intermediate-goods-producers}
+
+\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-labor-market}{Labor market}}
+\label{sec:hank-labor-market}
+
+\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-fiscal-policy}{Fiscal Policy}}
+\label{sec:hank-fiscal-policy}
+
+\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-monetary-policy}{Monetary Policy}}
+\label{sec:hank-monetary-policy}
+
+\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-equilibrium}{Equilibrium}}
+\label{sec:hank-equilibrium}
+
+\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-calibration}{Calibration of Non-Household Blocks}}
+\label{sec:hank-calibration}
+
+\medskip
+
+% C: Robustness appendix (using hidden appendix approach)
+% This appendix is processed for labels but doesn't appear in the PDF
+\begin{hiddencontent}[OnlineAppendix]
+  % Include the actual appendix content but it will be hidden
+  \subfile{Subfiles/Appendix-Robustness}
+\end{hiddencontent}
+
+\end{document}

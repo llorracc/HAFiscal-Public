@@ -1,0 +1,22 @@
+name: hafiscal-dashboard
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11.7
+  - econ-ark=0.14.1
+  - numpy=1.26.4
+  - matplotlib=3.8.0
+  - scipy=1.11.4
+  - pandas=2.1.4
+  - numba=0.59.0
+  - openpyxl=3.1.5
+  - jupyter
+  - ipywidgets
+  - voila
+  - nbconvert
+  - pytest
+  - pip
+  - pip:
+    - sequence-jacobian
+    - econpizza 

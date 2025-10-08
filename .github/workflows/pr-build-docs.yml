@@ -1,0 +1,41 @@
+name: PR Document Build
+
+on:
+  pull_request:
+    branches: [ master ]
+
+concurrency:
+  group: pr-docs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install TeX Live and latexmk
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-full
+
+      - name: Build PDFs
+        env:
+          LATEX_OPTS: "-interaction=nonstopmode"
+        run: |
+          bash reproduce/reproduce_documents.sh
+
+      - name: Upload PDFs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: PDFs
+          if-no-files-found: ignore
+          path: |
+            HAFiscal.pdf
+            HAFiscal-online-appendix.pdf
+            HAFiscal-Slides.pdf
