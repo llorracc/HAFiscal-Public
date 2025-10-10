@@ -1,5 +1,5 @@
-# This workflow is intentionally minimal and should MATCH the same file in HAFiscal-Latest/
-# It deploys the contents of the gh-pages branch without building in CI.
+# This workflow is intentionally minimal and should match the same file in HAFiscal-Latest/
+# It deploys the contents of the gh-pages branch without building in CI
 name: Deploy GitHub Pages
 on:
   push:
