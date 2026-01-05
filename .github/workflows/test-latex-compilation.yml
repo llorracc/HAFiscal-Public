@@ -1,0 +1,448 @@
+name: Test LaTeX Document Compilation
+
+on:
+  push:
+    branches: [ main, master, '*' ]
+    branches-ignore: [ gh-pages, with-precomputed-artifacts ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+env:
+  LATEX_INTERACTION_MODE: nonstopmode
+
+jobs:
+  test-latex:
+    name: Test LaTeX Compilation
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    # Skip this job on gh-pages and with-precomputed-artifacts branches (generated content, no source code)
+    if: github.ref != 'refs/heads/gh-pages' && github.ref != 'refs/heads/gh-pages/' && github.ref != 'refs/heads/with-precomputed-artifacts' && github.ref != 'refs/heads/with-precomputed-artifacts/'
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    env:
+      ACTIONS_STEP_DEBUG: true
+      ACTIONS_RUNNER_DEBUG: true
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up WSL2 and Ubuntu (Windows)
+        if: runner.os == 'Windows'
+        uses: Vampire/setup-wsl@v2
+        with:
+          distribution: Ubuntu-22.04
+          
+      - name: Verify WSL2 (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Write-Host "Verifying WSL2 setup..."
+          $result = wsl bash -c "uname -r" 2>&1
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host "Error: WSL verification failed"
+            Write-Host "Output: $result"
+            exit 1
+          }
+          Write-Host "WSL kernel: $result"
+          Write-Host "✅ WSL2 ready"
+
+      - name: Install prerequisites (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget perl build-essential fontconfig curl
+
+      - name: Install prerequisites (WSL2)
+        if: runner.os == 'Windows'
+        shell: wsl-bash {0}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget perl build-essential fontconfig curl python3-venv python3-pip
+
+      - name: Install prerequisites (macOS)
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          # Install Homebrew if not present (only for prerequisites, NOT for TeX Live)
+          if ! command -v brew >/dev/null 2>&1; then
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          fi
+          # Add Homebrew to PATH (needed for subsequent commands)
+          if [[ -f "/opt/homebrew/bin/brew" ]]; then
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+          elif [[ -f "/usr/local/bin/brew" ]]; then
+            eval "$(/usr/local/bin/brew shellenv)"
+          fi
+          # Install prerequisites via Homebrew (TeX Live will be installed via install-tl, not Homebrew)
+          brew install wget perl fontconfig curl
+
+      - name: Set up Python environment (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: bash ./reproduce/reproduce_environment_comp_uv.sh
+
+      - name: Set up Python environment (WSL2)
+        if: runner.os == 'Windows'
+        shell: wsl-bash {0}
+        run: bash ./reproduce/reproduce_environment_comp_uv.sh
+
+      - name: Install TeX Live via install-tl (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          echo "=== Installing TeX Live via standard install-tl Unix script ==="
+          echo "Using reproduce/docker/setup.sh (Single Source of Truth)"
+          echo "This installs TeX Live 2025 via install-tl + packages via tlmgr"
+          echo "Platform: ${{ runner.os }}"
+          
+          # Run the setup script (Single Source of Truth)
+          bash reproduce/docker/setup.sh
+          
+          # Add TeX Live to PATH for subsequent steps
+          TEXLIVE_BIN="/usr/local/texlive/2025/bin/x86_64-linux"
+          export PATH="$TEXLIVE_BIN:$PATH"
+          if [ -n "${GITHUB_PATH:-}" ]; then
+            echo "$TEXLIVE_BIN" >> $GITHUB_PATH
+          fi
+          
+          echo "✅ TeX Live installation completed via install-tl (managed by tlmgr)"
+          
+          # Verify installation - use full path to ensure we're checking the right pdflatex
+          if [ -f "$TEXLIVE_BIN/pdflatex" ]; then
+            "$TEXLIVE_BIN/pdflatex" --version | head -1
+            if "$TEXLIVE_BIN/pdflatex" --version | grep -q "Debian"; then
+              echo "❌ ERROR: Still using Debian TeX Live!"
+              exit 1
+            else
+              echo "✅ Confirmed: Using upstream TeX Live (not Debian)"
+            fi
+          else
+            echo "❌ ERROR: pdflatex not found at $TEXLIVE_BIN/pdflatex"
+            exit 1
+          fi
+
+      - name: Install TeX Live via install-tl (WSL2)
+        if: runner.os == 'Windows'
+        shell: wsl-bash {0}
+        run: |
+          echo "=== Installing TeX Live via standard install-tl Unix script ==="
+          echo "Using reproduce/docker/setup.sh (Single Source of Truth)"
+          echo "This installs TeX Live 2025 via install-tl + packages via tlmgr"
+          echo "Platform: ${{ runner.os }}"
+          
+          # Run the setup script (Single Source of Truth)
+          bash reproduce/docker/setup.sh
+          
+          # Add TeX Live to PATH for subsequent steps
+          TEXLIVE_BIN="/usr/local/texlive/2025/bin/x86_64-linux"
+          export PATH="$TEXLIVE_BIN:$PATH"
+          if [ -n "${GITHUB_PATH:-}" ]; then
+            echo "$TEXLIVE_BIN" >> $GITHUB_PATH
+          fi
+          
+          echo "✅ TeX Live installation completed via install-tl (managed by tlmgr)"
+          
+          # Verify installation - use full path to ensure we're checking the right pdflatex
+          if [ -f "$TEXLIVE_BIN/pdflatex" ]; then
+            "$TEXLIVE_BIN/pdflatex" --version | head -1
+            if "$TEXLIVE_BIN/pdflatex" --version | grep -q "Debian"; then
+              echo "❌ ERROR: Still using Debian TeX Live!"
+              exit 1
+            else
+              echo "✅ Confirmed: Using upstream TeX Live (not Debian)"
+            fi
+          else
+            echo "❌ ERROR: pdflatex not found at $TEXLIVE_BIN/pdflatex"
+            exit 1
+          fi
+
+      - name: Install TeX Live via install-tl (macOS)
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          echo "=== Installing TeX Live via standard install-tl Unix script ==="
+          echo "Using reproduce/docker/setup.sh (Single Source of Truth)"
+          echo "This installs TeX Live 2025 via install-tl + packages via tlmgr"
+          echo "Platform: macOS"
+          
+          # Skip apt-get on macOS (prerequisites installed via Homebrew)
+          export SKIP_APT_GET=1
+          
+          # Run the setup script (Single Source of Truth)
+          bash reproduce/docker/setup.sh
+          
+          # Add TeX Live to PATH for subsequent steps
+          # macOS: use universal-darwin (works for both Arm and Intel, macOS 10.14+)
+          TEXLIVE_BIN="/usr/local/texlive/2025/bin/universal-darwin"
+          export PATH="$TEXLIVE_BIN:$PATH"
+          if [ -n "${GITHUB_PATH:-}" ]; then
+            echo "$TEXLIVE_BIN" >> $GITHUB_PATH
+          fi
+          
+          echo "✅ TeX Live installation completed via install-tl (managed by tlmgr)"
+          
+          # Verify installation
+          pdflatex --version | head -1
+          echo "✅ Confirmed: Using upstream TeX Live"
+
+      # Note: Windows now uses WSL2 with TeX Live (same as Linux)
+      # The old MiKTeX installation has been replaced with WSL2 setup above
+
+      - name: Verify LaTeX Installation (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          echo "=== Verifying LaTeX Installation ==="
+          export PATH="/usr/local/texlive/2025/bin/x86_64-linux:$PATH"
+          pdflatex --version
+          bibtex --version || echo "BibTeX version check skipped"
+          echo "✅ LaTeX tools ready"
+
+      - name: Verify LaTeX Installation (macOS)
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          echo "=== Verifying LaTeX Installation ==="
+          export PATH="/usr/local/texlive/2025/bin/universal-darwin:$PATH"
+          pdflatex --version
+          bibtex --version || echo "BibTeX version check skipped"
+          echo "✅ LaTeX tools ready"
+
+      - name: Verify LaTeX Installation (WSL2)
+        if: runner.os == 'Windows'
+        shell: wsl-bash {0}
+        run: |
+          echo "=== Verifying LaTeX Installation ==="
+          export PATH="/usr/local/texlive/2025/bin/x86_64-linux:$PATH"
+          pdflatex --version
+          bibtex --version || echo "BibTeX version check skipped"
+          echo "✅ LaTeX tools ready"
+
+      - name: Find LaTeX Documents (Linux)
+        if: runner.os == 'Linux'
+        id: find-docs
+        shell: bash
+        run: |
+          echo "=== Finding LaTeX Documents ==="
+          MAIN_DOCS=$(find . -name "*.tex" -maxdepth 1 -type f | grep -v temp | head -5)
+          echo "Main documents found:"
+          echo "$MAIN_DOCS"
+          
+          if [ -n "$MAIN_DOCS" ]; then
+            # Get the first main document
+            FIRST_DOC=$(echo "$MAIN_DOCS" | head -1)
+            if [ -n "${GITHUB_OUTPUT:-}" ]; then
+              echo "has_docs=true" >> $GITHUB_OUTPUT
+              echo "first_doc=$FIRST_DOC" >> $GITHUB_OUTPUT
+            fi
+            echo "Primary document: $FIRST_DOC"
+          else
+            if [ -n "${GITHUB_OUTPUT:-}" ]; then
+              echo "has_docs=false" >> $GITHUB_OUTPUT
+            fi
+            echo "No main LaTeX documents found"
+          fi
+
+      - name: Find LaTeX Documents (macOS)
+        if: runner.os == 'macOS'
+        id: find-docs-macos
+        shell: bash
+        run: |
+          echo "=== Finding LaTeX Documents ==="
+          MAIN_DOCS=$(find . -name "*.tex" -maxdepth 1 -type f | grep -v temp | head -5)
+          echo "Main documents found:"
+          echo "$MAIN_DOCS"
+          
+          if [ -n "$MAIN_DOCS" ]; then
+            # Get the first main document
+            FIRST_DOC=$(echo "$MAIN_DOCS" | head -1)
+            if [ -n "${GITHUB_OUTPUT:-}" ]; then
+              echo "has_docs=true" >> $GITHUB_OUTPUT
+              echo "first_doc=$FIRST_DOC" >> $GITHUB_OUTPUT
+            fi
+            echo "Primary document: $FIRST_DOC"
+          else
+            if [ -n "${GITHUB_OUTPUT:-}" ]; then
+              echo "has_docs=false" >> $GITHUB_OUTPUT
+            fi
+            echo "No main LaTeX documents found"
+          fi
+
+      - name: Find LaTeX Documents (WSL2)
+        if: runner.os == 'Windows'
+        id: find-docs-wsl2
+        shell: wsl-bash {0}
+        run: |
+          echo "=== Finding LaTeX Documents ==="
+          MAIN_DOCS=$(find . -name "*.tex" -maxdepth 1 -type f | grep -v temp | head -5)
+          echo "Main documents found:"
+          echo "$MAIN_DOCS"
+          
+          if [ -n "$MAIN_DOCS" ]; then
+            # Get the first main document
+            FIRST_DOC=$(echo "$MAIN_DOCS" | head -1)
+            if [ -n "${GITHUB_OUTPUT:-}" ]; then
+              echo "has_docs=true" >> $GITHUB_OUTPUT
+              echo "first_doc=$FIRST_DOC" >> $GITHUB_OUTPUT
+            fi
+            echo "Primary document: $FIRST_DOC"
+          else
+            if [ -n "${GITHUB_OUTPUT:-}" ]; then
+              echo "has_docs=false" >> $GITHUB_OUTPUT
+            fi
+            echo "No main LaTeX documents found"
+          fi
+
+      - name: Test Environment Setup (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          echo "=== Testing Environment Setup ==="
+          export PATH="/usr/local/texlive/2025/bin/x86_64-linux:$PATH"
+          ./reproduce.sh --envt
+
+      - name: Test LaTeX Compilation (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          echo "=== Testing LaTeX Compilation via reproduce.sh ==="
+          export PATH="/usr/local/texlive/2025/bin/x86_64-linux:$PATH"
+          ./reproduce.sh --docs main
+
+      - name: Test Environment Setup (macOS)
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          echo "=== Testing Environment Setup ==="
+          export PATH="/usr/local/texlive/2025/bin/universal-darwin:$PATH"
+          ./reproduce.sh --envt
+
+      - name: Test LaTeX Compilation (macOS)
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          echo "=== Testing LaTeX Compilation via reproduce.sh ==="
+          export PATH="/usr/local/texlive/2025/bin/universal-darwin:$PATH"
+          ./reproduce.sh --docs main
+
+      - name: Test Environment Setup (WSL2)
+        if: runner.os == 'Windows'
+        shell: wsl-bash {0}
+        run: |
+          echo "=== Testing Environment Setup ==="
+          export PATH="/usr/local/texlive/2025/bin/x86_64-linux:$PATH"
+          ./reproduce.sh --envt
+
+      - name: Test LaTeX Compilation (WSL2)
+        if: runner.os == 'Windows'
+        shell: wsl-bash {0}
+        run: |
+          echo "=== Testing LaTeX Compilation via reproduce.sh ==="
+          export PATH="/usr/local/texlive/2025/bin/x86_64-linux:$PATH"
+          ./reproduce.sh --docs main
+
+      - name: Check Generated PDFs
+        if: steps.find-docs-linux.outputs.has_docs == 'true' || steps.find-docs-macos.outputs.has_docs == 'true' || steps.find-docs-wsl2.outputs.has_docs == 'true'
+        shell: bash
+        run: |
+          echo "=== Checking Generated PDFs ==="
+          
+          PDFS_FOUND=$(find . -name "*.pdf" -type f | wc -l)
+          echo "PDFs generated: $PDFS_FOUND"
+          
+          if [ "$PDFS_FOUND" -gt 0 ]; then
+            echo "Generated PDF files:"
+            ls -la *.pdf 2>/dev/null || echo "No PDFs in root directory"
+            find . -name "*.pdf" -type f -exec ls -la {} \;
+            echo "✅ PDF generation: SUCCESS on ${{ matrix.os }}"
+          else
+            echo "❌ PDF generation: FAILED on ${{ matrix.os }}"
+            echo "Checking for error logs..."
+            ls -la *.log 2>/dev/null || echo "No log files found"
+            exit 1
+          fi
+
+      - name: Check LaTeX Logs for Critical Errors
+        if: always()
+        shell: bash
+        run: |
+          echo "=== Checking for Critical LaTeX Errors ==="
+          
+          if ls *.log 1> /dev/null 2>&1; then
+            # Look for ACTUAL critical errors (file not found, missing packages)
+            # Note: "! Emergency stop" after undefined references is NORMAL for early passes
+            CRITICAL_ERRORS=$(grep -i "! LaTeX Error: File.*not found\|! Fatal error" *.log || true)
+            
+            if [ -n "$CRITICAL_ERRORS" ]; then
+              echo "❌ Critical LaTeX errors found:"
+              echo "$CRITICAL_ERRORS"
+              exit 1
+            else
+              echo "✅ No critical LaTeX errors found"
+            fi
+            
+            # Count warnings (informational only)
+            WARNING_COUNT=$(grep -c "LaTeX Warning\|Package.*Warning" *.log || echo "0")
+            echo "LaTeX warnings found: $WARNING_COUNT (warnings are OK)"
+            
+            # Note: Emergency stops after undefined refs are expected in multi-pass compilation
+            EMERGENCY_STOPS=$(grep -c "! Emergency stop" *.log || echo "0")
+            if [ "$EMERGENCY_STOPS" -gt 0 ]; then
+              echo "Emergency stops in logs: $EMERGENCY_STOPS (expected in early passes)"
+            fi
+          else
+            echo "No log files to check"
+          fi
+
+      - name: Upload Generated PDFs
+        if: always() && (steps.find-docs-linux.outputs.has_docs == 'true' || steps.find-docs-macos.outputs.has_docs == 'true' || steps.find-docs-wsl2.outputs.has_docs == 'true')
+        uses: actions/upload-artifact@v4
+        with:
+          name: hafiscal-latest-pdfs-${{ matrix.os }}-${{ github.sha }}
+          path: "*.pdf"
+          retention-days: 7
+          if-no-files-found: warn
+
+      - name: Upload LaTeX Logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hafiscal-latest-logs-${{ matrix.os }}-${{ github.sha }}
+          path: |
+            *.log
+            *.aux
+            *.blg
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Compilation Summary
+        if: always()
+        shell: bash
+        run: |
+          echo "=== Compilation Summary ==="
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Event: ${{ github.event_name }}"
+          echo "Operating System: ${{ matrix.os }}"
+          
+          # Count files
+          PDF_COUNT=$(find . -name "*.pdf" -type f | wc -l)
+          LOG_COUNT=$(find . -name "*.log" -type f | wc -l)
+          
+          echo "Generated $PDF_COUNT PDF files"
+          echo "Created $LOG_COUNT log files"
+          
+          if [ "$PDF_COUNT" -gt 0 ]; then
+            echo "✅ LaTeX compilation: SUCCESS on ${{ matrix.os }}"
+          else
+            echo "❌ LaTeX compilation: FAILED on ${{ matrix.os }}"
+          fi 

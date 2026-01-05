@@ -1,0 +1,188 @@
+#!/bin/sh
+set -eu
+
+fail() { echo "Pre-commit error: $*" >&2; exit 1; }
+
+# 1) Required symlinks (must exist, be symlinks, be recorded as 120000, and not broken)
+req_links="
+Subfiles/.latexmkrc
+reproduce/.latexmkrc
+Subfiles/Code
+"
+for p in $req_links; do
+	[ -e "$p" ] || fail "$p does not exist"
+	[ -L "$p" ] || fail "$p must be a symlink (found regular file)"
+	mode=$(git ls-files -s -- "$p" | awk '{print $1}')
+	[ "$mode" = "120000" ] || fail "$p is not recorded as a symlink in Git (mode=$mode, expected=120000)"
+	tgt=$(readlink "$p" || true)
+	if [ -n "$tgt" ]; then
+		linkdir=$(dirname -- "$p")
+		resolved="$linkdir/$tgt"
+		[ -e "$resolved" ] || fail "$p is a broken symlink (target $tgt not found from $linkdir)"
+	fi
+	# Enforce specific targets for latexmk links
+	case "$p" in
+		Subfiles/.latexmkrc)
+			expected='../.latexmkrc'
+			[ "${tgt:-}" = "$expected" ] || fail "Subfiles/.latexmkrc must point to $expected (found ${tgt:-})"
+			;;
+		reproduce/.latexmkrc)
+			expected='../.latexmkrc'
+			[ "${tgt:-}" = "$expected" ] || fail "reproduce/.latexmkrc must point to $expected (found ${tgt:-})"
+			;;
+	esac
+done
+
+# Collect staged files (text list and NUL-separated)
+staged_list=$(git diff --cached --name-only || true)
+staged_nul=$(git diff --cached --name-only -z || true)
+
+# 2) Block huge files in the index (>10MB), except top-level PDFs
+max_bytes=10485760
+case "${staged_nul:-}" in
+	"") : ;;
+	*)
+		# Read NUL-separated file list safely
+		printf %s "$staged_nul" | tr '\0' '\n' | while IFS= read -r file; do
+			[ -n "$file" ] || continue
+			[ -f "$file" ] || continue
+			size=$(wc -c < "$file" 2>/dev/null || echo 0)
+			base=$(basename -- "$file")
+			case "$base" in
+				HAFiscal.pdf|HAFiscal-Slides.pdf|HAFiscal-online-appendix.pdf) : ;;
+				*)
+					[ "$size" -le "$max_bytes" ] || fail "File too large (>10MB): $file ($size bytes)"
+				;;
+			esac
+		done
+	;;
+esac
+
+# 3) Disallow merge conflict markers in staged content
+	if [ -n "${staged_list:-}" ]; then
+		echo "$staged_list" | while IFS= read -r f; do
+			[ -f "$f" ] || continue
+			if grep -nE '^(<<<<<<<[[:space:]]|^=======$|^>>>>>>>)' -- "$f" >/dev/null 2>&1; then
+				fail "Merge conflict markers present in staged file: $f"
+			fi
+		done
+	fi
+
+# 4) shellcheck on staged shell scripts (if available)
+if command -v shellcheck >/dev/null 2>&1; then
+        sh_files=$(printf '%s\n' "$staged_list" | grep -E '\.sh$' | grep -v '@resources' | grep -v '^docs/' | grep -v '^Tools/' || true)
+	if [ -n "$sh_files" ]; then
+		# Run shellcheck per-file to avoid long argv
+		printf '%s\n' "$sh_files" | while IFS= read -r shf; do
+			[ -f "$shf" ] || continue
+			# Capture shellcheck output
+			shellcheck_output=$(shellcheck -x -f gcc "$shf" 2>&1 || true)
+			if [ -n "$shellcheck_output" ]; then
+				# Check if shellcheck found errors
+				if echo "$shellcheck_output" | grep -q "^$shf:"; then
+					# Display the shellcheck output
+					echo "$shellcheck_output" | sed 's/^/  /'
+					echo ""
+					
+					# Parse and provide fix instructions for common style errors
+					echo "$shellcheck_output" | while IFS= read -r line; do
+						case "$line" in
+							*"SC2001"*)
+								# SC2001: See if you can use ${variable//search/replace} instead
+								echo "  💡 FIX INSTRUCTION for SC2001:"
+								echo "     Replace: \$(echo \"\$var\" | sed 's/pattern/replacement/g')"
+								echo "     With:     \${var//pattern/replacement}"
+								echo ""
+								echo "  📝 Example fix for your specific case:"
+								# Try to extract the actual sed command from the context
+								if echo "$shellcheck_output" | grep -q 'sed.*s/\\\\/\\\\\\\\/g'; then
+									echo "     Replace: escaped_opt=\$(echo \"\$opt\" | sed 's/\\\\/\\\\\\\\/g')"
+									echo "     With:     escaped_opt=\${opt//\\\\/\\\\\\\\}"
+								fi
+								;;
+							*"SC2086"*)
+								# SC2086: Double quote to prevent globbing and word splitting
+								echo "  💡 FIX INSTRUCTION for SC2086:"
+								echo "     Add double quotes around the variable reference"
+								echo "     Example: Change \$var to \"\$var\""
+								;;
+							*"SC2046"*)
+								# SC2046: Quote this to prevent word splitting
+								echo "  💡 FIX INSTRUCTION for SC2046:"
+								echo "     Add double quotes around command substitution"
+								echo "     Example: Change \$(command) to \"\$(command)\""
+								;;
+							*"SC2164"*)
+								# SC2164: Use cd ... || exit in case cd fails
+								echo "  💡 FIX INSTRUCTION for SC2164:"
+								echo "     Replace: cd directory"
+								echo "     With:     cd directory || exit"
+								;;
+							*"SC2181"*)
+								# SC2181: Check exit code directly with if statement
+								echo "  💡 FIX INSTRUCTION for SC2181:"
+								echo "     Replace: command; if [ \$? -eq 0 ]; then"
+								echo "     With:     if command; then"
+								;;
+							*"SC2016"*)
+								# SC2016: Expressions don't expand in single quotes
+								echo "  💡 FIX INSTRUCTION for SC2016:"
+								echo "     Use double quotes if you want variable expansion"
+								echo "     Or escape the dollar sign if you want literal $"
+								;;
+							*"SC2028"*)
+								# SC2028: echo may not expand escape sequences
+								echo "  💡 FIX INSTRUCTION for SC2028:"
+								echo "     Replace: echo \"text\\n\""
+								echo "     With:     printf \"text\\n\""
+								;;
+							*"SC2162"*)
+								# SC2162: read without -r will mangle backslashes
+								echo "  💡 FIX INSTRUCTION for SC2162:"
+								echo "     Replace: read variable"
+								echo "     With:     read -r variable"
+								;;
+							*"SC2034"*)
+								# SC2034: Variable appears unused
+								echo "  💡 FIX INSTRUCTION for SC2034:"
+								echo "     Either use the variable or remove it"
+								echo "     Or add: # shellcheck disable=SC2034"
+								echo "     if the variable is used elsewhere"
+								;;
+							*"SC2155"*)
+								# SC2155: Declare and assign separately
+								echo "  💡 FIX INSTRUCTION for SC2155:"
+								echo "     Replace: local var=\$(command)"
+								echo "     With:     local var"
+								echo "              var=\$(command)"
+								;;
+						esac
+					done
+					
+					echo ""
+					echo "  ℹ️  To see full shellcheck wiki for any error code:"
+					echo "     Visit: https://www.shellcheck.net/wiki/SC####"
+					echo "     (Replace #### with the error code number)"
+					echo ""
+					echo "  🔧 To automatically fix some issues, you can try:"
+					echo "     shellcheck -f diff \"$shf\" | patch -p1"
+					echo ""
+					
+					fail "shellcheck failed on $shf - see fix instructions above"
+				fi
+			fi
+		done
+	fi
+fi
+
+# 5) Ensure shebang files are executable in the index
+if [ -n "${staged_nul:-}" ]; then
+	printf %s "$staged_nul" | tr '\0' '\n' | while IFS= read -r file; do
+		[ -f "$file" ] || continue
+		head -c 2 "$file" | grep -q "^#!" || continue
+		mode=$(git ls-files -s -- "$file" | awk '{print $1}')
+		[ "$mode" = "100755" ] || fail "Script not executable (fix with: git update-index --chmod=+x $file)"
+	done
+fi
+
+exit 0 
