@@ -1,0 +1,28 @@
+# ============================================================================
+# Cursor AI Complete Ignore List for HAFiscal Project
+# ============================================================================
+# Purpose: Files that Cursor should COMPLETELY ignore - cannot be referenced
+# with @ or opened in the AI context.
+#
+# Note: This is different from .cursorindexingignore:
+# - .cursorignore: Files completely unavailable to Cursor
+# - .cursorindexingignore: Files not indexed but can be explicitly referenced
+#
+# Keep this file MINIMAL - only truly inaccessible content
+# ============================================================================
+
+# SpecStory Auto-Save Files
+# Rationale: Temporary auto-save files that should not be accessible
+.specstory/**
+
+# Git Internal State
+# Rationale: Git internal files should not be accessible to AI
+.git/objects/**
+.git/refs/**
+
+# Large Binary Archives (if needed)
+# Rationale: Very large files that would consume too much context
+# Uncomment if specific large files cause issues
+# *.iso
+# *.dmg
+# *.img
