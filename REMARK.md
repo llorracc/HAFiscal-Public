@@ -3,7 +3,9 @@
 # in the https://github.com/econ-ark.org project
 github_repo_url: https://github.com/econ-ark/HAFiscal
 remark-name: HAFiscal # required
-notebooks: # path to any dashboards within the repo - optional
+notebooks: # path to any notebooks within the repo - optional
+  - HAFiscal-dashboard.ipynb
+dashboards: # path to any dashboards (Voila) within the repo - optional
   - HAFiscal-dashboard.ipynb
 tags: # Use the relevant tags
   - REMARK
