@@ -9,6 +9,7 @@ message: >-
   If you use this software, please cite it using the
   metadata from this file.
 type: software
+version: 1.0.7
 authors:
   - given-names: Christopher D.
     family-names: Carroll
