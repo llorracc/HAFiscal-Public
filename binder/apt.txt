@@ -1,3 +1,0 @@
-latexmk
-texlive-latex-base
-texlive-latex-recommended
