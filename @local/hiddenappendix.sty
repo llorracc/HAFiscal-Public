@@ -1,0 +1,142 @@
+% hiddenappendix.sty - Package for creating hidden but referenceable appendices
+% 
+% This package provides the \begin{hiddenappendix}...\end{hiddenappendix} environment
+% that allows content to be processed for cross-references (labels, equations, sections)
+% but not appear in the PDF output.
+%
+% Usage:
+%   \begin{hiddenappendix}[page][url]
+%     ... content with \label{}, equations, sections, etc. ...
+%   \end{hiddenappendix}
+%
+% Optional arguments:
+%   [page] - Explicit page number/identifier (e.g., "A1", "Online")
+%   [url]  - URL to online version of the appendix
+%
+% Limitations:
+%   - Page numbers show as literal text, not actual page numbers
+%   - Hyperref destinations generate warnings (but are non-fatal)
+%   - Content inside is completely hidden (zero space in PDF)
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hiddenappendix}[2025/09/20 v1.0 Hidden but referenceable appendices]
+
+% Required packages
+\RequirePackage{environ}  % For capturing environment body
+\RequirePackage{xparse}   % For advanced argument parsing
+
+% Main hidden appendix environment
+% Arguments:
+%   #1 = optional page number/identifier (default: "Online")
+%   #2 = optional URL to online version
+\NewDocumentEnvironment{hiddenappendix}{O{Online} o}{%
+  % Begin environment setup
+  \par\noindent%
+  % Store original page for restoration
+  \edef\@hiddenappendix@origpage{\thepage}%
+  % If URL provided, add a note
+  \IfValueT{#2}{%
+    \typeout{Hidden appendix available online at: #2}%
+  }%
+  % Start collecting body
+  \Collect@Body\@hiddenappendix@process{#1}%
+}{}
+
+% Process the collected body
+\long\def\@hiddenappendix@process#1#2{%
+  % #1 = page identifier
+  % #2 = body content
+  \setbox\@tempboxa\vbox{%
+    % Override \write to be immediate so labels are written
+    \let\@hiddenappendix@origwrite\write
+    \protected\def\write{\immediate\@hiddenappendix@origwrite}%
+    % Set custom page identifier
+    \def\thepage{#1}%
+    % Process the content (updates counters, writes labels)
+    #2%
+    % Restore original \write
+    \let\write\@hiddenappendix@origwrite
+  }%
+  % Restore original page
+  \edef\thepage{\@hiddenappendix@origpage}%
+  % Box is discarded, content doesn't appear in output
+}
+
+% Alternative simpler version using environ package directly
+\NewEnviron{hiddencontent}[1][Online]{%
+  \setbox0\vbox{%
+    % Force immediate writing of labels
+    \let\@orig@write\write
+    \protected\def\write{\immediate\@orig@write}%
+    % Override page number
+    \def\thepage{#1}%
+    % Make \captionof and \caption vbox-safe by preventing aux file writes
+    % Store originals
+    \let\@orig@captionof\captionof
+    \let\@orig@caption\caption
+    % Redefine \captionof to work in vbox context
+    \renewcommand{\captionof}[2]{%
+      % Just typeset the caption text without writing to aux
+      \par\vspace{0.5em}%
+      \parbox{\textwidth}{\small\textbf{##1:} ##2}%
+      \par
+    }%
+    % Redefine \caption to work in vbox context (for figure/table environments)
+    \renewcommand{\caption}[1]{%
+      % Just typeset the caption text without writing to aux
+      \par\vspace{0.5em}%
+      \parbox{\textwidth}{\small\textbf{\@captype:} ##1}%
+      \par
+    }%
+    % Disable figure and table float environments (floats can't exist in vbox)
+    % Replace with simple center environments
+    % NOTE: Must define \@captype so redefined \caption works
+    \renewenvironment{figure}[1][]{%
+      \def\@captype{figure}%
+      \begin{center}%
+    }{%
+      \end{center}%
+    }%
+    \renewenvironment{table}[1][]{%
+      \def\@captype{table}%
+      \begin{center}%
+    }{%
+      \end{center}%
+    }%
+    % Process the body
+    \BODY
+  }%
+  % Content is discarded
+}
+
+% Utility macro to indicate online-only content in references
+\newcommand{\onlineonly}[1]{%
+  #1\textsuperscript{\tiny(online)}%
+}
+
+% Macro for referencing online appendices with custom formatting
+\newcommand{\refOnline}[1]{%
+  \ref{#1}\textsuperscript{\tiny(online)}%
+}
+
+% Macro for page references to online content
+\newcommand{\pagerefOnline}[1]{%
+  (see online appendix)%
+}
+
+% Environment for content that appears in full version but shows stub in public
+% This can be used in conjunction with existing ProcessSupplemental logic
+\NewEnviron{conditionalappendix}[1][]{%
+  \ifnum\value{ProcessSupplemental}=1
+    % Full content in supplemental mode
+    \BODY
+  \else
+    % Stub or hidden in public mode
+    \IfValueT{#1}{%
+      % Show stub text if provided
+      #1%
+    }%
+  \fi
+}
+
+\endinput 

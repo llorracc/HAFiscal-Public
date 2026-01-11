@@ -1,0 +1,247 @@
+# ============================================================================
+# Cursor Indexing Additional Exclusions (Not in .gitignore)
+# ============================================================================
+# Purpose: Patterns that should be excluded from Cursor indexing but are NOT
+# in .gitignore (i.e., files that ARE committed to Git).
+#
+# This file is combined with .gitignore to generate .cursorindexingignore
+# To regenerate: make cursor-indexing-ignore
+#
+# Single Source of Truth (SST) Architecture:
+# - .gitignore                      → Master for Git exclusions
+# - .cursorindexingignore.additions → Master for Cursor-only exclusions
+# - .cursorindexingignore           → Generated (DO NOT EDIT DIRECTLY)
+# ============================================================================
+
+# ============================================================================
+# Binary Images (267 files: 91 PNG, 89 SVG, 87 JPG)
+# ============================================================================
+# Rationale: Committed for documentation but binary files aren't searchable
+# and significantly slow indexing performance
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+*.ico
+*.svg
+*.eps
+*.webp
+*.heic
+*.heif
+
+# ============================================================================
+# Generated PDFs (302 files including main documents)
+# ============================================================================
+# Rationale: Committed to Git for distribution but shouldn't be indexed
+# - Binary files (not searchable)
+# - Large (HAFiscal.pdf = 1.0M, HAFiscal-Slides.pdf = 533K)
+# - Frequently regenerated (forces re-indexing)
+*.pdf
+HAFiscal.pdf
+HAFiscal-Slides.pdf
+Figures/
+Tables/
+Subfiles/*.pdf
+
+# ============================================================================
+# Historical/Archive Directories (27 markdown files)
+# ============================================================================
+# Rationale: Historical content not relevant for current development
+history/
+Highlighted/
+
+# ============================================================================
+# Private Content Directories (130MB total)
+# ============================================================================
+# Rationale: Private notes, presentations, and reference materials
+# May be committed but shouldn't be indexed for privacy and performance
+*_private/
+Private/
+Notes_Private/
+Presentations_private/
+Related-Lit-private/
+resources-private/
+private-dev/
+
+# ============================================================================
+# LaTeX Package Dependencies (5.8MB, 43 packages)
+# ============================================================================
+# Rationale: External LaTeX packages stored locally for minimal installation
+# These are dependencies, not project source code
+@local/texlive/texmf-local/tex/latex/
+
+# ============================================================================
+# Python Virtual Environment Backup (755MB)
+# ============================================================================
+# Rationale: Backup copy of virtual environment
+.venv.backup-py39/
+
+# ============================================================================
+# Python Package Metadata (321 directories)
+# ============================================================================
+# Rationale: Package distribution metadata that may not be in .gitignore
+*.dist-info/
+*.egg-info/
+.eggs/
+.ruff_cache/
+*.pyd
+*.pyo
+
+# ============================================================================
+# Compiled/Binary Files
+# ============================================================================
+# Rationale: Compiled artifacts that aren't source code
+*.so
+*.dylib
+*.dll
+*.a
+*.lib
+*.o
+*.whl
+*.xdv
+
+# ============================================================================
+# Compressed Archives
+# ============================================================================
+# Rationale: Archive files that may contain large bundled content
+*.gz
+*.zip
+*.tar
+*.7z
+*.rar
+*.bz2
+
+# ============================================================================
+# Large Data Files
+# ============================================================================
+# Rationale: Large data files that slow indexing
+# Note: Some may be committed to Git (e.g., Code/Empirical/*.csv exceptions)
+*.dta
+*.pkl
+*.pickle
+*.hdf5
+*.h5
+*.mat
+
+# ============================================================================
+# Documentation Build Directories
+# ============================================================================
+# Rationale: Generated documentation content
+docs/
+docs/_build/
+docs/.doctrees/
+_build/
+_static/
+_templates/
+
+# ============================================================================
+# Version Control Directories (supplemental)
+# ============================================================================
+# Rationale: Usually auto-excluded but included for completeness
+.git/
+.svn/
+.hg/
+
+# ============================================================================
+# Operating System Files (supplemental to .gitignore)
+# ============================================================================
+desktop.ini
+
+# ============================================================================
+# IDE/Editor Files (supplemental to .gitignore)
+# ============================================================================
+.vscode/
+.idea/
+.project
+.settings/
+*.swp
+*.swo
+
+
+# ============================================================================
+# WHAT TO ADD HERE
+# ============================================================================
+# Add patterns here if:
+# 1. The file IS committed to Git (not in .gitignore)
+# 2. The file SHOULD NOT be indexed by Cursor (performance/privacy)
+#
+# DO NOT add patterns here if:
+# 1. Already in .gitignore (it will be included automatically)
+# 2. The file should be indexed (source code, configs, docs)
+# ============================================================================
+
+
+# ============================================================================
+# Sibling Repository Exclusions (CRITICAL for multi-root workspace)
+# ============================================================================
+# Rationale: When using multi-root workspace, exclude generated/derived repos
+../HAFiscal-Public/
+../HAFiscal-QE/
+../HAFiscal-Archive/
+../HAFiscal-dev/
+../HAFiscal-reproduce/
+
+# Also exclude from same-level references
+HAFiscal-Public/
+HAFiscal-QE/
+HAFiscal-Archive/
+HAFiscal-dev/
+HAFiscal-reproduce/
+
+# ============================================================================
+# HTML/CSS Build Artifacts
+# ============================================================================
+# Rationale: Generated web content from LaTeX compilation
+*.html
+*.css
+*.htm
+
+# ============================================================================
+# LaTeX Build Artifacts (additional to what's in .gitignore)
+# ============================================================================
+# Rationale: Additional LaTeX auxiliary files that may be committed
+*.xbb
+*.idv
+*.lg
+*.4ct
+*.4tc
+
+# ============================================================================
+# Backup Files (additional patterns)
+# ============================================================================
+*.backup
+*.backup-*
+*-old
+*.old
+*.orig
+
+# ============================================================================
+# Lock Files and Build Logs
+# ============================================================================
+uv.lock
+package_analysis.json
+makeEverything-run.log
+docs/makeEverything-run.log
+
+# ============================================================================
+# Large Tool Directories
+# ============================================================================
+Tools/
+
+# ============================================================================
+# Reconstitution/Build Artifacts
+# ============================================================================
+*-reconstitution/
+HAFiscal-Public-reconstitution/
+build/
+old/
+
+# ============================================================================
+# Python Cache (supplemental)
+# ============================================================================
+__pycache__/
+*.pyc
+*.pyo
+
