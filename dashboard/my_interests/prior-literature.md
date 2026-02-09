@@ -1,0 +1,13 @@
+# Prior Literature Summary: Wealth Inequality and Heterogeneous-Agent Macroeconomics
+
+## The papers my ballpark paper cites
+
+The prior literature rests on two main pillars: heterogeneous-agent (HA) macroeconomic theory and empirical work on income and wealth inequality. The theoretical foundation comes from Bewley–Huggett–Aiyagari models, in which agents face uninsurable idiosyncratic risk, smooth consumption by holding assets, and are subject to borrowing constraints. Aiyagari (1994) showed how precautionary saving and liquidity constraints affect aggregate saving and the distributions of wealth and income. Huggett (1993) and Krusell and Smith (1998) extended this framework, with the latter providing methods for aggregation in HA models with aggregate uncertainty. On the empirical side, Piketty and Saez (2003) and Saez and Zucman (2016) documented long-run trends in top income and wealth shares using tax data, establishing that inequality has risen sharply since the 1980s. A third strand explains why wealth is more concentrated than income: Benhabib, Bisin, and Zhu showed that idiosyncratic capital income risk can generate fat-tailed wealth distributions in Bewley economies, while Gabaix and others showed how random growth and scale dependence can produce Pareto tails. These lines of work jointly motivate models with heterogeneous agents, realistic inequality, and fiscal and monetary policy transmission through heterogeneous marginal propensities to consume.
+
+## Key foundational papers
+
+- **Aiyagari (1994)** – *"Uninsured idiosyncratic risk and aggregate saving"* – Core incomplete-markets growth model with precautionary saving and liquidity constraints; shows how uninsurable risk affects aggregate saving and the wealth distribution.
+- **Krusell and Smith (1998)** – *"Income and wealth heterogeneity in the macroeconomy"* – Introduces aggregation methods for HA models with aggregate shocks; basis for quantitative HA macroeconomics.
+- **Piketty and Saez (2003)** – *"Income inequality in the United States, 1913–1998"* – Uses tax data to document the long-run evolution of top income shares; foundational evidence for the inequality debate.
+- **Benhabib, Bisin, and Zhu (2015)** – *"The wealth distribution in Bewley economies with capital income risk"* – Proves that idiosyncratic capital income risk can generate fat-tailed (Pareto) wealth distributions, matching empirical tail behavior.
+- **Heathcote (2005)** – *"Fiscal policy with heterogeneous agents and incomplete markets"* – Analyzes how tax timing affects consumption when households differ in wealth; shows large consumption responses for constrained households and underpins fiscal policy transmission in HA models.
