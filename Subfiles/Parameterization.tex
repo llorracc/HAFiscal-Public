@@ -8,6 +8,10 @@
 
 This section describes how we set the model's parameters. First, we estimate the extent to which consumers `splurge' when receiving an income shock. Given the lack of empirical evidence on the marginal propensity to consume over time for the US, we instead use Norwegian data to estimate the splurge. Specifically, we calibrate our model to the Norwegian economy and match evidence from Norway on the profile of the marginal propensity to spend over time and across different wealth levels, as provided by~\cite{fagereng-mpc-2021}.\footnote{Appendix~\ref{app:Model-without-splurge} discusses an alternative calibration method, which solely relies on US data. The main results derived in that calibration are in line with those discussed in the main text.}
 
+\ifdefined\ShortVersion
+  \endinput
+\fi
+
 Second, we set up the full model on U.S.\ data, taking the splurge factor as given from the Norwegian estimation. In the full model, agents differ according to their level of education and their subjective discount factors. A subset of the parameters in the model are calibrated equally for all types, and some parameters are calibrated to be specific to each education group. Finally, a distribution of subjective discount factors is estimated separately for each education group to match features of each within-group liquid wealth distribution.
 
 \subsection{Estimation of the splurge factor}
@@ -37,8 +41,8 @@ Finally, we set the real interest rate on liquid debt to $13.6\%$, following dat
   Note that although these data let us pin down aggregate quantities, they do not solve the issue referred to in footnote~\ref{foot:liqwealth}, since we cannot link them to the tax registry at the individual level.
   We set the borrowing limit on liquid debt to zero.}
 
-Estimates of the standard deviations of the permanent and transitory shocks are taken from~\cite{crawley2024Parsimonious}, who estimate an income process on administrative data for Norwegian males from 1971 to 2014.
-The estimated annual variances for the permanent and transitory shocks are 0.004 and 0.033, respectively.\footnote{As shown in~\cite{crawley2024Parsimonious}, an income process of the form that we use here is more accurately estimated using moments in levels not differences.
+Estimates of the standard deviations of the permanent and transitory shocks are taken from~\cite{crawley2025Parsimonious}, who estimate an income process on administrative data for Norwegian males from 1971 to 2014.
+The estimated annual variances for the permanent and transitory shocks are 0.004 and 0.033, respectively.\footnote{As shown in~\cite{crawley2025Parsimonious}, an income process of the form that we use here is more accurately estimated using moments in levels not differences.
   Hence, we take the numbers from column 3 of Panel C in their table 4.} As in~\cite{carroll2020sticky}, these are converted to quarterly values by multiplying the permanent and transitory shock variances by $1/4$ and $4$, respectively.
 Thus, we obtain quarterly standard deviations of $\sigma_\psi=0.0316$ and $\sigma_\xi=0.363$.
 
@@ -49,7 +53,7 @@ The estimation procedure minimizes the distance between the target and model mom
 We approximate the uniform distribution of discount factors with a discrete approximation and let the population consist of seven different types.
 
 The estimation yields a splurge factor of $0.25$ and a distribution of discount factors described by $\beta = 0.968$ and $\nabla=0.0578$.
-Given these estimated parameters and the remaining calibrated ones, the model is able to replicate the time path of consumption in response to a lottery win from~\cite{fagereng-mpc-2021} and the targeted distribution of liquid wealth well, see Figure~\ref{fig:splurge_estimation}.
+Given these estimated parameters and the remaining calibrated ones, the model is able to replicate the time path of consumption in response to a lottery win from~\cite{fagereng-mpc-2021} and the targeted distribution of liquid wealth well; see Figure~\ref{fig:splurge_estimation}.
 Also, the targeted moments discussed in Table~\ref{tab:MPC-WQ} are captured well.
 In particular, the model is able to account for the empirical fact, in the first column, that the MPC for high-wealth agents is far above the near-zero value predicted by a model without a splurge.
 
@@ -138,7 +142,7 @@ The Bureau of Labor Statistics provide data on unemployment rates for different 
 Note that this calibration strategy is consistent with the results in~\cite{mincer1991education} who finds that the main difference between education groups is in the incidence of unemployment, and not its duration.\footnote{\cite{mincer1991education} states that ``the reduction of the incidence of unemployment [at higher education levels] is found to be far more important than the reduced duration of unemployment in creating the educational differentials in unemployment rates'' (p. 1).} More recent work by~\cite{elsby2010labor} includes data up to 2009 and echoes~\citeauthor{mincer1991education}'s results.
 
 The average unemployment rate in 2004 was 8.5\% for the Dropout group, 4.4\% for the High-School group, and 2.7\% for the College group.
-These values imply that the probabilities of transitioning into unemployment in normal times are $\pi_{eu}^d=6.2$ percent, $\pi_{eu}^h=3.1$ percent, and $\pi_{eu}^c=1.8$ percent, respectively.\footnote{Also note that the probability of transitioning from employment to unemployment is the probability of a job separation times the conditional probability of unemployment given a job separation.
+These values imply that the probabilities of transitioning into unemployment in normal times are $\pi_{eu}^d=6.2\%$, $\pi_{eu}^h=3.1\%$, and $\pi_{eu}^c=1.8\%$, respectively.\footnote{Also note that the probability of transitioning from employment to unemployment is the probability of a job separation times the conditional probability of unemployment given a job separation.
   ~\cite{mincer1991education} reports that both of these are lower for higher education levels.
   For our calibration, this means that a higher job finding rate~\textit{within} the quarter of the job separation for more educated workers translates	into a lower probability of transitioning from employment to unemployment during a quarter.
   In that sense, our calibration is consistent with short-term job-finding rates being higher for more educated workers.}
@@ -153,7 +157,7 @@ Table~\ref{tab:calibrationRecession} shows the model parameters that change when
 
 The two immediate changes that occur at the outset of a recession is that the unemployment rate doubles for all education groups, and the expected duration of an unemployment spell increases from $1.5$ to $4$ quarters. The duration of unemployment is the same across the three education groups, and this implies that the probability of leaving unemployment is set to $\pi_{ue} = 0.25$ in a recession.
 
-The increase in the expected duration of unemployment combined with the doubling of the education-specific unemployment rates pin down new values for the probabilities of transitioning from employment to unemployment during the recession. Due to the large increase in the unemployment duration, the values that we obtain end up being slightly smaller than those transition probabilities in normal times. The probability $\pi_{eu}$ in a recession is set to $5.1\%$ for the Dropout group, $2.4\%$ for the High-School group, and $1.4$ for the College group.
+The increase in the expected duration of unemployment combined with the doubling of the education-specific unemployment rates pin down new values for the probabilities of transitioning from employment to unemployment during the recession. Due to the large increase in the unemployment duration, the values that we obtain end up being slightly smaller than those transition probabilities in normal times. The probability $\pi_{eu}$ in a recession is set to $5.1\%$ for the Dropout group, $2.4\%$ for the High-School group, and $1.4\%$ for the College group.
 
 Our calibration of the transition probabilities between employment and unemployment during a recession are thus broadly in line with the results of~\cite{elsby2010labor}. They find that unemployment duration does not vary much between education groups and that the flow from unemployment to employment drops sharply for all groups in a recession. The flow into unemployment is more stable, but they find that it tends to increase a little bit in recessions.\footnote{See the bottom row of Figure~8 in~\cite{elsby2010labor} for these results.} This differs from the small decrease in the transition probabilities from employment into unemployment that our calibration strategy implies, which follows from our choice of targeting a doubling of the unemployment rate for each group rather than an even larger increase.
 
@@ -224,3 +228,4 @@ Our quarterly model is broadly consistent with this as the drop in spending the 
 \smartbib
 
 \end{document}
+
