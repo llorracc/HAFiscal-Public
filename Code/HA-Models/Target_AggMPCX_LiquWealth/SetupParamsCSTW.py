@@ -46,12 +46,12 @@ T_sim_agg_shocks = 1200       # Number of periods to simulate (aggregate shocks 
 ignore_periods_PY = 400       # Number of periods to throw out when looking at history (perpetual youth)
 ignore_periods_LC = 400       # Number of periods to throw out when looking at history (lifecycle)
 T_age = T_cycle + 1           # Don't let simulated agents survive beyond this age
-pLvlInitMean_d = np.log(5)    # average initial permanent income, dropouts
-pLvlInitMean_h = np.log(7.5)  # average initial permanent income, HS grads
-pLvlInitMean_c = np.log(12)   # average initial permanent income, college grads
-pLvlInitStd = 0.4             # Standard deviation of initial permanent income
-aNrmInitMean = np.log(0.5)    # log initial wealth/income mean
-aNrmInitStd  = 0.5            # log initial wealth/income standard deviation
+pLogInitMean_d = np.log(5)    # average initial permanent income, dropouts
+pLogInitMean_h = np.log(7.5)  # average initial permanent income, HS grads
+pLogInitMean_c = np.log(12)   # average initial permanent income, college grads
+pLogInitStd = 0.4             # Standard deviation of initial permanent income
+kLogInitMean = np.log(0.5)    # log initial wealth/income mean
+kLogInitStd = 0.5            # log initial wealth/income standard deviation
 
 # Set population macro parameters
 PopGroFac = 1.01**(0.25)      # Population growth rate
@@ -120,10 +120,10 @@ init_infinite = {"CRRA":CRRA,
                 'T_sim':T_sim_PY,
                 'T_age': 400,
                 'IndL': IndL,
-                'aNrmInitMean':np.log(0.00001),
-                'aNrmInitStd':0.0,
-                'pLvlInitMean':0.0,
-                'pLvlInitStd':0.0,
+                'kLogInitMean':np.log(0.00001),
+                'kLogInitStd':0.0,
+                'pLogInitMean':0.0,
+                'pLogInitStd':0.0,
                 'AgentCount':0, # will be overwritten by parameter distributor
                 }
 

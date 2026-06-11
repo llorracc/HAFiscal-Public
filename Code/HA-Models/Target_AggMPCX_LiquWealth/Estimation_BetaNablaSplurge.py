@@ -7,9 +7,9 @@ from copy import deepcopy
 import pandas as pd
 
 # Import needed tools from HARK
-from HARK.distribution import Uniform
+from HARK.distributions import Uniform
 from HARK.utilities import get_percentiles, get_lorenz_shares, make_figs
-from HARK.parallel import multi_thread_commands
+from HARK.core import multi_thread_commands
 from scipy.optimize import minimize
 from HARK.ConsumptionSaving.ConsIndShockModel import KinkedRconsumerType
 from SetupParamsCSTW import init_infinite
@@ -48,7 +48,7 @@ base_params['PermShkStd']   = [0.001**0.5]  #from stickyE paper
 base_params['TranShkStd']   = [0.132**0.5]  #from stickyE paper
 base_params['T_age']        = 400           # Kill off agents if they manage to achieve T_kill working years
 base_params['AgentCount']   = 5000          # Number of agents per instance of IndShockConsType
-base_params['pLvlInitMean'] = np.log(23.72) 
+base_params['pLogInitMean'] = np.log(23.72) 
 base_params['T_sim']        = 800
 
 
@@ -58,7 +58,7 @@ if  Parametrization == 'NOR':
     base_params['Rfree']        = 1.02**0.25
     base_params['Rsave']        = 1.02**0.25
     base_params['Rboro']        = 1.137**0.25
-    base_params['pLvlInitMean'] = 0 
+    base_params['pLogInitMean'] = 0 
     base_params['UnempPrb']     = 0.044
     base_params['IncUnemp']     = 0.60
     base_params['PermShkStd']   = [0.001**0.5] #from Crawley,Moll,Tretvoll
@@ -251,7 +251,7 @@ def FagerengObjFunc(SplurgeEstimate,center,spread,verbose=False,estimation_mode=
                     P_hist[:,period] = ThisType.shocks["PermShk"]
                     for i_agent in range(ThisType.AgentCount):
                         if ThisType.shocks["TranShk"][i_agent] == 1.0: # indicator of death
-                            a_actu[i_agent,period-1,k] = np.exp(base_params['aNrmInitMean'])
+                            a_actu[i_agent,period-1,k] = np.exp(base_params['kLogInitMean'])
                     m_adj = a_actu[:,period-1,k]*R_kink/ThisType.shocks["PermShk"] + ThisType.shocks["TranShk"] + Lnrm - SplurgeNrm #continue with resources from last period
                     c_actu[:,period,k] = ThisType.cFunc[0](m_adj) + SplurgeNrm
                     c_actu_Lvl[:,period,k] = c_actu[:,period,k] * ThisType.state_now["pLvl"]

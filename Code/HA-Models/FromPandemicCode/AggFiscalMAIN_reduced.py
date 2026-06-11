@@ -1,7 +1,7 @@
 '''
 This is the main script for the paper
 '''
-#from Parameters import returnParameters
+#from Parameters import return_parameters
 
 import os
 import sys

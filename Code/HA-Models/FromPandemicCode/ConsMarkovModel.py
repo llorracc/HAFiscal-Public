@@ -10,13 +10,14 @@ import scipy.sparse as sp
 from copy import deepcopy
 
 from HARK import AgentType
+from HARK.ConsumptionSaving.LegacyOOsolvers import ConsIndShockSolver
 from HARK.ConsumptionSaving.ConsIndShockModel import (
-    ConsIndShockSolver,
     ConsumerSolution,
     IndShockConsumerType,
     PerfForesightConsumerType,
+    make_basic_CRRA_solution_terminal,
 )
-from HARK.distribution import MarkovProcess, Uniform, calc_expectation
+from HARK.distributions import MarkovProcess, Uniform, calc_expectation
 from HARK.interpolation import (
     CubicInterp,
     LinearInterp,
@@ -853,7 +854,42 @@ class MarkovConsumerType(IndShockConsumerType):
     state_vars = IndShockConsumerType.state_vars + ["Mrkv"]
 
     def __init__(self, **kwds):
-        IndShockConsumerType.__init__(self, **kwds)
+        # HARK 0.17.0: Disable automatic construction, build manually
+        IndShockConsumerType.__init__(self, construct=False, **kwds)
+        
+        from HARK.utilities import make_assets_grid
+        from HARK.ConsumptionSaving.ConsIndShockModel import (
+            make_lognormal_kNrm_init_dstn,
+            make_lognormal_pLvl_init_dstn,
+        )
+        from HARK.Calibration.Income.IncomeProcesses import (
+            construct_lognormal_income_process_unemployment,
+            get_PermShkDstn_from_IncShkDstn,
+            get_TranShkDstn_from_IncShkDstn,
+        )
+        
+        self.aXtraGrid = make_assets_grid(
+            aXtraMin=self.aXtraMin, aXtraMax=self.aXtraMax, aXtraCount=self.aXtraCount,
+            aXtraExtra=self.aXtraExtra if hasattr(self, 'aXtraExtra') else None,
+            aXtraNestFac=self.aXtraNestFac if hasattr(self, 'aXtraNestFac') else 3,
+        )
+        self.kNrmInitDstn = make_lognormal_kNrm_init_dstn(
+            kLogInitMean=self.kLogInitMean, kLogInitStd=self.kLogInitStd,
+            kNrmInitCount=getattr(self, 'kNrmInitCount', 15), RNG=self.RNG,
+        )
+        self.pLvlInitDstn = make_lognormal_pLvl_init_dstn(
+            pLogInitMean=self.pLogInitMean, pLogInitStd=self.pLogInitStd,
+            pLvlInitCount=getattr(self, 'pLvlInitCount', 15), RNG=self.RNG,
+        )
+        IncShkDstn = construct_lognormal_income_process_unemployment(
+            T_cycle=self.T_cycle, PermShkStd=self.PermShkStd, PermShkCount=self.PermShkCount,
+            TranShkStd=self.TranShkStd, TranShkCount=self.TranShkCount, T_retire=0,
+            UnempPrb=self.UnempPrb, IncUnemp=self.IncUnemp,
+            UnempPrbRet=None, IncUnempRet=None, RNG=self.RNG,
+        )
+        self.IncShkDstn = IncShkDstn
+        self.PermShkDstn = get_PermShkDstn_from_IncShkDstn(IncShkDstn, self.RNG)
+        self.TranShkDstn = get_TranShkDstn_from_IncShkDstn(IncShkDstn, self.RNG)
         self.solve_one_period = _solve_ConsMarkov
 
         if not hasattr(self, "global_markov"):
@@ -950,7 +986,8 @@ class MarkovConsumerType(IndShockConsumerType):
         -------
         none
         """
-        IndShockConsumerType.update_solution_terminal(self)
+        # HARK 0.17.0: update_solution_terminal removed; use make_basic_CRRA_solution_terminal
+        self.solution_terminal = make_basic_CRRA_solution_terminal(self.CRRA)
 
         # Make replicated terminal period solution: consume all resources, no human wealth, minimum m is 0
         StateCount = self.MrkvArray[0].shape[0]

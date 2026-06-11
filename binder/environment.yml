@@ -21,8 +21,8 @@ channels:
   - defaults
 
 dependencies:
-  # Python version - REQUIRED: 3.9.x due to econ-ark dependencies
-  - python=3.9
+  # Python version - REQUIRED: 3.10.x for HARK >=0.17.0
+  - python=3.10
 
   # Core scientific computing stack (from conda for optimized builds)
   - numpy>=1.24,<2
@@ -33,7 +33,7 @@ dependencies:
   
   # Jupyter ecosystem (from conda)
   # Note: pyzmq will be auto-installed by jupyter packages at whatever version
-  # conda-forge has available for Python 3.9 (not 27.1.0, but that's OK)
+  # conda-forge has available for Python 3.10 (not 27.1.0, but that's OK)
   - jupyter>=1.0
   - notebook>=7.0
   - ipykernel>=6.0
@@ -54,6 +54,6 @@ dependencies:
   - pip
   - pip:
       # econ-ark and dependencies only on PyPI
-      - econ-ark==0.14.1
+      - econ-ark>=0.17.0
       # Jupyter notebook converter (not on conda)
       - ipynb-py-convert>=0.4

@@ -2,21 +2,21 @@ def Simulate(Run_Dict,figs_dir,Parametrization='Baseline'):
     
     
     from AggFiscalModel import AggFiscalType, AggregateDemandEconomy
-    from HARK.distribution import DiscreteDistribution
+    from HARK.distributions import DiscreteDistribution
     from time import time
     import numpy as np
     from copy import deepcopy
-    from OtherFunctions import saveAsPickleUnderVarName,  saveAsPickle
+    from OtherFunctions import save_as_pickle_under_var_name, save_as_pickle
     import os
     
-    from Parameters import returnParameters 
+    from Parameters import return_parameters 
     
     [init_dropout, init_highschool, init_college, init_ADEconomy, DiscFacDstns,\
     DiscFacCount, AgentCountTotal, base_dict, num_max_iterations_solvingAD,\
     convergence_tol_solvingAD, UBspell_normal, num_base_MrkvStates, \
     data_EducShares, max_recession_duration, num_experiment_periods,\
     recession_changes, UI_changes, recession_UI_changes,\
-    TaxCut_changes, recession_TaxCut_changes, Check_changes, recession_Check_changes] = returnParameters(Parametrization=Parametrization,OutputFor='_Main.py')
+    TaxCut_changes, recession_TaxCut_changes, Check_changes, recession_Check_changes] = return_parameters(Parametrization=Parametrization,OutputFor='_Main.py')
               
     
     mystr = lambda x : '{:.2f}'.format(x)
@@ -74,6 +74,13 @@ def Simulate(Run_Dict,figs_dir,Parametrization='Baseline'):
     # NOTE: THIS ASSUMES NO LIFECYCLE
     IncShkDstn_unemp = DiscreteDistribution(np.array([1.0]), [np.array([1.0]), np.array([InfHorizonTypeAgg_d.IncUnemp])])
     IncShkDstn_unemp_nobenefits = DiscreteDistribution(np.array([1.0]), [np.array([1.0]), np.array([InfHorizonTypeAgg_d.IncUnempNoBenefits])])
+    
+    # HARK 0.17.0 FIX: Sync IncShkDstn seeds to match HARK 0.14.1 (763607780)
+    # The IncShkDstn distributions use their own RNG for draw_events(), which must
+    # produce identical draws between HARK versions for numerical identity.
+    for BaseType in BaseTypeList:
+        BaseType.IncShkDstn[0].seed = 763607780
+        BaseType.IncShkDstn[0].reset()
         
     for ThisType in BaseTypeList:
         EmployedIncShkDstn = deepcopy(ThisType.IncShkDstn[0])
@@ -144,10 +151,10 @@ def Simulate(Run_Dict,figs_dir,Parametrization='Baseline'):
         # Run the baseline consumption level
         t0 = time()
         base_results = AggDemandEconomy.run_experiment(**base_dict_agg, Full_Output = 'ForWelfare')
-        saveAsPickleUnderVarName(base_results,figs_dir,locals())
+        save_as_pickle_under_var_name(base_results,figs_dir,locals())
         # For analysis purposes save full output
         base_results_full = AggDemandEconomy.run_experiment(**base_dict_agg, Full_Output = True)
-        saveAsPickleUnderVarName(base_results_full,figs_dir,locals())
+        save_as_pickle_under_var_name(base_results_full,figs_dir,locals())
         
         AggDemandEconomy.store_baseline(base_results['AggCons'])     
         t1 = time()
@@ -157,7 +164,7 @@ def Simulate(Run_Dict,figs_dir,Parametrization='Baseline'):
     #%%         
                  
         
-    def runExperimentsAllRecessions(dict_changes,AggDemandEconomy):
+    def run_experiments_all_recessions(dict_changes,AggDemandEconomy):
         
         t0 = time()
         dictt = base_dict_agg.copy()
@@ -177,7 +184,7 @@ def Simulate(Run_Dict,figs_dir,Parametrization='Baseline'):
         print('Calculating took ' + mystr(t1-t0) + ' seconds.') 
         return [avg_results,all_results]
     
-    def runExperimentsNoRecessions(dict_changes,AggDemandEconomy):
+    def run_experiments_no_recessions(dict_changes,AggDemandEconomy):
         
         t0 = time()
         dictt = base_dict_agg.copy()
@@ -201,8 +208,8 @@ def Simulate(Run_Dict,figs_dir,Parametrization='Baseline'):
             print('Calculating no recession effects for shock_type: ', shock_type)
             AggDemandEconomy_Routine.switch_shock_type(shock_type)
             AggDemandEconomy_Routine.solve()
-            results = runExperimentsNoRecessions(changes,AggDemandEconomy_Routine)
-            saveAsPickle(shock_type + '_results',results,figs_dir)
+            results = run_experiments_no_recessions(changes,AggDemandEconomy_Routine)
+            save_as_pickle(shock_type + '_results',results,figs_dir)
             
     def Run_FullRoutine(shock_type):
         AggDemandEconomy_Routine = deepcopy(AggDemandEconomy)
@@ -221,31 +228,31 @@ def Simulate(Run_Dict,figs_dir,Parametrization='Baseline'):
             print('Calculating no AD effects for shock_type: ', shock_type)
             AggDemandEconomy_Routine.switch_shock_type(shock_type)
             AggDemandEconomy_Routine.solve()
-            [results,all_results] = runExperimentsAllRecessions(changes,AggDemandEconomy_Routine)
-            saveAsPickle(shock_type + '_results',results,figs_dir)
-            saveAsPickle(shock_type + '_all_results',all_results,figs_dir)
+            [results,all_results] = run_experiments_all_recessions(changes,AggDemandEconomy_Routine)
+            save_as_pickle(shock_type + '_results',results,figs_dir)
+            save_as_pickle(shock_type + '_all_results',all_results,figs_dir)
         
         if Run_AD:
             # Solving recession under Agg Multiplier   
             t0 = time()
             AggDemandEconomy_Routine.switch_shock_type(shock_type)
             if shock_type == 'recession':
-                AggDemandEconomy_Routine.solveAD_Recession(num_max_iterations=num_max_iterations_solvingAD,convergence_cutoff=convergence_tol_solvingAD, name = shock_type)
+                AggDemandEconomy_Routine.solve_ad_recession(num_max_iterations=num_max_iterations_solvingAD,convergence_cutoff=convergence_tol_solvingAD, name = shock_type)
             elif shock_type == 'recessionCheck':
-                AggDemandEconomy_Routine.solveAD_Check_Recession(num_max_iterations=num_max_iterations_solvingAD,convergence_cutoff=convergence_tol_solvingAD, name = shock_type)
+                AggDemandEconomy_Routine.solve_ad_check_recession(num_max_iterations=num_max_iterations_solvingAD,convergence_cutoff=convergence_tol_solvingAD, name = shock_type)
             elif shock_type == 'recessionUI':
-                AggDemandEconomy_Routine.solveAD_UIExtension_Recession(num_max_iterations=num_max_iterations_solvingAD,convergence_cutoff=convergence_tol_solvingAD, name = shock_type)
+                AggDemandEconomy_Routine.solve_ad_ui_extension_recession(num_max_iterations=num_max_iterations_solvingAD,convergence_cutoff=convergence_tol_solvingAD, name = shock_type)
             elif shock_type == 'recessionTaxCut':         
-                AggDemandEconomy_Routine.solveAD_Recession_TaxCut(num_max_iterations=num_max_iterations_solvingAD,convergence_cutoff=convergence_tol_solvingAD, name = shock_type)
+                AggDemandEconomy_Routine.solve_ad_recession_taxcut(num_max_iterations=num_max_iterations_solvingAD,convergence_cutoff=convergence_tol_solvingAD, name = shock_type)
             t1 = time()
             print('Solving took ' + mystr(t1-t0) + ' seconds for shock_type: ', shock_type)
             
             print('Calculating AD effects for shock_type: ', shock_type)
             AggDemandEconomy_Routine.switch_shock_type(shock_type)
             AggDemandEconomy_Routine.restore_ADsolution(name = shock_type)
-            [results_AD,all_results_AD] = runExperimentsAllRecessions(changes,AggDemandEconomy_Routine)
-            saveAsPickle(shock_type + '_results_AD',results_AD,figs_dir)
-            saveAsPickle(shock_type + '_all_results_AD',all_results_AD,figs_dir)
+            [results_AD,all_results_AD] = run_experiments_all_recessions(changes,AggDemandEconomy_Routine)
+            save_as_pickle(shock_type + '_results_AD',results_AD,figs_dir)
+            save_as_pickle(shock_type + '_all_results_AD',all_results_AD,figs_dir)
         
         if Run_1stRoundAD:
             # Solving recession under Agg Multiplier   
@@ -253,22 +260,22 @@ def Simulate(Run_Dict,figs_dir,Parametrization='Baseline'):
             AggDemandEconomy_Routine.switch_shock_type(shock_type)
             
             if shock_type == 'recession':
-                AggDemandEconomy_Routine.solveAD_Recession(num_max_iterations=1,convergence_cutoff=convergence_tol_solvingAD, name = shock_type + '1stRoundAD')
+                AggDemandEconomy_Routine.solve_ad_recession(num_max_iterations=1,convergence_cutoff=convergence_tol_solvingAD, name = shock_type + '1stRoundAD')
             elif shock_type == 'recessionCheck':
-                AggDemandEconomy_Routine.solveAD_Check_Recession(num_max_iterations=1,convergence_cutoff=convergence_tol_solvingAD, name = shock_type + '1stRoundAD')
+                AggDemandEconomy_Routine.solve_ad_check_recession(num_max_iterations=1,convergence_cutoff=convergence_tol_solvingAD, name = shock_type + '1stRoundAD')
             elif shock_type == 'recessionUI':
-                AggDemandEconomy_Routine.solveAD_UIExtension_Recession(num_max_iterations=1,convergence_cutoff=convergence_tol_solvingAD, name = shock_type + '1stRoundAD')
+                AggDemandEconomy_Routine.solve_ad_ui_extension_recession(num_max_iterations=1,convergence_cutoff=convergence_tol_solvingAD, name = shock_type + '1stRoundAD')
             elif shock_type == 'recessionTaxCut':         
-                AggDemandEconomy_Routine.solveAD_Recession_TaxCut(num_max_iterations=1,convergence_cutoff=convergence_tol_solvingAD, name = shock_type + '1stRoundAD')
+                AggDemandEconomy_Routine.solve_ad_recession_taxcut(num_max_iterations=1,convergence_cutoff=convergence_tol_solvingAD, name = shock_type + '1stRoundAD')
             t1 = time()
             print('Solving took ' + mystr(t1-t0) + ' seconds for 1st round AD for shock_type: ', shock_type)
            
             print('Calculating 1st round AD effects for shock_type: ', shock_type)
             AggDemandEconomy_Routine.switch_shock_type(shock_type)
             AggDemandEconomy_Routine.restore_ADsolution(name = shock_type + '1stRoundAD')
-            [results_firstRoundAD,all_results_firstRoundAD] = runExperimentsAllRecessions(changes,AggDemandEconomy_Routine)
-            saveAsPickle(shock_type + '_results_firstRoundAD',results_firstRoundAD,figs_dir)
-            saveAsPickle(shock_type + '_all_results_firstRoundAD',all_results_firstRoundAD,figs_dir)
+            [results_firstRoundAD,all_results_firstRoundAD] = run_experiments_all_recessions(changes,AggDemandEconomy_Routine)
+            save_as_pickle(shock_type + '_results_firstRoundAD',results_firstRoundAD,figs_dir)
+            save_as_pickle(shock_type + '_all_results_firstRoundAD',all_results_firstRoundAD,figs_dir)
     
 
          

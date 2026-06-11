@@ -5,7 +5,7 @@
 name = "hafiscal"
 version = "1.0.0"
 description = "HAFiscal: Household Fiscal Policy Model"
-requires-python = ">=3.9,<3.10"
+requires-python = ">=3.10"
 authors = [
     {name = "Christopher D. Carroll", email = "ccarroll@llorracc.org"},
 ]
@@ -16,13 +16,16 @@ classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering :: Economics",
-    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
     "License :: OSI Approved :: Apache Software License",
 ]
 
 dependencies = [
     # Economics packages
-    "econ-ark==0.14.1",
+    # Pin to specific HARK commit that includes PR #1701 (array broadcasting fix)
+    # This fix is required for mixed scalar/array inputs in 2D/3D/4D interpolators
+    # Once HARK 0.17.1 is released, update to: "econ-ark>=0.17.1"
+    "econ-ark @ git+https://github.com/econ-ark/HARK.git@v0.17.0.post1-broadcasting-fix",
     "sequence-jacobian==1.0.0",
     
     # Core scientific computing stack
@@ -130,7 +133,7 @@ exclude = ["*"]
 
 [tool.ruff]
 line-length = 88
-target-version = "py39"
+target-version = "py310"
 extend-exclude = [
     ".venv",
     "venv",
@@ -140,7 +143,7 @@ extend-exclude = [
 
 [tool.black]
 line-length = 88
-target-version = ['py39']
+target-version = ['py310']
 extend-exclude = '''
 /(
     \.venv
@@ -151,7 +154,7 @@ extend-exclude = '''
 '''
 
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.10"
 warn_return_any = true
 warn_unused_configs = true
 ignore_missing_imports = true

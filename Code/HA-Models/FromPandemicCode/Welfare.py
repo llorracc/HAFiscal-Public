@@ -4,15 +4,15 @@ Created on Wed Dec 15 16:44:33 2021
 
 @author: edmun
 """
-from Parameters import returnParameters
-from OtherFunctions import loadPickle, getSimulationDiff, saveAsPickleUnderVarName
+from Parameters import return_parameters
+from OtherFunctions import load_pickle, get_simulation_diff, save_as_pickle_under_var_name
 import numpy as np
 import pandas as pd
 
 def Welfare_Results(saved_results_dir,table_dir,Parametrization='Baseline'):
     
     
-    [max_recession_duration, Rspell, Rfree_base, figs_dir_FullRun, CRRA]  = returnParameters(Parametrization=Parametrization,OutputFor='_Output_Results.py')
+    [max_recession_duration, Rspell, Rfree_base, figs_dir_FullRun, CRRA]  = return_parameters(Parametrization=Parametrization,OutputFor='_Output_Results.py')
     
     
     folder_AD           = saved_results_dir
@@ -21,36 +21,36 @@ def Welfare_Results(saved_results_dir,table_dir,Parametrization='Baseline'):
     else:
         folder_nonPVSame         = saved_results_dir
     
-    base_results                        = loadPickle('base_results',saved_results_dir,locals())
-    check_results                       = loadPickle('Check_results',saved_results_dir,locals())
-    UI_results                          = loadPickle('UI_results',folder_nonPVSame,locals())
-    TaxCut_results                      = loadPickle('TaxCut_results',saved_results_dir,locals())
+    base_results                        = load_pickle('base_results',saved_results_dir,locals())
+    check_results                       = load_pickle('Check_results',saved_results_dir,locals())
+    UI_results                          = load_pickle('UI_results',folder_nonPVSame,locals())
+    TaxCut_results                      = load_pickle('TaxCut_results',saved_results_dir,locals())
     
-    recession_results                   = loadPickle('recession_results',folder_nonPVSame,locals())
-    recession_results_AD                = loadPickle('recession_results_AD',folder_nonPVSame,locals())
-    recession_UI_results                = loadPickle('recessionUI_results',folder_nonPVSame,locals())       
-    recession_UI_results_AD             = loadPickle('recessionUI_results_AD',folder_nonPVSame,locals())  
-    recession_Check_results             = loadPickle('recessionCheck_results',saved_results_dir,locals())       
-    recession_Check_results_AD          = loadPickle('recessionCheck_results_AD',saved_results_dir,locals())
-    recession_TaxCut_results            = loadPickle('recessionTaxCut_results',saved_results_dir,locals())
-    recession_TaxCut_results_AD         = loadPickle('recessionTaxCut_results_AD',saved_results_dir,locals())
+    recession_results                   = load_pickle('recession_results',folder_nonPVSame,locals())
+    recession_results_AD                = load_pickle('recession_results_AD',folder_nonPVSame,locals())
+    recession_UI_results                = load_pickle('recessionUI_results',folder_nonPVSame,locals())       
+    recession_UI_results_AD             = load_pickle('recessionUI_results_AD',folder_nonPVSame,locals())  
+    recession_Check_results             = load_pickle('recessionCheck_results',saved_results_dir,locals())       
+    recession_Check_results_AD          = load_pickle('recessionCheck_results_AD',saved_results_dir,locals())
+    recession_TaxCut_results            = load_pickle('recessionTaxCut_results',saved_results_dir,locals())
+    recession_TaxCut_results_AD         = load_pickle('recessionTaxCut_results_AD',saved_results_dir,locals())
 
-    recession_all_results                   = loadPickle('recession_all_results',folder_nonPVSame,locals())
-    recession_all_results_AD                = loadPickle('recession_all_results_AD',folder_nonPVSame,locals())
-    recession_UI_all_results                = loadPickle('recessionUI_all_results',folder_nonPVSame,locals())       
-    recession_UI_all_results_AD             = loadPickle('recessionUI_all_results_AD',folder_nonPVSame,locals())  
-    recession_Check_all_results             = loadPickle('recessionCheck_all_results',saved_results_dir,locals())       
-    recession_Check_all_results_AD          = loadPickle('recessionCheck_all_results_AD',saved_results_dir,locals())
-    recession_TaxCut_all_results            = loadPickle('recessionTaxCut_all_results',saved_results_dir,locals())
-    recession_TaxCut_all_results_AD         = loadPickle('recessionTaxCut_all_results_AD',saved_results_dir,locals())
+    recession_all_results                   = load_pickle('recession_all_results',folder_nonPVSame,locals())
+    recession_all_results_AD                = load_pickle('recession_all_results_AD',folder_nonPVSame,locals())
+    recession_UI_all_results                = load_pickle('recessionUI_all_results',folder_nonPVSame,locals())       
+    recession_UI_all_results_AD             = load_pickle('recessionUI_all_results_AD',folder_nonPVSame,locals())  
+    recession_Check_all_results             = load_pickle('recessionCheck_all_results',saved_results_dir,locals())       
+    recession_Check_all_results_AD          = load_pickle('recessionCheck_all_results_AD',saved_results_dir,locals())
+    recession_TaxCut_all_results            = load_pickle('recessionTaxCut_all_results',saved_results_dir,locals())
+    recession_TaxCut_all_results_AD         = load_pickle('recessionTaxCut_all_results_AD',saved_results_dir,locals())
 
-    NPV_AddInc_Rec_Check                = getSimulationDiff(recession_results,recession_Check_results,'NPV_AggIncome') 
-    NPV_AddInc_UI_Rec                   = getSimulationDiff(recession_results,recession_UI_results,'NPV_AggIncome') # Policy expenditure
-    NPV_AddInc_Rec_TaxCut               = getSimulationDiff(recession_results,recession_TaxCut_results,'NPV_AggIncome')
+    NPV_AddInc_Rec_Check                = get_simulation_diff(recession_results,recession_Check_results,'NPV_AggIncome') 
+    NPV_AddInc_UI_Rec                   = get_simulation_diff(recession_results,recession_UI_results,'NPV_AggIncome') # Policy expenditure
+    NPV_AddInc_Rec_TaxCut               = get_simulation_diff(recession_results,recession_TaxCut_results,'NPV_AggIncome')
     
-    NPV_AddInc_Check                = getSimulationDiff(base_results,check_results,'NPV_AggIncome') 
-    NPV_AddInc_UI                   = getSimulationDiff(base_results,UI_results,'NPV_AggIncome') # Policy expenditure
-    NPV_AddInc_TaxCut               = getSimulationDiff(base_results,TaxCut_results,'NPV_AggIncome')
+    NPV_AddInc_Check                = get_simulation_diff(base_results,check_results,'NPV_AggIncome') 
+    NPV_AddInc_UI                   = get_simulation_diff(base_results,UI_results,'NPV_AggIncome') # Policy expenditure
+    NPV_AddInc_TaxCut               = get_simulation_diff(base_results,TaxCut_results,'NPV_AggIncome')
     
     def felicity(cons):
         if CRRA==1:
@@ -251,16 +251,16 @@ def Welfare_Results(saved_results_dir,table_dir,Parametrization='Baseline'):
     # Calculate the marginal utility of a dollar of spending for each household in the baseline.
     # These will act as weights: under the baseline there is no benefit to the social planner to doing any marginal consumption transfers
     base_MU = (base_results['cLvl_all_splurge'] )**(-CRRA)
-    NPV_AddCons_Rec_Check                = getSimulationDiff(recession_results,recession_Check_results,'NPV_AggCons') 
-    NPV_AddCons_UI_Rec                   = getSimulationDiff(recession_results,recession_UI_results,'NPV_AggCons') 
-    NPV_AddCons_Rec_TaxCut               = getSimulationDiff(recession_results,recession_TaxCut_results,'NPV_AggCons')
+    NPV_AddCons_Rec_Check                = get_simulation_diff(recession_results,recession_Check_results,'NPV_AggCons') 
+    NPV_AddCons_UI_Rec                   = get_simulation_diff(recession_results,recession_UI_results,'NPV_AggCons') 
+    NPV_AddCons_Rec_TaxCut               = get_simulation_diff(recession_results,recession_TaxCut_results,'NPV_AggCons')
     
-    NPV_AddCons_Check                = getSimulationDiff(base_results,check_results,'NPV_AggCons') 
-    NPV_AddCons_UI                   = getSimulationDiff(base_results,UI_results,'NPV_AggCons')
-    NPV_AddCons_TaxCut               = getSimulationDiff(base_results,TaxCut_results,'NPV_AggCons')
+    NPV_AddCons_Check                = get_simulation_diff(base_results,check_results,'NPV_AggCons') 
+    NPV_AddCons_UI                   = get_simulation_diff(base_results,UI_results,'NPV_AggCons')
+    NPV_AddCons_TaxCut               = get_simulation_diff(base_results,TaxCut_results,'NPV_AggCons')
     
     # In the AD model, the cost of the tax cut is increased by 2% of the increase in income relative to the 
-    NPV_AddInc_Rec_TaxCut_AD               = NPV_AddInc_Rec_TaxCut + 0.02*getSimulationDiff(recession_results_AD,recession_TaxCut_results_AD,'NPV_AggIncome')
+    NPV_AddInc_Rec_TaxCut_AD               = NPV_AddInc_Rec_TaxCut + 0.02*get_simulation_diff(recession_results_AD,recession_TaxCut_results_AD,'NPV_AggIncome')
 
 
     recession_Check_consumption_welfare6   = (np.sum(np.sum((recession_Check_welfare-recession_welfare)/base_MU,1)/NPV_AddInc_Rec_Check[-1]/Rfree_base[0]**np.arange(periods))) + (NPV_AddInc_Rec_Check[-1]-NPV_AddCons_Rec_Check[-1])/NPV_AddInc_Rec_Check[-1]
@@ -307,13 +307,13 @@ def Welfare_Results(saved_results_dir,table_dir,Parametrization='Baseline'):
         'recession_UI_consumption_welfareAD6':     mystr2dp(recession_UI_consumption_welfareAD6),  
         'recession_TaxCut_consumption_welfareAD6': mystr2dp(recession_TaxCut_consumption_welfareAD6),
         }
-        saveAsPickleUnderVarName(Welfare_Baseline_Results,table_dir,locals())
+        save_as_pickle_under_var_name(Welfare_Baseline_Results,table_dir,locals())
 
     # Comparison chart with baseline for Splurge = 0
     if Parametrization == 'Splurge0':
         import os
         Abs_Path              = os.getcwd()   
-        Welfare_Baseline_Results = loadPickle('Welfare_Baseline_Results',Abs_Path+'/Tables/CRRA2/',locals())
+        Welfare_Baseline_Results = load_pickle('Welfare_Baseline_Results',Abs_Path+'/Tables/CRRA2/',locals())
 
         output  ="\\begin{tabular}{@{}lccc@{}} \n"
         output +="\\toprule \n"

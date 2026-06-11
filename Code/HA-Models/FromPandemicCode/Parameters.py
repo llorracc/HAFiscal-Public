@@ -1,4 +1,4 @@
-def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
+def return_parameters(Parametrization='Baseline',OutputFor='_Main.py'):
     
     import os
     
@@ -14,15 +14,15 @@ def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
         Abs_Path = cwd + '/FromPandemicCode'
 
     import numpy as np
-    from HARK.distribution import Uniform
-    from OtherFunctions import loadPickle, getSimulationDiff
+    from HARK.distributions import Uniform
+    from OtherFunctions import load_pickle, get_simulation_diff
     
 
     
     from EstimParameters import data_EducShares, Urate_normal_d, Urate_normal_h, Urate_normal_c,\
     Uspell_normal, UBspell_normal, PopGroFac, PermGroFacAgg, IncUnemp,\
-    pLvlInitMean_d, pLvlInitMean_h, pLvlInitMean_c,\
-    pLvlInitStd_d, pLvlInitStd_h, pLvlInitStd_c,\
+    pLogInitMean_d, pLogInitMean_h, pLogInitMean_c,\
+    pLogInitStd_d, pLogInitStd_h, pLogInitStd_c,\
     PermGroFac_base_d, PermGroFac_base_h, PermGroFac_base_c,\
     TranShkStd, PermShkStd, LivPrb_base, num_types, GICmaxBetas, minBeta, DiscFacCount
     
@@ -128,13 +128,13 @@ def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
 
         
     if Parametrization.find('PVSame')>0:
-        base_results                    = loadPickle('base_results',figs_dir_FullRun,locals())
-        check_results                   = loadPickle('Check_results',figs_dir_FullRun,locals())
-        UI_results                      = loadPickle('UI_results',figs_dir_FullRun,locals())
-        TaxCut_results                  = loadPickle('TaxCut_results',figs_dir_FullRun,locals())
-        NPV_AddInc_Check                = getSimulationDiff(base_results,check_results,'NPV_AggIncome') 
-        NPV_AddInc_UI                   = getSimulationDiff(base_results,UI_results,'NPV_AggIncome') # Policy expenditure
-        NPV_AddInc_TaxCut               = getSimulationDiff(base_results,TaxCut_results,'NPV_AggIncome')
+        base_results                    = load_pickle('base_results',figs_dir_FullRun,locals())
+        check_results                   = load_pickle('Check_results',figs_dir_FullRun,locals())
+        UI_results                      = load_pickle('UI_results',figs_dir_FullRun,locals())
+        TaxCut_results                  = load_pickle('TaxCut_results',figs_dir_FullRun,locals())
+        NPV_AddInc_Check                = get_simulation_diff(base_results,check_results,'NPV_AggIncome') 
+        NPV_AddInc_UI                   = get_simulation_diff(base_results,UI_results,'NPV_AggIncome') # Policy expenditure
+        NPV_AddInc_TaxCut               = get_simulation_diff(base_results,TaxCut_results,'NPV_AggIncome')
         
         TaxCutAdjFactor = NPV_AddInc_UI[-1]/NPV_AddInc_TaxCut[-1]
         CheckAdjFactor =  NPV_AddInc_UI[-1]/NPV_AddInc_Check[-1]
@@ -274,7 +274,7 @@ def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
         print('EducationGroup: ', e, ', betaDistr :', theDFs.tolist())
         DiscFacDstns[e] = dfs
     
-    def makeMacroMrkvArray_recession(Rspell, num_experiment_periods):
+    def make_macro_mrkv_array_recession(Rspell, num_experiment_periods):
         R_persist = 1.-1./Rspell
         recession_transitions = np.array([[1.0, 0.0],[1-R_persist, R_persist]])
         MacroMrkvArray = np.zeros((2*(num_experiment_periods+1), 2*(num_experiment_periods+1)))
@@ -298,14 +298,14 @@ def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
         small_MrkvArray[ub+1,0] = 1-u
         return small_MrkvArray 
     
-    def makeCondMrkvArrays_base(Urate_normal, Uspell_normal, UBspell_normal):
+    def make_cond_mrkv_arrays_base(Urate_normal, Uspell_normal, UBspell_normal):
         U_persist_normal = 1.-1./Uspell_normal
         E_persist_normal = 1.-Urate_normal*(1.-U_persist_normal)/(1.-Urate_normal)
         MrkvArray_normal         = small_MrkvArray(E_persist_normal,    U_persist_normal,    UBspell_normal)
         CondMrkvArrays = [MrkvArray_normal]
         return CondMrkvArrays
     
-    def makeCondMrkvArrays_recession(Urate_normal, Uspell_normal, UBspell_normal, Urate_recession, Uspell_recession, num_experiment_periods):
+    def make_cond_mrkv_arrays_recession(Urate_normal, Uspell_normal, UBspell_normal, Urate_recession, Uspell_recession, num_experiment_periods):
         U_persist_normal = 1.-1./Uspell_normal
         E_persist_normal = 1.-Urate_normal*(1.-U_persist_normal)/(1.-Urate_normal)
         U_persist_recession = 1.-1./Uspell_recession
@@ -315,7 +315,7 @@ def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
         CondMrkvArrays = [MrkvArray_normal, MrkvArray_recession]*(num_experiment_periods+1)
         return CondMrkvArrays
     
-    def makeCondMrkvArrays_recessionUI(Urate_normal, Uspell_normal, UBspell_normal, Urate_recession, Uspell_recession, num_experiment_periods, ExtraUBperiods):
+    def make_cond_mrkv_arrays_recession_ui(Urate_normal, Uspell_normal, UBspell_normal, Urate_recession, Uspell_recession, num_experiment_periods, ExtraUBperiods):
         U_persist_normal = 1.-1./Uspell_normal
         E_persist_normal = 1.-Urate_normal*(1.-U_persist_normal)/(1.-Urate_normal)
         U_persist_recession = 1.-1./Uspell_recession
@@ -328,7 +328,7 @@ def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
         return CondMrkvArrays
     
     
-    def makeFullMrkvArray(MacroMrkvArray, CondMrkvArrays):
+    def make_full_mrkv_array(MacroMrkvArray, CondMrkvArrays):
         for i in range(MacroMrkvArray.shape[0]):
             this_row = MacroMrkvArray[i,0]*CondMrkvArrays[0]
             for j in range(MacroMrkvArray.shape[0]-1):
@@ -340,44 +340,44 @@ def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
         return [FullMrkv]
     
     MacroMrkvArray_base = np.array([[1.0]])
-    CondMrkvArrays_base_d = makeCondMrkvArrays_base(Urate_normal_d, Uspell_normal, UBspell_normal)
-    CondMrkvArrays_base_h = makeCondMrkvArrays_base(Urate_normal_h, Uspell_normal, UBspell_normal)
-    CondMrkvArrays_base_c = makeCondMrkvArrays_base(Urate_normal_c, Uspell_normal, UBspell_normal)
-    MrkvArray_base_d = makeFullMrkvArray(MacroMrkvArray_base, CondMrkvArrays_base_d)
-    MrkvArray_base_h = makeFullMrkvArray(MacroMrkvArray_base, CondMrkvArrays_base_h)
-    MrkvArray_base_c = makeFullMrkvArray(MacroMrkvArray_base, CondMrkvArrays_base_c)
+    CondMrkvArrays_base_d = make_cond_mrkv_arrays_base(Urate_normal_d, Uspell_normal, UBspell_normal)
+    CondMrkvArrays_base_h = make_cond_mrkv_arrays_base(Urate_normal_h, Uspell_normal, UBspell_normal)
+    CondMrkvArrays_base_c = make_cond_mrkv_arrays_base(Urate_normal_c, Uspell_normal, UBspell_normal)
+    MrkvArray_base_d = make_full_mrkv_array(MacroMrkvArray_base, CondMrkvArrays_base_d)
+    MrkvArray_base_h = make_full_mrkv_array(MacroMrkvArray_base, CondMrkvArrays_base_h)
+    MrkvArray_base_c = make_full_mrkv_array(MacroMrkvArray_base, CondMrkvArrays_base_c)
     
-    MacroMrkvArray_recession = makeMacroMrkvArray_recession(Rspell, num_experiment_periods)
-    CondMrkvArrays_recession_d = makeCondMrkvArrays_recession(Urate_normal_d, Uspell_normal, UBspell_normal, Urate_recession_d, Uspell_recession, num_experiment_periods)
-    CondMrkvArrays_recession_h = makeCondMrkvArrays_recession(Urate_normal_h, Uspell_normal, UBspell_normal, Urate_recession_h, Uspell_recession, num_experiment_periods)
-    CondMrkvArrays_recession_c = makeCondMrkvArrays_recession(Urate_normal_c, Uspell_normal, UBspell_normal, Urate_recession_c, Uspell_recession, num_experiment_periods)
-    MrkvArray_recession_d = makeFullMrkvArray(MacroMrkvArray_recession, CondMrkvArrays_recession_d)
-    MrkvArray_recession_h = makeFullMrkvArray(MacroMrkvArray_recession, CondMrkvArrays_recession_h)
-    MrkvArray_recession_c = makeFullMrkvArray(MacroMrkvArray_recession, CondMrkvArrays_recession_c)
+    MacroMrkvArray_recession = make_macro_mrkv_array_recession(Rspell, num_experiment_periods)
+    CondMrkvArrays_recession_d = make_cond_mrkv_arrays_recession(Urate_normal_d, Uspell_normal, UBspell_normal, Urate_recession_d, Uspell_recession, num_experiment_periods)
+    CondMrkvArrays_recession_h = make_cond_mrkv_arrays_recession(Urate_normal_h, Uspell_normal, UBspell_normal, Urate_recession_h, Uspell_recession, num_experiment_periods)
+    CondMrkvArrays_recession_c = make_cond_mrkv_arrays_recession(Urate_normal_c, Uspell_normal, UBspell_normal, Urate_recession_c, Uspell_recession, num_experiment_periods)
+    MrkvArray_recession_d = make_full_mrkv_array(MacroMrkvArray_recession, CondMrkvArrays_recession_d)
+    MrkvArray_recession_h = make_full_mrkv_array(MacroMrkvArray_recession, CondMrkvArrays_recession_h)
+    MrkvArray_recession_c = make_full_mrkv_array(MacroMrkvArray_recession, CondMrkvArrays_recession_c)
     
     MacroMrkvArray_recessionCheck = MacroMrkvArray_recession
     CondMrkvArrays_recessionCheck_d = CondMrkvArrays_recession_d
     CondMrkvArrays_recessionCheck_h = CondMrkvArrays_recession_h
     CondMrkvArrays_recessionCheck_c = CondMrkvArrays_recession_c
-    MrkvArray_recessionCheck_d = makeFullMrkvArray(MacroMrkvArray_recessionCheck, CondMrkvArrays_recessionCheck_d)
-    MrkvArray_recessionCheck_h = makeFullMrkvArray(MacroMrkvArray_recessionCheck, CondMrkvArrays_recessionCheck_h)
-    MrkvArray_recessionCheck_c = makeFullMrkvArray(MacroMrkvArray_recessionCheck, CondMrkvArrays_recessionCheck_c)
+    MrkvArray_recessionCheck_d = make_full_mrkv_array(MacroMrkvArray_recessionCheck, CondMrkvArrays_recessionCheck_d)
+    MrkvArray_recessionCheck_h = make_full_mrkv_array(MacroMrkvArray_recessionCheck, CondMrkvArrays_recessionCheck_h)
+    MrkvArray_recessionCheck_c = make_full_mrkv_array(MacroMrkvArray_recessionCheck, CondMrkvArrays_recessionCheck_c)
     
     MacroMrkvArray_recessionTaxCut = MacroMrkvArray_recession
     CondMrkvArrays_recessionTaxCut_d = CondMrkvArrays_recession_d
     CondMrkvArrays_recessionTaxCut_h = CondMrkvArrays_recession_h
     CondMrkvArrays_recessionTaxCut_c = CondMrkvArrays_recession_c
-    MrkvArray_recessionTaxCut_d = makeFullMrkvArray(MacroMrkvArray_recessionTaxCut, CondMrkvArrays_recessionTaxCut_d)
-    MrkvArray_recessionTaxCut_h = makeFullMrkvArray(MacroMrkvArray_recessionTaxCut, CondMrkvArrays_recessionTaxCut_h)
-    MrkvArray_recessionTaxCut_c = makeFullMrkvArray(MacroMrkvArray_recessionTaxCut, CondMrkvArrays_recessionTaxCut_c)
+    MrkvArray_recessionTaxCut_d = make_full_mrkv_array(MacroMrkvArray_recessionTaxCut, CondMrkvArrays_recessionTaxCut_d)
+    MrkvArray_recessionTaxCut_h = make_full_mrkv_array(MacroMrkvArray_recessionTaxCut, CondMrkvArrays_recessionTaxCut_h)
+    MrkvArray_recessionTaxCut_c = make_full_mrkv_array(MacroMrkvArray_recessionTaxCut, CondMrkvArrays_recessionTaxCut_c)
     
     MacroMrkvArray_recessionUI = MacroMrkvArray_recession
-    CondMrkvArrays_recessionUI_d = makeCondMrkvArrays_recessionUI(Urate_normal_d, Uspell_normal, UBspell_normal, Urate_recession_d, Uspell_recession, num_experiment_periods, UBspell_extended-UBspell_normal)
-    CondMrkvArrays_recessionUI_h = makeCondMrkvArrays_recessionUI(Urate_normal_h, Uspell_normal, UBspell_normal, Urate_recession_h, Uspell_recession, num_experiment_periods, UBspell_extended-UBspell_normal)
-    CondMrkvArrays_recessionUI_c = makeCondMrkvArrays_recessionUI(Urate_normal_c, Uspell_normal, UBspell_normal, Urate_recession_c, Uspell_recession, num_experiment_periods, UBspell_extended-UBspell_normal)
-    MrkvArray_recessionUI_d    = makeFullMrkvArray(MacroMrkvArray_recessionUI, CondMrkvArrays_recessionUI_d)
-    MrkvArray_recessionUI_h    = makeFullMrkvArray(MacroMrkvArray_recessionUI, CondMrkvArrays_recessionUI_h)
-    MrkvArray_recessionUI_c    = makeFullMrkvArray(MacroMrkvArray_recessionUI, CondMrkvArrays_recessionUI_c)
+    CondMrkvArrays_recessionUI_d = make_cond_mrkv_arrays_recession_ui(Urate_normal_d, Uspell_normal, UBspell_normal, Urate_recession_d, Uspell_recession, num_experiment_periods, UBspell_extended-UBspell_normal)
+    CondMrkvArrays_recessionUI_h = make_cond_mrkv_arrays_recession_ui(Urate_normal_h, Uspell_normal, UBspell_normal, Urate_recession_h, Uspell_recession, num_experiment_periods, UBspell_extended-UBspell_normal)
+    CondMrkvArrays_recessionUI_c = make_cond_mrkv_arrays_recession_ui(Urate_normal_c, Uspell_normal, UBspell_normal, Urate_recession_c, Uspell_recession, num_experiment_periods, UBspell_extended-UBspell_normal)
+    MrkvArray_recessionUI_d    = make_full_mrkv_array(MacroMrkvArray_recessionUI, CondMrkvArrays_recessionUI_d)
+    MrkvArray_recessionUI_h    = make_full_mrkv_array(MacroMrkvArray_recessionUI, CondMrkvArrays_recessionUI_h)
+    MrkvArray_recessionUI_c    = make_full_mrkv_array(MacroMrkvArray_recessionUI, CondMrkvArrays_recessionUI_c)
     
     
     
@@ -451,10 +451,10 @@ def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
                     "aXtraNestFac": aXtraNestFac,
                     "CubicBool": False,
                     "vFuncBool": False,
-                    'aNrmInitMean': np.log(0.00001), # Initial assets are zero
-                    'aNrmInitStd': 0.0,
-                    'pLvlInitMean': pLvlInitMean_d,
-                    'pLvlInitStd': pLvlInitStd_d,
+                    'kLogInitMean': np.log(0.00001), # Initial assets are zero
+                    'kLogInitStd': 0.0,
+                    'pLogInitMean': pLogInitMean_d,
+                    'pLogInitStd': pLogInitStd_d,
                     "MrkvPrbsInit" : np.array(list(init_mrkv_dist_d)),
                     'Urate_normal' : Urate_normal_d,
                     'Uspell_normal' : Uspell_normal,
@@ -496,8 +496,8 @@ def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
         "CondMrkvArrays_recessionTaxCut" : CondMrkvArrays_recessionTaxCut_h,
         "MrkvArray_recessionCheck" : MrkvArray_recessionCheck_h,
         "CondMrkvArrays_recessionCheck" : CondMrkvArrays_recessionCheck_h,  
-        'pLvlInitMean': pLvlInitMean_h,
-        'pLvlInitStd': pLvlInitStd_h,
+        'pLogInitMean': pLogInitMean_h,
+        'pLogInitStd': pLogInitStd_h,
         "MrkvPrbsInit" : np.array(list(init_mrkv_dist_h)),
         'Urate_normal' : Urate_normal_h,
         'Urate_recession' : Urate_recession_h,
@@ -520,8 +520,8 @@ def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
         "CondMrkvArrays_recessionTaxCut" : CondMrkvArrays_recessionTaxCut_c,
         "MrkvArray_recessionCheck" : MrkvArray_recessionCheck_c,
         "CondMrkvArrays_recessionCheck" : CondMrkvArrays_recessionCheck_c, 
-        'pLvlInitMean': pLvlInitMean_c,
-        'pLvlInitStd': pLvlInitStd_c,
+        'pLogInitMean': pLogInitMean_c,
+        'pLogInitStd': pLogInitStd_c,
         "MrkvPrbsInit" : np.array(list(init_mrkv_dist_c)),
         'Urate_normal' : Urate_normal_c,
         'Urate_recession' : Urate_recession_c,
@@ -618,8 +618,8 @@ def returnParameters(Parametrization='Baseline',OutputFor='_Main.py'):
             
     elif OutputFor=='_Model.py':
 
-        return [makeMacroMrkvArray_recession, makeCondMrkvArrays_recession, makeFullMrkvArray, T_sim, \
-                 makeCondMrkvArrays_base, makeCondMrkvArrays_recessionUI]            
+        return [make_macro_mrkv_array_recession, make_cond_mrkv_arrays_recession, make_full_mrkv_array, T_sim, \
+                 make_cond_mrkv_arrays_base, make_cond_mrkv_arrays_recession_ui]            
             
     elif OutputFor=='_Output_Results.py':
 

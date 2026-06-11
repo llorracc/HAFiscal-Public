@@ -29,14 +29,14 @@ def Output_Results(saved_results_dir,fig_dir,table_dir,Parametrization='Baseline
 
     
     
-    from Parameters import returnParameters
+    from Parameters import return_parameters
     import numpy as np
-    from OtherFunctions import getSimulationDiff, getSimulationPercentDiff, getNPVMultiplier, loadPickle, saveAsPickleUnderVarName
+    from OtherFunctions import get_simulation_diff, get_simulation_percent_diff, get_npv_multiplier, load_pickle, save_as_pickle_under_var_name
 
     mystr = lambda x : '{:.2f}'.format(x)
     
     
-    [max_recession_duration, Rspell, Rfree_base, figs_dir_FullRun, CRRA]  = returnParameters(Parametrization=Parametrization,OutputFor='_Output_Results.py')
+    [max_recession_duration, Rspell, Rfree_base, figs_dir_FullRun, CRRA]  = return_parameters(Parametrization=Parametrization,OutputFor='_Output_Results.py')
     
     
     Plot_1stRoundAd         = False
@@ -51,23 +51,23 @@ def Output_Results(saved_results_dir,fig_dir,table_dir,Parametrization='Baseline
         folder_nonPVSame         = saved_results_dir
         
 
-    base_results                            = loadPickle('base_results',folder_nonPVSame,locals())
+    base_results                            = load_pickle('base_results',folder_nonPVSame,locals())
     
-    recession_results                       = loadPickle('recession_results',folder_nonPVSame,locals())
-    recession_results_AD                    = loadPickle('recession_results_AD',folder_nonPVSame,locals())
-    recession_results_firstRoundAD          = loadPickle('recession_results_firstRoundAD',folder_nonPVSame,locals())
+    recession_results                       = load_pickle('recession_results',folder_nonPVSame,locals())
+    recession_results_AD                    = load_pickle('recession_results_AD',folder_nonPVSame,locals())
+    recession_results_firstRoundAD          = load_pickle('recession_results_firstRoundAD',folder_nonPVSame,locals())
     
-    recession_UI_results                    = loadPickle('recessionUI_results',folder_nonPVSame,locals())       
-    recession_UI_results_AD                 = loadPickle('recessionUI_results_AD',folder_nonPVSame,locals())
-    recession_UI_results_firstRoundAD       = loadPickle('recessionUI_results_firstRoundAD',folder_nonPVSame,locals())
+    recession_UI_results                    = load_pickle('recessionUI_results',folder_nonPVSame,locals())       
+    recession_UI_results_AD                 = load_pickle('recessionUI_results_AD',folder_nonPVSame,locals())
+    recession_UI_results_firstRoundAD       = load_pickle('recessionUI_results_firstRoundAD',folder_nonPVSame,locals())
     
-    recession_Check_results                 = loadPickle('recessionCheck_results',saved_results_dir,locals())       
-    recession_Check_results_AD              = loadPickle('recessionCheck_results_AD',saved_results_dir,locals())
-    recession_Check_results_firstRoundAD    = loadPickle('recessionCheck_results_firstRoundAD',saved_results_dir,locals())
+    recession_Check_results                 = load_pickle('recessionCheck_results',saved_results_dir,locals())       
+    recession_Check_results_AD              = load_pickle('recessionCheck_results_AD',saved_results_dir,locals())
+    recession_Check_results_firstRoundAD    = load_pickle('recessionCheck_results_firstRoundAD',saved_results_dir,locals())
     
-    recession_TaxCut_results                = loadPickle('recessionTaxCut_results',saved_results_dir,locals())
-    recession_TaxCut_results_AD             = loadPickle('recessionTaxCut_results_AD',saved_results_dir,locals())
-    recession_TaxCut_results_firstRoundAD   = loadPickle('recessionTaxCut_results_firstRoundAD',saved_results_dir,locals())
+    recession_TaxCut_results                = load_pickle('recessionTaxCut_results',saved_results_dir,locals())
+    recession_TaxCut_results_AD             = load_pickle('recessionTaxCut_results_AD',saved_results_dir,locals())
+    recession_TaxCut_results_firstRoundAD   = load_pickle('recessionTaxCut_results_firstRoundAD',saved_results_dir,locals())
     
     if type(recession_TaxCut_results_firstRoundAD) == int:
         Mltp_1stRoundAd         = False
@@ -79,15 +79,15 @@ def Output_Results(saved_results_dir,fig_dir,table_dir,Parametrization='Baseline
     # Tax cut        
     
     
-    AddCons_Rec_TaxCut_RelRec               = getSimulationPercentDiff(recession_results,               recession_TaxCut_results,'AggCons')
-    AddCons_Rec_TaxCut_AD_RelRec            = getSimulationPercentDiff(recession_results_AD,            recession_TaxCut_results_AD,'AggCons')
+    AddCons_Rec_TaxCut_RelRec               = get_simulation_percent_diff(recession_results,               recession_TaxCut_results,'AggCons')
+    AddCons_Rec_TaxCut_AD_RelRec            = get_simulation_percent_diff(recession_results_AD,            recession_TaxCut_results_AD,'AggCons')
     
-    AddInc_Rec_TaxCut_RelRec                = getSimulationPercentDiff(recession_results,               recession_TaxCut_results,'AggIncome')
-    AddInc_Rec_TaxCut_AD_RelRec             = getSimulationPercentDiff(recession_results_AD,            recession_TaxCut_results_AD,'AggIncome')
+    AddInc_Rec_TaxCut_RelRec                = get_simulation_percent_diff(recession_results,               recession_TaxCut_results,'AggIncome')
+    AddInc_Rec_TaxCut_AD_RelRec             = get_simulation_percent_diff(recession_results_AD,            recession_TaxCut_results_AD,'AggIncome')
     
     if Plot_1stRoundAd:
-        AddCons_Rec_TaxCut_firstRoundAD_RelRec  = getSimulationPercentDiff(recession_results_firstRoundAD,  recession_TaxCut_results_firstRoundAD,'AggCons')
-        AddInc_Rec_TaxCut_firstRoundAD_RelRec  = getSimulationPercentDiff(recession_results_firstRoundAD,   recession_TaxCut_results_firstRoundAD,'AggIncome')
+        AddCons_Rec_TaxCut_firstRoundAD_RelRec  = get_simulation_percent_diff(recession_results_firstRoundAD,  recession_TaxCut_results_firstRoundAD,'AggCons')
+        AddInc_Rec_TaxCut_firstRoundAD_RelRec  = get_simulation_percent_diff(recession_results_firstRoundAD,   recession_TaxCut_results_firstRoundAD,'AggIncome')
        
     
     plt.figure(figsize=(4, 4))
@@ -118,15 +118,15 @@ def Output_Results(saved_results_dir,fig_dir,table_dir,Parametrization='Baseline
     
     
     #UI extension
-    AddCons_UI_Ext_Rec_RelRec               = getSimulationPercentDiff(recession_results,    recession_UI_results,'AggCons')
-    AddInc_UI_Ext_Rec_RelRec                = getSimulationPercentDiff(recession_results,    recession_UI_results,'AggIncome')
+    AddCons_UI_Ext_Rec_RelRec               = get_simulation_percent_diff(recession_results,    recession_UI_results,'AggCons')
+    AddInc_UI_Ext_Rec_RelRec                = get_simulation_percent_diff(recession_results,    recession_UI_results,'AggIncome')
     
-    AddCons_UI_Ext_Rec_RelRec_AD            = getSimulationPercentDiff(recession_results_AD,    recession_UI_results_AD,'AggCons')
-    AddInc_UI_Ext_Rec_RelRec_AD             = getSimulationPercentDiff(recession_results_AD,    recession_UI_results_AD,'AggIncome')
+    AddCons_UI_Ext_Rec_RelRec_AD            = get_simulation_percent_diff(recession_results_AD,    recession_UI_results_AD,'AggCons')
+    AddInc_UI_Ext_Rec_RelRec_AD             = get_simulation_percent_diff(recession_results_AD,    recession_UI_results_AD,'AggIncome')
      
     if Plot_1stRoundAd:
-        AddCons_UI_Ext_Rec_RelRec_firstRoundAD  = getSimulationPercentDiff(recession_results_firstRoundAD,    recession_UI_results_firstRoundAD,'AggCons')
-        AddInc_UI_Ext_Rec_RelRec_firstRoundAD   = getSimulationPercentDiff(recession_results_firstRoundAD,    recession_UI_results_firstRoundAD,'AggIncome')       
+        AddCons_UI_Ext_Rec_RelRec_firstRoundAD  = get_simulation_percent_diff(recession_results_firstRoundAD,    recession_UI_results_firstRoundAD,'AggCons')
+        AddInc_UI_Ext_Rec_RelRec_firstRoundAD   = get_simulation_percent_diff(recession_results_firstRoundAD,    recession_UI_results_firstRoundAD,'AggIncome')       
     
     plt.figure(figsize=(4, 4))
     #plt.title('Recession + UI extension', size=30)
@@ -155,15 +155,15 @@ def Output_Results(saved_results_dir,fig_dir,table_dir,Parametrization='Baseline
     
     
     #Check stimulus    
-    AddCons_Rec_Check_RelRec               = getSimulationPercentDiff(recession_results,               recession_Check_results,'AggCons')
-    AddInc_Rec_Check_RelRec                = getSimulationPercentDiff(recession_results,               recession_Check_results,'AggIncome')
+    AddCons_Rec_Check_RelRec               = get_simulation_percent_diff(recession_results,               recession_Check_results,'AggCons')
+    AddInc_Rec_Check_RelRec                = get_simulation_percent_diff(recession_results,               recession_Check_results,'AggIncome')
     
-    AddCons_Rec_Check_AD_RelRec            = getSimulationPercentDiff(recession_results_AD,            recession_Check_results_AD,'AggCons')
-    AddInc_Rec_Check_AD_RelRec             = getSimulationPercentDiff(recession_results_AD,            recession_Check_results_AD,'AggIncome')
+    AddCons_Rec_Check_AD_RelRec            = get_simulation_percent_diff(recession_results_AD,            recession_Check_results_AD,'AggCons')
+    AddInc_Rec_Check_AD_RelRec             = get_simulation_percent_diff(recession_results_AD,            recession_Check_results_AD,'AggIncome')
     
     if Plot_1stRoundAd:
-        AddCons_Rec_Check_firstRoundAD_RelRec  = getSimulationPercentDiff(recession_results_firstRoundAD,  recession_Check_results_firstRoundAD,'AggCons')
-        AddInc_Rec_Check_firstRoundAD_RelRec   = getSimulationPercentDiff(recession_results_firstRoundAD,  recession_Check_results_firstRoundAD,'AggIncome')
+        AddCons_Rec_Check_firstRoundAD_RelRec  = get_simulation_percent_diff(recession_results_firstRoundAD,  recession_Check_results_firstRoundAD,'AggCons')
+        AddInc_Rec_Check_firstRoundAD_RelRec   = get_simulation_percent_diff(recession_results_firstRoundAD,  recession_Check_results_firstRoundAD,'AggIncome')
     
     
     plt.figure(figsize=(4, 4))
@@ -207,28 +207,28 @@ def Output_Results(saved_results_dir,fig_dir,table_dir,Parametrization='Baseline
     
     
     
-    NPV_AddInc_UI_Rec                       = getSimulationDiff(recession_results,recession_UI_results,'NPV_AggIncome') # Policy expenditure
-    NPV_Multiplier_UI_Rec                   = getNPVMultiplier(recession_results,               recession_UI_results,               NPV_AddInc_UI_Rec)
-    NPV_Multiplier_UI_Rec_AD                = getNPVMultiplier(recession_results_AD,            recession_UI_results_AD,            NPV_AddInc_UI_Rec)
+    NPV_AddInc_UI_Rec                       = get_simulation_diff(recession_results,recession_UI_results,'NPV_AggIncome') # Policy expenditure
+    NPV_Multiplier_UI_Rec                   = get_npv_multiplier(recession_results,               recession_UI_results,               NPV_AddInc_UI_Rec)
+    NPV_Multiplier_UI_Rec_AD                = get_npv_multiplier(recession_results_AD,            recession_UI_results_AD,            NPV_AddInc_UI_Rec)
     if Mltp_1stRoundAd:
-        NPV_Multiplier_UI_Rec_firstRoundAD  = getNPVMultiplier(recession_results_firstRoundAD,  recession_UI_results_firstRoundAD,  NPV_AddInc_UI_Rec)
+        NPV_Multiplier_UI_Rec_firstRoundAD  = get_npv_multiplier(recession_results_firstRoundAD,  recession_UI_results_firstRoundAD,  NPV_AddInc_UI_Rec)
     else:
         NPV_Multiplier_UI_Rec_firstRoundAD = np.zeros_like(NPV_Multiplier_UI_Rec)
     
     
-    NPV_AddInc_Rec_TaxCut                   = getSimulationDiff(recession_results,recession_TaxCut_results,'NPV_AggIncome')
-    NPV_Multiplier_Rec_TaxCut               = getNPVMultiplier(recession_results,               recession_TaxCut_results,               NPV_AddInc_Rec_TaxCut)
-    NPV_Multiplier_Rec_TaxCut_AD            = getNPVMultiplier(recession_results_AD,            recession_TaxCut_results_AD,            NPV_AddInc_Rec_TaxCut)
+    NPV_AddInc_Rec_TaxCut                   = get_simulation_diff(recession_results,recession_TaxCut_results,'NPV_AggIncome')
+    NPV_Multiplier_Rec_TaxCut               = get_npv_multiplier(recession_results,               recession_TaxCut_results,               NPV_AddInc_Rec_TaxCut)
+    NPV_Multiplier_Rec_TaxCut_AD            = get_npv_multiplier(recession_results_AD,            recession_TaxCut_results_AD,            NPV_AddInc_Rec_TaxCut)
     if Mltp_1stRoundAd:
-        NPV_Multiplier_Rec_TaxCut_firstRoundAD  = getNPVMultiplier(recession_results_firstRoundAD,  recession_TaxCut_results_firstRoundAD,  NPV_AddInc_Rec_TaxCut)
+        NPV_Multiplier_Rec_TaxCut_firstRoundAD  = get_npv_multiplier(recession_results_firstRoundAD,  recession_TaxCut_results_firstRoundAD,  NPV_AddInc_Rec_TaxCut)
     else:
         NPV_Multiplier_Rec_TaxCut_firstRoundAD = np.zeros_like(NPV_Multiplier_Rec_TaxCut)
         
-    NPV_AddInc_Rec_Check                    = getSimulationDiff(recession_results,recession_Check_results,'NPV_AggIncome') 
-    NPV_Multiplier_Rec_Check                = getNPVMultiplier(recession_results,               recession_Check_results,               NPV_AddInc_Rec_Check)
-    NPV_Multiplier_Rec_Check_AD             = getNPVMultiplier(recession_results_AD,            recession_Check_results_AD,            NPV_AddInc_Rec_Check)
+    NPV_AddInc_Rec_Check                    = get_simulation_diff(recession_results,recession_Check_results,'NPV_AggIncome') 
+    NPV_Multiplier_Rec_Check                = get_npv_multiplier(recession_results,               recession_Check_results,               NPV_AddInc_Rec_Check)
+    NPV_Multiplier_Rec_Check_AD             = get_npv_multiplier(recession_results_AD,            recession_Check_results_AD,            NPV_AddInc_Rec_Check)
     if Mltp_1stRoundAd:
-        NPV_Multiplier_Rec_Check_firstRoundAD   = getNPVMultiplier(recession_results_firstRoundAD,  recession_Check_results_firstRoundAD,  NPV_AddInc_Rec_Check)
+        NPV_Multiplier_Rec_Check_firstRoundAD   = get_npv_multiplier(recession_results_firstRoundAD,  recession_Check_results_firstRoundAD,  NPV_AddInc_Rec_Check)
     else:
         NPV_Multiplier_Rec_Check_firstRoundAD = np.zeros_like(NPV_Multiplier_Rec_Check)
  
@@ -259,9 +259,9 @@ def Output_Results(saved_results_dir,fig_dir,table_dir,Parametrization='Baseline
     
     
     #Cumulative, common plot
-    C_Multiplier_UI_Rec_AD                = getNPVMultiplier(recession_results_AD,            recession_UI_results_AD,            NPV_AddInc_UI_Rec[-1])
-    C_Multiplier_Rec_TaxCut_AD            = getNPVMultiplier(recession_results_AD,            recession_TaxCut_results_AD,        NPV_AddInc_Rec_TaxCut[-1])
-    C_Multiplier_Rec_Check_AD             = getNPVMultiplier(recession_results_AD,            recession_Check_results_AD,         NPV_AddInc_Rec_Check[-1])
+    C_Multiplier_UI_Rec_AD                = get_npv_multiplier(recession_results_AD,            recession_UI_results_AD,            NPV_AddInc_UI_Rec[-1])
+    C_Multiplier_Rec_TaxCut_AD            = get_npv_multiplier(recession_results_AD,            recession_TaxCut_results_AD,        NPV_AddInc_Rec_TaxCut[-1])
+    C_Multiplier_Rec_Check_AD             = get_npv_multiplier(recession_results_AD,            recession_Check_results_AD,         NPV_AddInc_Rec_Check[-1])
     x_axis = np.arange(1,max_T2+1)
     plt.plot(x_axis,C_Multiplier_Rec_Check_AD[0:max_T2],               color='#4daf4a',linestyle='-')
     plt.plot(x_axis,C_Multiplier_UI_Rec_AD[0:max_T2],                  color='#377eb8',linestyle='-')
@@ -281,7 +281,7 @@ def Output_Results(saved_results_dir,fig_dir,table_dir,Parametrization='Baseline
         'C_Multiplier_Rec_TaxCut_AD': C_Multiplier_Rec_TaxCut_AD  
         }
         
-        saveAsPickleUnderVarName(C_Multiplier_Baseline_Results,fig_dir,locals())
+        save_as_pickle_under_var_name(C_Multiplier_Baseline_Results,fig_dir,locals())
         
     #Cumulative, single plots
     if Parametrization=='Baseline':
@@ -348,7 +348,7 @@ def Output_Results(saved_results_dir,fig_dir,table_dir,Parametrization='Baseline
         
         
         Abs_Path              = os.getcwd()   
-        C_Multiplier_Baseline_Results = loadPickle('C_Multiplier_Baseline_Results',Abs_Path+'/Figures/',locals())
+        C_Multiplier_Baseline_Results = load_pickle('C_Multiplier_Baseline_Results',Abs_Path+'/Figures/',locals())
         
         fig, ax = plt.subplots()  
         
@@ -390,24 +390,24 @@ def Output_Results(saved_results_dir,fig_dir,table_dir,Parametrization='Baseline
         ShareduringRecession['Check_Cons']  = 0
              
         for i in range(max_recession_duration):      
-            NPV_TaxCut                      = getSimulationDiff(rec[i],TaxCut[i],'NPV_AggIncome') 
+            NPV_TaxCut                      = get_simulation_diff(rec[i],TaxCut[i],'NPV_AggIncome') 
             ShareduringRecession['Tax_Inc'] += NPV_TaxCut[i]/NPV_TaxCut[-1]*recession_prob_array[i]
             
-            NPV_Cons_TaxCut                 = getSimulationDiff(rec[i],TaxCut[i],'NPV_AggCons') 
+            NPV_Cons_TaxCut                 = get_simulation_diff(rec[i],TaxCut[i],'NPV_AggCons') 
             ShareduringRecession['Tax_Cons']+= NPV_Cons_TaxCut[i]/NPV_Cons_TaxCut[-1]*recession_prob_array[i]
             
             
-            NPV_UI                          = getSimulationDiff(rec[i],UI[i],'NPV_AggIncome') 
+            NPV_UI                          = get_simulation_diff(rec[i],UI[i],'NPV_AggIncome') 
             ShareduringRecession['UI_Inc']  += NPV_UI[i]/NPV_UI[-1]*recession_prob_array[i]
             
-            NPV_Cons_UI                     = getSimulationDiff(rec[i],UI[i],'NPV_AggCons') 
+            NPV_Cons_UI                     = get_simulation_diff(rec[i],UI[i],'NPV_AggCons') 
             ShareduringRecession['UI_Cons'] += NPV_Cons_UI[i]/NPV_Cons_UI[-1]*recession_prob_array[i]
             
             
-            NPV_Check                           = getSimulationDiff(rec[i],Check[i],'NPV_AggIncome') 
+            NPV_Check                           = get_simulation_diff(rec[i],Check[i],'NPV_AggIncome') 
             ShareduringRecession['Check_Inc']   += NPV_Check[i]/NPV_Check[-1]*recession_prob_array[i]
             
-            NPV_Cons_Check                      = getSimulationDiff(rec[i],Check[i],'NPV_AggCons') 
+            NPV_Cons_Check                      = get_simulation_diff(rec[i],Check[i],'NPV_AggCons') 
             ShareduringRecession['Check_Cons']  += NPV_Cons_Check[i]/NPV_Cons_Check[-1]*recession_prob_array[i]
              
         # times 100
@@ -420,10 +420,10 @@ def Output_Results(saved_results_dir,fig_dir,table_dir,Parametrization='Baseline
         return ShareduringRecession
         
              
-    recession_all_results        = loadPickle('recession_all_results',folder_nonPVSame,locals())   
-    recession_all_results_UI     = loadPickle('recessionUI_all_results',folder_nonPVSame,locals())
-    recession_all_results_TaxCut = loadPickle('recessionTaxCut_all_results',saved_results_dir,locals())
-    recession_all_results_Check  = loadPickle('recessionCheck_all_results',saved_results_dir,locals())
+    recession_all_results        = load_pickle('recession_all_results',folder_nonPVSame,locals())   
+    recession_all_results_UI     = load_pickle('recessionUI_all_results',folder_nonPVSame,locals())
+    recession_all_results_TaxCut = load_pickle('recessionTaxCut_all_results',saved_results_dir,locals())
+    recession_all_results_Check  = load_pickle('recessionCheck_all_results',saved_results_dir,locals())
         
     ShareduringRecession=ShareOfPolicyDuringRec(recession_all_results,recession_all_results_TaxCut,\
                            recession_all_results_UI,recession_all_results_Check,\
@@ -470,13 +470,13 @@ def Output_Results(saved_results_dir,fig_dir,table_dir,Parametrization='Baseline
         'NPV_Multiplier_UI_Rec_AD':     NPV_Multiplier_UI_Rec_AD,  
         'NPV_Multiplier_Rec_TaxCut_AD': NPV_Multiplier_Rec_TaxCut_AD,
         }
-        saveAsPickleUnderVarName(NPV_Multiplier_Baseline_Results,fig_dir,locals())
+        save_as_pickle_under_var_name(NPV_Multiplier_Baseline_Results,fig_dir,locals())
 
     
     # Comparison chart with baseline for Splurge = 0
     if Parametrization == 'Splurge0':
         Abs_Path              = os.getcwd()   
-        NPV_Multiplier_Baseline_Results = loadPickle('NPV_Multiplier_Baseline_Results',Abs_Path+'/Figures/',locals())
+        NPV_Multiplier_Baseline_Results = load_pickle('NPV_Multiplier_Baseline_Results',Abs_Path+'/Figures/',locals())
 
         
         output  ="\\begin{tabular}{@{}lccc@{}} \n"
@@ -508,10 +508,10 @@ def Output_Results(saved_results_dir,fig_dir,table_dir,Parametrization='Baseline
         
             # Policy options 'recession_UI' / 'recession_TaxCut' / 'recession_Check'
             
-            recession_all_results               = loadPickle('recession_all_results',folder_nonPVSame,locals())
-            recession_all_results_AD            = loadPickle('recession_all_results_AD',folder_nonPVSame,locals())
+            recession_all_results               = load_pickle('recession_all_results',folder_nonPVSame,locals())
+            recession_all_results_AD            = load_pickle('recession_all_results_AD',folder_nonPVSame,locals())
             if Mltp_1stRoundAd:
-                recession_all_results_firstRoundAD  = loadPickle('recession_all_results_firstRoundAD',folder_nonPVSame,locals())
+                recession_all_results_firstRoundAD  = load_pickle('recession_all_results_firstRoundAD',folder_nonPVSame,locals())
             
             if Policy == 'recessionUI':
                 folder_policy = folder_nonPVSame
@@ -519,17 +519,17 @@ def Output_Results(saved_results_dir,fig_dir,table_dir,Parametrization='Baseline
                 folder_policy = saved_results_dir
                     
             
-            recession_all_policy_results        = loadPickle( Policy + '_all_results',folder_policy,locals())       
-            recession_all_policy_results_AD     = loadPickle(Policy + '_all_results_AD',folder_policy,locals())
+            recession_all_policy_results        = load_pickle( Policy + '_all_results',folder_policy,locals())       
+            recession_all_policy_results_AD     = load_pickle(Policy + '_all_results_AD',folder_policy,locals())
             if Mltp_1stRoundAd:
-                recession_all_policy_results_firstRoundAD= loadPickle(Policy + '_all_results_firstRoundAD',folder_policy,locals())
+                recession_all_policy_results_firstRoundAD= load_pickle(Policy + '_all_results_firstRoundAD',folder_policy,locals())
             
             
-            NPV_AddInc                  = getSimulationDiff(recession_all_results[RecLength-1],recession_all_policy_results[RecLength-1],'NPV_AggIncome') # Policy expenditure
-            NPV_Multiplier              = getNPVMultiplier(recession_all_results[RecLength-1],               recession_all_policy_results[RecLength-1],               NPV_AddInc)
-            NPV_Multiplier_AD           = getNPVMultiplier(recession_all_results_AD[RecLength-1],            recession_all_policy_results_AD[RecLength-1],            NPV_AddInc)
+            NPV_AddInc                  = get_simulation_diff(recession_all_results[RecLength-1],recession_all_policy_results[RecLength-1],'NPV_AggIncome') # Policy expenditure
+            NPV_Multiplier              = get_npv_multiplier(recession_all_results[RecLength-1],               recession_all_policy_results[RecLength-1],               NPV_AddInc)
+            NPV_Multiplier_AD           = get_npv_multiplier(recession_all_results_AD[RecLength-1],            recession_all_policy_results_AD[RecLength-1],            NPV_AddInc)
             if Mltp_1stRoundAd:
-                NPV_Multiplier_firstRoundAD = getNPVMultiplier(recession_all_results_firstRoundAD[RecLength-1],  recession_all_policy_results_firstRoundAD[RecLength-1],  NPV_AddInc)
+                NPV_Multiplier_firstRoundAD = get_npv_multiplier(recession_all_results_firstRoundAD[RecLength-1],  recession_all_policy_results_firstRoundAD[RecLength-1],  NPV_AddInc)
             else:
                 NPV_Multiplier_firstRoundAD = np.zeros_like(NPV_Multiplier_AD)
              
@@ -539,11 +539,11 @@ def Output_Results(saved_results_dir,fig_dir,table_dir,Parametrization='Baseline
             
             if PlotEach:
             
-                AddCons_RelRec               = getSimulationPercentDiff(recession_all_results[RecLength-1],    recession_all_policy_results[RecLength-1],'AggCons')
-                AddInc_RelRec                = getSimulationPercentDiff(recession_all_results[RecLength-1],    recession_all_policy_results[RecLength-1],'AggIncome')
+                AddCons_RelRec               = get_simulation_percent_diff(recession_all_results[RecLength-1],    recession_all_policy_results[RecLength-1],'AggCons')
+                AddInc_RelRec                = get_simulation_percent_diff(recession_all_results[RecLength-1],    recession_all_policy_results[RecLength-1],'AggIncome')
                 
-                AddCons_RelRec_AD            = getSimulationPercentDiff(recession_all_results_AD[RecLength-1],    recession_all_policy_results_AD[RecLength-1],'AggCons')
-                AddInc_RelRec_AD             = getSimulationPercentDiff(recession_all_results_AD[RecLength-1],    recession_all_policy_results_AD[RecLength-1],'AggIncome')
+                AddCons_RelRec_AD            = get_simulation_percent_diff(recession_all_results_AD[RecLength-1],    recession_all_policy_results_AD[RecLength-1],'AggCons')
+                AddInc_RelRec_AD             = get_simulation_percent_diff(recession_all_results_AD[RecLength-1],    recession_all_policy_results_AD[RecLength-1],'AggIncome')
                 
                
                 plt.figure(figsize=(15,10))

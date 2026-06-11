@@ -4,10 +4,11 @@ This file has an extension of MarkovConsumerType that is used for the Fiscal pro
 import warnings
 import numpy as np
 import scipy.sparse as sp
-from HARK.distribution import DiscreteDistribution, Uniform
+from HARK.distributions import DiscreteDistribution, Uniform
 from HARK.ConsumptionSaving.ConsMarkovModel import MarkovConsumerType
 from HARK.ConsumptionSaving.ConsIndShockModel import ConsumerSolution
-from HARK.ConsumptionSaving.ConsAggShockModel import MargValueFunc2D, AggShockConsumerType
+from HARK.ConsumptionSaving.ConsAggShockModel import AggShockConsumerType, make_aggshock_solution_terminal
+from HARK.interpolation import MargValueFuncCRRA as MargValueFunc2D
 from HARK.interpolation import LinearInterp, BilinearInterp, VariableLowerBoundFunc2D, \
                                 LinearInterpOnInterp1D, LowerEnvelope2D, UpperEnvelope, ConstantFunction
 from HARK import Market
@@ -17,27 +18,101 @@ from HARK.core import Model
 from copy import copy, deepcopy
 import matplotlib.pyplot as plt
 
-from Parameters import returnParameters
-[makeMacroMrkvArray_recession, makeCondMrkvArrays_recession, makeFullMrkvArray, T_sim, makeCondMrkvArrays_base, makeCondMrkvArrays_recessionUI] = returnParameters(OutputFor='_Model.py')
+from Parameters import return_parameters
+[make_macro_mrkv_array_recession, make_cond_mrkv_arrays_recession, make_full_mrkv_array, T_sim, make_cond_mrkv_arrays_base, make_cond_mrkv_arrays_recession_ui] = return_parameters(OutputFor='_Model.py')
 
 # Define a modified MarkovConsumerType
 class AggFiscalType(MarkovConsumerType):
     time_inv_ = MarkovConsumerType.time_inv_ 
     
     def __init__(self,cycles=1,time_flow=True,**kwds):
-        MarkovConsumerType.__init__(self,cycles=1,time_flow=True,**kwds)
+        # HARK 0.17.0 COMPATIBILITY:
+        # Disable automatic construction entirely because:
+        # 1. MarkovConsumerType's IncShkDstn constructor expects numpy arrays with specific shapes
+        # 2. HAFiscal uses lists for PermShkStd, TranShkStd which don't match
+        # 3. HAFiscal builds its own Markov income structure anyway
+        MarkovConsumerType.__init__(self,cycles=1,time_flow=True,construct=False,**kwds)
+        
+        # Manually build the required attributes that would normally come from construct()
+        from HARK.utilities import make_assets_grid
+        from HARK.ConsumptionSaving.ConsIndShockModel import (
+            make_lognormal_kNrm_init_dstn,
+            make_lognormal_pLvl_init_dstn,
+        )
+        from HARK.Calibration.Income.IncomeProcesses import (
+            construct_lognormal_income_process_unemployment,
+            get_PermShkDstn_from_IncShkDstn,
+            get_TranShkDstn_from_IncShkDstn,
+        )
+        
+        # Build aXtraGrid
+        self.aXtraGrid = make_assets_grid(
+            aXtraMin=self.aXtraMin,
+            aXtraMax=self.aXtraMax,
+            aXtraCount=self.aXtraCount,
+            aXtraExtra=self.aXtraExtra if hasattr(self, 'aXtraExtra') else None,
+            aXtraNestFac=self.aXtraNestFac if hasattr(self, 'aXtraNestFac') else 3,
+        )
+        
+        # Build initial distributions for simulation
+        self.kNrmInitDstn = make_lognormal_kNrm_init_dstn(
+            kLogInitMean=self.kLogInitMean,
+            kLogInitStd=self.kLogInitStd,
+            kNrmInitCount=getattr(self, 'kNrmInitCount', 15),
+            RNG=self.RNG,
+        )
+        self.pLvlInitDstn = make_lognormal_pLvl_init_dstn(
+            pLogInitMean=self.pLogInitMean,
+            pLogInitStd=self.pLogInitStd,
+            pLvlInitCount=getattr(self, 'pLvlInitCount', 15),
+            RNG=self.RNG,
+        )
+        
+        # Build MrkvInitDstn for MarkovConsumerType.sim_birth compatibility
+        # (HAFiscal overrides this in initialize_sim anyway)
+        from HARK.ConsumptionSaving.ConsMarkovModel import make_MrkvInitDstn
+        if hasattr(self, 'MrkvPrbsInit'):
+            self.MrkvInitDstn = make_MrkvInitDstn(self.MrkvPrbsInit, self.RNG)
+        else:
+            # Default: uniform over 2 states
+            import numpy as np
+            from HARK.distributions import DiscreteDistribution
+            self.MrkvInitDstn = DiscreteDistribution(
+                pmv=np.array([0.5, 0.5]),
+                atoms=np.array([0, 1]),
+                seed=self.RNG.integers(2**31-1)
+            )
+        
+        # Build income distribution using non-Markov builder (HAFiscal customizes this later)
+        IncShkDstn = construct_lognormal_income_process_unemployment(
+            T_cycle=self.T_cycle,
+            PermShkStd=self.PermShkStd,
+            PermShkCount=self.PermShkCount,
+            TranShkStd=self.TranShkStd,
+            TranShkCount=self.TranShkCount,
+            T_retire=0,
+            UnempPrb=self.UnempPrb,
+            IncUnemp=self.IncUnemp,
+            UnempPrbRet=None,
+            IncUnempRet=None,
+            RNG=self.RNG,
+        )
+        self.IncShkDstn = IncShkDstn
+        self.PermShkDstn = get_PermShkDstn_from_IncShkDstn(IncShkDstn, self.RNG)
+        self.TranShkDstn = get_TranShkDstn_from_IncShkDstn(IncShkDstn, self.RNG)
         self.shock_vars += ['update_draw','unemployment_draw']
         self.state_vars += ['cNrm', 'cLvl_splurge', 'cLvl']
-        self.solve_one_period = solveAggConsMarkovALT
+        self.solve_one_period = solve_agg_cons_markov_alt
         # Add consumer-type specific objects, copying to create independent versions
         self.time_vary = deepcopy(MarkovConsumerType.time_vary_)
         self.time_inv = deepcopy(MarkovConsumerType.time_inv_)
         self.del_from_time_inv('vFuncBool', 'CubicBool')
         self.add_to_time_vary('IncShkDstn','PermShkDstn','TranShkDstn')
+        self.del_from_time_vary('Rfree')  # HARK 0.17.0 puts Rfree in time_vary by default
         self.add_to_time_inv('aXtraGrid', 'Rfree')
         
-    def updateSolutionTerminal(self):
-        AggShockConsumerType.update_solution_terminal(self)
+    def update_solution_terminal(self):
+        self.solution_terminal = make_aggshock_solution_terminal(self.CRRA)
         # Make replicated terminal period solution
         StateCount = self.MrkvArray[-1].shape[0]
         self.solution_terminal.cFunc = StateCount*[self.solution_terminal.cFunc]
@@ -46,11 +121,93 @@ class AggFiscalType(MarkovConsumerType):
         
     def pre_solve(self):
         self.MrkvArray = self.MrkvArray
-        MarkovConsumerType.pre_solve(self)
-        self.updateSolutionTerminal()
+        # HARK 0.17.0: Skip MarkovConsumerType.pre_solve which has strict Rfree checks
+        # that assume Rfree is a list of arrays per period. HAFiscal uses a single array.
+        from HARK.core import AgentType
+        AgentType.pre_solve(self)
+        self.update_solution_terminal()
         
+
+
+
+    def reset_rng(self):
+        """
+        Override reset_rng to match HARK 0.14.1 MarkovConsumerType.reset_rng() behavior.
+        
+        HARK 0.14.1 reset self.RNG and also reset IncShkDstn distributions.
+        HARK 0.17.0 additionally resets ALL distributions in self.distributions.
+        
+        We replicate 0.14.1's behavior for reproducible results.
+        """
+        import numpy as np
+        # Reset the main RNG (like PerfForesightConsumerType.reset_rng)
+        self.RNG = np.random.default_rng(self.seed)
+        
+        # Reset IncShkDstn distributions (like MarkovConsumerType.reset_rng in 0.14.1)
+        # Handle both structures: list of lists (Markov) or flat list (IndShock)
+        if hasattr(self, "IncShkDstn"):
+            for item in self.IncShkDstn:
+                if isinstance(item, list):
+                    # Markov structure: IncShkDstn[t] is a list of distributions
+                    for dstn in item:
+                        if hasattr(dstn, 'reset'):
+                            dstn.reset()
+                elif hasattr(item, 'reset'):
+                    # Flat structure: IncShkDstn is a list of distributions
+                    item.reset()
+
+    def sim_birth(self, which_agents):
+        """
+        Override sim_birth to replicate HARK 0.14.1 + HAFiscal's ConsMarkovModel behavior.
+        
+        This replicates the exact RNG consumption sequence:
+        1. Lognormal seed for aNrm
+        2. Lognormal seed for pLvl  
+        3. Uniform seed for intermediate Mrkv draw (from HAFiscal's local ConsMarkovModel.py)
+        
+        The intermediate Mrkv is later overwritten by AggFiscalType.initialize_sim(),
+        but consuming this RNG integer keeps the sequence synchronized.
+        """
+        from HARK.distributions import Lognormal, Uniform
+        import numpy as np
+        
+        N = np.sum(which_agents)  # Number of new consumers to make
+        
+        # 1. Draw aNrm from Lognormal (consumes 1 RNG integer)
+        self.state_now["aNrm"][which_agents] = Lognormal(
+            mu=self.kLogInitMean,
+            sigma=self.kLogInitStd,
+            seed=self.RNG.integers(0, 2**31 - 1),
+        ).draw(N)
+        
+        # 2. Draw pLvl from Lognormal (consumes 1 RNG integer)
+        pLvlInitMeanNow = self.pLogInitMean + np.log(self.state_now["PlvlAgg"])
+        self.state_now["pLvl"][which_agents] = Lognormal(
+            pLvlInitMeanNow,
+            self.pLogInitStd,
+            seed=self.RNG.integers(0, 2**31 - 1),
+        ).draw(N)
+        
+        # 3. HAFiscal's local ConsMarkovModel.sim_birth() draws intermediate Mrkv
+        #    (consumes 1 RNG integer - even though value is overwritten later)
+        if not getattr(self, 'global_markov', False):
+            _ = self.RNG.integers(0, 2**31 - 1)  # Match HAFiscal's RNG consumption
+        
+        # How many periods since each agent was born
+        self.t_age[which_agents] = 0
+        
+        # If PerfMITShk not specified, let it be False
+        if not hasattr(self, "PerfMITShk"):
+            self.PerfMITShk = False
+        if not self.PerfMITShk:
+            # Which period of the cycle each agent is currently in
+            self.t_cycle[which_agents] = 0
+
     def initialize_sim(self):
-        MarkovConsumerType.initialize_sim(self)
+        # HARK 0.17.0: Skip MarkovConsumerType.initialize_sim which needs MrkvInitDstn
+        # Call IndShockConsumerType.initialize_sim directly since HAFiscal sets up Markov manually
+        from HARK.ConsumptionSaving.ConsIndShockModel import IndShockConsumerType
+        IndShockConsumerType.initialize_sim(self)
         if hasattr(self,'use_prestate'):
             self.restore_state()
         else:   # set to ergodic unemployment rate during normal times
@@ -68,6 +225,26 @@ class AggFiscalType(MarkovConsumerType):
         self.EconomyMrkvNow = self.MacroMrkvNow #For aggregate model only
         self.EconomyMrkvNow_hist = [0] * self.T_sim #For aggregate model only
         
+    
+    def get_Rport(self):
+        """
+        Returns an array of size self.AgentCount with interest factor that varies with Markov state.
+        
+        HARK 0.17.0 compatibility: Override get_Rport() because HARK 0.17.0's MarkovConsumerType
+        expects Rfree[t][state] (time-varying, then by state), but HAFiscal uses Rfree as a simple
+        array where Rfree[markov_state] gives the interest rate for that state.
+        
+        Parameters
+        ----------
+        None
+        
+        Returns
+        -------
+        RfreeNow : np.array
+             Array of size self.AgentCount with risk free interest rate for each agent.
+        """
+        return self.Rfree[self.shocks["Mrkv"]]
+
     def get_mortality(self):
         '''
         A modified version of getMortality that reads mortality history if the
@@ -109,9 +286,15 @@ class AggFiscalType(MarkovConsumerType):
     def save_state(self):
         '''
         Record the current state of simulation variables for later use.
+        
+        HARK 0.17.0 compatibility: Also save bNrm and mNrm because HARK 0.17.0's
+        AgentType.initialize_sim() unconditionally resets ALL state variables to NaN,
+        whereas HARK 0.14.1 only reset them if they were None.
         '''
         self.aNrm_base = self.state_now['aNrm'].copy()
         self.pLvl_base = self.state_now['pLvl'].copy()
+        self.bNrm_base = self.state_now['bNrm'].copy()
+        self.mNrm_base = self.state_now['mNrm'].copy()
         self.Mrkv_base = self.shocks['Mrkv'].copy()
         self.cycle_base  = self.t_cycle.copy()
         self.age_base  = self.t_age.copy()
@@ -121,9 +304,13 @@ class AggFiscalType(MarkovConsumerType):
     def restore_state(self):
         '''
         Restore the state of the simulation to some baseline values.
+        
+        HARK 0.17.0 compatibility: Also restore bNrm and mNrm.
         '''
         self.state_now['aNrm'] = self.aNrm_base.copy()
         self.state_now['pLvl'] = self.pLvl_base.copy()
+        self.state_now['bNrm'] = self.bNrm_base.copy()
+        self.state_now['mNrm'] = self.mNrm_base.copy()
         self.shocks['Mrkv'] = self.Mrkv_base.copy()
         self.t_cycle = self.cycle_base.copy()
         self.t_age   = self.age_base.copy()
@@ -337,24 +524,24 @@ class AggFiscalType(MarkovConsumerType):
     def update_mrkv_array(self, shock_type):
         if shock_type=="base":
             self.MacroMrkvArray = np.array([[1.0]])
-            self.CondMrkvArrays = makeCondMrkvArrays_base(self.Urate_normal, self.Uspell_normal, self.UBspell_normal)
-            self.MrkvArray = makeFullMrkvArray(self.MacroMrkvArray, self.CondMrkvArrays)
+            self.CondMrkvArrays = make_cond_mrkv_arrays_base(self.Urate_normal, self.Uspell_normal, self.UBspell_normal)
+            self.MrkvArray = make_full_mrkv_array(self.MacroMrkvArray, self.CondMrkvArrays)
         elif shock_type=="recession":
-            self.MacroMrkvArray = makeMacroMrkvArray_recession(self.Rspell, self.num_experiment_periods)
-            self.CondMrkvArrays = makeCondMrkvArrays_recession(self.Urate_normal, self.Uspell_normal, self.UBspell_normal, self.Urate_recession, self.Uspell_recession, self.num_experiment_periods)
-            self.MrkvArray = makeFullMrkvArray(self.MacroMrkvArray, self.CondMrkvArrays)
+            self.MacroMrkvArray = make_macro_mrkv_array_recession(self.Rspell, self.num_experiment_periods)
+            self.CondMrkvArrays = make_cond_mrkv_arrays_recession(self.Urate_normal, self.Uspell_normal, self.UBspell_normal, self.Urate_recession, self.Uspell_recession, self.num_experiment_periods)
+            self.MrkvArray = make_full_mrkv_array(self.MacroMrkvArray, self.CondMrkvArrays)
         elif shock_type=="recessionUI" or shock_type=="UI":
-            self.MacroMrkvArray = makeMacroMrkvArray_recession(self.Rspell, self.num_experiment_periods)
-            self.CondMrkvArrays = makeCondMrkvArrays_recessionUI(self.Urate_normal, self.Uspell_normal, self.UBspell_normal, self.Urate_recession, self.Uspell_recession, self.num_experiment_periods,  self.UBspell_extended-self.UBspell_normal)
-            self.MrkvArray = makeFullMrkvArray(self.MacroMrkvArray, self.CondMrkvArrays)
+            self.MacroMrkvArray = make_macro_mrkv_array_recession(self.Rspell, self.num_experiment_periods)
+            self.CondMrkvArrays = make_cond_mrkv_arrays_recession_ui(self.Urate_normal, self.Uspell_normal, self.UBspell_normal, self.Urate_recession, self.Uspell_recession, self.num_experiment_periods,  self.UBspell_extended-self.UBspell_normal)
+            self.MrkvArray = make_full_mrkv_array(self.MacroMrkvArray, self.CondMrkvArrays)
         elif shock_type=="recessionTaxCut" or shock_type=="TaxCut":
-            self.MacroMrkvArray = makeMacroMrkvArray_recession(self.Rspell, self.num_experiment_periods)
-            self.CondMrkvArrays = makeCondMrkvArrays_recession(self.Urate_normal, self.Uspell_normal, self.UBspell_normal, self.Urate_recession, self.Uspell_recession, self.num_experiment_periods)
-            self.MrkvArray = makeFullMrkvArray(self.MacroMrkvArray, self.CondMrkvArrays)
+            self.MacroMrkvArray = make_macro_mrkv_array_recession(self.Rspell, self.num_experiment_periods)
+            self.CondMrkvArrays = make_cond_mrkv_arrays_recession(self.Urate_normal, self.Uspell_normal, self.UBspell_normal, self.Urate_recession, self.Uspell_recession, self.num_experiment_periods)
+            self.MrkvArray = make_full_mrkv_array(self.MacroMrkvArray, self.CondMrkvArrays)
         elif shock_type=="recessionCheck" or shock_type=="Check":
-            self.MacroMrkvArray = makeMacroMrkvArray_recession(self.Rspell, self.num_experiment_periods)
-            self.CondMrkvArrays = makeCondMrkvArrays_recession(self.Urate_normal, self.Uspell_normal, self.UBspell_normal, self.Urate_recession, self.Uspell_recession, self.num_experiment_periods)
-            self.MrkvArray = makeFullMrkvArray(self.MacroMrkvArray, self.CondMrkvArrays)
+            self.MacroMrkvArray = make_macro_mrkv_array_recession(self.Rspell, self.num_experiment_periods)
+            self.CondMrkvArrays = make_cond_mrkv_arrays_recession(self.Urate_normal, self.Uspell_normal, self.UBspell_normal, self.Urate_recession, self.Uspell_recession, self.num_experiment_periods)
+            self.MrkvArray = make_full_mrkv_array(self.MacroMrkvArray, self.CondMrkvArrays)
         else:
             print("shock_type not recognized")
     
@@ -446,7 +633,7 @@ class AggFiscalType(MarkovConsumerType):
         return # do nothing           
             
             
-def solveAggConsMarkovALT(solution_next,IncShkDstn,LivPrb,DiscFac,CRRA,Rfree,PermGroFac,
+def solve_agg_cons_markov_alt(solution_next,IncShkDstn,LivPrb,DiscFac,CRRA,Rfree,PermGroFac,
                                  MrkvArray,BoroCnstArt,aXtraGrid, Cgrid, CFunc, ADFunc,
                                  num_experiment_periods, num_base_MrkvStates):
     '''
@@ -541,7 +728,8 @@ def solveAggConsMarkovALT(solution_next,IncShkDstn,LivPrb,DiscFac,CRRA,Rfree,Per
             aNrmMin_candidates = PermGroFac[j]*PermShkValsNext_tiled[:, 0, :] / Rfree[j] * \
                 (mNrmMinNext * Cnext_array[:, 0, :] - TranShkValsNext_tiled[:, 0, :])
         else:
-            aNrmMin_candidates = (mNrmMinNext(Cnext_array[:, 0, :]) - TranShkValsNext_tiled[:, 0, :])
+            aNrmMin_candidates = PermGroFac[j]*PermShkValsNext_tiled[:, 0, :] / Rfree[j] * \
+                (mNrmMinNext(Cnext_array[:, 0, :]) - TranShkValsNext_tiled[:, 0, :])
         
         aNrmMin_vec = np.max(aNrmMin_candidates, axis=1)
         BoroCnstNat_vec = aNrmMin_vec
@@ -694,7 +882,7 @@ class AggregateDemandEconomy(Market):
         return mill_return.parameters
 
     def calc_dynamics(self):
-        return self.calcCFunc()
+        return self.calc_c_func()
 
     def update(self):
         '''
@@ -943,7 +1131,7 @@ class AggregateDemandEconomy(Market):
         print('Total Diff in CFunc: ', Total_Diff)
         return Total_Diff
     
-    def solveAD_Recession(self, num_max_iterations, convergence_cutoff=1E-3, name = None, shock_type = "recession"):
+    def solve_ad_recession(self, num_max_iterations, convergence_cutoff=1E-3, name = None, shock_type = "recession"):
         #reset Cfunc
         dim = len(self.CFunc)
         self.CFunc = [[CRule(1.0,0.0) for i in range(dim)] for j in range(dim)]
@@ -1009,14 +1197,14 @@ class AggregateDemandEconomy(Market):
             self.store_ADsolution(name)
             
             
-    def solveAD_Check_Recession(self, num_max_iterations, convergence_cutoff=1E-3, name = None):
-        self.solveAD_Recession(num_max_iterations, convergence_cutoff, name = name, shock_type = "recessionCheck")   
+    def solve_ad_check_recession(self, num_max_iterations, convergence_cutoff=1E-3, name = None):
+        self.solve_ad_recession(num_max_iterations, convergence_cutoff, name = name, shock_type = "recessionCheck")   
     
-    def solveAD_UIExtension_Recession(self, num_max_iterations, convergence_cutoff=1E-3, name = None):
-        self.solveAD_Recession(num_max_iterations, convergence_cutoff, name = name, shock_type = "recessionUI")       
+    def solve_ad_ui_extension_recession(self, num_max_iterations, convergence_cutoff=1E-3, name = None):
+        self.solve_ad_recession(num_max_iterations, convergence_cutoff, name = name, shock_type = "recessionUI")       
                         
-    def solveAD_Recession_TaxCut(self, num_max_iterations, convergence_cutoff=1E-3, name = None):
-        self.solveAD_Recession(num_max_iterations, convergence_cutoff, name = name, shock_type = "recessionTaxCut")
+    def solve_ad_recession_taxcut(self, num_max_iterations, convergence_cutoff=1E-3, name = None):
+        self.solve_ad_recession(num_max_iterations, convergence_cutoff, name = name, shock_type = "recessionTaxCut")
             
             
 

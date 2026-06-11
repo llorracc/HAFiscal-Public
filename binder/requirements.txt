@@ -6,5 +6,5 @@ runipy==0.1.5
 pytest==6.2.4
 jupyter==1.0.0
 jupyter_contrib_nbextensions==0.5.1
-econ-ark==0.14.1
+econ-ark>=0.17.0
 

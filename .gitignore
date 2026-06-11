@@ -556,3 +556,5 @@ tmp/
 .zenodo_token
 */.zenodo_token
 private-dev/zenodo/.zenodo_token
+*egg*/
+qe/HAFiscal-QE

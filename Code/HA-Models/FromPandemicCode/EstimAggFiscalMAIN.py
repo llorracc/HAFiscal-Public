@@ -12,7 +12,7 @@ from copy import deepcopy
 from collections import namedtuple 
 import pickle
 import random 
-from HARK.distribution import DiscreteDistribution, Uniform
+from HARK.distributions import DiscreteDistribution, Uniform
 from HARK import multi_thread_commands, multi_thread_commands_fake
 from HARK.utilities import get_percentiles, get_lorenz_shares
 from HARK.estimation import minimize_nelder_mead
@@ -55,7 +55,7 @@ print('Parameters: R = '+str(round(Rfree_base[0],3))+', CRRA = '+str(round(CRRA,
 
 # %%
 # -----------------------------------------------------------------------------
-def calcEstimStats(Agents):
+def calc_estim_stats(Agents):
     '''
     Calculate the average LW/PI-ratio and total LW / total PI for each education
     type. Also calculate the 20th, 40th, 60th, and 80th percentile points of the
@@ -115,7 +115,7 @@ def calcEstimStats(Agents):
 
     return Stats(avgLWPI, LWoPI, medianLWPI, LorenzPts) 
 # -----------------------------------------------------------------------------
-def calcWealthShareByEd(Agents):
+def calc_wealth_share_by_ed(Agents):
     '''
     Calculate the share of total wealth held by each education type. 
     Assumption: Agents is organized by EducType and there are DiscFacCount
@@ -144,7 +144,7 @@ def calcWealthShareByEd(Agents):
     
     return np.array(WealthShares)
 # -----------------------------------------------------------------------------
-def calcLorenzPts(Agents):
+def calc_lorenz_pts(Agents):
     '''
     Calculate the 20th, 40th, 60th, and 80th percentile points of the
     Lorenz curve for (liquid) wealth for the given set of Agents. 
@@ -171,7 +171,7 @@ def calcLorenzPts(Agents):
 
     return LorenzPts
 # -----------------------------------------------------------------------------
-def calcMPCbyEdSimple(Agents):
+def calc_mpc_by_ed_simple(Agents):
     '''
     Calculate the average MPC for each education type. 
     Assumption: Agents is organized by EducType and there are DiscFacCount
@@ -219,7 +219,7 @@ def calcMPCbyEdSimple(Agents):
     return MPCs(MPCsQ,MPCsA)
  
 # -----------------------------------------------------------------------------
-def calcMPCbyWealthQsimple(Agents):
+def calc_mpc_by_wealth_q_simple(Agents):
     '''
     Calculate the average annual MPC for each wealth quartile. 
     Assumption: Agents is organized by EducType and there are DiscFacCount
@@ -290,7 +290,7 @@ def calcMPCbyWealthQsimple(Agents):
     return MPCs(MPCsQ,MPCsA,MPCsFYL)    
  
 # -----------------------------------------------------------------------------
-def checkDiscFacDistribution(beta, nabla, GICfactor, educ_type, print_mode=False, print_file=False, filename='DefaultResultsFile.txt'):
+def check_disc_fac_distribution(beta, nabla, GICfactor, educ_type, print_mode=False, print_file=False, filename='DefaultResultsFile.txt'):
     '''
     Calculate max and min discount factors in discrete approximation to uniform 
     distribution of discount factors. Also report if most patient agents satisfies 
@@ -352,7 +352,7 @@ def checkDiscFacDistribution(beta, nabla, GICfactor, educ_type, print_mode=False
     return dfCheck(betaMin, betaMax, GICsatisfied)    
 
 # -----------------------------------------------------------------------------
-def calcMPCbyWealthQ(Agents,lotterySize):
+def calc_mpc_by_wealth_q(Agents,lotterySize):
     '''
     Modified objective function to calculate MPCs by wealth in a consistent way. 
 
@@ -485,7 +485,7 @@ def calcMPCbyWealthQ(Agents,lotterySize):
                 P_hist[:,period] = ThisType.shocks["PermShk"]
                 for i_agent in range(ThisType.AgentCount):
                     if ThisType.shocks["TranShk"][i_agent] == 1.0: # indicator of death
-                        a_actu[i_agent,period-1,k] = np.exp(np.log(0.00001)) #base_params['aNrmInitMean']
+                        a_actu[i_agent,period-1,k] = np.exp(np.log(0.00001)) #base_params['kLogInitMean']
                 m_adj = a_actu[:,period-1,k]*R_kink/ThisType.shocks["PermShk"] + ThisType.shocks["TranShk"] + Lnrm - SplurgeNrm #continue with resources from last period
                 for aa in range(0,ThisType.AgentCount):
                     c_actu[aa,period,k] = ThisType.cFunc[0][ThisType.MicroMrkvNow[aa]](m_adj[aa],1) + SplurgeNrm[aa]
@@ -697,8 +697,8 @@ for agent in AggDemandEconomy.agents:
 
 AggDemandEconomy.make_history()   
 AggDemandEconomy.save_state()   
-#AggDemandEconomy.switchToCounterfactualMode("base")
-#AggDemandEconomy.makeIdiosyncraticShockHistories()
+#AggDemandEconomy.switch_to_counterfactual_mode("base")
+#AggDemandEconomy.make_idiosyncratic_shock_histories()
 
 baseline_commands = ['solve()', 'initialize_sim()', 'simulate()', 'save_state()', 'unpack_cFunc()']
 multi_thread_commands_fake(TypeList, baseline_commands)
@@ -709,7 +709,7 @@ output_keys = ['NPV_AggIncome', 'NPV_AggCons', 'AggIncome', 'AggCons']
 
 #%% Objective functions
 # -----------------------------------------------------------------------------
-def betasObjFunc(betas, spreads, GICfactors, target_option=1, print_mode=False, print_file=False, filename='DefaultResultsFile.txt'):
+def betas_obj_func(betas, spreads, GICfactors, target_option=1, print_mode=False, print_file=False, filename='DefaultResultsFile.txt'):
     '''
     Objective function for the estimation of discount factor distributions for the 
     three education groups. The groups can differ in the centering of their discount 
@@ -798,15 +798,15 @@ def betasObjFunc(betas, spreads, GICfactors, target_option=1, print_mode=False, 
     baseline_commands = ['solve()', 'initialize_sim()', 'simulate()', 'save_state()', 'unpack_cFunc()']
     multi_thread_commands_fake(TypeListNew, baseline_commands)
     
-    Stats = calcEstimStats(TypeListNew)
+    Stats = calc_estim_stats(TypeListNew)
     
     if target_option == 1:
         sumSquares = 10*np.sum((Stats.medianLWPI-data_medianLWPI)**2)
         sumSquares += np.sum((np.array(Stats.LorenzPts) - data_LorenzPtsAll)**2)
     elif target_option == 2:
-        lp_d = calcLorenzPts(TypeListNew[0:DiscFacCount])
-        lp_h = calcLorenzPts(TypeListNew[DiscFacCount:2*DiscFacCount])
-        lp_c = calcLorenzPts(TypeListNew[2*DiscFacCount:3*DiscFacCount])
+        lp_d = calc_lorenz_pts(TypeListNew[0:DiscFacCount])
+        lp_h = calc_lorenz_pts(TypeListNew[DiscFacCount:2*DiscFacCount])
+        lp_c = calc_lorenz_pts(TypeListNew[2*DiscFacCount:3*DiscFacCount])
         sumSquares = np.sum((np.array(Stats.avgLWPI)-data_avgLWPI)**2)
         sumSquares += np.sum((np.array(lp_d)-data_LorenzPts[0])**2)
         sumSquares += np.sum((np.array(lp_h)-data_LorenzPts[1])**2)
@@ -815,10 +815,10 @@ def betasObjFunc(betas, spreads, GICfactors, target_option=1, print_mode=False, 
     distance = np.sqrt(sumSquares)
 
     if print_mode or print_file:
-        WealthSharesByEd = calcWealthShareByEd(TypeListNew)
-        MPCsByEdSimple = calcMPCbyEdSimple(TypeListNew)
-        MPCsByWQsimple = calcMPCbyWealthQsimple(TypeListNew)
-        calculatedMPCs = calcMPCbyWealthQ(TypeListNew, 5)
+        WealthSharesByEd = calc_wealth_share_by_ed(TypeListNew)
+        MPCsByEdSimple = calc_mpc_by_ed_simple(TypeListNew)
+        MPCsByWQsimple = calc_mpc_by_wealth_q_simple(TypeListNew)
+        calculatedMPCs = calc_mpc_by_wealth_q(TypeListNew, 5)
         MPCsByWQ = calculatedMPCs.MPCbyWQ
         MPCsByEd = calculatedMPCs.MPCbyEd
         IMPCs = calculatedMPCs.simulated_IMPCs
@@ -905,7 +905,7 @@ def betasObjFunc(betas, spreads, GICfactors, target_option=1, print_mode=False, 
         
     return distance 
 # -----------------------------------------------------------------------------
-def betasObjFuncEduc(beta, spread, GICx, educ_type=2, print_mode=False, print_file=False, filename='DefaultResultsFile.txt'):
+def betas_obj_func_educ(beta, spread, GICx, educ_type=2, print_mode=False, print_file=False, filename='DefaultResultsFile.txt'):
     '''
     Objective function for the estimation of a discount factor distribution for
     a single education group.
@@ -981,10 +981,10 @@ def betasObjFuncEduc(beta, spread, GICx, educ_type=2, print_mode=False, print_fi
     baseline_commands = ['solve()', 'initialize_sim()', 'simulate()', 'save_state()']
     multi_thread_commands_fake(TypeListAll, baseline_commands)
     
-    Stats = calcEstimStats(TypeListAll)
+    Stats = calc_estim_stats(TypeListAll)
     
     sumSquares = np.sum((Stats.medianLWPI[educ_type]-data_medianLWPI[educ_type])**2)
-    lp = calcLorenzPts(TypeListNewEduc)
+    lp = calc_lorenz_pts(TypeListNewEduc)
     sumSquares += np.sum((np.array(lp) - data_LorenzPts[educ_type])**2)
 #    sumSquares = np.sum((Stats.avgLWPI[educ_type]-data_avgLWPI[educ_type])**2)
    
@@ -1037,7 +1037,7 @@ if estimateDiscFacs:
     print('Estimation results saved in ' + df_resFileStr)
     
     for edType in [0,1,2]:
-        f_temp = lambda x : betasObjFuncEduc(x[0],x[1],x[2], educ_type=edType)
+        f_temp = lambda x : betas_obj_func_educ(x[0],x[1],x[2], educ_type=edType)
         if edType == 0:
             initValues = [0.75, 0.3, 6]       # Dropouts
         elif edType == 1:
@@ -1109,13 +1109,13 @@ if calcAllResults:
         GICx = dictload['GICx']
         GICfactor = np.exp(GICx)/(1+np.exp(GICx))
         myEstim[edType] = [beta,nabla,GICx, GICfactor]
-        betasObjFuncEduc(beta, nabla, GICx, educ_type = edType, print_mode=True, print_file=printResToFile, filename=ar_resFileStr)
-        checkDiscFacDistribution(beta, nabla, GICfactor, edType, print_mode=True, print_file=printResToFile, filename=ar_resFileStr)
+        betas_obj_func_educ(beta, nabla, GICx, educ_type = edType, print_mode=True, print_file=printResToFile, filename=ar_resFileStr)
+        check_disc_fac_distribution(beta, nabla, GICfactor, edType, print_mode=True, print_file=printResToFile, filename=ar_resFileStr)
         readStr = betFile.readline().strip()
     betFile.close()
     
     # Also calculate results for the whole population 
-    betasObjFunc([myEstim[0][0], myEstim[1][0], myEstim[2][0]], \
+    betas_obj_func([myEstim[0][0], myEstim[1][0], myEstim[2][0]], \
                  [myEstim[0][1], myEstim[1][1], myEstim[2][1]], \
                  [myEstim[0][3], myEstim[1][3], myEstim[2][3]], \
                  target_option = 1, print_mode=True, print_file=printResToFile, filename=ar_resFileStr)
@@ -1127,12 +1127,12 @@ run_additional_analysis = False
 
 #%%
 if run_additional_analysis:
-    #betasObjFuncEduc(0.9838941233454087, 0.009553568500479719, 6, educ_type = 2, print_mode=True)
+    #betas_obj_func_educ(0.9838941233454087, 0.009553568500479719, 6, educ_type = 2, print_mode=True)
 
     ar_resFileStr = res_dir + 'DEBUG_checkDiscFacDistribution.txt'
     GICx = 6.0832796965018225
     GICfactor = np.exp(GICx)/(1+np.exp(GICx))
-    checkDiscFacDistribution(0.7354184459881328, 0.29783637632458415, GICfactor, edType, print_mode=True, print_file=True, filename=ar_resFileStr)
+    check_disc_fac_distribution(0.7354184459881328, 0.29783637632458415, GICfactor, edType, print_mode=True, print_file=True, filename=ar_resFileStr)
 
 # d - (0.72, 0.5)        
 # h - (0.94, 0.7)
@@ -1190,7 +1190,7 @@ if run_additional_analysis:
 
 #%% Plot of MPCs
 if run_additional_analysis:
-    mpcs = calcMPCbyEdSimple(AggDemandEconomy.agents)
+    mpcs = calc_mpc_by_ed_simple(AggDemandEconomy.agents)
     
     show_plot(range(len(mpcs[0])), np.sort(mpcs[0]))
     plt.xlabel('Agents')

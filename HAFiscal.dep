@@ -116,6 +116,7 @@
   *{package}{owner}       {0000/00/00 v0.0}
   *{file}   {@local/config.ltx}{0000/00/00 v0.0}
   *{package}{in-showlabels-mode}{2025/11/02 v0.0}
+  *{package}{showlabels}  {2022/07/18 v1.9.2}
   *{package}{local-qe}    {2025/11/05 v0.0}
   *{package}{catchfile}   {2019/12/09 v1.8}
   *{package}{etexcmds}    {2019/12/15 v1.7}

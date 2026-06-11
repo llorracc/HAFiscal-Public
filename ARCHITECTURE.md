@@ -8,11 +8,10 @@
 ## High-Level Architecture
 
 ```
-Data Sources → Data Processing → Model Solution → Policy Analysis → Output Generation
+Data Sources → Data Processing → Model Estimation → Policy Analysis → Output Generation
     ↓               ↓                  ↓                ↓                ↓
-  SCF, NIPA    DataRead.py      ConsumerModel.py  PolicyCompute.py  Output_Results.py
-                                                                           ↓
-                                                                  Figures/ + Tables/
+  SCF 2004    make_liquid_    EstimAggFiscalMAIN   AggFiscalMAIN   Output_Results.py
+              _wealth.py                              .py            Welfare.py
 ```
 
 ---
@@ -21,246 +20,210 @@ Data Sources → Data Processing → Model Solution → Policy Analysis → Outp
 
 ```
 HAFiscal-Latest/
-├── Code/                      # All computational code
-│   ├── Empirical/             # Data analysis and policy computations
-│   ├── HA-Models/             # Heterogeneous agent models
-│   ├── Calibration/           # Parameter calibration
-│   └── Tools/                 # Utility functions
-├── Figures/                   # Generated figures (PDF, PNG)
-├── Tables/                    # Generated tables (LaTeX, CSV)
-├── Subfiles/                  # LaTeX paper sections
-├── HAFiscal.tex              # Main LaTeX document
-├── reproduce.sh              # Main entry point for all operations
-├── environment.yml           # Conda environment specification
-└── README/                    # Extended documentation
+├── Code/                          # All computational code
+│   ├── Empirical/                 # Data processing
+│   │   ├── make_liquid_wealth.py  # Construct liquid wealth measure
+│   │   ├── adjust_scf_inflation.py # Inflation adjustments
+│   │   ├── compare_scf_datasets.py # Dataset comparisons
+│   │   ├── download_scf_data.sh   # Download SCF data
+│   │   └── *.dta, *.csv          # Data files
+│   └── HA-Models/                 # Heterogeneous agent models
+│       ├── do_all.py              # Main pipeline orchestrator
+│       ├── reproduce_min.py       # Minimal validation script
+│       ├── Target_AggMPCX_LiquWealth/  # Step 1: Splurge estimation
+│       │   └── Estimation_BetaNablaSplurge.py
+│       └── FromPandemicCode/      # Steps 2-5: Main analysis
+│           ├── EstimAggFiscalMAIN.py    # Step 2: Estimation
+│           ├── AggFiscalMAIN.py          # Step 5: Policy comparison
+│           ├── AggFiscalModel.py         # Model classes
+│           ├── Simulate.py               # Simulation
+│           ├── Output_Results.py         # Generate figures/tables
+│           ├── Welfare.py                # Welfare calculations
+│           ├── Parameters.py             # Model parameters
+│           ├── EstimParameters.py        # Estimation parameters
+│           ├── Figures/                  # Generated figures
+│           └── Tables/                   # Generated tables
+├── Figures/                       # Figure LaTeX files (*.tex, *.pdf)
+├── Tables/                        # Table LaTeX files (*.tex, *.pdf)
+├── Subfiles/                      # LaTeX paper sections
+├── HAFiscal.tex                   # Main LaTeX document
+├── reproduce.sh                   # Main entry point for all operations
+├── environment.yml                # Conda environment specification
+└── README/                        # Extended documentation
 ```
 
 ---
 
-## Core Data Pipeline
+## Core Computational Pipeline
 
-### Stage 1: Data Acquisition and Processing
+The computational workflow is orchestrated by `Code/HA-Models/do_all.py` and consists of 5 sequential steps:
+
+### Step 1: Splurge Factor Estimation (~20 minutes)
 
 ```
-Federal Reserve SCF Data
-         ↓
-    [Download]
-         ↓
-Code/Empirical/DataRead.py
-    - Load SCF microdata
-    - Clean and process
-    - Apply CPI adjustments (2022$ → 2013$)
-    - Create derived variables
-         ↓
-Processed Data (rscfp2004.dta)
-         ↓
-Code/Empirical/DataSummary.py
-    - Compute wealth distribution moments
-    - Calculate income statistics
-    - Generate descriptive statistics
-         ↓
-Calibration Targets (saved as .pkl)
+SCF 2004 Data
+    ↓
+Code/Empirical/make_liquid_wealth.py
+    - Process SCF microdata
+    - Calculate liquid wealth distribution
+    - Generate calibration targets
+    ↓
+Code/HA-Models/Target_AggMPCX_LiquWealth/Estimation_BetaNablaSplurge.py
+    - Jointly estimate discount factor distribution and splurge factor
+    - Match aggregate MPC and liquid wealth distribution
+    ↓
+Outputs:
+  - Figure 1: MPC_WealthQuartiles_Figure.pdf
+  - Table 1: MPC_WealthQuartiles_Table.tex
+  - Estimated parameters saved for later steps
 ```
 
 **Key Files**:
-- `Code/Empirical/DataRead.py` (~300 lines)
-- `Code/Empirical/DataSummary.py` (~200 lines)
-- Output: `Data/rscfp2004.dta`, `Calibration/targets.pkl`
+- `Code/Empirical/make_liquid_wealth.py` - Data processing
+- `Code/HA-Models/Target_AggMPCX_LiquWealth/Estimation_BetaNablaSplurge.py` - Splurge estimation
 
-**Dependencies**: pandas, numpy, pyreadstat
+**Runtime**: ~20 minutes
 
 ---
 
-### Stage 2: Model Calibration
+### Step 2: Discount Factor Distribution Estimation (~21 hours) ⚠️
 
 ```
-Calibration Targets
-         ↓
-Code/Calibration/baseline_params.py
-    - Set initial parameter guesses
-    - Define parameter bounds
-         ↓
-Code/Calibration/calibrate_model.py
-    - Run optimization to match moments
-    - Iterate: solve model → simulate → compute moments → update params
-         ↓
-Calibrated Parameters (baseline_params.pkl)
-         ↓
-Code/Calibration/validation.py
-    - Verify model matches all target moments
-    - Generate validation tables
-         ↓
-Tables/calibration_fit.tex
+Calibration Targets (from Step 1)
+    ↓
+Code/HA-Models/FromPandemicCode/EstimAggFiscalMAIN.py
+    - Estimate discount factor distributions for 3 education groups
+    - Simulated Method of Moments matching consumption drop upon UI exit
+    - ~7 hours per education group
+    ↓
+Code/HA-Models/FromPandemicCode/CreateLPfig.py
+    - Generate Figure 2 (lifecycle profiles)
+    ↓
+Code/HA-Models/FromPandemicCode/CreateIMPCfig.py
+    - Generate Figure 3 (impulse response functions)
+    ↓
+Outputs:
+  - Figure 2: Lifecycle profiles
+  - Figure 3: iMPC profiles
+  - Estimated parameters for each education group
+  - Results: AllResults_CRRA_2.0_R_1.01.txt
 ```
 
 **Key Files**:
-- `Code/Calibration/baseline_params.py` (~150 lines)
-- `Code/Calibration/calibrate_model.py` (~400 lines)
-- `Code/Calibration/validation.py` (~250 lines)
+- `Code/HA-Models/FromPandemicCode/EstimAggFiscalMAIN.py` - Main estimation
+- `Code/HA-Models/FromPandemicCode/EstimParameters.py` - Calibrated parameters
+- `Code/HA-Models/FromPandemicCode/CreateLPfig.py` - Figure 2
+- `Code/HA-Models/FromPandemicCode/CreateIMPCfig.py` - Figure 3
 
-**Dependencies**: HARK, scipy.optimize
-
-**Runtime**: ~8 hours (on 8-core machine)
+**Runtime**: ~21 hours (7 hours × 3 education groups)
 
 ---
 
-### Stage 3: Model Solution
+### Step 3: Robustness Check with Splurge=0 (OPTIONAL, ~21 hours)
 
 ```
-Calibrated Parameters
-         ↓
-Code/HA-Models/ConsumerModel.py
-    - Define HARK consumer type
-    - Set up income process
-    - Configure state space
-         ↓
-Solve Household Problem
-    - Backward induction (EGM)
-    - Store consumption policy functions
-         ↓
-Code/HA-Models/Simulate.py
-    - Monte Carlo simulation
-    - 10,000 households × 400 quarters
-    - Track: consumption, wealth, MPC
-         ↓
-Simulated Distributions (baseline_sim.pkl)
+Same as Step 2, but with Splurge=0 parameter
+    ↓
+Code/HA-Models/FromPandemicCode/EstimAggFiscalMAIN.py (Splurge=0)
+    ↓
+Outputs:
+  - Table 8: welfare6_SplurgeComp.tex (robustness comparison)
+```
+
+**Note**: This step is **disabled by default** in `do_all.py` (set `run_step_3=True` to enable)
+
+**Runtime**: ~21 hours (similar to Step 2)
+
+---
+
+### Step 4: HANK-SAM Model Robustness (~1 hour)
+
+```
+Code/HA-Models/FromPandemicCode/HA-Fiscal-HANK-SAM.py
+    - Compute household Jacobian matrices
+    - General equilibrium effects
+    ↓
+Code/HA-Models/FromPandemicCode/HA-Fiscal-HANK-SAM-to-python.py
+    - Run HANK-SAM experiments
+    - Sequence Space Jacobian methods
+    ↓
+Outputs:
+  - Figure 5: HANK-SAM policy comparisons
+  - Jacobian matrices: HA_Fiscal_Jacs.obj, HA_Fiscal_Jacs_UI_extend_real.obj
 ```
 
 **Key Files**:
-- `Code/HA-Models/ConsumerModel.py` (~350 lines)
-- `Code/HA-Models/Simulate.py` (~300 lines)
+- `Code/HA-Models/FromPandemicCode/HA-Fiscal-HANK-SAM.py` - Jacobian computation
+- `Code/HA-Models/FromPandemicCode/HA-Fiscal-HANK-SAM-to-python.py` - Experiments
 
-**Dependencies**: HARK, numpy
-
-**Runtime**: ~30 seconds per solve + simulate cycle
+**Runtime**: ~1 hour
 
 ---
 
-### Stage 4: Policy Analysis
+### Step 5: Policy Comparison (~65 hours) ⚠️
 
 ```
-Baseline Simulation
-         ↓
-    Policy Intervention (choose one):
-    ├── Stimulus Check
-    ├── UI Extension
-    └── Tax Cut
-         ↓
-Code/Empirical/{Policy}Compute.py
-    - Modify income or transfer
-    - Re-simulate consumption
-    - Compute consumption difference (∆C)
-         ↓
-Code/Empirical/MultiplierCalc.py
-    - Calculate fiscal multiplier
-    - Compute iMPC path
-         ↓
-Code/Tools/Welfare.py
-    - Calculate welfare changes
-    - By wealth percentile
-         ↓
-Results (policy_results.pkl)
-```
-
-**Policy-Specific Files**:
-1. `Code/Empirical/StimulusCheckCompute.py` (~400 lines)
-2. `Code/Empirical/UICompute.py` (~350 lines)
-3. `Code/Empirical/TaxCutCompute.py` (~450 lines)
-
-**Common Files**:
-- `Code/Empirical/MultiplierCalc.py` (~200 lines)
-- `Code/Tools/Welfare.py` (~180 lines)
-
-**Runtime**: ~10 hours per policy (full sensitivity analysis)
-
----
-
-### Stage 5: Output Generation
-
-```
-Policy Results
-         ↓
-Code/Empirical/Output_Results.py
-    - Load all policy results
-    - Generate figures (matplotlib)
-    - Generate tables (LaTeX)
-         ↓
-    Figures/               Tables/
-    ├── Figure1.pdf        ├── Table1.tex
-    ├── Figure2.pdf        ├── Table2.tex
-    ├── Figure3.pdf        ├── Table3.tex
-    └── ...                └── ...
-         ↓
-LaTeX Compilation (reproduce.sh --docs)
-         ↓
-HAFiscal.pdf
+Baseline Model (from Step 2)
+    ↓
+Code/HA-Models/FromPandemicCode/AggFiscalMAIN.py
+    - Analyze three fiscal policies:
+      1. UI benefit extension
+      2. Stimulus checks (lump-sum transfers)
+      3. Payroll tax cuts
+    - Welfare and spending analysis
+    - Fiscal multiplier calculations
+    ↓
+Code/HA-Models/FromPandemicCode/Output_Results.py
+    - Generate Figure 4 (policy effects, 6 subfigures)
+    - Generate Table 6 (fiscal multipliers)
+    ↓
+Code/HA-Models/FromPandemicCode/Welfare.py
+    - Calculate welfare changes by wealth percentile
+    - Generate Figure 6 (welfare comparisons)
+    - Generate Table 7 (welfare effectiveness)
+    ↓
+Outputs:
+  - Figure 4: Policy effects (6 panels)
+  - Figure 6: Welfare comparisons
+  - Table 6: Multipliers (Multiplier.tex)
+  - Table 7: Welfare (welfare6.tex)
+  - Table 8: Splurge comparison (if Step 3 run)
 ```
 
 **Key Files**:
-- `Code/Empirical/Output_Results.py` (~600 lines)
-- `Code/Tools/Plotting.py` (~400 lines, plotting utilities)
+- `Code/HA-Models/FromPandemicCode/AggFiscalMAIN.py` - Policy comparison
+- `Code/HA-Models/FromPandemicCode/AggFiscalModel.py` - Model classes
+- `Code/HA-Models/FromPandemicCode/Simulate.py` - Simulation utilities
+- `Code/HA-Models/FromPandemicCode/Output_Results.py` - Figure/table generation
+- `Code/HA-Models/FromPandemicCode/Welfare.py` - Welfare calculations
 
-**Dependencies**: matplotlib, seaborn, pandas
-
-**Runtime**: ~2-3 minutes
+**Runtime**: ~65 hours (longest step)
 
 ---
 
 ## Module Dependency Graph
 
 ```
-HARK (external)
+External Libraries
   ↓
-ConsumerModel.py
+  HARK (econ-ark)
   ↓
-  ├→ Simulate.py
+FromPandemicCode/AggFiscalModel.py
+  ↓
+  ├→ EstimAggFiscalMAIN.py (Step 2)
   │    ↓
-  │    ├→ StimulusCheckCompute.py ──┐
-  │    ├→ UICompute.py ──────────────┤
-  │    └→ TaxCutCompute.py ──────────┤
-  │                                  ↓
-  └→ Calibration/                MultiplierCalc.py
-       calibrate_model.py            ↓
-            ↓                    Welfare.py
-       validation.py                 ↓
-                               Output_Results.py
-                                     ↓
-                               Figures/ + Tables/
-```
-
----
-
-## Key Function Call Hierarchy
-
-### Solving the Model
-
-```
-main()
-  └─> load_baseline_params()
-      └─> create_consumer_type(params)
-          └─> solve()                      [HARK library]
-              ├─> prepare()
-              ├─> solve_one_period()       [Endogenous Grid Method]
-              │   ├─> calc_EndOfPrd_vP()
-              │   ├─> calc_mNrm()
-              │   └─> make_cFunc()
-              └─> add_to_time_inv()
-```
-
-### Policy Analysis
-
-```
-compute_stimulus_check_effects()
-  ├─> load_calibrated_model()
-  │   └─> solve()
-  ├─> simulate_baseline()
-  │   └─> initialize_sim()
-  │       └─> simulate(T_sim)             [HARK library]
-  ├─> simulate_policy(shock_amount)
-  │   ├─> modify_income_process()
-  │   └─> simulate(T_sim)
-  ├─> compute_consumption_diff()
-  └─> compute_fiscal_multiplier()
+  │    ├→ CreateLPfig.py → Figure 2
+  │    └→ CreateIMPCfig.py → Figure 3
+  │
+  ├→ AggFiscalMAIN.py (Step 5)
+  │    ↓
+  │    ├→ Simulate.py
+  │    ├→ Output_Results.py → Figure 4, Table 6
+  │    └→ Welfare.py → Figure 6, Table 7
+  │
+  └→ HA-Fiscal-HANK-SAM.py (Step 4)
+       ↓
+       HA-Fiscal-HANK-SAM-to-python.py → Figure 5
 ```
 
 ---
@@ -284,20 +247,38 @@ Flags:
 ```
 --envt:  Install dependencies → Verify setup
 --docs:  Run LaTeX compiler → Generate PDF
---comp:  Data → Calibrate → Solve → Policies → Output
+--comp:  Calls Code/HA-Models/do_all.py with configured steps
 ```
 
-### Secondary Entry Points (Direct Python)
+### Secondary Entry Point: `Code/HA-Models/do_all.py`
 
 ```python
-# Calibrate model
-python Code/Calibration/calibrate_model.py
+# Run all steps (4-5 days)
+cd Code/HA-Models
+python do_all.py
 
-# Run single policy
-python Code/Empirical/StimulusCheckCompute.py
+# Or run minimal validation (~1 hour)
+python reproduce_min.py
+```
 
-# Generate figures/tables
-python Code/Empirical/Output_Results.py
+**Direct script execution** (individual steps):
+
+```bash
+# Step 1: Splurge estimation
+cd Code/HA-Models/Target_AggMPCX_LiquWealth
+python Estimation_BetaNablaSplurge.py
+
+# Step 2: Estimation
+cd Code/HA-Models/FromPandemicCode
+python EstimAggFiscalMAIN.py
+
+# Step 5: Policy comparison
+cd Code/HA-Models/FromPandemicCode
+python AggFiscalMAIN.py
+
+# Generate outputs
+python Output_Results.py
+python Welfare.py
 ```
 
 ---
@@ -306,25 +287,28 @@ python Code/Empirical/Output_Results.py
 
 | Stage | Runtime | Parallelizable? | Bottleneck |
 |-------|---------|-----------------|------------|
-| Data processing | 2 min | No | I/O |
-| Calibration | 8 hours | Partial | Optimization loop |
-| Model solution | 30 sec | Yes | Numerical solver |
-| Policy simulation | 10 hours | Yes | Monte Carlo |
-| Figure generation | 2 min | Yes | Plotting |
+| Step 1: Splurge estimation | 20 min | No | Single optimization |
+| Step 2: Estimation | 21 hours | Partial | Education groups (can parallelize) |
+| Step 3: Robustness (optional) | 21 hours | Partial | Similar to Step 2 |
+| Step 4: HANK-SAM | 1 hour | Partial | Jacobian computation |
+| Step 5: Policy comparison | 65 hours | Partial | Policy scenarios |
+
+**Total Runtime**:
+- With Step 3: ~108 hours (4.5 days)
+- Without Step 3: ~87 hours (3.6 days)
 
 **Parallelization opportunities**:
-- Calibration: Parallel evaluation of objective function
-- Policy simulation: Run policies independently
-- Robustness checks: Full parallel (40 scenarios)
+- Step 2: Run education groups in parallel
+- Step 5: Some policy scenarios can be parallelized
 
 ---
 
 ## External Dependencies
 
-### Python Packages (from environment.yml)
+### Python Packages (from pyproject.toml/environment.yml)
 
 **Core**:
-- `HARK >= 0.13.0`: Heterogeneous agent toolkit
+- `econ-ark >= 0.14.1`: Heterogeneous agent toolkit (HARK)
 - `numpy >= 1.21`: Numerical computing
 - `scipy >= 1.7`: Optimization, statistics
 - `pandas >= 1.3`: Data manipulation
@@ -339,7 +323,7 @@ python Code/Empirical/Output_Results.py
 
 **Other**:
 - `joblib`: Parallel processing
-- `dill`: Serialization (for saving results)
+- `sequence-jacobian`: For HANK-SAM models (Step 4)
 
 ### LaTeX Packages (from reproduce/required_latex_packages.txt)
 
@@ -352,10 +336,9 @@ Key packages: `econark`, `subfiles`, `hyperref`, `booktabs`, `graphicx`, `amsmat
 | Directory | Typical Size | Notes |
 |-----------|-------------|-------|
 | Code/ | ~2 MB | Python scripts |
-| Data/ | ~50 MB | SCF microdata (not in repo) |
-| Figures/ | ~20 MB | Generated PDFs |
-| Tables/ | ~1 MB | LaTeX tables |
-| Results/ | ~500 MB | Intermediate .pkl files (not in repo) |
+| Code/HA-Models/FromPandemicCode/Figures/ | ~20 MB | Generated PDFs |
+| Code/HA-Models/FromPandemicCode/Tables/ | ~1 MB | LaTeX tables |
+| Code/HA-Models/Results/ | ~500 MB | Intermediate results (not in repo) |
 | .venv-{platform}/ | ~1 GB | Python environment (not in repo) |
 
 ---
@@ -364,36 +347,21 @@ Key packages: `econark`, `subfiles`, `hyperref`, `booktabs`, `graphicx`, `amsmat
 
 ### Quick Verification (`--comp min`)
 
+The minimal reproduction runs a subset of steps to verify the environment works:
+
+```bash
+./reproduce.sh --comp min
 ```
-Test 1: Data loading
-  → Load SCF data
-  → Verify key moments match targets
-  Runtime: 30 seconds
 
-Test 2: Model solution
-  → Solve baseline model
-  → Check consumption function shape
-  Runtime: 30 seconds
-
-Test 3: Policy simulation
-  → Run one policy scenario (stimulus check)
-  → Verify multiplier in reasonable range (0.5-2.0)
-  Runtime: 10 minutes
-
-Test 4: Output generation
-  → Generate Figure 1 (iMPC plot)
-  → Generate Table 1 (calibration targets)
-  Runtime: 1 minute
-
-Total: ~15 minutes
-```
+This executes `Code/HA-Models/reproduce_min.py` which runs faster validation steps.
 
 ### Full Validation (`--comp full`)
 
-- All 40 robustness scenarios
-- All figures (1-7) and tables (1-8)
-- Welfare analysis by percentile
-- Sensitivity to key parameters
+```bash
+./reproduce.sh --comp full
+```
+
+This runs all 5 steps (or 4 if Step 3 is disabled) and generates all figures and tables.
 
 **Runtime**: 4-5 days
 
@@ -404,116 +372,68 @@ Total: ~15 minutes
 ### Workflow 1: Quick Verification
 
 ```bash
-./reproduce.sh --envt           # 10 min
-./reproduce.sh --docs           # 1 min
-./reproduce.sh --comp min       # 15 min
-# Total: ~30 minutes
+./reproduce.sh --envt           # Set up environment
+./reproduce.sh --docs           # Compile paper
+./reproduce.sh --comp min       # Quick validation
+# Total: ~1-2 hours
 ```
 
-### Workflow 2: Extend Model
-
-```python
-# 1. Modify model
-vim Code/HA-Models/ConsumerModel.py
-
-# 2. Test solution
-python Code/HA-Models/ConsumerModel.py
-
-# 3. Run policy analysis
-python Code/Empirical/StimulusCheckCompute.py
-
-# 4. Regenerate outputs
-python Code/Empirical/Output_Results.py
-```
-
-### Workflow 3: Add New Policy
-
-```python
-# 1. Copy template
-cp Code/Empirical/StimulusCheckCompute.py Code/Empirical/NewPolicyCompute.py
-
-# 2. Modify policy intervention
-vim Code/Empirical/NewPolicyCompute.py
-# Change how income/transfers are modified
-
-# 3. Add to output script
-vim Code/Empirical/Output_Results.py
-# Add new policy to comparison tables/figures
-
-# 4. Run analysis
-python Code/Empirical/NewPolicyCompute.py
-python Code/Empirical/Output_Results.py
-```
-
----
-
-## Debugging Tips
-
-### Model Won't Solve
-
-```python
-# Check parameters in reasonable range
-from Code.Calibration.baseline_params import params
-print(params['CRRA'])      # Should be 1-10
-print(params['DiscFac'])   # Should be 0.90-0.99
-print(params['Rfree'])     # Should be 1.00-1.05
-
-# Verify grid specifications
-print(params['aXtraGrid'])  # Should span [0, 50+]
-print(len(params['TranShkGrid']))  # Should have 7+ points
-```
-
-### Calibration Not Converging
-
-```python
-# Check objective function values
-from Code.Calibration.calibrate_model import objective_function
-obj_value = objective_function(initial_params)
-# Should be < 1.0 for decent fit, < 0.1 for good fit
-
-# Try tighter bounds
-# Edit: Code/Calibration/calibrate_model.py
-# Reduce parameter search ranges
-```
-
-### Simulation Crashes
+### Workflow 2: Run Single Step
 
 ```bash
-# Check for NaN/Inf in results
-python -c "from Code.HA_Models.Simulate import *; check_simulation_validity()"
+# Step 1 only
+cd Code/HA-Models
+python do_all.py  # Edit do_all.py: set run_step_1=True, others=False
 
-# Reduce simulation length if memory issues
-# Edit T_sim from 400 → 100 in Simulate.py
+# Step 5 only (requires Steps 1-2 completed first)
+cd Code/HA-Models/FromPandemicCode
+python AggFiscalMAIN.py
+```
+
+### Workflow 3: Modify Model Parameters
+
+```python
+# Edit parameters
+vim Code/HA-Models/FromPandemicCode/Parameters.py
+# or
+vim Code/HA-Models/FromPandemicCode/EstimParameters.py
+
+# Re-run affected step
+cd Code/HA-Models/FromPandemicCode
+python EstimAggFiscalMAIN.py  # If estimation params changed
+python AggFiscalMAIN.py        # If policy params changed
 ```
 
 ---
 
-## Performance Optimization
+## Key Files Reference
 
-### Parallelization
+### Model Definition
+- `Code/HA-Models/FromPandemicCode/AggFiscalModel.py` - Core model classes
+- `Code/HA-Models/FromPandemicCode/ConsMarkovModel.py` - Consumer model with Markov unemployment
+- `Code/HA-Models/FromPandemicCode/EstimAggFiscalModel.py` - Estimation-specific variants
 
-```python
-# Use joblib for parallel policy runs
-from joblib import Parallel, delayed
+### Parameters
+- `Code/HA-Models/FromPandemicCode/Parameters.py` - Model parameters
+- `Code/HA-Models/FromPandemicCode/EstimParameters.py` - Estimation/calibration parameters
 
-policies = ['stimulus', 'UI', 'taxcut']
-results = Parallel(n_jobs=3)(
-    delayed(run_policy)(p) for p in policies
-)
-```
+### Estimation
+- `Code/HA-Models/FromPandemicCode/EstimAggFiscalMAIN.py` - Main estimation (Step 2)
+- `Code/HA-Models/FromPandemicCode/EstimSetupEconomy.py` - Economy setup for estimation
 
-### Caching
+### Policy Analysis
+- `Code/HA-Models/FromPandemicCode/AggFiscalMAIN.py` - Policy comparison (Step 5)
+- `Code/HA-Models/FromPandemicCode/Simulate.py` - Simulation utilities
+- `Code/HA-Models/FromPandemicCode/Welfare.py` - Welfare calculations
 
-```python
-# HARK models cache solution
-agent.solve()  # First time: slow
-agent.solve()  # Subsequent: instant (uses cache)
+### Output Generation
+- `Code/HA-Models/FromPandemicCode/Output_Results.py` - Generate figures and tables
+- `Code/HA-Models/FromPandemicCode/CreateLPfig.py` - Generate Figure 2
+- `Code/HA-Models/FromPandemicCode/CreateIMPCfig.py` - Generate Figure 3
 
-# Save solved model
-import dill
-with open('solved_model.pkl', 'wb') as f:
-    dill.dump(agent, f)
-```
+### Utilities
+- `Code/HA-Models/FromPandemicCode/FiscalTools.py` - Helper functions
+- `Code/HA-Models/FromPandemicCode/Clean_Folders.py` - Cleanup utility
 
 ---
 
@@ -523,6 +443,8 @@ with open('solved_model.pkl', 'wb') as f:
 - **Concept definitions**: See `README_IF_YOU_ARE_AN_AI/CONCEPT_GLOSSARY.md`
 - **Computational workflows**: See `README_IF_YOU_ARE_AN_AI/030_COMPUTATIONAL_WORKFLOWS.md`
 - **Code navigation**: See `README_IF_YOU_ARE_AN_AI/060_CODE_NAVIGATION.md`
+- **Detailed Code README**: See `Code/HA-Models/README.md`
+- **Code Directory Overview**: See `Code/README.md`
 
 ---
 

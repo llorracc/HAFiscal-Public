@@ -539,16 +539,16 @@ with open('pyproject.toml', 'r') as f:
 fi
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# STEP 3: Ensure Python 3.9 is available
+# STEP 3: Ensure Python 3.10 is available
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-echo "Checking Python 3.9 availability..."
-if uv python list 2>/dev/null | grep -q "cpython-3.9"; then
-    echo "✅ Python 3.9 is available"
+echo "Checking Python 3.10 availability..."
+if uv python list 2>/dev/null | grep -q "cpython-3.10"; then
+    echo "✅ Python 3.10 is available"
 else
-    echo "Installing Python 3.9..."
-    uv python install 3.9
-    echo "✅ Python 3.9 installed"
+    echo "Installing Python 3.10..."
+    uv python install 3.10
+    echo "✅ Python 3.10 installed"
 fi
 echo ""
 
@@ -643,23 +643,23 @@ if [[ ! -d "$VENV_PATH" ]]; then
     # Ensure UV is in PATH before creating venv
     ensure_uv_in_path
     
-    # Install Python 3.9 using UV's managed Python installer
+    # Install Python 3.10 using UV's managed Python installer
     # This ensures we have a standalone Python that doesn't depend on Xcode/system Python
-    echo "Ensuring Python 3.9 is available..."
+    echo "Ensuring Python 3.10 is available..."
     if [[ "$(uname -m)" == "arm64" ]]; then
-        arch -arm64 uv python install 3.9 >/dev/null 2>&1 || true
+        arch -arm64 uv python install 3.10 >/dev/null 2>&1 || true
     else
-        uv python install 3.9 >/dev/null 2>&1 || true
+        uv python install 3.10 >/dev/null 2>&1 || true
     fi
-    echo "✓ Python 3.9 ready"
+    echo "✓ Python 3.10 ready"
     echo ""
     
     # Force arm64 on Apple Silicon
     if [[ "$(uname -m)" == "arm64" ]]; then
         echo "Detected Apple Silicon - creating arm64 environment"
-        arch -arm64 uv venv --python 3.9 "$VENV_PATH"
+        arch -arm64 uv venv --python 3.10 "$VENV_PATH"
     else
-        uv venv --python 3.9 "$VENV_PATH"
+        uv venv --python 3.10 "$VENV_PATH"
     fi
     
     # Verify the venv was created
@@ -689,7 +689,7 @@ export UV_PROJECT_ENVIRONMENT="$VENV_PATH"
 
 # Force arm64 on Apple Silicon
 if [[ "$(uname -m)" == "arm64" ]]; then
-    if arch -arm64 uv sync --all-groups --python 3.9; then
+    if arch -arm64 uv sync --all-groups --python 3.10; then
         echo ""
         echo "✅ Environment setup complete (arm64)!"
     else
@@ -698,7 +698,7 @@ if [[ "$(uname -m)" == "arm64" ]]; then
         return 1 2>/dev/null || exit 1
     fi
 else
-    if uv sync --all-groups --python 3.9; then
+    if uv sync --all-groups --python 3.10; then
         echo ""
         echo "✅ Environment setup complete!"
     else
@@ -717,7 +717,7 @@ echo "========================================"
 echo "Setup Summary"
 echo "========================================"
 echo "Virtual environment: $VENV_NAME/"
-echo "Python version: 3.9"
+echo "Python version: 3.10"
 echo "Packages: All dependency groups installed"
 
 # Verify the environment

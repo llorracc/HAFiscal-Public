@@ -1,0 +1,13 @@
+name: DemARK
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - ipywidgets
+  - pandas-datareader
+  - linearmodels
+  - tqdm
+  - nbval
+  - pip
+  - pip:
+    - git+https://github.com/econ-ark/hark@master

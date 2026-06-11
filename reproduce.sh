@@ -663,7 +663,10 @@ OPTIONS:
                          IMPC: Intertemporal MPC figures from pre-computed results
                          LP: Lorenz Points figures from pre-computed results
                          all: all figures from results (IMPC + LP)
-    --comp, -c [SCOPE]  Reproduce computational results (SCOPE: min|full|max, default: min)
+    --comp, -c [SCOPE]  Reproduce computational results (SCOPE: nano|micro|mini|min|full|max, default: min)
+                         nano: fastest verification (~30 sec) - parameter loading and agent creation
+                         micro: fast verification (~1 min) - includes economy solve
+                         mini: intermediate verification (~5-10 min) - includes simulation and baseline experiment
                          min: minimal computational results (~1 hour)
                          full: all computational results needed for the printed document (4-5 days on a high-end 2025 laptop)
                          max: full results + robustness (Step 3: Splurge=0 for Online Appendix) (~6 days on a high-end 2025 laptop)
@@ -728,6 +731,9 @@ EXAMPLES:
     ./reproduce.sh --docs tables             # Compile repo root + Tables/
     ./reproduce.sh --docs subfiles           # Compile repo root + Subfiles/
     ./reproduce.sh --docs all --stop-on-error # Stop on first compilation error
+    ./reproduce.sh --comp nano               # Fastest verification (~30 seconds)
+    ./reproduce.sh --comp micro              # Fast verification with economy solve (~1 minute)
+    ./reproduce.sh --comp mini               # Intermediate verification with baseline experiment (~5-10 minutes)
     ./reproduce.sh --comp min                # Minimal computational results (~1 hour)
     ./reproduce.sh --comp full               # All computational results for printed document (4-5 days on a high-end 2025 laptop)
     ./reproduce.sh --comp max                # Maximum computational results including robustness (~6 days on a high-end 2025 laptop)
@@ -1027,6 +1033,104 @@ reproduce_all_results() {
     local total_elapsed=$(($(date +%s) - start_time))
     log SUCCESS "Complete reproduction finished successfully"
     log INFO "Total time: $(printf '%d:%02d:%02d' $((total_elapsed/3600)) $((total_elapsed%3600/60)) $((total_elapsed%60)))"
+}
+
+# ============================================================================
+# NANO/MICRO LEVEL COMPUTATION FUNCTIONS
+# Fast verification with progressive checkpoints
+# ============================================================================
+
+reproduce_nano_results() {
+    local start_time=$(date +%s)
+    
+    log PROGRESS "Starting NANO level verification"
+    log INFO "========================================"
+    log INFO "NANO Level: Fastest Verification (~30 sec)"
+    log INFO "========================================"
+    echo ""
+    log INFO "Testing: Agent creation and solve"
+    log INFO "Start time: $(date '+%Y-%m-%d %H:%M:%S')"
+    echo ""
+    
+    if [[ -f "./reproduce/reproduce_computed_nano.sh" ]]; then
+        log INFO "Executing: ./reproduce/reproduce_computed_nano.sh"
+        
+        if ./reproduce/reproduce_computed_nano.sh 2>&1 | tee -a "$LOG_FILE"; then
+            local elapsed=$(($(date +%s) - start_time))
+            log SUCCESS "NANO level verification completed successfully"
+            log INFO "Duration: $(printf '%d:%02d:%02d' $((elapsed/3600)) $((elapsed%3600/60)) $((elapsed%60)))"
+            return 0
+        else
+            local exit_code=$?
+            log ERROR "NANO level verification failed with exit code $exit_code"
+            return $exit_code
+        fi
+    else
+        log ERROR "./reproduce/reproduce_computed_nano.sh not found"
+        return 1
+    fi
+}
+
+reproduce_micro_results() {
+    local start_time=$(date +%s)
+    
+    log PROGRESS "Starting MICRO level verification"
+    log INFO "========================================"
+    log INFO "MICRO Level: Fast Verification (~1 min)"
+    log INFO "========================================"
+    echo ""
+    log INFO "Testing: Agent creation and economy solve"
+    log INFO "Start time: $(date '+%Y-%m-%d %H:%M:%S')"
+    echo ""
+    
+    if [[ -f "./reproduce/reproduce_computed_micro.sh" ]]; then
+        log INFO "Executing: ./reproduce/reproduce_computed_micro.sh"
+        
+        if ./reproduce/reproduce_computed_micro.sh 2>&1 | tee -a "$LOG_FILE"; then
+            local elapsed=$(($(date +%s) - start_time))
+            log SUCCESS "MICRO level verification completed successfully"
+            log INFO "Duration: $(printf '%d:%02d:%02d' $((elapsed/3600)) $((elapsed%3600/60)) $((elapsed%60)))"
+            return 0
+        else
+            local exit_code=$?
+            log ERROR "MICRO level verification failed with exit code $exit_code"
+            return $exit_code
+        fi
+    else
+        log ERROR "./reproduce/reproduce_computed_micro.sh not found"
+        return 1
+    fi
+}
+
+reproduce_mini_results() {
+    local start_time=$(date +%s)
+    
+    log PROGRESS "Starting MINI level verification"
+    log INFO "========================================"
+    log INFO "MINI Level: Intermediate Verification (~5-10 min)"
+    log INFO "========================================"
+    echo ""
+    log INFO "Testing: Full setup, solve, simulation, and baseline experiment"
+    log INFO "Start time: $(date '+%Y-%m-%d %H:%M:%S')"
+    echo ""
+    
+    if [[ -f "./reproduce/reproduce_computed_mini.sh" ]]; then
+        log INFO "Executing: ./reproduce/reproduce_computed_mini.sh"
+        
+        if ./reproduce/reproduce_computed_mini.sh 2>&1 | tee -a "$LOG_FILE"; then
+            local elapsed=$(($(date +%s) - start_time))
+            log SUCCESS "MINI level verification completed successfully"
+            log INFO "Duration: $(printf '%d:%02d:%02d' $((elapsed/3600)) $((elapsed%3600/60)) $((elapsed%60)))"
+            return 0
+        else
+            local exit_code=$?
+            log ERROR "MINI level verification failed with exit code $exit_code"
+            return $exit_code
+        fi
+    else
+        log ERROR "./reproduce/reproduce_computed_mini.sh not found"
+        return 1
+    fi
 }
 
 reproduce_minimal_results() {
@@ -1746,7 +1850,7 @@ while [[ $# -gt 0 ]]; do
             ACTION="comp"
             shift
             # Check if next argument is a scope specifier
-            if [[ $# -gt 0 && "$1" =~ ^(min|full|max)$ ]]; then
+            if [[ $# -gt 0 && "$1" =~ ^(nano|micro|mini|min|full|max)$ ]]; then
                 COMP_SCOPE="$1"
                 shift
             else
@@ -2346,6 +2450,18 @@ case "$ACTION" in
         init_logging "comp" "$COMP_SCOPE"
         log INFO "Action: Computational reproduction (scope: $COMP_SCOPE)"
         case "$COMP_SCOPE" in
+            nano)
+                reproduce_nano_results
+                exit $?
+                ;;
+            micro)
+                reproduce_micro_results
+                exit $?
+                ;;
+            mini)
+                reproduce_mini_results
+                exit $?
+                ;;
             min)
                 reproduce_minimal_results
                 exit $?
@@ -2363,7 +2479,7 @@ case "$ACTION" in
                 ;;
             *)
                 log ERROR "Unknown computational scope: $COMP_SCOPE"
-                log ERROR "Valid scopes: min, full, max"
+                log ERROR "Valid scopes: nano, micro, mini, min, full, max"
                 exit 1
                 ;;
         esac

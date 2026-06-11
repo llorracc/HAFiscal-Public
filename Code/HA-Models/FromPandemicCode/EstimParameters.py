@@ -1,7 +1,7 @@
 import numpy as np
 import os
 import sys
-from HARK.distribution import Uniform
+from HARK.distributions import Uniform
 
 # Targets in the estimation of the discount factor distributions for each 
 # education level. 
@@ -82,12 +82,12 @@ if len(sys.argv) >= 5:
 
 # Parameters concerning the initial distribution of permanent income 
 # "newborn" = 25 years old in SCF 2004
-pLvlInitMean_d = np.log(6.2)   # Average quarterly permanent income of "newborn" HS dropout ($1000)
-pLvlInitMean_h = np.log(11.1)  # Average quarterly permanent income of "newborn" HS graduate ($1000)
-pLvlInitMean_c = np.log(14.5)  # Average quarterly permanent income of "newborn" HS  ($1000)
-pLvlInitStd_d  = 0.32          # Standard deviation of initial log permanent income 
-pLvlInitStd_h  = 0.42          # Standard deviation of initial log permanent income 
-pLvlInitStd_c  = 0.53          # Standard deviation of initial log permanent income 
+pLogInitMean_d = np.log(6.2)   # Average quarterly permanent income of "newborn" HS dropout ($1000)
+pLogInitMean_h = np.log(11.1)  # Average quarterly permanent income of "newborn" HS graduate ($1000)
+pLogInitMean_c = np.log(14.5)  # Average quarterly permanent income of "newborn" HS  ($1000)
+pLogInitStd_d  = 0.32          # Standard deviation of initial log permanent income 
+pLogInitStd_h  = 0.42          # Standard deviation of initial log permanent income 
+pLogInitStd_c  = 0.53          # Standard deviation of initial log permanent income 
 
 # Parameters concerning grid sizes: assets, permanent income shocks, transitory income shocks
 aXtraMin = 0.001        # Lowest non-zero end-of-period assets above minimum gridpoint
@@ -126,14 +126,14 @@ def small_MrkvArray(e,u,ub,transition_ub=True):
     small_MrkvArray[ub+1,0] = 1-u
     return small_MrkvArray 
 
-def makeCondMrkvArrays_base(Urate_normal, Uspell_normal, UBspell_normal):
+def make_cond_mrkv_arrays_base(Urate_normal, Uspell_normal, UBspell_normal):
     U_persist_normal = 1.-1./Uspell_normal
     E_persist_normal = 1.-Urate_normal*(1.-U_persist_normal)/(1.-Urate_normal)
     MrkvArray_normal         = small_MrkvArray(E_persist_normal,    U_persist_normal,    UBspell_normal)
     CondMrkvArrays = [MrkvArray_normal]
     return CondMrkvArrays
 
-def makeFullMrkvArray(MacroMrkvArray, CondMrkvArrays):
+def make_full_mrkv_array(MacroMrkvArray, CondMrkvArrays):
     for i in range(MacroMrkvArray.shape[0]):
         this_row = MacroMrkvArray[i,0]*CondMrkvArrays[0]
         for j in range(MacroMrkvArray.shape[0]-1):
@@ -145,12 +145,12 @@ def makeFullMrkvArray(MacroMrkvArray, CondMrkvArrays):
     return [FullMrkv]
 
 MacroMrkvArray_base = np.array([[1.0]])
-CondMrkvArrays_base_d = makeCondMrkvArrays_base(Urate_normal_d, Uspell_normal, UBspell_normal)
-MrkvArray_base_d = makeFullMrkvArray(MacroMrkvArray_base, CondMrkvArrays_base_d)
-CondMrkvArrays_base_h = makeCondMrkvArrays_base(Urate_normal_h, Uspell_normal, UBspell_normal)
-MrkvArray_base_h = makeFullMrkvArray(MacroMrkvArray_base, CondMrkvArrays_base_h)
-CondMrkvArrays_base_c = makeCondMrkvArrays_base(Urate_normal_c, Uspell_normal, UBspell_normal)
-MrkvArray_base_c = makeFullMrkvArray(MacroMrkvArray_base, CondMrkvArrays_base_c)
+CondMrkvArrays_base_d = make_cond_mrkv_arrays_base(Urate_normal_d, Uspell_normal, UBspell_normal)
+MrkvArray_base_d = make_full_mrkv_array(MacroMrkvArray_base, CondMrkvArrays_base_d)
+CondMrkvArrays_base_h = make_cond_mrkv_arrays_base(Urate_normal_h, Uspell_normal, UBspell_normal)
+MrkvArray_base_h = make_full_mrkv_array(MacroMrkvArray_base, CondMrkvArrays_base_h)
+CondMrkvArrays_base_c = make_cond_mrkv_arrays_base(Urate_normal_c, Uspell_normal, UBspell_normal)
+MrkvArray_base_c = make_full_mrkv_array(MacroMrkvArray_base, CondMrkvArrays_base_c)
 
 # Define permanent income growth rates
 PermGroFac_base =   [1.0]
@@ -240,10 +240,10 @@ init_dropout = {"cycles": 0, # This will be overwritten at type construction
                 "aXtraNestFac": aXtraNestFac,
                 "CubicBool": False,
                 "vFuncBool": False,
-                'aNrmInitMean': np.log(0.00001), # Initial assets are zero
-                'aNrmInitStd': 0.0,
-                'pLvlInitMean': pLvlInitMean_d,
-                'pLvlInitStd': pLvlInitStd_d,
+                'kLogInitMean': np.log(0.00001), # Initial assets are zero
+                'kLogInitStd': 0.0,
+                'pLogInitMean': pLogInitMean_d,
+                'pLogInitStd': pLogInitStd_d,
                 "MrkvPrbsInit" : np.array(list(init_mrkv_dist_d)),
                 'Urate_normal' : Urate_normal_d,
                 'Uspell_normal' : Uspell_normal,
@@ -263,8 +263,8 @@ adj_highschool = {
     "CondMrkvArrays_base" : CondMrkvArrays_base_h,
     "MrkvArray" : MrkvArray_base_h, 
     "CondMrkvArrays" : CondMrkvArrays_base_h,
-    'pLvlInitMean': pLvlInitMean_h,
-    'pLvlInitStd': pLvlInitStd_h,
+    'pLogInitMean': pLogInitMean_h,
+    'pLogInitStd': pLogInitStd_h,
     "MrkvPrbsInit" : np.array(list(init_mrkv_dist_h)),
     'Urate_normal' : Urate_normal_h,
     'EducType' : 1}
@@ -278,8 +278,8 @@ adj_college = {
     "CondMrkvArrays_base" : CondMrkvArrays_base_c,
     "MrkvArray" : MrkvArray_base_c, 
     "CondMrkvArrays" : CondMrkvArrays_base_c,
-    'pLvlInitMean': pLvlInitMean_c,
-    'pLvlInitStd': pLvlInitStd_c,
+    'pLogInitMean': pLogInitMean_c,
+    'pLogInitStd': pLogInitStd_c,
     "MrkvPrbsInit" : np.array(list(init_mrkv_dist_c)),
     'Urate_normal' : Urate_normal_c,
     'EducType' : 2}

@@ -5,12 +5,12 @@ import warnings
 import numpy as np
 import matplotlib.pyplot as plt
 from copy import deepcopy
-from HARK import multiThreadCommands, multiThreadCommandsFake
+from HARK.core import multi_thread_commands, multi_thread_commands_fake
 
 mystr = lambda x : '{:.2f}'.format(x)
 mystr2 = lambda x : '{:.3f}'.format(x)
 
-def runExperiment(agents,RecessionShock = False,TaxCutShock = False, \
+def run_experiment(agents,RecessionShock = False,TaxCutShock = False, \
                   ExtendedUIShock =False, UpdatePrb = 1.0, Splurge = 0.0):
     '''
     Conduct an experiment in which the recession hits and/or fiscal policy is initiated.
@@ -51,7 +51,7 @@ def runExperiment(agents,RecessionShock = False,TaxCutShock = False, \
                            'makeShocksIfChanged()', 'initializeSim()',
                            'hitWithRecessionShock()',
                            'simulate()']
-    multiThreadCommandsFake(agents, experiment_commands)
+    multi_thread_commands_fake(agents, experiment_commands)
     
     #print(agents[0].history['pLvlNow'][35:40,0])
     #print(agents[0].history['TranShkNow'][35:40,0])

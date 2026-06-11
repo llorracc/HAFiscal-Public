@@ -2,7 +2,7 @@ import os
 import sys
 import numpy as np
 import matplotlib.pyplot as plt  
-from OtherFunctions import loadPickle
+from OtherFunctions import load_pickle
 from HARK.utilities import make_figs
 
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -23,8 +23,8 @@ else:
 sys.path.append(Abs_Path)
 
 
-base_results_full                            = loadPickle('base_results_full',Abs_Path+'/Figures/CRRA2/',locals())
-base_results_full_splurge0                    = loadPickle('base_results_full',Abs_Path+'/Figures/Splurge0/',locals())
+base_results_full                            = load_pickle('base_results_full',Abs_Path+'/Figures/CRRA2/',locals())
+base_results_full_splurge0                    = load_pickle('base_results_full',Abs_Path+'/Figures/Splurge0/',locals())
 
 
 

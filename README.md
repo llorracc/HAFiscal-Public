@@ -217,7 +217,7 @@ This research uses publicly available data from the Survey of Consumer Finances 
   - URL: <https://www.federalreserve.gov/econres/scf_2004.htm>
 
 - **Norwegian Population Data**: Fagereng, Holm, and Natvik (2021)
-  - Summary statistics and moments (published in paper)
+  - Summary statistics and moments (published in working paper version Statistics Norway Discussion Paper no. 852, 2016)
   - Individual-level data not publicly available
 
 **Data Files Included**: Data files are included in `Code/Empirical/` for convenience. See [README/REPLICATION.md](README/REPLICATION.md) for detailed data provenance and processing information.

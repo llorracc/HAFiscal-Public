@@ -2,10 +2,10 @@ import os
 import sys
 
 import numpy as np
-from HARK.distribution import DiscreteDistribution
+from HARK.distributions import DiscreteDistribution
 from ConsMarkovModel import MarkovConsumerType
 from copy import deepcopy
-from Parameters import returnParameters
+from Parameters import return_parameters
 import scipy.sparse as sp
 import matplotlib.pyplot as plt
 import time
@@ -22,7 +22,7 @@ convergence_tol_solvingAD, UBspell_normal, num_base_MrkvStates, \
 data_EducShares, max_recession_duration, num_experiment_periods,\
 recession_changes, UI_changes, recession_UI_changes,\
 TaxCut_changes, recession_TaxCut_changes, Check_changes, recession_Check_changes] = \
-    returnParameters(Parametrization='Baseline',OutputFor='_Main.py')
+    return_parameters(Parametrization='Baseline',OutputFor='_Main.py')
       
 mCount = 200
 bigT = 300
