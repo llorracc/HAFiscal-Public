@@ -1,4 +1,0 @@
-[run]
-omit =
-    HARK/ConsumptionSaving/LegacyOOsolvers.py
-    HARK/helpers.py
