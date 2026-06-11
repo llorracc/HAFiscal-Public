@@ -6,24 +6,24 @@
 \begin{document}
 
 \FloatBarrier
-% This will be 'A Details of the HANK and SAM Model' as the first appendix section
+% This will be 'A Details of the HANK and SAM model' as the first appendix section
 
 % Always use starred section to suppress automatic bookmark
 % The bookmark will be created in HAFiscal.tex at the stub page location
-\section{\href{https://econ-ark.github.io/HAFiscal/\#sec:appendix-hank}{Details of the HANK and SAM Model}}
+\section{\href{https://econ-ark.github.io/HAFiscal/\#sec:appendix-hank}{Details of the HANK and SAM model}}
 \whenintegrated{\label{sec:appendix-hank}} % integrated doc: SST for labels
 
 % Old BuildWithoutNoSplurge logic removed - OFFLINE appendices are always included in full
 
 \subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-households}{Households}}\whenintegrated{\label{sec:hank-households}}
 
-The household block follows closely to the main text with a few exceptions. First, the splurge only occurs out of equilibrium---that is, the steady state of the model is calculated without the splurge behavior. Second, the level of permanent income of all newborns is equal to one. Furthermore, all households face the same employment to unemployment and unemployment to employment probabilities. The probabilities are calibrated to the transition probabilities of high school graduates from the main text. Lastly, following the notation of~\cite{arsJumpsHumps}, $r^{a}_{t}$ will denote the economy wide ex-ante real interest rate.
+The household block follows closely to the main text with a few exceptions. First, the splurge only occurs out of equilibrium---that is, the steady state of the model is calculated without the splurge behavior. Second, the level of permanent income of all newborns is equal to one. Furthermore, all households face the same employment to unemployment and unemployment to employment probabilities. The probabilities are calibrated to the transition probabilities of high school graduates from the main text. Lastly, following the notation of~\cite{arsJumpsHumps}, $r^{a}_{t}$ will denote the economy wide ex ante real interest rate.
 
-\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:goods-market}{Goods Market}}\whenintegrated{\label{sec:goods-market}}
+\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:goods-market}{Goods market}}\whenintegrated{\label{sec:goods-market}}
 
 A continuum of monopolistically competitive intermediate goods producers, indexed by \( j \in [0,1] \), produces intermediate goods \( Y_{jt} \), which are sold to a final goods producer at price \( P_{jt} \). Each period, these producers fully consume their profits.
 
-\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-final-goods-producer}{Final Goods Producer}}\whenintegrated{\label{sec:hank-final-goods-producer}}
+\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-final-goods-producer}{Final goods producer}}\whenintegrated{\label{sec:hank-final-goods-producer}}
 
 A perfectly competitive final goods producer purchases intermediate goods \( Y_{jt} \) from intermediate good producer $j$ at price \( P_{jt} \) and produces the final good \( Y_t \) using a CES production function:
 
@@ -47,7 +47,7 @@ and the price index
   P_{t} = {\left(\int_{0}^{1} P_{jt}^{1-\epsilon_{p}}\,dj \right )}^{\frac{1}{1-\epsilon_{p}}}.
 \]
 
-\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-intermediate-goods-producers}{Intermediate Goods Producers}}\whenintegrated{\label{sec:hank-intermediate-goods-producers}}
+\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-intermediate-goods-producers}{Intermediate goods producers}}\whenintegrated{\label{sec:hank-intermediate-goods-producers}}
 
 Intermediate goods producers produce according to a production function linear in labor~$L_{t}$:
 \[
@@ -120,7 +120,7 @@ where $\Theta_{t} = \frac{v_{t}}{e_{t}}$ is labor market tightness.
 \]
 where $\phi_w$ dictates the extent of real wage rigidity.
 
-\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-fiscal-policy}{Fiscal Policy}}\whenintegrated{\label{sec:hank-fiscal-policy}}
+\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-fiscal-policy}{Fiscal policy}}\whenintegrated{\label{sec:hank-fiscal-policy}}
 
 The government issues long term bonds $B_{t}$ at price $q^{b}_{t}$ in period $t$ that pays $\delta^{s}$ in period $t+s+1$ for $s \in \{0,1,2,\ldots\}$.
 
@@ -147,7 +147,7 @@ For the tax cuts, we assume government expenditures adjust following:
 \]
 where $\phi_{G}$ governs the speed of adjustment of government spending in response to debt.
 
-\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-monetary-policy}{Monetary Policy}}\whenintegrated{\label{sec:hank-monetary-policy}}
+\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-monetary-policy}{Monetary policy}}\whenintegrated{\label{sec:hank-monetary-policy}}
 
 The central bank follows a standard Taylor rule that responds solely to inflation:
 \[
@@ -205,10 +205,10 @@ Such that:
   \end{center}
 \end{table}
 
-\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-calibration}{Calibration of Non-Household Blocks }}\whenintegrated{\label{sec:hank-calibration}}
+\subsection{\href{https://econ-ark.github.io/HAFiscal/\#sec:hank-calibration}{Calibration of nonhousehold blocks }}\whenintegrated{\label{sec:hank-calibration}}
 
 The elasticity of substitution is set to 6, and the price adjustment cost parameter is set to 96.9 as in~\cite{Ravn2017,Ravn2021}.
-The vacancy cost is set to 7 percent of the real wage as in~\cite{Christiano2016}.\footnote{The range of plausible values lie between $4 percent$ and $14 percent$~\cite{Silva2009}} The matching elasticity is 0.65 following~\cite{Ravn2017,Ravn2021}. The job separation rate is set to 0.092. As in section~\ref{sec:calib}, we set the job finding probability in the steady state for the unemployed $\eta_{ss}$ to 0.67. Along with the job separation rate, this gives a probability of transitioning from employment to unemployment within a quarter of $3.1$ percent which is the value we use for the Highschool group in section~\ref{sec:calib}. The quarterly vacancy filling rate is 0.71 as in~\cite{DenHaan2000} (and together with our other choices, this pins down the matching efficiency $\chi$). The degree of wage rigidity $\phi_w$ is set to 0.837 following~\cite{Gornemann2021}. The tax rate is set to 0.3 and government spending is set to clear the government budget constraint. The parameters that dictate the speed of fiscal adjustment, $\phi_{B}$ and $\phi_{G}$, are set to 0.015, the lower bound of the estimates in~\cite{arsJumpsHumps}.\footnote{The speed of adjustment parameter is set to the lower bound to ensure that the policies evaluated in the HANK and SAM model are almost entirely deficit financed.} Furthermore, the decay rate of government coupons is set to $\delta = 0.95$ to match a maturity of 5 years.\footnote{The duration of bonds in the model is $\frac{{(1+r)}^4}{{(1+r)}^4 - \delta}$} Finally, the Taylor rule coefficient on inflation is set to the standard value of $\phi_{\pi}=1.5$.
+The vacancy cost is set to 7\% of the real wage as in~\cite{Christiano2016}.\footnote{The range of plausible values lie between $4\%$ and $14\%$~\cite{Silva2009}} The matching elasticity is 0.65 following~\cite{Ravn2017,Ravn2021}. The job separation rate is set to 0.092. As in Section~\ref{sec:calib}, we set the job finding probability in the steady state for the unemployed $\eta_{ss}$ to 0.67. Along with the job separation rate, this gives a probability of transitioning from employment to unemployment within a quarter of $3.1\%$ which is the value we use for the Highschool group in Section~\ref{sec:calib}. The quarterly vacancy filling rate is 0.71 as in~\cite{DenHaan2000} (and together with our other choices, this pins down the matching efficiency $\chi$). The degree of wage rigidity $\phi_w$ is set to 0.837 following~\cite{Gornemann2021}. The tax rate is set to 0.3 and government spending is set to clear the government budget constraint. The parameters that dictate the speed of fiscal adjustment, $\phi_{B}$ and $\phi_{G}$, are set to 0.015, the lower bound of the estimates in~\cite{arsJumpsHumps}.\footnote{The speed of adjustment parameter is set to the lower bound to ensure that the policies evaluated in the HANK and SAM model are almost entirely deficit financed.} Furthermore, the decay rate of government coupons is set to $\delta = 0.95$ to match a maturity of 5 years.\footnote{The duration of bonds in the model is $\frac{{(1+r)}^4}{{(1+r)}^4 - \delta}$} Finally, the Taylor rule coefficient on inflation is set to the standard value of $\phi_{\pi}=1.5$.
 
 % Bibliography inclusion handled automatically by document structure
 % Override \bibfilesfound to use only \texname.bib (contains all needed entries, avoids duplicates)
