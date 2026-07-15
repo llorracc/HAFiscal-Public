@@ -1,0 +1,20 @@
+#!/bin/bash
+# Git post-checkout hook to auto-update environment when switching commits
+# Install: cp this file to .git/hooks/post-checkout && chmod +x .git/hooks/post-checkout
+
+PREV_COMMIT=$1
+NEW_COMMIT=$2
+BRANCH_CHECKOUT=$3
+
+# Only run for branch/commit checkouts, not file checkouts
+if [ "$BRANCH_CHECKOUT" == "1" ]; then
+    # Check if environment files changed
+    if git diff --name-only $PREV_COMMIT $NEW_COMMIT | grep -E "(environment\.yml|requirements\.txt|pyproject\.toml)" > /dev/null; then
+        echo
+        echo "⚠️  Environment specification files changed between commits!"
+        echo "   You may need to update your conda environment:"
+        echo "   conda env update -f binder/environment.yml --prune"
+        echo
+    fi
+fi
+

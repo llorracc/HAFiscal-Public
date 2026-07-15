@@ -1,0 +1,1192 @@
+# Equation-tag registry: math-derive docs <-> canonical YAML <-> code.
+# Maintained by hand on top of a --bootstrap scrape; checked by
+# check_eqn_registry.py (run with --strict in CI / pytest).
+# Schema: plans/20260611_doloplus-eqn-tag-registry.md
+- id: main:13.5.1
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#135-theorem-tm-q-multiplier-mc-p-multiplier-asymptotic-identity'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:13.5.2
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#135-theorem-tm-q-multiplier-mc-p-multiplier-asymptotic-identity'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:E-p-evolution
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#112-exact-mean-field-recurrence'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:E-p-init
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#1-model-primitives'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:E-pLvl
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#53-analytical-formula-for-ep'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: compute_analytical_mean_pLvl
+    cite: math-derive (E-pLvl)
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: run_experiment_tm
+    cite: math-derive (E-pLvl)
+  status: bound
+  decision: null
+- id: main:MC-agg
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#8-the-mc-aggregation-formula'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/AggFiscalModel.py
+    symbol: AggFiscalType.get_controls
+    cite: math-derive (MC-agg)
+  - file: Code/HA-Models/FromPandemicCode/AggFiscalModel.py
+    symbol: AggregateDemandEconomy.run_experiment
+    cite: math-derive (MC-agg)
+  status: bound
+  decision: null
+- id: main:MC-error-decomp
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#133-mc-error-decomposition'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:MC-rate
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#92-central-limit-theorem-and-convergence-rate'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:NPV-def
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#131-npv-definition'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/AggFiscalModel.py
+    symbol: AggregateDemandEconomy.run_experiment
+    cite: math-derive (NPV-def)
+  - file: Code/HA-Models/FromPandemicCode/Simulate.py
+    symbol: Simulate
+    cite: math-derive (NPV-def)
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: run_experiment_tm
+    cite: math-derive (NPV-def)
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: calculate_NPV
+    cite: math-derive (NPV-def)
+  status: bound
+  decision: null
+- id: main:TM-NPV-error
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#104-npv-convergence-of-tm'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:TM-agg
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#7-the-tm-aggregation-formula'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: compute_type_aggregates_tm
+    cite: math-derive (TM-agg)
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: run_experiment_tm
+    cite: math-derive (TM-agg)
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: propagate_experiment_tm
+    cite: math-derive (TM-agg)
+  status: bound
+  decision: null
+- id: main:TM-rate
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#102-convergence-as-m-'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:age-dist
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#51-the-ergodic-age-distribution'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: compute_pLvl_distribution
+    cite: math-derive (age-dist)
+  status: bound
+  decision: null
+- id: main:approx-recurrence
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#114-the-approximate-formula-old-bug-015-fix'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:cov-decomp
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#62-formal-decomposition-law-of-total-covariance'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:cov-magnitude
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#64-magnitude-estimate'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:error-decomp
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#132-tm-error-decomposition'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:factorization
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#3-aggregate-consumption-the-factorization'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:g-base
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#52-the-population-average-growth-rate'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:half-life
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#113-properties'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:homogeneity
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#2-the-normalized-problem-and-homogeneity'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/AggFiscalModel.py
+    symbol: AggFiscalType.get_controls
+    cite: math-derive (homogeneity)
+  status: bound
+  decision: null
+- id: main:level-bias
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#53-analytical-formula-for-ep'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:m-budget
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: null
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/AggFiscalModel.py
+    symbol: DualAggFiscalType
+    cite: math-derive (m-budget)
+  status: code-only
+  decision: null
+  note: (m-budget) lives in the APPENDIX doc, not the main doc; the cite in
+    DualAggFiscalType's docstring omits the -appendix suffix. P2 backfill should
+    correct the cite to math-derive-appendix (m-budget) and retire this entry.
+- id: main:m-transition
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#1-model-primitives'
+  yaml_ref: equations.arvl_to_dcsn_transition
+  code: []
+  status: doc-only
+  decision: null
+- id: main:newborn-ratio
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#54-steady-state-relation-for-newborn-ep_init'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:p-survive-growth
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#52-the-population-average-growth-rate'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:p-transition
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#1-model-primitives'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:pLvl-recurrence
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#112-exact-mean-field-recurrence'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/phase_harm_neutral_mc.py
+    symbol: compute_scalar_AggCons
+    cite: math-derive (pLvl-recurrence)
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: propagate_experiment_tm
+    cite: math-derive (pLvl-recurrence)
+  status: bound
+  decision: null
+- id: main:psi-covariance
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#61-the-within-period-psi-channel'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: main:splurge
+  doc: history/20260331-mathematical-derivations-TM-MC-convergence.md
+  anchor: '#71-splurge-adjustment'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/AggFiscalModel.py
+    symbol: DualAggFiscalType
+    cite: math-derive (splurge)
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: compute_type_aggregates_tm
+    cite: math-derive (splurge)
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: compute_period_aggregates_tm
+    cite: math-derive (splurge)
+  status: bound
+  decision: null
+- id: appendix:AD-factor
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#6-aggregate-demand-factor'
+  yaml_ref: equations.arvl_to_dcsn_transition
+  code:
+  - file: Code/HA-Models/FromPandemicCode/AggFiscalModel.py
+    symbol: AggregateDemandEconomy.update
+    cite: math-derive-appendix (AD-factor)
+  status: bound
+  decision: null
+- id: appendix:CRRA-utility
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#10-crra-utility'
+  yaml_ref: equations.cntn_to_dcsn_mover.Bellman
+  code:
+  - file: Code/HA-Models/FromPandemicCode/Welfare.py
+    symbol: Welfare_Results
+    cite: math-derive-appendix (CRRA-utility)
+  status: bound
+  decision: null
+- id: appendix:D-eff
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#1-effective-survival-probability'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: appendix:D-eff-decomp
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#1-effective-survival-probability'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: appendix:E-p-init
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#2-expected-initial-permanent-income'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: compute_analytical_mean_pLvl
+    cite: math-derive-appendix (E-p-init)
+  status: bound
+  decision: null
+- id: appendix:L-eff
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#1-effective-survival-probability'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: _effective_LivPrb
+    cite: math-derive-appendix (L-eff)
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: propagate_experiment_tm
+    cite: math-derive-appendix (L-eff)
+  status: bound
+  decision: null
+- id: appendix:MRS-welfare
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#13-mrs-weighted-welfare'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/Welfare.py
+    symbol: Welfare_Results
+    cite: math-derive-appendix (MRS-welfare)
+  status: bound
+  decision: null
+- id: appendix:SP-welfare
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#11-social-planner-welfare'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/Welfare.py
+    symbol: Welfare_Results
+    cite: math-derive-appendix (SP-welfare)
+  status: bound
+  decision: null
+- id: appendix:emp-persist
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#9-employment-persistence'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/Parameters.py
+    symbol: return_parameters.make_cond_mrkv_arrays_base
+    cite: math-derive-appendix (emp-persist)
+  status: bound
+  decision: null
+- id: appendix:euler
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#5-euler-equation-and-egm'
+  yaml_ref: equations.cntn_to_dcsn_mover.InvEuler
+  code: []
+  status: doc-only
+  decision: null
+- id: appendix:fiscal-multiplier
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#14-fiscal-multiplier'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/Simulate.py
+    symbol: Simulate
+    cite: math-derive-appendix (fiscal-multiplier)
+  status: bound
+  decision: null
+- id: appendix:m-budget
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#4-mc-budget-constraint'
+  yaml_ref: equations.arvl_to_dcsn_transition
+  code:
+  - file: Code/HA-Models/FromPandemicCode/AggFiscalModel.py
+    symbol: AggFiscalType
+    cite: math-derive-appendix (m-budget)
+  status: bound
+  decision: null
+- id: appendix:mc-pLvl-init
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#7-mc-permanent-income-initialization'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: appendix:pLvl-cohort
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#3-per-cohort-lognormal-parameters'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: compute_pLvl_distribution
+    cite: math-derive-appendix (pLvl-cohort)
+  status: bound
+  decision: null
+- id: appendix:recession-duration
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#8-recession-duration-probabilities'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/Parameters.py
+    symbol: return_parameters.make_macro_mrkv_array_recession
+    cite: math-derive-appendix (recession-duration)
+  - file: Code/HA-Models/FromPandemicCode/Simulate.py
+    symbol: Simulate
+    cite: math-derive-appendix (recession-duration)
+  status: bound
+  decision: null
+- id: appendix:welfare-per-dollar
+  doc: history/20260331-mathematical-derivations-appendix.md
+  anchor: '#12-welfare-per-dollar'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/Welfare.py
+    symbol: Welfare_Results
+    cite: math-derive-appendix (welfare-per-dollar)
+  status: bound
+  decision: null
+- id: harm:AD-ratio
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#181-the-problem'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Carroll-40
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#setup'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Carroll-41
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#setup'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Carroll-42
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#case-1-szeidl-invariant-economy-barc-constant'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Carroll-44
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#case-2-harmenberg--but-not-szeidl-invariant-barc-also-grows'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:NM-agg
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#7-aggregation-under-the-neutral-measure'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: propagate_experiment_tm
+    cite: math-derive-harm (NM-agg)
+  status: bound
+  decision: null
+- id: harm:NM-error-decomp
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#111-remaining-errors'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:P-MC-sample
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#201-source-of-variance-reduction'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:P-state-frac
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#51-marginal-state-fractions'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Q-E-TranShk
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#8-splurge-term-under-q'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Q-MC-TE
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#151-the-q-mc-aggregation-formula'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Q-MC-agg
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#151-the-q-mc-aggregation-formula'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Q-MC-agg-multi
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#152-multi-type-extension'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Q-MC-diff
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#184-cancellation-in-differenced-effects'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Q-MC-sample
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#201-source-of-variance-reduction'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Q-P-frac-equal
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#52-invariance-of-micro-state-fractions'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/test_reduced_run_tm_harmenberg_flags.py
+    symbol: test_compute_baseline_tm_data_neutral_measure_reduced_run
+    cite: math-derive-harm (Q-P-frac-equal)
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: compute_period_aggregates_tm
+    cite: math-derive-harm (Q-P-frac-equal)
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: propagate_experiment_tm
+    cite: math-derive-harm (Q-P-frac-equal)
+  status: bound
+  decision: null
+- id: harm:Q-TranShk-emp
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#8-splurge-term-under-q'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Q-TranShk-unemp
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#8-splurge-term-under-q'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Q-adapt
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#10-adapted-initial-distribution'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Q-def
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: null
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: _to_neutral_measure
+    cite: math-derive-harm (Q-def)
+  status: code-only
+  decision: null
+  note: No \tag{Q-def} exists in the harm doc; the change-of-measure definition is
+    tagged eq:cap-piQ-defn (§21.1) / discussed in §1. P2 backfill should either
+    retag the doc or repoint the cite.
+- id: harm:Q-full-cnrm
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#8-splurge-term-under-q'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Q-income
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#9-income-aggregation-under-q'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Q-income-level
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#9-income-aggregation-under-q'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Q-newborn
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#4-newborn-distribution-under-q'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: build_tm_agg_fiscal
+    cite: math-derive-harm (Q-newborn)
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: build_experiment_period_tm
+    cite: math-derive-harm (Q-newborn)
+  status: bound
+  decision: null
+- id: harm:Q-reweight-emp
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#21-for-employed-states-stochastic-psi'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Q-reweight-unemp
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#22-for-unemployed-states-degenerate-psi-1'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: _to_neutral_measure
+    cite: math-derive-harm (Q-reweight-unemp)
+  status: bound
+  decision: null
+- id: harm:Q-splurge
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#8-splurge-term-under-q'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:Q-state-frac
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#51-marginal-state-fractions'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: propagate_experiment_tm
+    cite: math-derive-harm (Q-state-frac)
+  status: bound
+  decision: null
+- id: harm:TM-Q-entry
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: null
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: _build_period_tm
+    cite: math-derive-harm (TM-Q-entry)
+  status: code-only
+  decision: null
+  note: No \tag{TM-Q-entry} exists in the harm doc; the q_s-for-p_s TM construction
+    is prose in §3 (The Neutral TM and Aggregation Identity). P2 backfill should
+    add the tag doc-side or repoint the cite.
+- id: harm:VR-ratio
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#201-source-of-variance-reduction'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:NM-agg-corrected
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#216-three-fix-candidates'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:Omega-cov-formula
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#case-2-harmenberg--but-not-szeidl-invariant-barc-also-grows'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:Q-TM-bias-magnitude
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#215-quantification-of-the-bias'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:Q-TM-corrected
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#216-three-fix-candidates'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:Q-TM-mortality
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#213-the-q-tm-ergodic-in-hafiscal'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:Q-TM-mortality-mixture
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#215-quantification-of-the-bias'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:Q-marginal-not-invertible
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#232-what-is-not-possible-invert-from-pi_qtexttm-a-to-mu_p'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:Q-true-marginal
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#212-the-true-q-marginal'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:Q-true-mortality-mixture
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#215-quantification-of-the-bias'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:T-S-p
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#216-three-fix-candidates'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:T-S-pk
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#237-the-higher-moment-ladder-drift-reducing-init'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:TM-P-decomp
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#243-cohort-conditional-state-evolution-the-survival-only-kernel'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:agg-bias-formula
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#215-quantification-of-the-bias'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:c-Q-TM-bias
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#215-quantification-of-the-bias'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cQ-from-cP-true
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#216-three-fix-candidates'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-EP-p
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#252-setup-state-augmentation-and-dynamics-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-EP-p2
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#252-setup-state-augmentation-and-dynamics-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-EQ-pk-given-s
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#256-cohort-age-computation-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-Elifetime
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#258-verification-of-expected-lifetime-formula'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-Harmenberg-identity
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#253-defining-the-q-measure-on-the-augmented-state'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-LQ
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#254-q-twisted-dynamics-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-Q-kernel-shift
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#256-cohort-age-computation-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-Qtau
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#256-cohort-age-computation-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-T-tilde-S-pk
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#256-cohort-age-computation-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-TP
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#252-setup-state-augmentation-and-dynamics-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-TQ
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#254-q-twisted-dynamics-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-age-marginal-P
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#252-setup-state-augmentation-and-dynamics-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-age-marginal-Q
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#255-verification-of-invariance-t_q-pi_q-pi_q'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-flow-newborn
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#255-verification-of-invariance-t_q-pi_q-pi_q'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-flow-survive
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#255-verification-of-invariance-t_q-pi_q-pi_q'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-newborn-consistency
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#255-verification-of-invariance-t_q-pi_q-pi_q'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-p-given-age
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#252-setup-state-augmentation-and-dynamics-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-piQ-aggregate
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#256-cohort-age-computation-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-piQ-defn
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#253-defining-the-q-measure-on-the-augmented-state'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-piQ-prop
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#256-cohort-age-computation-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-piQ-tau
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#256-cohort-age-computation-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-tilde-Kp
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#254-q-twisted-dynamics-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-tilde-TS
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#256-cohort-age-computation-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-tilde-g-init
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#256-cohort-age-computation-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cap-tilde-newborn
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#254-q-twisted-dynamics-under-the-cap'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cohort-aggregate-marginal
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#247-stationarity-cross-checks-validity-tests'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cohort-aggregate-moment
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#247-stationarity-cross-checks-validity-tests'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cohort-cond-dist
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#243-cohort-conditional-state-evolution-the-survival-only-kernel'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cohort-fwd-prop
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#243-cohort-conditional-state-evolution-the-survival-only-kernel'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cohort-lognormal-fit
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#248-the-mc-initialization-scheme'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cohort-moment-defn
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#244-cohort-conditional-moment-recursions'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cohort-moment-fwd
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#244-cohort-conditional-moment-recursions'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cohort-moment-init
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#244-cohort-conditional-moment-recursions'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cohort-weight-geom
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#246-the-cohort-weight-distribution-geometric-in-constant-l-case'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:cov-master
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#the-master-identity'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:f-linear-system
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#216-three-fix-candidates'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:fk-linear-system
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#237-the-higher-moment-ladder-drift-reducing-init'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:joint-decomp
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#234-the-correct-decomposition'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:p-bar-mortality
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#211-setup-and-notation'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:p-mixture-at-zero
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#238-the-mixture-structure-at-constrained-cells'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:pi-Q-doob
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#216-three-fix-candidates'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:vk-defn
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#237-the-higher-moment-ladder-drift-reducing-init'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:w-defn
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#216-three-fix-candidates'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:eq:within-cohort-lognormal
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#245-within-cohort-lognormality-exact-not-clt'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:f-from-history
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#174-computing-normalized-consumption'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:f-normalized
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#151-the-q-mc-aggregation-formula'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:neutral-identity
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#1-the-change-of-measure'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/AggFiscalMAIN_reduced.py
+    symbol: <module>
+    cite: math-derive-harm (neutral-identity)
+  - file: Code/HA-Models/FromPandemicCode/Simulate.py
+    symbol: Simulate
+    cite: math-derive-harm (neutral-identity)
+  - file: Code/HA-Models/FromPandemicCode/test_reduced_run_tm_harmenberg_flags.py
+    symbol: <module>
+    cite: math-derive-harm (neutral-identity)
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: <module>
+    cite: math-derive-harm (neutral-identity)
+  status: bound
+  decision: null
+- id: harm:phase-out
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#191-the-phase-out-function'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:raw-Q-agg
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#181-the-problem'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:shadow-agg
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#161-the-shadow-approach-incorrect'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:shadow-bias
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#162-the-correlation-bias'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:shadow-decomp
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#162-the-correlation-bias'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null
+- id: harm:std-frac-init
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#63-initialization'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: propagate_experiment_tm
+    cite: math-derive-harm (std-frac-init)
+  status: bound
+  decision: null
+- id: harm:std-frac-init-halfstep
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#63-initialization'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: propagate_experiment_tm
+    cite: math-derive-harm (std-frac-init-halfstep)
+  status: bound
+  decision: null
+- id: harm:std-frac-recurrence
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#62-the-recurrence'
+  yaml_ref: null
+  code:
+  - file: Code/HA-Models/FromPandemicCode/tm_methods.py
+    symbol: _propagate_state_fracs
+    cite: math-derive-harm (std-frac-recurrence)
+  status: bound
+  decision: null
+- id: harm:u-from-MC
+  doc: history/20260331-mathematical-derivations-harmenberg.md
+  anchor: '#152-multi-type-extension'
+  yaml_ref: null
+  code: []
+  status: doc-only
+  decision: null

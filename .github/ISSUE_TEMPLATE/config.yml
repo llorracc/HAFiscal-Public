@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: General Questions
+    url: https://github.com/econ-ark/HAFiscal/discussions
+    about: Ask questions and discuss with the community
+  - name: Econ-ARK Community
+    url: https://econ-ark.org
+    about: Learn more about the Econ-ARK project

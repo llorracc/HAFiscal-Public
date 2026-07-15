@@ -1,0 +1,35 @@
+[BUG-043 fix] HAFISCAL_UI_STATE_ENCODING=bug_fix → num_base_MrkvStates=6 (legacy would be 4)
+EducationGroup:  0 , betaDistr : [0.3201, 0.4319, 0.5438, 0.6556, 0.7674, 0.8792, 0.991]
+EducationGroup:  1 , betaDistr : [0.8021, 0.8337, 0.8653, 0.8968, 0.9284, 0.96, 0.9915]
+EducationGroup:  2 , betaDistr : [0.9589, 0.9655, 0.9722, 0.9788, 0.9855, 0.9921, 0.9988]
+CRRA =  2.0
+Rfree_base =  [1.01]
+Rspell =  6
+Splurge =  0.2571044750751492
+beta/nablas =  [[0.6555748142095308, 0.3913477548295663, 6.906754778648553, 0.999], [0.8968299550323479, 0.11047571713021365, 6.906754778648553, 0.999], [0.9788306243393124, 0.023299568068148827, 6.906754778648553, 0.999]]
+TaxCutAdjFactor =  1
+CheckAdjFactor =  1
+IncUnempNoBenefits =  0.5
+IncUnemp =  0.7
+ADelasticity =  0.3
+EducationGroup:  0 , betaDistr : [0.6556]
+EducationGroup:  1 , betaDistr : [0.8968]
+EducationGroup:  2 , betaDistr : [0.9788]
+CRRA =  2.0
+Rfree_base =  [1.01]
+Rspell =  6
+Splurge =  0.2571044750751492
+beta/nablas =  [[0.6555748142095308, 0.3913477548295663, 6.906754778648553, 0.999], [0.8968299550323479, 0.11047571713021365, 6.906754778648553, 0.999], [0.9788306243393124, 0.023299568068148827, 6.906754778648553, 0.999]]
+TaxCutAdjFactor =  1
+CheckAdjFactor =  1
+IncUnempNoBenefits =  0.5
+IncUnemp =  0.7
+ADelasticity =  0.3
+EducationGroup:  0 , betaDistr : [0.6556]
+EducationGroup:  1 , betaDistr : [0.8968]
+EducationGroup:  2 , betaDistr : [0.9788]
+/home/shared/github/econ-ark/HARK/HARK/core.py:1551: UserWarning: The option for reading shocks was activated but the model requires state PlvlAgg, not contained in newborn_init_history.
+  warn(
+  [_prob_weighted_rec] duration loop (n=11, workers=1) took 12.6s
+[recession] ran in 18s (setup 1s, duration_workers=1, solve_workers=1, ad_tol=default)
+[recession] saved: welfare6_bugfix_check/recession.pkl (19s wall)

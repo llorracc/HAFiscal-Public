@@ -1,0 +1,27 @@
+# stageA_drive.conf — config for stageA_drive.sh (the optional ssh orchestrator).
+#
+# Copy this to stageA_drive.conf and edit for YOUR two machines, then run:
+#   bash Code/HA-Models/stageA_drive.sh            # launch both legs + compare
+#   bash Code/HA-Models/stageA_drive.sh --promote  # ...and promote after
+#
+# Run the driver from EITHER machine: it auto-detects which entry is the local
+# box (its repo_dir resolves to the checkout you launch from) and runs that leg
+# in-process, ssh-ing only to the genuinely remote box. So each entry's
+# ssh_target only has to work FROM THE OTHER machine — you do NOT need an
+# ssh alias that reaches the local box itself.
+#
+# stageA_drive.conf is gitignored (it contains machine-specific ssh targets).
+# Requires passwordless ssh from the box you run the driver on to the REMOTE target.
+
+# Integration branch both legs fork from / push under (optional; default shown).
+STAGEA_BASE_BRANCH="0.14.1-to-0.17.0-upgrade-validation_TM-vs-MC"
+
+# One entry per machine: "ssh_target|repo_dir|world|machine_label"
+#   ssh_target    : what `ssh <target>` reaches (user@host or an ssh-config alias)
+#   repo_dir      : absolute path to the HAFiscal checkout on that machine
+#   world         : default | as-corrected
+#   machine_label : friendly label used in the leg branch name (no spaces/underscores)
+LEGS_SPEC=(
+  "econ-mw|/home/shared/github/llorracc/HAFiscal-Latest|default|econ-mw"
+  "your-machine|/path/to/HAFiscal-Latest|as-corrected|your-machine"
+)

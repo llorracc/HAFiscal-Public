@@ -1,0 +1,43 @@
+% HAFiscal local-qe-standalone.sty - Commands for standalone QE compilation
+% This file provides command definitions needed for standalone compilation
+% of figures, tables, and subfiles in the HAFiscal-QE submission
+%
+% Usage: \usepackage{@local/local-qe-standalone}
+%
+% This file can be loaded by local-qe-figs-and-tables.sty or used directly
+% in standalone documents that need these command definitions
+
+\ProvidesPackage{local-qe-standalone}[2025/01/02 HAFiscal QE standalone compilation commands]
+
+% ═══════════════════════════════════════════════════════════════════════════
+% CONDITIONAL COMMANDS FOR STANDALONE COMPILATION
+% ═══════════════════════════════════════════════════════════════════════════
+% Redefine \whenintegrated to be a no-op for standalone compilation
+% This ensures content intended for integrated mode doesn't execute when
+% compiling standalone figures/tables/subfiles
+\providecommand{\whenintegrated}[1]{}  % No-op for standalone compilation
+\providecommand{\whenstandalone}[1]{#1}  % Execute content in standalone mode
+
+% PDF/Web conditional compilation macros
+% For standalone compilation, we're always in PDF mode, so \pdfonly always executes
+\RequirePackage{ifthen}
+\newboolean{Web}
+\setboolean{Web}{false}  % Always false for standalone QE compilation
+\providecommand{\pdfonly}[1]{#1}  % Always execute in standalone PDF mode
+\providecommand{\webonly}[1]{}    % Never execute in standalone PDF mode
+\providecommand{\pdfortext}[1]{#1}  % Alias for \pdfonly (text version)
+
+% Fancy header/footer commands (no-op for standalone compilation)
+% These are used in integrated mode but not needed for standalone
+\providecommand{\chead}[2]{}  % Center header (no-op for standalone)
+\providecommand{\lhead}[2]{}  % Left header (no-op for standalone)
+\providecommand{\rhead}[2]{}  % Right header (no-op for standalone)
+\providecommand{\cfoot}[2]{}  % Center footer (no-op for standalone)
+\providecommand{\lfoot}[2]{}  % Left footer (no-op for standalone)
+\providecommand{\rfoot}[2]{}  % Right footer (no-op for standalone)
+
+% Subfile command - in standalone mode, use \input instead
+% Note: \subfile from subfiles package won't work in standalone econsocart mode
+% For standalone compilation, we need to use \input directly
+\providecommand{\subfile}[1]{\input{#1}}  % Convert \subfile to \input for standalone
+

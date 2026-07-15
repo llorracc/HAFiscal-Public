@@ -1,0 +1,55 @@
+POWER-LAW vs EXPONENTIAL decay_extrap: worktree-HARK validation harness
+worktree: /home/shared/github/econ-ark/HARK-pr-aggshock-pf-decay
+HARK resolves to: /home/shared/github/econ-ark/HARK-pr-aggshock-pf-decay/HARK/__init__.py
+
+=== case A (q*=2.72>1 -> leading m^-1, crossover ~89): R=1.04 Gamma=1.01 beta=0.96 ===
+    MPCmin=0.039231 hNrm=33.6667  q*=2.7226  min(1,q*)=1.0000
+      depth    Q_emp   (theory: q* pre-crossover -> min(1,q*) asymptotically)
+         20   2.9563
+         40   2.5835
+        100   2.5516
+        400   1.7907
+       1000      nan
+    depth-40 extrapolation vs truth on m in [48, 800] (22 clean pts):
+      max err/c:      exp 4.354e-04   powerlaw 3.629e-05
+      err/gap at top: exp 1.000      powerlaw 0.574
+      err_exp/err_pl: median 5.3  min 1.7
+
+=== impatient (q*=0.21<1 -> leading m^-q*): R=1.01 Gamma=1.0 beta=0.9 ===
+    MPCmin=0.056025 hNrm=94.9466  q*=0.2086  min(1,q*)=0.2086
+      depth    Q_emp   (theory: q* pre-crossover -> min(1,q*) asymptotically)
+         20   0.6519
+         40   0.4674
+        100   0.3258
+        400   0.2652
+       1000   0.2393
+    depth-40 extrapolation vs truth on m in [48, 800] (22 clean pts):
+      max err/c:      exp 4.789e-02   powerlaw 1.663e-02
+      err/gap at top: exp 0.876      powerlaw 0.286
+      err_exp/err_pl: median 2.6  min 1.6
+
+=== no-growth patient (q*~49 -> leading m^-1): R=1.04 Gamma=1.0 beta=0.96 ===
+    MPCmin=0.039231 hNrm=25.0000  q*=48.9867  min(1,q*)=1.0000
+      depth    Q_emp   (theory: q* pre-crossover -> min(1,q*) asymptotically)
+         20   1.0193
+         40   0.9964
+        100   1.0364
+        400      nan
+       1000      nan
+    depth-40 extrapolation vs truth on m in [48, 800] (22 clean pts):
+      max err/c:      exp 5.975e-06   powerlaw 5.946e-08
+      err/gap at top: exp 1.000      powerlaw 0.007
+      err_exp/err_pl: median 178.8  min 12.9
+
+=== HARK-default-like (perm+unemp+mortality): R=1.03 Gamma=1.01 beta=0.96 ===
+    MPCmin=0.044281 hNrm=50.4947  q*=0.5923  min(1,q*)=0.5923
+      depth    Q_emp   (theory: q* pre-crossover -> min(1,q*) asymptotically)
+         20   0.6345
+         40   0.5200
+        100   0.4452
+        400   0.4125
+       1000   0.4665
+    depth-40 extrapolation vs truth on m in [48, 800] (22 clean pts):
+      max err/c:      exp 1.707e-02   powerlaw 3.182e-03
+      err/gap at top: exp 0.965      powerlaw 0.151
+      err_exp/err_pl: median 5.4  min 1.9
