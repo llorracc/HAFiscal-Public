@@ -1,0 +1,65 @@
+## ChkTeX configuration for HAFiscal project
+## 
+## This file contains project-wide warning suppressions with full documentation
+## of what each warning means and why it's suppressed for this project.
+## 
+## For file-specific suppressions, use local .chktexrc files in the same
+## directory as the LaTeX file being processed.
+
+##############################################################################
+## Default command-line options - Warning Suppressions
+##############################################################################
+
+CmdLine
+{
+    -n 1    # Warning 1: Command terminated with space
+            # Reason: Common in spacing patterns like \LaTeX\ that are intentional
+            
+    -n 13   # Warning 13: Intersentence spacing  
+            # Reason: False positives in non-typeset contexts like \typeout{} commands
+            
+    -n 26   # Warning 26: You ought to remove spaces in front of punctuation
+            # Reason: False positives in certain formatting contexts and code blocks
+            
+    -n 27   # Warning 27: Could not execute LaTeX command
+            # Reason: Path variables like \latexroot not resolved when checking individual files
+    -n 8    # Warning 8: Wrong length of dash (em-dash vs en-dash) - user prefers standard LaTeX dashes
+    -n 24   # Warning 24: Delete space for pagereferences - false positives with \label{}
+    -n 39   # Warning 39: Double space found - common in academic writing, not harmful
+    -n 38   # Warning 38: Punctuation before quotes - user prefers British/logical punctuation style
+    -n 36   # Warning 36: Space before parenthesis - conflicts with proper non-breaking space usage
+    -n 44   # Warning 44: Booktabs formatting - preserve established \hline table styles
+    -n 10   # Warning 10: Solo parenthesis - false positive for numbered lists in prose (e.g., "1) item, 2) item")
+}
+
+##############################################################################
+## Project-specific Configuration
+##############################################################################
+
+## TabSize - Width of tabs for error message formatting
+TabSize = 4
+
+## CmdSpaceStyle - How to treat commands followed by punctuation
+## Set to Ignore to avoid warnings when punctuation follows LaTeX commands
+CmdSpaceStyle = Ignore
+
+##############################################################################
+## Warning Number Reference (for local .chktexrc files)
+##############################################################################
+## Common warnings you might want to suppress in local files:
+##
+##  1 - Command terminated with space
+##  2 - Non-breaking space (~) should have been used  
+##  3 - You should enclose the previous parenthesis with {}
+##  8 - Wrong length of dash may have been used
+## 11 - You should use \ldots to achieve an ellipsis
+## 12 - Interword spacing should perhaps be used
+## 13 - Intersentence spacing should perhaps be used
+## 18 - Use either `` or '' as an alternative to `"'
+## 24 - Delete this space to maintain correct pagereferences
+## 26 - You ought to remove spaces in front of punctuation
+## 36 - You should put a space in front of parenthesis
+## 38 - You should not use punctuation in front of quotes
+## 42 - Use of \eqnarray is not recommended
+##
+## Full list: https://www.nongnu.org/chktex/ChkTeX.pdf

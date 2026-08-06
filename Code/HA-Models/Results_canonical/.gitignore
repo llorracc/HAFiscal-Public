@@ -1,0 +1,8 @@
+# Results_canonical: only manifests + small text tables go to git.
+# Big binaries (result pickles, figures) are local-only; each MANIFEST.md
+# records exactly what they are and the config/commit that regenerates them.
+*
+!*/
+!.gitignore
+!*.md
+!*.tex

@@ -1,0 +1,32 @@
+#!/bin/bash
+# Post-push hook to monitor GitHub Actions workflows
+
+# Get the current branch and commit
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+COMMIT_SHA=$(git rev-parse HEAD)
+
+# Get the directory containing this hook
+HOOK_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# Check if we actually pushed to remote (not just a local operation)
+if [ -n "$GIT_PUSH_OPTION_COUNT" ] || git show-ref --verify --quiet "refs/remotes/origin/$BRANCH"; then
+    echo ""
+    echo "🚀 Pushed to remote. Starting GitHub Actions monitor in background..."
+    echo "   Branch: $BRANCH"
+    echo "   Commit: ${COMMIT_SHA:0:7}"
+    echo ""
+    
+    # Run monitoring script in background, output to a log file
+    LOG_FILE="/tmp/gh-actions-monitor-$(date +%s).log"
+    nohup "$HOOK_DIR/monitor-github-actions.sh" "$BRANCH" "$COMMIT_SHA" > "$LOG_FILE" 2>&1 &
+    MONITOR_PID=$!
+    
+    echo "Monitor running in background (PID: $MONITOR_PID)"
+    echo "Log file: $LOG_FILE"
+    echo ""
+    echo "💡 To view live updates: tail -f $LOG_FILE"
+    echo "💡 To stop monitoring: kill $MONITOR_PID"
+    echo ""
+fi
+
+exit 0

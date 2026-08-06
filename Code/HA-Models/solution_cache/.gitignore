@@ -1,0 +1,15 @@
+# Cache data — gitignored. Python files are still tracked.
+*.pkl
+*.pkl.tmp
+*.meta.json
+*.meta.json.tmp
+_index.json
+_index.json.tmp
+
+# Parametrization subdirs (data only)
+Baseline/
+HS_Only/
+Reduced_Run/
+College_Beta_Het/
+Smoke_Test/
+custom_*/

@@ -1,0 +1,20 @@
+# Regenerated 2026-06-12 (post-BUG-047 re-baseline run; HAFISCAL_PERMGROFAC_FIX
+# default-ON environment). This check is YAML-driven (independent of the HAFiscal
+# solver), so results match the 2026-06-03 baseline — re-run for a dated record.
+======================================================================
+HAFiscal dolo-plus YAML — Turn-8 numerical validation
+======================================================================
+
+[normal   (z=0, Cratio=1.0)]   ADF=1.00000
+  EGM converged it=145 (|dc(5)|=8.6e-13)
+  c_opt(5,0): EGM=1.290102   HARK=1.289991   |diff|/HARK=8.65e-05  PASS(<1e-2)
+  Euler resid (YAML eq on EGM soln): 1.169e-04  PASS(<1e-3)
+
+[recession(z=0, Cratio=0.9, kappa=0.3)]   ADF=0.96889
+  EGM converged it=145 (|dc(5)|=9.2e-13)
+  c_opt(5,0): EGM=1.259038   HARK=1.258911   |diff|/HARK=1.01e-04  PASS(<1e-2)
+  Euler resid (YAML eq on EGM soln): 7.960e-05  PASS(<1e-3)
+
+======================================================================
+OVERALL: PASS
+======================================================================

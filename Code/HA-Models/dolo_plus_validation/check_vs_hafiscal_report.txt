@@ -1,0 +1,70 @@
+# Regenerated 2026-06-12 (post-BUG-047 re-baseline; HAFISCAL_PERMGROFAC_FIX default-ON,
+# HAFISCAL_INTERPRETATION=ESC, re-estimated calibration). See the 2026-06-12 addendum in
+# FINDING_permgrofac_marginal_value_factor.md. Supersedes the stale 2026-06-03 report
+# (pre-fix world: MODE A FAIL 5.19e-2 / MODE B 2.84e-3 — now inverted, as the fix predicts).
+#
+# Gate: rel < 1e-3 on probes within both solvers' grid support (m <= aXtraMax = 40);
+# probes beyond that are extrapolation FYI rows (documented domain restriction, not a
+# threshold relaxation — threshold unchanged at 1e-3). Gate evaluated at equation-check
+# grid densities (HAFiscal aXtraCount=192, EGM aCount=440); the production grid
+# (aXtraCount=48) carries an intrinsic ~5e-3 discretization residual (bisection below).
+
+########## MODE A: standard (PermGroFac*psi)^(-rho) — spec/YAML/standard-HARK/post-fix solver ##########
+[grids] EQUATION-CHECK (aXtraCount=192, EGM aCount=440)
+[HAFiscal ESC solve] J=6  beta=0.935635  rho=2.0  Rfree=1.01  aXtraCount=192
+  PermGroFac = [1.00453 1.      1.      1.      1.      1.     ]
+  LivPrb[:3] = [0.99375 0.99375 0.99375]   Splurge=0.2672
+  MrkvArray row0 = [0.9693 0.0307 0.     0.     0.     0.    ]
+
+[EGM converged it=77, FACTOR_MODE=standard]  comparison of employed-state cFunc[0](m):
+       m     HAFiscal          EGM   rel.diff
+    0.10     0.100000     0.100000   0.00e+00
+    0.25     0.250000     0.250000   0.00e+00
+    0.50     0.500000     0.500000   0.00e+00
+    1.00     0.895844     0.895948   1.17e-04
+    2.00     1.144068     1.144122   4.71e-05
+    5.00     1.499798     1.499854   3.73e-05
+   20.00     2.531719     2.532008   1.14e-04
+   50.00     4.109606     4.104861   1.15e-03   (FYI: extrapolation beyond grids, not gated)
+  100.00     6.625852     6.440348   2.80e-02   (FYI: extrapolation beyond grids, not gated)
+  300.00    16.690834    15.112850   9.45e-02   (FYI: extrapolation beyond grids, not gated)
+  1000.00    51.918273    44.746520   1.38e-01   (FYI: extrapolation beyond grids, not gated)
+
+max rel diff, gated probes m<=40 (on-grid) = 1.166e-04   RESULT: PASS (<1e-3)
+max rel diff, all probes (incl. extrapolation FYI)   = 1.381e-01
+
+########## MODE B: hafiscal_code psi^(-rho) only — legacy pre-BUG-047 solver math ##########
+[grids] EQUATION-CHECK (aXtraCount=192, EGM aCount=440)
+[HAFiscal ESC solve] J=6  beta=0.935635  rho=2.0  Rfree=1.01  aXtraCount=192
+  PermGroFac = [1.00453 1.      1.      1.      1.      1.     ]
+  LivPrb[:3] = [0.99375 0.99375 0.99375]   Splurge=0.2672
+  MrkvArray row0 = [0.9693 0.0307 0.     0.     0.     0.    ]
+
+[EGM converged it=86, FACTOR_MODE=hafiscal_code]  comparison of employed-state cFunc[0](m):
+       m     HAFiscal          EGM   rel.diff
+    0.10     0.100000     0.100000   0.00e+00
+    0.25     0.250000     0.250000   0.00e+00
+    0.50     0.500000     0.500000   0.00e+00
+    1.00     0.895844     0.890719   5.72e-03
+    2.00     1.144068     1.127355   1.46e-02
+    5.00     1.499798     1.458445   2.76e-02
+   20.00     2.531719     2.403719   5.06e-02
+   50.00     4.109606     3.831206   6.77e-02   (FYI: extrapolation beyond grids, not gated)
+  100.00     6.625852     5.941224   1.03e-01   (FYI: extrapolation beyond grids, not gated)
+  300.00    16.690834    13.748158   1.76e-01   (FYI: extrapolation beyond grids, not gated)
+  1000.00    51.918273    40.361744   2.23e-01   (FYI: extrapolation beyond grids, not gated)
+
+max rel diff, gated probes m<=40 (on-grid) = 5.056e-02   RESULT: FAIL (expected — legacy
+math vs fixed solver; this FAIL is the regression guard that the BUG-047 fix is active)
+
+########## Grid-density bisection (FACTOR_MODE=standard, gated probes m<=40) ##########
+HAFiscal aXtraCount x EGM aCount -> max rel diff:
+  aXtraCount= 48  egm_aCount=220   4.767e-03   (production grids)
+  aXtraCount= 48  egm_aCount=440   5.033e-03
+  aXtraCount= 96  egm_aCount=220   9.043e-04
+  aXtraCount= 96  egm_aCount=440   1.169e-03
+  aXtraCount=192  egm_aCount=220   1.134e-04
+  aXtraCount=192  egm_aCount=440   2.363e-04
+Residual halves ~4x per aXtraCount doubling (second-order convergence) and is insensitive
+to the EGM's own aCount -> the production-grid residual is HAFiscal asset-grid
+discretization, not an equation mismatch.

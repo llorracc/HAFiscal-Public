@@ -1,0 +1,750 @@
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+
+	<title>Data and Code for: Public Education Inequality and Intergenerational Mobility</title>
+
+	
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-5X9C45K');</script>
+	<!-- End Google Tag Manager -->
+
+	
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<link href="/openicpsr/resources/commons/scripts/bootstrap-3.4.1-dist/css/bootstrap.min.css;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8" rel="stylesheet" />
+	<link href="/openicpsr/resources/commons/scripts/bootstrap-3.4.1-dist/css/bootstrap-theme.min.css;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8" rel="stylesheet" />
+	<link href="/openicpsr/resources/commons/scripts/jquery-ui-1.13.2/jquery-ui.min.css;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8" type="text/css" rel="stylesheet" />
+	<link href="/openicpsr/resources/commons/scripts/jquery-ui-1.13.2/jquery-ui.theme.min.css;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8" type="text/css" rel="stylesheet" />
+	
+	<link href="/openicpsr/resources/commons/css/all-tenants.css;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8" type="text/css" rel="stylesheet" />
+	<link href="https://www.icpsr.umich.edu/pages/css-shared/allsites.css" type="text/css" rel="stylesheet">
+
+	<link href="/openicpsr/resources/css/screen-css-notDM3.jsp;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8" type="text/css" rel="stylesheet" media="screen" />
+	<link href="/openicpsr/resources/css/splash-css.jsp;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8" type="text/css" rel="stylesheet" media="screen" />
+	<link href="/openicpsr/resources/css/print-css.jsp;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8" type="text/css" rel="stylesheet" media="print" />
+
+	<script src="/openicpsr/resources/commons/scripts/jquery-1.12.4/jquery-1.12.4.min.js;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8"></script>
+	<script src="/openicpsr/resources/commons/scripts/jquery-ui-1.13.2/jquery-ui.min.js;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8"></script>
+	<script src="/openicpsr/resources/commons/scripts/bootstrap-3.4.1-dist/js/bootstrap.min.js;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8"></script>
+	<script src="/openicpsr/resources/js/search-suggest.js;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8"></script>
+	<script src="/openicpsr/resources/js/set-active.js;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8"></script>
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+	<!-- Font Awesome 6 -->
+	<link href="/openicpsr/resources/commons/fontawesome/css/all.css;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8" type="text/css" rel="stylesheet" />	
+	
+	<meta charset="UTF-8" />
+	<script src="/openicpsr/resources/commons/scripts/react-0.14.7/react.min.js;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8"></script>
+	<script src="/openicpsr/resources/commons/scripts/react-0.14.7/react-dom.min.js ;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8"></script>
+	<link href="/openicpsr/resources/commons/scripts/select2-4.0.3/css/select2.min.css;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8" rel="stylesheet" />
+	<script src="/openicpsr/resources/commons/scripts/select2-4.0.3/js/select2.min.js;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8"></script>
+	<script src="/openicpsr/resources/commons/scripts/d3plus/js/d3.min.js;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8"></script>
+	<script src="/openicpsr/resources/commons/scripts/d3plus/js/d3plus.min.js;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8"></script>
+	
+
+
+
+
+
+
+
+
+<meta name="isProd" value="true" />
+<meta name="isLocal" value="false" />
+
+<script src="https://pcms.icpsr.umich.edu/pcms/resources/js/app/projectUsage/ProjectUsage.js?buildNumber=20251028-102485" onload="pcmsJSLoaded=true;"></script>
+
+     
+       <script src="https://deposit.icpsr.umich.edu/deposit/resources/scripts/app/deposit.min.js?buildNumber=20251028-102485" onload="depositJSLoaded=true;"></script>
+       <script src="https://deposit.icpsr.umich.edu/deposit/resources/scripts/app/bibliography.min.js?buildNumber=20251028-102485" onload="depositJSLoaded=true;"></script>
+      
+      
+    
+
+	<style type="text/css">	
+		.tenantLogo img{float: right;}
+		ul#relatedPublications div.csl-entry {
+			display: list-item;
+		}	
+		@media(max-width:768px){
+			.tenantLogo{ text-align: center; 
+			}
+		}
+	</style>
+	<script type="text/javascript">
+		function modalCloseHandler(helpTerm,elem){
+	    $('#helpViewDivId').unbind('hidden.bs.modal');
+		$('#helpViewDivId').on('hidden.bs.modal', function (e) {
+				$(elem).focus();
+		});
+		}
+		function displayHelp(helpTerm,elem){
+			ReactDOM.render(React.createElement(HelpViewer, {modalId:'helpViewDivId', helpTerm:helpTerm, context: 'pcms', application:'openicpsr',module:null,appUrl:'https://deposit.icpsr.umich.edu/deposit'}), document.getElementById('helpViewDiv'));
+			$('#helpViewDivId').on('shown.bs.modal', function (e) {
+				$('#helpViewDivId .modal-header .close').focus();
+				modalCloseHandler(helpTerm,elem);
+			});
+			$('#helpViewDivId').modal('show');
+		}
+	</script>
+	<script type="text/javascript">
+		function approveDisapproveModal(projectId, versionNumber) {
+			$("#approveDisapproveDialog").modal().show();
+		}
+		
+
+		function approveOrDisapprove() {
+			var projectId = "122884";
+			var versionNumber = "V1";
+			var approveDisapproveValue = $("input[name='approveDisapproveSelection']:checked").val();
+			var reason = $("#reason").val();
+			
+			$.ajax({
+				url: "https://deposit.icpsr.umich.edu/deposit/review/approveDisapproveAction",
+				crossDomain: true,
+				dataType: "text",
+				data: {projectId: projectId, versionNumber: versionNumber, approveDisapprove: approveDisapproveValue, reason:reason},
+				type: "POST",
+				success: function(data) {
+					$("#approvalWell").hide();
+				},
+				error: function(xhr, status, err) {
+					console.log(err);
+				}
+			})
+		}
+		
+	</script>
+	<script>
+		var jwtToken = null;
+		$(document).ready(function (e) {
+			jwtToken = '';
+			$(document).ajaxSend(function(event, jqxhr, settings) {
+				jqxhr.setRequestHeader("Authorization", "Bearer " + jwtToken);
+			});
+			
+
+			// test for presence of request button
+			if($( "a#restrictedDataRequestButton" ).length){
+				// FIXME This may 
+				// attach a click event to the request link for restricted data
+				$("a#restrictedDataRequestButton").click(function(e){
+					e.preventDefault();
+					window.setTimeout( function(){
+						window.location = $(this).attr('href');
+					}, 500 );
+				});
+			}
+						
+		});
+
+		function updatePager(pageSelected, pageSize, sortOrder, sortAsc) {
+			var newUrl = '/openicpsr' + '/project/122884/version/V1/view?flag=follow&path=/openicpsr/122884/fcr:versions/V1/raw/SCF_precompiled/scfp2004s.zip&type=file' 
+							+ ((pageSelected !=null) ? ('&pageSelected=' + pageSelected) : '') + ((pageSize !=null) ? ('&pageSize=' + pageSize) : '' ) 
+							+ ((sortOrder !=null) ? ('&sortOrder=' + sortOrder) : '') + ((sortAsc != null) ? ('&sortAsc=' + sortAsc) : '') ;
+			window.location.href = newUrl;
+		}
+
+		function showObjectPreview(path, type) {
+			ReactDOM.render(React.createElement(ObjectViewDialog, {
+				path: path.trim(),
+				type: type
+			}), document.getElementById('objectPreviewTag'));
+		};
+
+	</script>
+	<script type="text/javascript">
+		var depositConfig = {
+			depositServerUrl : "/openicpsr/project/122884/version/V1",
+			embed:true
+		};
+	</script>
+
+	
+
+	<meta name="DC.identifier" content="10.3886/E122884V1" />
+	<meta name="DC.title" content="Data and Code for: Public Education Inequality and Intergenerational Mobility" />
+	
+	<meta name="DC.publisher" content="Inter-university Consortium for Political and Social Research (ICPSR)" />
+	<meta name="DC.date" content="2022-06-24" />
+	<meta name="DC.type" content="Dataset" />
+
+	<script>
+		$(document).ready(function() {
+			var year = new Date().getFullYear();
+			$("span#currentYear").html(year);
+			$(".navbar-toggle").click(function(){
+				$(this).toggleClass("active")
+				});
+			$.ajax({
+				url: "/openicpsr/banner/applications/openicpsr",
+				type: "GET",
+				data: "text",
+				success: function(data) {
+					if (data != "") {
+						$("#bannerText").html(data);
+						$("#bannerText").show();
+					}
+				}
+			});
+		});
+	</script>
+
+	
+		<script src="/openicpsr/resources/commons/scripts/react-0.14.7/react.js;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8"></script>
+		<script src="/openicpsr/resources/commons/scripts/react-0.14.7/react-dom.js ;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8"></script>
+		<script src="https://deposit.icpsr.umich.edu/deposit/resources/scripts/app/authentication/ArchonnexLoginDropdownReact14.js"></script>
+	
+
+	
+<script>
+window.onerror = function() {
+	console.log('Error reported !!');
+	$("#busy").removeClass('busyModal');
+};
+	$(document)
+			.ajaxError(
+					function(event, jqXHR, settings, thrownError) {
+						$("#busy").removeClass('busyModal');
+						var msg = '<div class="alert alert-danger alert-dismissible fade in" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;ï¿½</span></button>';
+						var errmsg = '';
+						msg = msg
+								+ '<strong>Oops!</strong> Problem processing your request. Try again and if problem persists, please email ICPSR support: <a href="mailto:help@icpsr.umich.edu">help@icpsr.umich.edu</a><br>';
+						if (jqXHR.status == 0) {
+							errmsg = 'Network problem';
+							return;
+						} else if (jqXHR.status == 400) {
+							errmsg = 'Bad request';
+						} else if (jqXHR.status == 401) {
+							errmsg = 'Unauthorized';
+						} else if (jqXHR.status == 403) {
+							errmsg = 'Forbidden';
+						} else if (jqXHR.status == 404) {
+							errmsg = 'Requested page not found';
+						} else if (jqXHR.status == 408
+								|| thrownError == 'timeout') {
+							errmsg = 'Time out error';
+						} else if (jqXHR.status == 500) {
+							errmsg = 'Internal server error';
+						} else if (thrownError == 'parsererror') {
+							errmsg = 'Requested JSON parse failed';
+						} else if (thrownError == 'abort') {
+							errmsg = 'AJAX request aborted';
+						} else {
+							errmsg = 'Uncaught Error:\n' + jqXHR.responseText;
+						}
+						msg = msg + errmsg;
+						msg = msg
+								+ '; URL : '
+								+ settings.url
+								+ '</div>';
+						if(jqXHR.status == 301 && jqXHR.responseText.includes("StudyMigrated")) {
+							msg = '<div class="alert alert-danger alert-dismissible fade in" role="alert">'
+							msg = msg + 'Your deposit has migrated to our new system. Please follow this link to access and edit your deposit '
+							msg = msg + '<a href="https://archive-manager-ui-archive-prod.apps.cluster0.ocp.icpsr.umich.edu/">https://archive-manager-ui-archive-prod.apps.cluster0.ocp.icpsr.umich.edu/ </a>'							
+							msg = msg + '</div>';
+						}
+						$("#errormsg").html(msg);
+					});
+</script>
+
+</head>
+<body id="empty" class="empty">
+
+<noscript>
+<div class="text-center no-js-alert" style="margin-bottom: 0;">
+Please enable JavaScript in your browser. JavasScript is required to use the core functionality of this site including searching, downloading data, and depositing data.
+</div>
+</noscript>
+
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5X9C45K"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<script>
+$(document).ready(function(){
+	var url = 'https://cms.icpsr.umich.edu/services/archonnex-alerts?site=openicpsr';
+	var message = '';
+	$.getJSON(url).done(function(data) {
+			if(data.length>0){
+				data = data.slice(0, 1);
+				$.each( data, function( i, item ) {
+					message += '<div id="archonnex-alert-message" class="container">';
+					message += item.Message;
+					message += '</div>';
+			      });
+			     $('.archonnex-alert-message-wrapper').prepend(message);
+			 }
+		}).fail(function() {
+		    console.log( "No response from cms." );
+		  });	
+	});
+</script>
+
+
+<div class="archonnex-alert-message-wrapper"></div>
+
+<header>
+	<div id="skip">
+		<a href="#skipto">Skip to Main Content</a>
+	</div>	
+	<nav class="navbar">
+		
+			
+				
+
+
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar line-1"></span>
+					<span class="icon-bar line-2"></span>
+					<span class="icon-bar line-3"></span>
+			    </button>
+			    <a class="navbar-brand header-logo" href="/openicpsr/"><img src="https://www.icpsr.umich.edu/files/openICPSR/openicpsr-logo-oneline-white-02.png" alt="open I C P S R"></a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<div class="row">
+					<ul class="nav navbar-nav navbar-right loginManagement" id="newLoginDropdown"> 
+					</ul>
+					<ul class="nav navbar-nav navbar-right loginManagement">
+						
+					</ul>
+				</div>
+				<div class="row">			
+					<ul class="nav navbar-nav navbar-right row navigation-row">
+						<li>
+							<a href="/openicpsr/search/studies">Find Data</a>
+						</li>
+						<li>
+							<a href="/openicpsr/workspace?path=openICPSR" id="topNavShareData">Share Data</a>
+						</li>
+						<li>
+							<a href="/openicpsr/repository/">Repositories</a>
+						</li>
+					</ul>
+      			</div>
+			</div>
+		</div>
+
+			
+			
+		
+	</nav>
+</header>
+
+<section id="skipto">
+
+<div class="container-fluid" id="mainContent">
+<div id="ie-detection-result">
+</div>
+
+<script src="/openicpsr/resources/commons/scripts/detect-ie.js;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8"></script>
+
+
+
+	<div id="bannerText" class="alert alert-warning"></div>
+
+	<article>
+	
+	<ul class="breadcrumb" style="margin-bottom:5px;">
+		<li>
+			<a href="/openicpsr/search/studies;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8">Find Data</a>
+		</li>
+		<li>
+			<a href="/openicpsr/project/122884/version/V1/view;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8">Data and Code for: Public Education Inequality and Intergenerational Mobility</a>
+		</li>
+		
+				
+					
+						
+							<li><a	href="/openicpsr/project/122884/version/V1/view;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8?path=/openicpsr/122884/fcr:versions/V1/raw">raw</a>
+							</li>
+						
+						
+					
+				
+					
+						
+							<li><a	href="/openicpsr/project/122884/version/V1/view;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8?path=/openicpsr/122884/fcr:versions/V1/raw/SCF_precompiled">SCF_precompiled</a>
+							</li>
+						
+						
+					
+				
+					
+						
+						
+							<li>scfp2004s.zip</li>
+						
+					
+				
+		
+	</ul>
+
+	
+	
+			<div class="page-header">
+				
+				<div class="row">
+					<div class="col-xs-12">
+						<h1 style="margin-top:5px;">Data and Code for: Public Education Inequality and Intergenerational Mobility</h1>
+					</div>
+					<div class="col-sm-8">
+						<p><strong>Principal Investigator(s)</strong>:&nbsp;
+						<a tabindex="0" href="#" data-helplink="yes" role="button" id="helpLink-dcterms-creator" onclick="event.preventDefault();displayHelp('dcterms-creator',this)"><span class="glyphicon glyphicon-question-sign"></span><span class="sr-only">View help for Principal Investigator(s)</span></a>
+						
+							
+							
+								
+									Angela Zheng, McMaster University; 
+								
+									James Graham, University of Sydney
+								
+							
+						
+						</p>
+						
+							<p><strong>Version</strong>:&nbsp;
+							<a tabindex="0" href="#" data-helplink="yes" role="button" id="helpLink-icpsr-versionLabel" onclick="event.preventDefault();displayHelp('icpsr-versionLabel',this)"><span class="glyphicon glyphicon-question-sign"></span><span class="sr-only">View help for Version</span></a>
+							V1 
+							</p>
+						
+						
+					</div>
+					<div class="col-sm-4 tenantLogo">
+						
+							
+								
+								
+									<a href="https://www.icpsr.umich.edu/sites/aea/home" >
+										<img alt="AEA Data and Code Repository" src="https://deposit.icpsr.umich.edu/deposit/getSystemResource?filePath=/archive-logos/aea.png" />
+									</a>
+									
+							
+						
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-8">
+					<div class="table-responsive">
+						<!-- Folders & Files -->
+						<table class="table table-striped">
+							<thead style="background-color:lightgrey;">
+							<tr>
+								<th>Name <a id="(?title)" onclick="updatePager(, , this.id, );">
+											<span class="glyphicon glyphicon-collapse-up"></span></a></th>
+								<th>File Type <a id="(?fileContentType)" onclick="updatePager(, , this.id, );">
+											<span class="glyphicon glyphicon-collapse-up" ></span></a></th>
+								<th>Size <a id="(?fileSize)" onclick="updatePager(, , this.id, );">
+											<span class="glyphicon glyphicon-collapse-up" ></span></a></th>
+								<th>Last Modified <a id="(?lastModified)" onclick="updatePager(, , this.id, );">
+											<span class="glyphicon glyphicon-collapse-up" ></span></a></th>
+							</tr>
+							</thead>
+							<tbody>
+							
+							
+
+							
+								<tr>
+									<td width="35%">
+										<img src="/openicpsr/project/122884/version/V1/getFileIcon;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8?contentType=application/zip" width="35" height="35"/>
+											scfp2004s.zip
+									</td>
+									<td>application/zip</td>
+									<td>3.2 MB</td>
+									<td>01/26/2021 05:25:PM</td>
+								</tr>
+							
+							</tbody>
+						</table>
+					</div>
+					
+					
+					
+
+					<!-- Citation & DOI -->
+					<div class="well">
+					
+						
+							
+							
+							
+							
+								
+								<p>Login to generate citation for this file.</p>
+								<p><em>To view the citation for the overall project, see 
+								<a href="http://doi.org/10.3886/E122884V1">http://doi.org/10.3886/E122884V1</a>.</em></p>
+							
+						
+													
+					</div>
+
+					<!-- Main Contents -->
+					<div>
+						
+							
+							<!-- get rid of this line break and instead insert one at the BEGINNING of every new resource property title -->
+							<!-- this is because the issue is occuring when "summary" or any other text area is the last field displayed in any particular resource  -->
+							<br/>
+						
+							
+							<!-- get rid of this line break and instead insert one at the BEGINNING of every new resource property title -->
+							<!-- this is because the issue is occuring when "summary" or any other text area is the last field displayed in any particular resource  -->
+							<br/>
+						
+							
+							<!-- get rid of this line break and instead insert one at the BEGINNING of every new resource property title -->
+							<!-- this is because the issue is occuring when "summary" or any other text area is the last field displayed in any particular resource  -->
+							<br/>
+						
+						<h4>Related Publications</h4>
+						<div id="bibliography"></div>
+					</div>
+				</div>  
+
+				<div class="col-md-4 asideColumn">
+					<div class="well pubDownloadWell">
+						
+							
+							
+							
+								<!-- Set download type -->
+								
+								
+								
+									
+									
+								
+								
+									
+									
+										
+										<!-- Download file -->
+										<a href="/openicpsr/project/122884/version/V1/download/terms;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8?path=/openicpsr/122884/fcr:versions/V1/raw/SCF_precompiled/scfp2004s.zip&type=file"
+										   class="btn btn-primary" role="button" id="downloadButton">
+											<i class="glyphicon glyphicon-download"></i> Download this file
+										</a>
+									
+								
+							
+							
+						
+					</div> 
+					
+						
+					
+					
+						
+					
+					
+					<div id="projectUsage"></div>	
+					
+					<div class="well">
+						<h2 class="asideH2">Published Versions</h2>
+						<div class="indent">
+							
+								<p style="margin-top:10px;">
+									<a href="/openicpsr/project/122884/version/V1/view;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8">V1 [2022-06-24]</a>
+								</p>
+							
+						</div>
+					</div>
+
+					
+					
+
+					
+					<div class="well">
+						<fieldset>
+							 <h2 class="asideH2">Export Metadata</h2>
+					      	<div class="indent">
+								<p style="margin-top:10px;">
+									<a href="https://pcms.icpsr.umich.edu/pcms/api/1.0/oai/studies?metadataPrefix=oai_dc&verb=GetRecord&identifier=122884&version=V1&page=/openicpsr/project/122884/version/V1/view?flag=follow&path=/openicpsr/122884/fcr:versions/V1/raw/SCF_precompiled/scfp2004s.zip&type=file">Dublin Core</a>
+								</p>
+								<p style="margin-top:10px;">
+									<a href="https://pcms.icpsr.umich.edu/pcms/api/1.0/oai/studies?metadataPrefix=oai_ddi25&verb=GetRecord&identifier=122884&version=V1&page=/openicpsr/project/122884/version/V1/view?flag=follow&path=/openicpsr/122884/fcr:versions/V1/raw/SCF_precompiled/scfp2004s.zip&type=file">DDI 2.5</a>
+								</p>
+							</div>
+						</fieldset>
+					</div>
+
+
+					<div class="well">
+						<div class="well">
+							<a href='/openicpsr/contactUs;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8?reqProps={"sip_project_id":"122884","version_label":"V1","sip_project_title":"Data and Code for: Public Education Inequality and Intergenerational Mobility"}'
+							   class="btn btn-warning reportAProblemBTN">Report a Problem</a>
+							<p style="margin-top:10px;">Found a serious problem with the data, such as disclosure risk or
+								copyrighted content? Let us know.</p>
+						</div>
+						<div class="well">
+							<div id="projectLicense"></div>
+							<p>This material is distributed exactly as it arrived from the data depositor. ICPSR has not checked or processed this material. Users should consult the investigator(s) if further information is desired.</p>
+						</div> 
+					</div>
+				</div>  
+			</div>  
+	
+
+	
+</article>
+	<div id="helpViewDiv"></div>
+	
+	<div id="approveDisapproveDialog" class="modal fade">
+		<div class="modal-dialog modal-vertical-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+				    	<span aria-hidden="true">x</span>
+				    	<span class="sr-only">Close</span>
+				    </button>
+					<h4 class="modal-title">Approve or Disapprove Project</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<input type="radio" name="approveDisapproveSelection" value="approve" checked>Approve<br>
+							<input type="radio" name="approveDisapproveSelection" value="disapprove">Disapprove<br>
+							<div style="padding-left:14px;">
+								<label for="reason">Reason</label><br/>
+								<textarea rows="4" cols="100" id="reason" style="max-width:550px"></textarea> 
+							</div>
+						</div>
+						<button class="btn btn-primary" role="button" id="disapproveButton" onclick="approveOrDisapprove();">Submit</button>
+						<button class="btn" role="button" id="cancel">Cancel</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+		<script type="application/ld+json">
+				{"identifier":{"@type":"PropertyValue","name":"Digital Object Identifier","@id":"https://doi.org/10.3886/E122884V1","propertyId":"https://registry.identifiers.org/registry/doi","value":"doi:10.3886/E122884V1","url":"https://doi.org/10.3886/E122884V1"},"creator":[{"affiliation":["McMaster University"],"@type":"Person","name":"Angela Zheng"},{"affiliation":["University of Sydney"],"@type":"Person","name":"James Graham"}],"keywords":"","@type":"Dataset","description":"Code for \"Public Education Inequality and Intergenerational Mobility\"&nbsp;","spatialCoverage":"","distribution":[{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/derived/plotfunding2010_2000.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/derived/data_scatterbin.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/derived/tractleaid.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/derived/chettydistrict_tract.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/derived/NCES_SchoolDistrict_ACS_2009_2013.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/derived/educplot.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/derived/nbhdplot.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/derived/chettydistrict_tract_covariates.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/derived/NCES_SchoolDistrict_Census2000.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/derived/schooldistrict_plots.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/derived/funding1997_2010_2013.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/derived/chetty_districtinfo_tractFINAL.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/derived/NCES_SchoolDistrict_Census1990.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/derived/NCES_SchoolDistrict_Census1990.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/derived/plotfunding2010_2000.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/derived/nbhdplot.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/derived/funding1997_2010_2013.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/derived/schooldistrict_plots.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/derived/tractleaid.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/derived/chettydistrict_tract.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/derived/educplot.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/derived/NCES_SchoolDistrict_ACS_2009_2013.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/derived/chetty_districtinfo_tractFINAL.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/derived/data_scatterbin.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/derived/NCES_SchoolDistrict_Census2000.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/derived/chettydistrict_tract_covariates.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/02_analysisplots/plotfigures.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/02_analysisplots/master.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/02_analysisplots/funding1999_2010_Table1.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/02_analysisplots/chetty_covariates_plot.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Policy_EqualFunding/ModelIRFwelfare.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Policy_EqualFunding/ModelIRFdata.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_OH/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_OH/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_OH/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_OH/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_CA/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_CA/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_CA/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_CA/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_MI/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_MI/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_MI/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_MI/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_PA/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_PA/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_PA/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_PA/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_GA/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_GA/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_GA/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_GA/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_IL/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_IL/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_IL/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_IL/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_TX/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_TX/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_TX/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_TX/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_NC/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_NC/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_NC/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_NC/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_NY/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_NY/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_NY/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_NY/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_FL/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_FL/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_FL/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Files/Calibration/RESULTS_FL/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Data/ModCalibData_States_SchoolFunding.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Data/ModCalibData_Nbhds_Inequality.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Data/ModCalibData_StateNamesCodes.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Data/ModCalibData_TransProb.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Data/ModCalibData_States_EducExp.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Data/ModCalibData_SCF.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Data/ModCalibData_States_TaxRates.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Data/ModCalibData_Inequality.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Data/ModCalibData_IGM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Data/ModCalibData_States_Inequality.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Data/ModCalibData_NbhdTargetPopulations.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Data/ModCalibData_Nbhds_SchoolFunding.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Data/ModCalibData_Nbhds_PricesIncomesRents.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Mod_Data/ModCalibData_SaizSupplyElasticities.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Figures/ModelFitData_Figure6and7.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Figures/ModelIRFwelfare_Figure9.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/04_model/Figures/ModelIRFdata_Figure8.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/03_calibration/ModCalibData_NbhdTargetPopulations.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/03_calibration/ModCalibData_StateNamesCodes.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/03_calibration/ModCalibData_SaizSupplyElasticities.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/01_dataprep/district_to_tract.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/01_dataprep/cleanchettytract.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/01_dataprep/chetty_to_district.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/01_dataprep/master.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/programs/01_dataprep/0_globalRlibrary.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/census200rents_housevalue.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/pop_by2010def.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/funding1997_1998allstatescalc.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/HOUSING_SUPPLY.dta&type=application/x-stata","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Stata"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/grf13_lea_tract.sas7bdat&type=application/x-sas-data","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"SAS"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/chettycountyigm.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/funding2010.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/CEX/cex1990_calendarestimate.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/CEX/fmli904.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/CEX/fmli903.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/CEX/fmli902.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/CEX/fmli901.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/funding1999_2010.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/SaizData/.ipynb_checkpoints/SaizHousingSupplyElasticity_MODIFIED-checkpoint.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/SaizData/HOUSING_SUPPLY.dta&type=application/x-stata","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Stata"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/countydistrictmapping.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/county2010house.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/cztransitionmatrix.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/CodeSubmitNew/raw/tract_covariates.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/grf13_lea_tract.sas7bdat&type=application/x-sas-data","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"SAS"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/chettycountyigm.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/countydistrictmapping.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/HOUSING_SUPPLY.dta&type=application/x-stata","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Stata"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/SaizData/HOUSING_SUPPLY.dta&type=application/x-stata","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Stata"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/SaizData/.ipynb_checkpoints/SaizHousingSupplyElasticity_MODIFIED-checkpoint.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/funding2010.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/funding1997_1998allstatescalc.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/CEX/fmli901.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/CEX/fmli903.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/CEX/fmli904.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/CEX/cex1990_calendarestimate.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/CEX/fmli902.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/census200rents_housevalue.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/county2010house.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/tract_covariates.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/pop_by2010def.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/cztransitionmatrix.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/raw/funding1999_2010.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/02_analysisplots/master.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/02_analysisplots/funding1999_2010_Table1.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/02_analysisplots/chetty_covariates_plot.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/02_analysisplots/plotfigures.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/01_dataprep/chetty_to_district.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/01_dataprep/0_globalRlibrary.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/01_dataprep/district_to_tract.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/01_dataprep/cleanchettytract.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/01_dataprep/master.R&type=text/x-r-syntax","@type":"DataDownload","encodingFormat":"application/zip"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Data/ModCalibData_StateNamesCodes.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Data/ModCalibData_Nbhds_SchoolFunding.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Data/ModCalibData_States_EducExp.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Data/ModCalibData_States_SchoolFunding.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Data/ModCalibData_IGM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Data/ModCalibData_States_TaxRates.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Data/ModCalibData_States_Inequality.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Data/ModCalibData_SaizSupplyElasticities.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Data/ModCalibData_Inequality.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Data/ModCalibData_Nbhds_PricesIncomesRents.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Data/ModCalibData_TransProb.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Data/ModCalibData_Nbhds_Inequality.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Data/ModCalibData_NbhdTargetPopulations.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Data/ModCalibData_SCF.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Policy_EqualFunding/ModelIRFwelfare.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Policy_EqualFunding/ModelIRFdata.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_CA/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_CA/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_CA/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_CA/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_MI/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_MI/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_MI/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_MI/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_NY/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_NY/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_NY/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_NY/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_PA/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_PA/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_PA/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_PA/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_NC/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_NC/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_NC/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_NC/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_FL/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_FL/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_FL/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_FL/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_TX/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_TX/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_TX/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_TX/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_GA/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_GA/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_GA/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_GA/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_IL/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_IL/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_IL/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_IL/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_OH/results_theta.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_OH/results_MOM.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_OH/results_theta_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Mod_Files/Calibration/RESULTS_OH/results_MOM_colnames.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Figures/ModelFitData_Figure6and7.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Figures/ModelIRFdata_Figure8.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/04_model/Figures/ModelIRFwelfare_Figure9.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/03_calibration/ModCalibData_NbhdTargetPopulations.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/03_calibration/ModCalibData_SaizSupplyElasticities.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"},{"contentURL":"https://www.openicpsr.org/openicpsr/project/122884/version/V1/download/terms?path=/openicpsr/122884/fcr:versions/V1/programs/03_calibration/ModCalibData_StateNamesCodes.csv&type=text/csv","@type":"DataDownload","encodingFormat":"application/zip","fileFormat":"Delimited"}],"@context":"http://schema.org","version":"V1","datePublished":"2020-09-28","license":"https://creativecommons.org/licenses/by/4.0","temporalCoverage":[""],"includedInDataCatalog":{"@type":"DataCatalog","name":"openICPSR","url":"https://www.openicpsr.org/"},"name":"Data and Code for: Public Education Inequality and Intergenerational Mobility","publisher":{"@type":"Organization","name":"American Economic Association","alternateName":"AEA","url":"https://www.aeaweb.org"}}
+		</script>
+	
+	
+	<script type="text/javascript">
+		ReactDOM.render(React.createElement(ProjectLicense, {depositServerUrl: 'https://deposit.icpsr.umich.edu/deposit', licenseId: '1', resourcePath: '/openicpsr/122884'}), document.getElementById('projectLicense'));
+		ReactDOM.render(React.createElement(ProjectUsage, {pcmsURL: 'https://pcms.icpsr.umich.edu/pcms', projectId: '122884', tenant: 'openicpsr',level: 'file', selectedPath: '/openicpsr/122884/fcr:versions/V1/raw/SCF_precompiled/scfp2004s.zip'}), document.getElementById('projectUsage'));
+		var studyPath = '/openicpsr/122884';
+		var bibliographyConfig = {
+				bibliographyServerUrl: 'https://bibliography.icpsr.umich.edu/bibliography',
+				editLinks: false,
+				addButton: false,
+				editButton: false,
+				deleteButton: false,
+				panelDisplay: false,
+				relationshipSort: true
+		};
+		ReactDOM.render(React.createElement(Bibliography, {path: studyPath}), document.getElementById('bibliography'));
+	</script>
+
+
+
+</div>
+
+</section>
+<div id="webcomponent">
+				<icpsr-rp-profile-update acxAppBasePath="/openicpsr" />
+</div>
+
+
+
+<footer class="container-fluid">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 center-block">
+				<div class="footerNav">
+					<a href="/openicpsr/about;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8" id="navAbout">About openICPSR</a>&nbsp;&nbsp;|&nbsp;&nbsp;  
+					<a href="/openicpsr/privacy;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8" id="bottomNavPrivacy">Privacy</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a href="/openicpsr/faqs;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8" id="bottomNavFAQ">FAQs</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a href="/openicpsr/repository/;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8"  id="bottomNavRepository">Learn about repositories</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a href="/openicpsr/contactUs;jsessionid=CCDF58A6E8BAEC686D09E6B6A53D05D8" id="bottomNavContact">Contact us</a>
+			
+				</div>
+				<div id="copyrightLine"><p>&copy; <span id="currentYear">2018</span>  <a href="http://regents.umich.edu/">The Regents of the University of Michigan</a>. ICPSR is part of the <a href="https://www.isr.umich.edu/">Institute for Social Research</a> at the <a href="https://www.umich.edu/">University of Michigan</a>.</p></div>
+			</div>
+		</div>	
+	</div>
+</footer>
+
+
+
+
+
+	<script type="text/javascript">
+		function signIn(providerId,callbackUrl){
+			window.location.href = "/openicpsr/login";
+		}
+		function signOut(){
+			window.location.href = "/openicpsr/logout";
+		}
+		var session = {};
+		
+		var authUiPath = "https://researcherpassport.icpsr.umich.edu/profiles/self";
+		var props = { signIn: signIn, signOut: signOut, session: session, authUiPath: authUiPath, mode: 'openicpsr', dashboardUrl: "https://researcherpassport.icpsr.umich.edu/dashboard" }
+		ReactDOM.render(React.createElement(ArchonnexLoginDropdownReact14, props), document.getElementById('newLoginDropdown'));
+	</script>
+
+<script type="text/javascript">
+
+		function mfeLoadCallBack () {
+			if (!window.customElements.get("icpsr-rp-profile-update")) {
+				console.log("icpsr-rp-profile-update not yet addded to registry");
+				
+				const mfe = window.icpsrrp.get('RpProfileUpdate').then((factory) => {
+					console.log("preping the icpsr mfe factory");
+					return { default: factory() };
+				})
+			}
+		}
+		let mfeProps = {show: false};
+		
+		if(mfeProps.show) {
+			var script = document.createElement("script");
+			script.type = "text/javascript";
+			if (script.readyState) {  // only required for IE <9
+				script.onreadystatechange = function () {
+					if (script.readyState === "loaded" || script.readyState === "complete") {
+						script.onreadystatechange = null;
+						mfeLoadCallBack();
+					}
+				};
+			} else {  //Others
+				script.onload = function () {
+					mfeLoadCallBack();
+				};
+			}
+			//below is for local testing
+			// script.src = "http://localhost:3008/_next/static/chunks/mfe-rp-profile-update.js";
+			script.src = "https://researcherpassport.icpsr.umich.edu/_next/static/chunks/mfe-rp-profile-update.js";
+			document.getElementsByTagName("head")[0].appendChild(script);
+		}
+
+	</script>
+</body>
+</html>

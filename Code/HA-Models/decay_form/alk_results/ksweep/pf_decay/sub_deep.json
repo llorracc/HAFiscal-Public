@@ -1,0 +1,41 @@
+{
+ "label": "sub_deep",
+ "beta_mode": "central",
+ "DiscFac": 0.9919255740493225,
+ "aXtraMax": 5000.0,
+ "aXtraCount": 70,
+ "env": {
+  "HAFISCAL_PF_DECAY_EXTRAP": "1",
+  "HAFISCAL_PF_DECAY_Q": "local2",
+  "HAFISCAL_PF_DECAY_AMAX_MULT": null,
+  "HAFISCAL_SOLVE_AMAX": "5000"
+ },
+ "n_powerlaw_slices": 12,
+ "n_decay_active": 12,
+ "Q_range": [
+  0.28731687059145955,
+  0.2874605414302132
+ ],
+ "drift_range": [
+  0.06464318062449481,
+  0.06482547199110564
+ ],
+ "advisories": [
+  "local_q_tail: local power-law exponent still drifting at the grid top (worst |Q2-Q1| = 0.078/e-fold > tol 0.05; Q1=0.105 Q2=0.069 at m_top=5063.5, h=190.2). The attach still uses the most-local Q2, but consider raising HAFISCAL_PF_DECAY_AMAX_MULT (or HAFISCAL_SOLVE_AMAX) so the tail is stable in the vicinity of aXtraMax. One-shot warning; see local_q_tail.DIAG."
+ ],
+ "n_warnings_total": 1,
+ "wall_sec": 8.618678331375122,
+ "lqt_DIAG": {
+  "n_slices": 9504,
+  "n_local2": 9504,
+  "n_fallback": 0,
+  "max_abs_drift": 0.20202066231557395,
+  "worst": {
+   "Q1": 0.6841161373511526,
+   "Q2": 0.7776249576420671,
+   "drift": 0.20202066231557395,
+   "m_top": 5063.455300669378,
+   "h": 190.22285225453095
+  }
+ }
+}

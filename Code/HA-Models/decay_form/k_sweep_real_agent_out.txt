@@ -1,0 +1,24 @@
+# k_sweep_real_agent.py report — 2026-07-22 (local2 default-flip tee-up)
+# Real 4-state College agents (AggFiscalType + AggregateDemandEconomy, 6-state base encoding),
+# cap = gic_capped_beta(2)=1.005369 (GIC-cap / concentration-strip atom),
+# central = 0.9919255740493225 (production College central, subcritical).
+# Arms solved under: t40=env-clean | plslope=PF_DECAY_EXTRAP=1 | k{3,6,8}=+PF_DECAY_Q=local2,AMAX_MULT={3,6,8} | deep=+SOLVE_AMAX=5000.
+# Reference truth per beta_mode: deep / sub_deep (grid 5000 => [0,1300] fully in-sample).
+#
+arm              grid            Q range  worst drift  adv  max|dc|/c full     @m       m>40     @m
+deep         5000/70      [0.429, 0.429]       +0.144    1     (reference)                         
+k3            591/61      [0.497, 0.498]       +0.192    1       4.207e-03    680  4.207e-03    680
+k6           1181/64      [0.462, 0.463]       +0.172    1       1.836e-03   1300  1.836e-03   1300
+k8           1575/65      [0.452, 0.453]       +0.165    1       9.743e-04   1010  9.743e-04   1010
+plslope        40/48      [1.506, 1.508]            -    0       8.094e-02    125  8.094e-02    125
+sub_deep     5000/70      [0.287, 0.287]       +0.065    1     (reference)                         
+sub_k3        591/61      [0.341, 0.342]       +0.064    1       2.340e-03   1020  2.340e-03   1020
+t40            40/48                   -            -    0       3.379e-01   1300  3.379e-01   1300
+
+advisory texts (first per arm):
+  deep: local_q_tail: local power-law exponent still drifting at the grid top (worst |Q2-Q1| = 0.078/e-fold > tol 0.05; Q1=0.105 Q2=0.069 at m_top=5028.3, h=190.2). The attach still uses the most-local Q2, bu
+  k3: local_q_tail: local power-law exponent still drifting at the grid top (worst |Q2-Q1| = 0.221/e-fold > tol 0.05; Q1=0.362 Q2=0.305 at m_top=594.8, h=190.2). The attach still uses the most-local Q2, but
+  k6: local_q_tail: local power-law exponent still drifting at the grid top (worst |Q2-Q1| = 0.179/e-fold > tol 0.05; Q1=0.266 Q2=0.207 at m_top=1188.5, h=190.2). The attach still uses the most-local Q2, bu
+  k8: local_q_tail: local power-law exponent still drifting at the grid top (worst |Q2-Q1| = 0.158/e-fold > tol 0.05; Q1=0.228 Q2=0.171 at m_top=1584.4, h=190.2). The attach still uses the most-local Q2, bu
+  sub_deep: local_q_tail: local power-law exponent still drifting at the grid top (worst |Q2-Q1| = 0.078/e-fold > tol 0.05; Q1=0.105 Q2=0.069 at m_top=5063.5, h=190.2). The attach still uses the most-local Q2, bu
+  sub_k3: local_q_tail: local power-law exponent still drifting at the grid top (worst |Q2-Q1| = 0.221/e-fold > tol 0.05; Q1=0.362 Q2=0.305 at m_top=600.1, h=190.2). The attach still uses the most-local Q2, but

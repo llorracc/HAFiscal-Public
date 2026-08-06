@@ -1,0 +1,46 @@
+# latexindent configuration for HAFiscal project
+# Synchronized with HAFiscal-make/scripts/utils/clean_latex.yaml
+# Sets default indentation to two spaces for consistent formatting
+#
+# Usage: latexindent -w -m myfile.tex
+# Note: -w (overwrite) and -m (modify line breaks) flags are passed via command line
+
+# Backup settings - disable backup creation since git provides version control
+onlyOneBackUp: 0
+
+# Default indentation settings
+defaultIndent: '  '
+
+# FILE-LEVEL INDENTATION: Prevent indenting snippet files
+# This fixes the Equations/splurge.tex indentation cycle where files without
+# \documentclass preamble would alternate between indented/unindented.
+# Snippet files (like Equations/*.tex) contain only environments with no document preamble,
+# and should not be indented at the root level.
+indentPreamble: no
+
+# List of verbatim-like environments where content should not be modified
+# (Additional to clean_latex.yaml for HAFiscal-specific environments)
+verbatimEnvironments:
+    verbatim: 1
+    lstlisting: 1
+    verbatimwrite: 1
+
+# Explicitly mark verbatimwrite as a verbatim environment
+lookForThis:
+    verbatimwrite: verbatim
+
+# Line break modification settings
+modifyLineBreaks:
+  environments:
+    BeginStartsOnOwnLine: 0
+    BodyStartsOnOwnLine: 1 
+    EndStartsOnOwnLine: 0
+    EndFinishesWithLineBreak: 1
+  items:
+    ItemStartsOnOwnLine: 1
+    ItemFinishesWithLineBreak: 1
+  specialBeginEnd:
+    displayMath:
+      BeginStartsOnOwnLine: 1
+      BodyStartsOnOwnLine: 1
+      EndStartsOnOwnLine: 1

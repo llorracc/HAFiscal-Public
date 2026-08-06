@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/llorracc/HAFiscal/provenance_sidecar.schema.json",
+  "title": "HAFiscal run-provenance sidecar",
+  "description": "Small, travelling provenance record written next to a run's outputs as RUN_<run_id>.prov.json. Emitted by Code/HA-Models/provenance.py. Never stored inside a result file's bytes.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "run_id",
+    "created_utc",
+    "branch",
+    "git_commit",
+    "git_dirty",
+    "command_line",
+    "argv",
+    "wrapper_env",
+    "resolved_config"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "created_utc": { "type": "string" },
+    "label": { "type": ["string", "null"] },
+    "host": { "type": ["string", "null"] },
+    "user": { "type": ["string", "null"] },
+    "branch": { "type": ["string", "null"] },
+    "git_commit": { "type": ["string", "null"] },
+    "git_dirty": {
+      "type": ["boolean", "null"],
+      "description": "Working-tree dirty at run start. null = unknown (only for reconstructed sidecars, where run-time dirtiness is unrecoverable)."
+    },
+    "git_diff_sha256": { "type": ["string", "null"] },
+    "reconstructed": {
+      "type": "boolean",
+      "description": "True if this sidecar was reconstructed AFTER the fact from an authoritative log (not captured live during the run). Live captures omit this or set false."
+    },
+    "reconstructed_from": {
+      "type": ["string", "null"],
+      "description": "Source of the reconstructed facts (e.g. the run log path)."
+    },
+    "reconstructed_note": { "type": ["string", "null"] },
+    "command_line": { "type": ["string", "null"] },
+    "argv": { "type": "array", "items": { "type": "string" } },
+    "wrapper_env": {
+      "type": "object",
+      "description": "HAFISCAL_* env vars plus BLAS thread counts EXPLICITLY present at run start (the subset a human exported). For the full surface see all_known_flags.",
+      "additionalProperties": { "type": ["string", "null"] }
+    },
+    "set_flags": {
+      "type": "object",
+      "description": "ONLY the ENV_FLAGS.md-registry HAFISCAL_* flags that were SET, mapped to their value in force. Unset flags are intentionally omitted — they take their code default at git_commit. Reproduce by setting these values and checking out git_commit.",
+      "additionalProperties": { "type": ["string", "null"] }
+    },
+    "env_flags_registry": {
+      "type": ["object", "null"],
+      "description": "Pointer to the authoritative flag registry (ENV_FLAGS.md) + counts (flag_count/flags_set/flags_unset), so the omitted (unset) flags can be resolved to their documented defaults at the recorded commit.",
+      "properties": {
+        "path": { "type": ["string", "null"] },
+        "sha256": { "type": ["string", "null"] },
+        "flag_count": { "type": "integer" },
+        "flags_set": { "type": "integer" },
+        "flags_unset": { "type": "integer" }
+      },
+      "additionalProperties": true
+    },
+    "resolved_config": {
+      "type": "object",
+      "description": "Resolved effective config from config.effective_config().",
+      "additionalProperties": true
+    },
+    "manifest_ref": { "type": ["string", "null"] },
+    "registry_run_id": { "type": ["string", "null"] },
+    "reuse": {
+      "type": "object",
+      "description": "Schema v2: what the run actually REUSED (cache HITs, guarded ad_full verdicts, belief seeds, platform observations), collected in-process at each reuse decision point. determinism_class is DERIVED: 'cache-history-dependent' iff any event has byte_effect 'tolerance' (documented tolerance-class reuse), else 'pure-config'. Platform events never flip the class. v1 sidecars (no reuse key) remain valid.",
+      "required": ["determinism_class", "events"],
+      "properties": {
+        "determinism_class": {
+          "enum": ["pure-config", "cache-history-dependent"]
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["kind", "outcome", "byte_effect"],
+            "properties": {
+              "kind": { "type": "string" },
+              "outcome": { "type": "string" },
+              "byte_effect": { "enum": ["exact", "tolerance", "none"] },
+              "t_utc": { "type": "string" },
+              "source_child": { "type": "string", "description": "Set on events ingested from a battery child's fragment." }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "extra": { "type": "object" }
+  }
+}
