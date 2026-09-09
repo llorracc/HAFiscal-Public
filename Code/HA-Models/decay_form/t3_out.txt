@@ -1,0 +1,16 @@
+[grid40] solved (m_top=40.96, S=4, Q_emp range [1.506, 1.508])
+[endo] solved (m_top=258.11, S=4, Q_emp range [1.304, 1.306])
+
+== T3: {solve grid} x {decay form} on the College GIC-cap atom, C=1 ==
+
+  [grid40] exp-vs-powerlaw:  in-sample max|dC/C| = 5.209e-03
+    tail max-over-states |dC/C|: m=50:6.09e-03  m=100:1.25e-02  m=200:1.89e-02  m=400:1.50e-02  m=700:7.32e-03  m=1000:3.76e-03  m=1300:2.17e-03
+
+  [endo] exp-vs-powerlaw:  in-sample max|dC/C| = 1.456e-03
+    tail max-over-states |dC/C|: m=50:1.62e-03  m=100:2.31e-03  m=200:3.50e-03  m=400:6.31e-03  m=700:7.49e-03  m=1000:5.89e-03  m=1300:4.25e-03
+
+  grid40 forms vs the extended-grid solve (reference, in-sample to m=258):
+         m  |exp40-endo|/c   |pl40-endo|/c   ratio
+        50       6.138e-02       5.491e-02     1.1
+       100       7.655e-02       6.305e-02     1.2
+       200       6.945e-02       4.928e-02     1.4

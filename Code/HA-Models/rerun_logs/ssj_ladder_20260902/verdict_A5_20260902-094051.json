@@ -1,0 +1,17 @@
+{
+ "rung": "A5",
+ "stamp": "20260902-094051",
+ "gates": {
+  "sst:zeroth_column_flow_budget": {
+   "measured": 0,
+   "threshold": 0,
+   "PASS": true
+  },
+  "weighted_aggregation_identity": {
+   "measured": 2.6645352591003757e-15,
+   "threshold": 1e-12,
+   "PASS": true
+  }
+ },
+ "PASS": true
+}

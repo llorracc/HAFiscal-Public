@@ -1,0 +1,177 @@
+#!/bin/bash
+
+# HAFiscal Pre-Push Hook
+# Tests that ./reproduce.sh --docs main completes successfully before allowing push
+
+# Color codes for output
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo -e "${BLUE}🚀 HAFiscal Pre-Push CI Check${NC}"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+# Skip pre-push checks for gh-pages branch (generated content, no source code)
+# Check current branch name directly (more reliable than parsing stdin)
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
+if [ "$CURRENT_BRANCH" = "gh-pages" ]; then
+    echo -e "${YELLOW}ℹ️  gh-pages branch detected - skipping pre-push checks${NC}"
+    echo "   (gh-pages contains generated website content, not source code)"
+    echo ""
+    exit 0
+fi
+
+# Check if we can bypass this hook (BEFORE reading stdin to prevent hangs)
+if [ -n "$HAFISCAL_SKIP_PREPUSH" ]; then
+    echo -e "${YELLOW}⚠️  HAFISCAL_SKIP_PREPUSH is set - skipping pre-push checks${NC}"
+    echo ""
+    exit 0
+fi
+
+# Skip pre-push checks in non-interactive mode (automated workflows)
+# MUST check this BEFORE the while read loop to prevent hanging on stdin
+if [ ! -t 0 ]; then
+    echo -e "${YELLOW}ℹ️  Non-interactive mode detected - skipping pre-push checks${NC}"
+    echo "   (Assumes compilation already verified in workflow)"
+    echo ""
+    exit 0
+fi
+
+# Get push details (only runs in interactive mode now)
+while read local_ref local_sha remote_ref remote_sha
+do
+    if [ "$local_sha" = "0000000000000000000000000000000000000000" ]; then
+        # Deleting a branch, skip checks
+        echo "Branch deletion detected - skipping pre-push checks"
+        exit 0
+    fi
+    
+    if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
+        # New branch
+        RANGE="$local_sha"
+    else
+        # Updating existing branch
+        RANGE="$remote_sha..$local_sha"
+    fi
+    
+    BRANCH=$(echo "$remote_ref" | sed 's/refs\/heads\///')
+    COMMIT_COUNT=$(git rev-list --count "$RANGE" 2>/dev/null || echo "1")
+    
+    echo "   Branch: $BRANCH"
+    echo "   Commits to push: $COMMIT_COUNT"
+    echo "   Latest commit: $(git log -1 --oneline $local_sha)"
+    echo ""
+done
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# Deactivate conda if present to avoid architecture conflicts
+# Git hooks run in a minimal environment where conda activation can interfere
+# with the project's platform-specific virtual environment
+if command -v conda >/dev/null 2>&1; then
+    if [ -n "${CONDA_DEFAULT_ENV:-}" ] || [ -n "${CONDA_PREFIX:-}" ]; then
+        echo "ℹ️  Detected active conda environment - deactivating for clean test"
+        # Deactivate conda (may need multiple calls to fully exit nested envs)
+        for i in $(seq 1 5); do
+            conda deactivate 2>/dev/null || true
+            [ -z "${CONDA_DEFAULT_ENV:-}" ] && break
+        done
+        
+        # Unset conda environment variables to prevent reactivation
+        unset CONDA_DEFAULT_ENV
+        unset CONDA_PREFIX
+        unset CONDA_PYTHON_EXE
+        unset CONDA_SHLVL
+        unset CONDA_EXE
+        unset _CE_CONDA
+        unset _CE_M
+        
+        # Set flag to tell reproduce.sh that conda should stay disabled
+        export HAFISCAL_DISABLE_CONDA=1
+        
+        echo "   Conda fully deactivated - reproduce.sh will use project venv"
+        echo ""
+    fi
+fi
+
+echo "📝 Running: ./reproduce.sh --docs main"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "This ensures the paper compiles successfully before pushing..."
+echo ""
+
+# Create a log file for the output
+LOG_FILE="/tmp/hafiscal-prepush-$(date +%Y%m%d-%H%M%S).log"
+
+# Detect if we're in an interactive shell
+if [ -t 0 ]; then
+    # Interactive shell - show output in real-time
+    echo "   (Running in interactive mode - output shown in real-time)"
+    echo "   Log will also be saved to: $LOG_FILE"
+    echo ""
+    
+    # Use tee to show output AND save to log file
+    if ./reproduce.sh --docs main 2>&1 | tee "$LOG_FILE"; then
+        EXIT_CODE=${PIPESTATUS[0]}
+    else
+        EXIT_CODE=${PIPESTATUS[0]}
+    fi
+else
+    # Non-interactive shell (CI/automation) - capture to log file only
+    echo "   (Running in non-interactive mode - output captured to log)"
+    echo "   Full output will be logged to: $LOG_FILE"
+    echo ""
+    
+    # Run the reproduce script with --docs main
+    # Capture both stdout and stderr
+    if ./reproduce.sh --docs main > "$LOG_FILE" 2>&1; then
+        EXIT_CODE=$?
+    else
+        EXIT_CODE=$?
+    fi
+fi
+
+# Check the result
+if [ $EXIT_CODE -eq 0 ]; then
+    echo ""
+    echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${GREEN}✅ Pre-push check PASSED${NC}"
+    echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+    echo "   Paper compiles successfully"
+    echo "   Full log: $LOG_FILE"
+    echo ""
+    echo "🚀 Proceeding with push..."
+    echo ""
+    exit 0
+else
+    echo ""
+    echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${RED}❌ Pre-push check FAILED${NC}"
+    echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+    echo "   ./reproduce.sh --docs main exited with code: $EXIT_CODE"
+    echo ""
+    echo "Last 50 lines of output:"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    tail -50 "$LOG_FILE"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+    echo "   Full log: $LOG_FILE"
+    echo ""
+    echo "Options:"
+    echo "   1. Fix the errors and try pushing again"
+    echo "   2. Review full log: cat $LOG_FILE"
+    echo "   3. Bypass this check (NOT RECOMMENDED):"
+    echo "      HAFISCAL_SKIP_PREPUSH=1 git push"
+    echo ""
+    echo "🛑 Push aborted to prevent broken code from reaching remote"
+    echo ""
+    exit 1
+fi
+

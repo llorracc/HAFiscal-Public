@@ -1,0 +1,273 @@
+name: Push Document Build
+
+on:
+  push:
+    branches: [ main, master, 20250612_finish-latexmk-fixes ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: push-docs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-docs:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        # Note: Windows removed from matrix - users must use WSL2 (Linux) per project requirements
+        # Windows users follow Linux installation instructions via WSL2
+    outputs:
+      docs_changed: ${{ steps.job-output.outputs.docs_changed }}
+    env:
+      ACTIONS_STEP_DEBUG: true
+      ACTIONS_RUNNER_DEBUG: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install and configure LaTeX (Ubuntu) - SST
+        if: runner.os == 'Linux'
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "📄 Installing TeX Live via SST (Single Source of Truth)"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          
+          # Call the SST setup script (reproduce/docker/setup.sh)
+          # This installs prerequisites, TeX Live 2025 scheme-basic + required packages via tlmgr
+          # Uses ONLY tlmgr (not apt-managed TeX Live packages)
+          bash reproduce/docker/setup.sh
+          
+          echo ""
+          echo "📊 Disk usage after LaTeX install:"
+          df -h / | tail -1
+
+      - name: Install and configure LaTeX (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "📄 Installing MacTeX on macOS"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          
+          # Check if Homebrew is installed
+          if ! command -v brew >/dev/null 2>&1; then
+            echo "Installing Homebrew..."
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          fi
+          
+          # Check if MacTeX is already installed
+          if [ -d "/Library/TeX/texbin" ] && command -v pdflatex >/dev/null 2>&1; then
+            echo "✅ MacTeX appears to be already installed"
+            pdflatex --version | head -1
+          else
+            echo "Installing MacTeX via Homebrew (this may take 10-15 minutes)..."
+            brew install --cask mactex
+            
+            # Add MacTeX to PATH for this session
+            export PATH="/Library/TeX/texbin:$PATH"
+            echo "/Library/TeX/texbin" >> $GITHUB_PATH
+          fi
+          
+          # Ensure MacTeX is in PATH
+          export PATH="/Library/TeX/texbin:$PATH"
+          echo "/Library/TeX/texbin" >> $GITHUB_PATH
+          
+          # Verify installation
+          if command -v pdflatex >/dev/null 2>&1; then
+            echo "✅ pdflatex installed: $(which pdflatex)"
+            pdflatex --version | head -1
+          else
+            echo "❌ pdflatex not found after installation"
+              exit 1
+          fi
+          
+          # Install additional packages via tlmgr if needed
+          # MacTeX comes with most packages, but we may need some from the SST
+          echo ""
+          echo "Checking for additional packages from SST..."
+          if [ -f "@resources/environment/extract-standalone-packages.sh" ]; then
+            PACKAGES_TO_INSTALL=$(bash @resources/environment/extract-standalone-packages.sh | tr '\n' ' ')
+            if [ -n "$PACKAGES_TO_INSTALL" ]; then
+              echo "Installing additional packages: $PACKAGES_TO_INSTALL"
+              sudo tlmgr install $PACKAGES_TO_INSTALL || echo "Some packages may already be installed"
+            fi
+          fi
+          
+          echo ""
+          echo "📊 Disk usage after LaTeX install:"
+          df -h / | tail -1
+
+      - name: Verify LaTeX tools are in PATH
+        shell: bash
+        run: |
+          echo "=== Verifying LaTeX tools are available ==="
+          
+          # macOS: Ensure MacTeX is in PATH
+          if [[ "$RUNNER_OS" == "macOS" ]]; then
+            export PATH="/Library/TeX/texbin:$PATH"
+            echo "/Library/TeX/texbin" >> $GITHUB_PATH
+          fi
+          
+          # Linux: Source TeX Live environment if available
+          if [[ "$RUNNER_OS" == "Linux" ]]; then
+          if [ -f /etc/profile.d/texlive.sh ]; then
+            source /etc/profile.d/texlive.sh
+          fi
+          
+          # Check for latexmk in common locations
+          if ! command -v latexmk >/dev/null 2>&1; then
+            echo "latexmk not in PATH, searching..."
+            for texlive_bin in /usr/local/texlive/*/bin/*/latexmk /usr/bin/latexmk; do
+              if [ -f "$texlive_bin" ]; then
+                echo "Found latexmk at: $texlive_bin"
+                echo "$(dirname "$texlive_bin")" >> $GITHUB_PATH
+                break
+              fi
+            done
+            fi
+          fi
+          
+          # Verify tools are available
+          if command -v latexmk >/dev/null 2>&1; then
+            echo "✅ latexmk: $(which latexmk)"
+            latexmk --version | head -1
+          else
+            echo "❌ latexmk not found"
+            exit 1
+          fi
+          
+          if command -v pdflatex >/dev/null 2>&1; then
+            echo "✅ pdflatex: $(which pdflatex)"
+            pdflatex --version | head -1
+          else
+            echo "❌ pdflatex not found"
+            exit 1
+          fi
+
+      - name: Build PDFs
+        shell: bash
+        env:
+          LATEX_OPTS: "-interaction=nonstopmode"
+        run: |
+          echo "=== Building PDFs with latexmk ==="
+          
+          # macOS: Ensure MacTeX is in PATH
+          if [[ "$RUNNER_OS" == "macOS" ]]; then
+            export PATH="/Library/TeX/texbin:$PATH"
+          fi
+          
+          # Linux: Ensure TeX Live is in PATH
+          if [[ "$RUNNER_OS" == "Linux" ]]; then
+          if [ -f /etc/profile.d/texlive.sh ]; then
+            source /etc/profile.d/texlive.sh
+            fi
+          fi
+          
+          # Ensure TEXINPUTS includes @local/ (from setup-latex-minimal.sh via GITHUB_ENV)
+          # This is a fallback in case GITHUB_ENV wasn't properly sourced
+          if [[ -z "${TEXINPUTS:-}" ]] || [[ "$TEXINPUTS" != *"@local"* ]]; then
+            REPO_ROOT="$GITHUB_WORKSPACE"
+            if [[ -d "$REPO_ROOT/@local" ]]; then
+              export TEXINPUTS="${REPO_ROOT}/@local//:${TEXINPUTS:-}"
+              echo "Added @local/ to TEXINPUTS (fallback)"
+            fi
+          fi
+          echo "TEXINPUTS=${TEXINPUTS:-<not set>}"
+          
+          # Verify latexmk is available before proceeding
+          if ! command -v latexmk >/dev/null 2>&1; then
+            echo "❌ ERROR: latexmk is not available"
+            echo "PATH: $PATH"
+            echo "Searching for latexmk..."
+            find /usr -name latexmk 2>/dev/null | head -5 || echo "latexmk not found"
+            exit 1
+          fi
+          
+          if [ -f reproduce/reproduce_documents.sh ]; then
+            bash reproduce/reproduce_documents.sh
+          else
+            echo "Warning: reproduce/reproduce_documents.sh not found"
+            # Fallback: try to compile main document if it exists
+            if [ -f HAFiscal.tex ]; then
+              latexmk -pdf -interaction=nonstopmode HAFiscal.tex
+            fi
+          fi
+          echo "PDF build completed"
+
+      - name: Upload PDFs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: PDFs-${{ matrix.os }}
+          if-no-files-found: ignore
+          path: |
+            HAFiscal.pdf
+            HAFiscal-online-appendix.pdf
+            HAFiscal-Slides.pdf
+
+      # GitHub Pages deployment only runs on Ubuntu
+      - name: Check for docs directory changes
+        if: runner.os == 'Linux'
+        id: docs-changes
+        run: |
+          echo "=== Checking for docs directory changes ==="
+          if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q '^docs/'; then
+            echo "docs_changed=true" >> $GITHUB_OUTPUT
+            echo "✅ Changes detected in docs/ directory"
+          else
+            echo "docs_changed=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ No changes in docs/ directory"
+          fi
+
+      - name: Upload docs artifact for Pages deployment
+        if: runner.os == 'Linux' && steps.docs-changes.outputs.docs_changed == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      
+      # Output docs_changed for deploy-pages job
+      # Set output on all matrix runs to ensure it's always defined
+      # Use if: always() so this runs even if previous steps failed
+      - name: Set job output
+        id: job-output
+        if: always()
+        run: |
+          if [ "${{ runner.os }}" == "Linux" ] && [ "${{ steps.docs-changes.outcome }}" == "success" ]; then
+            echo "docs_changed=${{ steps.docs-changes.outputs.docs_changed }}" >> $GITHUB_OUTPUT
+            echo "Set docs_changed=${{ steps.docs-changes.outputs.docs_changed }} (Linux)"
+          else
+            echo "docs_changed=false" >> $GITHUB_OUTPUT
+            echo "Set docs_changed=false (${{ runner.os }})"
+          fi
+
+  # Separate deployment job that only runs on main/master branches when docs changed
+  # Note: With matrix strategy, we need to check if output exists and equals 'true'
+  deploy-pages:
+    needs: build-docs
+    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && (needs.build-docs.outputs.docs_changed == 'true')
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Pages deployment summary
+        run: |
+          echo "🌐 GitHub Pages deployed successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📁 Deployed from: \`docs/\`" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 URL: ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "📦 Commit: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY

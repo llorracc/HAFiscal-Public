@@ -1,0 +1,7 @@
+ARM=arm1_zeroth_mono ENGINE=monolith deltas: HAFISCAL_STEP4_ZEROTH_FIX=1 ; start 2026-08-28 13:08:57
+jacobians rc=0 wall_s=1507  18461835264 maximum resident set size
+be505694fbab02cf17bb54bf297f0b0e719f3b4b139283be44e041e0ae4d017a  /Users/ccarroll/ui_ext_20260826/hank_ladder_20260828/arm1_zeroth_mono/HA_Fiscal_Jacs.obj
+ge rc=0 wall_s=6
+ge_dump rc=0
+end 2026-08-28 13:34:16
+DONE

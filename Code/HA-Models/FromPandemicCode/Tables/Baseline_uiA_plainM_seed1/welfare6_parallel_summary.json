@@ -1,0 +1,67 @@
+{
+  "parametrization": "Baseline",
+  "wall_clock_s": 1524.5087041854858,
+  "cpu_sum_s": 1524.4563868045807,
+  "longest_s": 190.04707741737366,
+  "per_scenario": {
+    "recession_AD": {
+      "rc": 0,
+      "wall_s": 188.09404683113098
+    },
+    "recessionUI_AD": {
+      "rc": 0,
+      "wall_s": 188.0785632133484
+    },
+    "recessionCheck_AD": {
+      "rc": 0,
+      "wall_s": 190.04707741737366
+    },
+    "recessionTaxCut_AD": {
+      "rc": 0,
+      "wall_s": 190.0453896522522
+    },
+    "base": {
+      "rc": 0,
+      "wall_s": 44.007975578308105
+    },
+    "Check": {
+      "rc": 0,
+      "wall_s": 56.00913381576538
+    },
+    "UI": {
+      "rc": 0,
+      "wall_s": 56.00916266441345
+    },
+    "TaxCut": {
+      "rc": 0,
+      "wall_s": 56.00966429710388
+    },
+    "recession": {
+      "rc": 0,
+      "wall_s": 138.0286087989807
+    },
+    "recessionUI": {
+      "rc": 0,
+      "wall_s": 140.05529117584229
+    },
+    "recessionCheck": {
+      "rc": 0,
+      "wall_s": 140.03991651535034
+    },
+    "recessionTaxCut": {
+      "rc": 0,
+      "wall_s": 138.0315568447113
+    }
+  },
+  "welfare6": {
+    "check_norec": 0.9621603519385966,
+    "ui_norec": 0.8525170369041299,
+    "taxcut_norec": 0.99010124671392,
+    "check_rec": 1.0147407707731129,
+    "ui_rec": 1.7449536072907295,
+    "taxcut_rec": 0.9919006358688023,
+    "check_rec_AD": 1.3672037753926738,
+    "ui_rec_AD": 2.036393935748623,
+    "taxcut_rec_AD": 1.1330484674960546
+  }
+}

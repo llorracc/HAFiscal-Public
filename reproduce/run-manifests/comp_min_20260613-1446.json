@@ -1,0 +1,483 @@
+{
+  "schema_version": "1",
+  "invocation": {
+    "command_line": "reproduce.sh --comp min --mode default --accept-unpushed --accept-dirty",
+    "argv": [
+      "reproduce.sh",
+      "--comp",
+      "min",
+      "--mode",
+      "default",
+      "--accept-unpushed",
+      "--accept-dirty"
+    ],
+    "scope": "min",
+    "modifiers": [],
+    "started_at_utc": "2026-06-13T14:46:54Z",
+    "ended_at_utc": "2026-06-13T14:48:12Z",
+    "wall_clock_seconds": 78.0,
+    "exit_code": 0,
+    "user": "econ-ark",
+    "hostname": "ECON-MW-7MYCC14",
+    "platform": "linux-x86_64",
+    "platform_release": "6.6.87.2-microsoft-standard-WSL2",
+    "hafiscal_env_vars_at_start": {
+      "HAFISCAL_RUN_STEP_1": null,
+      "HAFISCAL_RUN_STEP_2": null,
+      "HAFISCAL_RUN_STEP_3": null,
+      "HAFISCAL_RUN_STEP_4": null,
+      "HAFISCAL_RUN_STEP_5": null,
+      "HAFISCAL_MC_SHUFFLE": null,
+      "HAFISCAL_INCOME_SHUFFLE": null,
+      "HAFISCAL_SPLURGE_OLD": null,
+      "HAFISCAL_SIM_METHOD": null
+    }
+  },
+  "code_state": {
+    "branch": "0.14.1-to-0.17.0-upgrade-validation_TM-vs-MC",
+    "git_commit": "91cce1eeb51d752de132450a726e50f2a9878d44",
+    "git_dirty": true,
+    "git_status_summary": "28 file(s) modified/added/deleted; first 5: M Code/HA-Models/FromPandemicCode/EstimParameters.py;  M Code/HA-Models/FromPandemicCode/Figures/HANK_IRFs_w_splurge.pdf;  M Code/HA-Models/FromPandemicCode/Figures/HANK_IRFs_w_splurge.svg;  M Code/HA-Models/FromPandemicCode/Figures/HANK_UI_IRF.pdf;  M Code/HA-Models/FromPandemicCode/Figures/HANK_UI_IRF.svg",
+    "git_unpushed_commits": [],
+    "preflight_status": "overridden",
+    "overrides_used": [
+      "git_dirty:user-accepted via --accept-dirty",
+      "git_unpushed:user-accepted via --accept-unpushed"
+    ],
+    "hark_version": "0.17.1",
+    "hark_install_path": "/home/shared/github/econ-ark/HARK/HARK",
+    "hark_git_commit": "ce0cb5d6a3016fabf5823702985d35a63a1502b8",
+    "python_version": "3.11.14"
+  },
+  "environment_lock": {
+    "pip_freeze_path": "reproduce/run-manifests/comp_min_20260613-1446_pip_freeze.txt",
+    "pip_freeze_sha256": "3a3b4dce380d8ec1c049b7358734928c3a086ce95d563fa924dd351528d05c8a",
+    "uv_lockfile_sha256": "42752f1e25a3d27d8cfc7654b95a88854421758006b770f267382b343877fcc8",
+    "python_version_file": null
+  },
+  "input_data_hashes": {
+    "Code/HA-Models/Target_AggMPCX_LiquWealth/LiquWealth_Distribution_a.xlsx": "70d6c8a258dfbfa36d458f45867c2370fbc29ecb216483b429243044c5c919ef",
+    "Code/HA-Models/Target_AggMPCX_LiquWealth/LiquWealth_Distribution_b.xlsx": "72f4c7da3b5968bdfcf3201d28c857e20b5086ad7e8a325c63cf902c3b226afe",
+    "Code/HA-Models/Target_AggMPCX_LiquWealth/Data_AggMPC_LotteryWin.xlsx": "38bfe8fd231b6e2b7db25c09b38c9d439ebe5ab7beee75cf1cb18e5e680c6e61"
+  },
+  "calibration_inputs": {
+    "Result_AllTarget_path": "Code/HA-Models/Target_AggMPCX_LiquWealth/Result_AllTarget.txt",
+    "Result_AllTarget_contents_sha256": "beff9cd639d5e3edb19b6e3a0349b617a80335854aaeb91274ed4c970edde4f2",
+    "Result_AllTarget_parsed": {
+      "splurge": 0.2571044750751492,
+      "beta": 0.9608076235664129,
+      "nabla": 0.07128652461546793
+    },
+    "extra_calibration_files": {
+      "Code/HA-Models/Target_AggMPCX_LiquWealth/Result_AllTarget_Splurge0.txt": "4bc0b7de05e0a785b8d95dfce53d8ae4a0e402b1671bd676c3996f4aeea19839"
+    }
+  },
+  "steps_executed": [
+    {
+      "step": "min",
+      "command": "./reproduce/reproduce_computed_min.sh",
+      "started_at_utc": "2026-06-13T14:46:53Z",
+      "ended_at_utc": "2026-06-13T14:48:12Z",
+      "wall_clock_seconds": 79.0,
+      "exit_code": 0
+    }
+  ],
+  "outputs": {
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/Multiplier.tex": {
+      "sha256": "c8917900f002919e9cfd329a25b96bc053569c53b79fecaee215d97b9825dcd9",
+      "bytes": 487,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/Multiplier_TM_only.tex": {
+      "sha256": "6ebe1fa0d89f770284aec21703c113f6a99dd6ffbf5f9034cfe97c0a9058a70a",
+      "bytes": 510,
+      "mtime_utc": "2026-04-11T15:04:45Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/Multiplier_TM_only_pre_doob.tex": {
+      "sha256": "6ebe1fa0d89f770284aec21703c113f6a99dd6ffbf5f9034cfe97c0a9058a70a",
+      "bytes": 510,
+      "mtime_utc": "2026-05-01T14:24:44Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/Multiplier_doob_cdc.tex": {
+      "sha256": "b61ced3863dd6999f8699296a4bee7399cfba50dc27f8d2aafc052adade79dad",
+      "bytes": 510,
+      "mtime_utc": "2026-05-01T14:24:44Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/Multiplier_doob_esc.tex": {
+      "sha256": "b61ced3863dd6999f8699296a4bee7399cfba50dc27f8d2aafc052adade79dad",
+      "bytes": 510,
+      "mtime_utc": "2026-05-01T14:24:44Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/Multiplier_pre_doob.tex": {
+      "sha256": "56a985aa38057797eeab24213985cca4bc864ba6ec65ab14b050a35767e97ab3",
+      "bytes": 510,
+      "mtime_utc": "2026-05-01T14:24:44Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/Multiplier_qmethod_cohort.tex": {
+      "sha256": "b233a025bb6b8f45e2bd0691a893b1d0bf47b5397ce4fb3ad00883bfc7af0e1b",
+      "bytes": 510,
+      "mtime_utc": "2026-05-01T14:24:44Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/Welfare_Baseline_Results.csv": {
+      "sha256": "cc228aa5d8a3d40c68474fdf44a3b5d0b0643c38225482eb66ce5fe9ea97268c",
+      "bytes": 400,
+      "mtime_utc": "2026-05-04T08:00:10Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/welfare1.tex": {
+      "sha256": "76c8909ffc0f9474223f68ae791188d05df216152c00cfcb16daee8c6f9c0255",
+      "bytes": 259,
+      "mtime_utc": "2026-05-04T08:00:10Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/welfare2.tex": {
+      "sha256": "cddc33ca58857ff5d5a708cfa06ae566abe16a23f83ff739a35cf9aada2381eb",
+      "bytes": 261,
+      "mtime_utc": "2026-05-04T08:00:10Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/welfare3.tex": {
+      "sha256": "a45b6513d6b7c51be7e4acd8d022830e63b2dba598be2ce8595441130c252bf7",
+      "bytes": 333,
+      "mtime_utc": "2026-05-04T08:00:10Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/welfare4.tex": {
+      "sha256": "2ef6ec619a97f8926e456a49b66d62802ee244a8b7496464ce87c83339666230",
+      "bytes": 288,
+      "mtime_utc": "2026-05-04T08:00:10Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/welfare5.tex": {
+      "sha256": "57eeb3a71c8fd268d8865e2a6d8384b05b1b25220f4af16f051182c2bec3edcf",
+      "bytes": 299,
+      "mtime_utc": "2026-05-04T08:00:10Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/welfare6.tex": {
+      "sha256": "d386fa384278f1bbcbc0c00e82f1f919cb450daa9f6d2f408553ba521de3f846",
+      "bytes": 382,
+      "mtime_utc": "2026-05-10T20:20:33Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/welfare6_parallel_summary.json": {
+      "sha256": "b89fc57fc703082b35b14231606e9f4ae64631601763cf5a8d7dfccee70d455e",
+      "bytes": 1447,
+      "mtime_utc": "2026-05-16T17:26:20Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Tables/Baseline/welfare6_source_audit.txt": {
+      "sha256": "e6f888dd1719977a20ebf66f300f7074446b230654aff7be4f238d66958e5fe8",
+      "bytes": 1046,
+      "mtime_utc": "2026-05-10T20:20:33Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/C_Multiplier_Baseline_Results.csv": {
+      "sha256": "9185dee8d8dec4a6f6f0d61087951bd473c3d0f8080f2b9b591ac08dcd6064d6",
+      "bytes": 9933,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Check_results.csv": {
+      "sha256": "a0d5bf31e113b2926bba0ee03c00c9eb3a7c661a2d7acfd8e2275792c6e63a31",
+      "bytes": 16301,
+      "mtime_utc": "2026-06-11T05:28:12Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multiplier_Check.jpg": {
+      "sha256": "867abefd890e103b5f3ac2eda466fc69a849305107f03ddbed09bd08bb7305f6",
+      "bytes": 15051,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multiplier_Check.pdf": {
+      "sha256": "b6a2ea3305303fc6b0b8196114b11e2cd6aca395efcaeefbd2afd9e43336ebbc",
+      "bytes": 9246,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multiplier_Check.png": {
+      "sha256": "95952c1e3b8ef68ab2715295ba1429be62d2363390283756cb7126f8c48c7530",
+      "bytes": 15642,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multiplier_Check.svg": {
+      "sha256": "553a37a30e39d67aecc449562b4bd472f52348643af239626627a0320eb47fdb",
+      "bytes": 19706,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multiplier_TaxCut.jpg": {
+      "sha256": "af3a5175e6b739b694d1d249899f3937dc6cce3393a6880bc2f285e08fc49265",
+      "bytes": 15312,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multiplier_TaxCut.pdf": {
+      "sha256": "e9f31dfc2bf225fc5a3273de0dc50cc1686d0d6a85f6dca5515726333ccc009d",
+      "bytes": 9244,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multiplier_TaxCut.png": {
+      "sha256": "6f0d4cdd45ed181db010e535c19046c669c23ef4aee9726efd2f9f64c322f5b9",
+      "bytes": 16301,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multiplier_TaxCut.svg": {
+      "sha256": "f3c8732acbf5e522968950d5b27a62ae65be56cad58f4bfca7c5fee64c4772eb",
+      "bytes": 19714,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multiplier_UI.jpg": {
+      "sha256": "a884d91493895316c3875ac67585d9b32ff580ab254f6c8fa7b52427cd84bb7e",
+      "bytes": 12887,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multiplier_UI.pdf": {
+      "sha256": "768463e1a9134cdd6d0fb9dd420ad6ffc1fc298dde94dff48e44873ee0d310e3",
+      "bytes": 9122,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multiplier_UI.png": {
+      "sha256": "57c61b9543a48da53c85f64cf8a673c70e92e276144522411ec6813ccbd4604b",
+      "bytes": 10274,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multiplier_UI.svg": {
+      "sha256": "2837c76188f1996271ce3d85ed71f546275155f5ec6d83807da1a35052680a1c",
+      "bytes": 19404,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multipliers.jpg": {
+      "sha256": "b8caee1c002a370a4d305b7a8f55498f88f4e3a2fad263bc9cf0caf422cd5621",
+      "bytes": 20041,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multipliers.pdf": {
+      "sha256": "75e600ec129c8c34d0bf77286037bbffc28e04c8dda9e0ae0154fce842c73ce6",
+      "bytes": 13589,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multipliers.png": {
+      "sha256": "2cdfb8971657f1e80c5a39a76f149b3f452b8f6660ff909b985ff87543e17187",
+      "bytes": 25374,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multipliers.svg": {
+      "sha256": "195ef13708ee066866c967ab9c0bdbb177a4c815872ea01c43b9ce9e03f39983",
+      "bytes": 28044,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multipliers_withHank.jpg": {
+      "sha256": "e73c83b2d35940b65a146c2908c4ac4f4d842a4ed317b11f6a38aa3fecc54632",
+      "bytes": 27791,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multipliers_withHank.pdf": {
+      "sha256": "7d76cb706b31ec742f3eb9e3f34de54bb53af822e361c04aeeec09cbd64af8d7",
+      "bytes": 15265,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multipliers_withHank.png": {
+      "sha256": "d762d400441d38bf77904fe3c79d07a6b96885376e10ba703a966236b8f4c208",
+      "bytes": 43643,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/Cumulative_multipliers_withHank.svg": {
+      "sha256": "32c78df06d7d12be2dd479a43261a2c438b59983dc8005d9d9bf896cf28a7db1",
+      "bytes": 37407,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/NPV_Multiplier_Baseline_Results.csv": {
+      "sha256": "65475c6602e2fc5395f2b3b64623bb1e41e2f5b3f4f4d8d09329e2454a31bb1d",
+      "bytes": 19798,
+      "mtime_utc": "2026-06-11T13:33:38Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/TaxCut_results.csv": {
+      "sha256": "c91bdd7ed6f39343132f8315dd1354771ec63ebf9f05a958cbc6deb32974a3d0",
+      "bytes": 16301,
+      "mtime_utc": "2026-06-11T04:36:22Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/UI_results.csv": {
+      "sha256": "e2e998cc4e1a7fcf2ab767ea364645590292c7c9a486857c02c06d659033dd8b",
+      "bytes": 16301,
+      "mtime_utc": "2026-06-11T04:36:39Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/base_results.csv": {
+      "sha256": "220126341861c9a7594d0b85fa2c2e4ea989936bf5a22596e39c052f6c7d1b00",
+      "bytes": 3965633,
+      "mtime_utc": "2026-06-11T13:26:19Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/base_results_full.csv": {
+      "sha256": "8acef7366cac004a12310ba37281d9c07fb0e82a6d92cb2057ac225b50f1ed66",
+      "bytes": 25636115,
+      "mtime_utc": "2026-05-06T19:32:36Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionCheck_all_results.csv": {
+      "sha256": "e1b261f3b3ac7ca69a647c56e040ab72f8867e4f1546f3c7a820c6a8b8dd1407",
+      "bytes": 341174,
+      "mtime_utc": "2026-06-11T06:40:00Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionCheck_all_results_AD.csv": {
+      "sha256": "d5141c187fd0c421a83fa6d98dab2622c4eb7888f455c34465d0433f40926ba6",
+      "bytes": 341174,
+      "mtime_utc": "2026-06-11T11:08:07Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionCheck_all_results_firstRoundAD.csv": {
+      "sha256": "8db1b86dd12b9b8847022b047ed97522e4f785f19bd687fdc3395d36ec126198",
+      "bytes": 341174,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionCheck_results.csv": {
+      "sha256": "63e7ae478d6f77f72afef50f2d172bf06978acf8ea63bada4329f67d73f1e290",
+      "bytes": 13061,
+      "mtime_utc": "2026-06-11T06:40:00Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionCheck_results_AD.csv": {
+      "sha256": "c0e8b201c4aaeb8db1bfd1c206bdc67ed209e17018d8ae2d343d7be064c680f8",
+      "bytes": 13061,
+      "mtime_utc": "2026-06-11T11:08:07Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionCheck_results_firstRoundAD.csv": {
+      "sha256": "00c042059b30b6bfa3d43f5139f7dd48d0882e6aaa95500a9636e428ef05752b",
+      "bytes": 13061,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionTaxCut_all_results.csv": {
+      "sha256": "4e5f32b598c0289087e313fd2f9075607e32b07c6b85555056508977dd8ed4a1",
+      "bytes": 341174,
+      "mtime_utc": "2026-06-11T04:40:35Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionTaxCut_all_results_AD.csv": {
+      "sha256": "b71d8faaa58e33854f0422dd607659e521d7a675bdb9dd768c63b0224b4a6a21",
+      "bytes": 341174,
+      "mtime_utc": "2026-06-11T04:58:16Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionTaxCut_all_results_firstRoundAD.csv": {
+      "sha256": "5fa5d913eb7c27f28e6430adcd8a97fd93315347ac081e44f5083af74ea84518",
+      "bytes": 341174,
+      "mtime_utc": "2026-06-11T05:08:24Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionTaxCut_results.csv": {
+      "sha256": "460c74ffa88c9478533eca44d3de9f0df4ef7646717867ae19c99529aba32b98",
+      "bytes": 13061,
+      "mtime_utc": "2026-06-11T04:40:35Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionTaxCut_results_AD.csv": {
+      "sha256": "7958fda8e632a68eaf7ce89f148a22988015be772e6ad15f846b0a06f1d257a2",
+      "bytes": 13061,
+      "mtime_utc": "2026-06-11T04:58:16Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionTaxCut_results_firstRoundAD.csv": {
+      "sha256": "694ecbf5547836b7a8862f371e1e5b4e8c281b8f84479a68b28c07e8bf4b6f71",
+      "bytes": 13061,
+      "mtime_utc": "2026-06-11T05:08:24Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionUI_all_results.csv": {
+      "sha256": "9082254c9bc1ff0f68951f0cbe3e71096b85159a74928a92d47d96cc5cb39b1a",
+      "bytes": 341174,
+      "mtime_utc": "2026-06-11T04:40:56Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionUI_all_results_AD.csv": {
+      "sha256": "dc918f1ccfa4f07ef7964047b0e69fc1300b02a7d6b74415aa48d4f742dda002",
+      "bytes": 341174,
+      "mtime_utc": "2026-06-11T05:02:56Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionUI_all_results_firstRoundAD.csv": {
+      "sha256": "79959c159e772eabc2c945619d428525b4c61a6f9e73e5c2467d093074fef211",
+      "bytes": 341174,
+      "mtime_utc": "2026-06-11T05:10:44Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionUI_results.csv": {
+      "sha256": "81c32214bbf81aa9011d8c982fa3fb1a45b874f49cde8977d5b698cdb2842d52",
+      "bytes": 13061,
+      "mtime_utc": "2026-06-11T04:40:56Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionUI_results_AD.csv": {
+      "sha256": "f32c9f0571702ac0ec8c8d3763408d34985b722b52d81c469dd653d8e9799dfb",
+      "bytes": 13061,
+      "mtime_utc": "2026-06-11T05:02:56Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recessionUI_results_firstRoundAD.csv": {
+      "sha256": "2c5cd601e821bc438986e4449bcbdd1eec55bbeb672ee02029d2b4e3f5762ad4",
+      "bytes": 13061,
+      "mtime_utc": "2026-06-11T05:10:44Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_Check_relrecession.jpg": {
+      "sha256": "018e63ed50102a79950e4a3b9a9307a3fbcb430ca3185a9256008cdcd5923ff1",
+      "bytes": 20092,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_Check_relrecession.pdf": {
+      "sha256": "09a42cb058769df9cca446cc6bec03ddb6afa42c05367f950a5ccbee3017651c",
+      "bytes": 15089,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_Check_relrecession.png": {
+      "sha256": "eeb7ff2e37b7efce11f25d2d2d3314d5c5afd6564577add7dcf9a266b8153abd",
+      "bytes": 30701,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_Check_relrecession.svg": {
+      "sha256": "8728e87843f58e2ccb33cca0a46924cd7c2cb01f38df48ce2425b0280c09a9f1",
+      "bytes": 35904,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_UI_relrecession.jpg": {
+      "sha256": "966f721c0c609cff383bede37b603f602ec0a837c25ea44062da991c7f0990ea",
+      "bytes": 9986,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_UI_relrecession.pdf": {
+      "sha256": "d54480808c539207b32da9a28a2d776296ed0c260f8f284a20cdf9e1f8d6df7e",
+      "bytes": 9083,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_UI_relrecession.png": {
+      "sha256": "6b074fba9f93a47e4655b4f83e33e9148a50b4ab4fb803f915409260adb05bdb",
+      "bytes": 7811,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_UI_relrecession.svg": {
+      "sha256": "22ca7f4ead5a8add9024eb896b1fd9b34a04fbf0f283dd042c53554251eaf227",
+      "bytes": 19779,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_all_results.csv": {
+      "sha256": "9082254c9bc1ff0f68951f0cbe3e71096b85159a74928a92d47d96cc5cb39b1a",
+      "bytes": 341174,
+      "mtime_utc": "2026-06-11T04:40:49Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_all_results_AD.csv": {
+      "sha256": "dc918f1ccfa4f07ef7964047b0e69fc1300b02a7d6b74415aa48d4f742dda002",
+      "bytes": 341174,
+      "mtime_utc": "2026-06-11T05:03:01Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_all_results_firstRoundAD.csv": {
+      "sha256": "79959c159e772eabc2c945619d428525b4c61a6f9e73e5c2467d093074fef211",
+      "bytes": 341174,
+      "mtime_utc": "2026-06-11T05:10:46Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_results.csv": {
+      "sha256": "81c32214bbf81aa9011d8c982fa3fb1a45b874f49cde8977d5b698cdb2842d52",
+      "bytes": 13061,
+      "mtime_utc": "2026-06-11T04:40:49Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_results_AD.csv": {
+      "sha256": "f32c9f0571702ac0ec8c8d3763408d34985b722b52d81c469dd653d8e9799dfb",
+      "bytes": 13061,
+      "mtime_utc": "2026-06-11T05:03:01Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_results_firstRoundAD.csv": {
+      "sha256": "2c5cd601e821bc438986e4449bcbdd1eec55bbeb672ee02029d2b4e3f5762ad4",
+      "bytes": 13061,
+      "mtime_utc": "2026-06-11T05:10:46Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_taxcut_relrecession.jpg": {
+      "sha256": "b61639c2e985d6d86e293b2bf3a19a96a06f621270fc98f5884bb4a90a93fca0",
+      "bytes": 12855,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_taxcut_relrecession.pdf": {
+      "sha256": "29cbeb46d48b53683c3df527d1ced284266eff005b6688b1b07fdf820f8b67a2",
+      "bytes": 9379,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_taxcut_relrecession.png": {
+      "sha256": "237d72639e9ea12963380ce2843bfd52629f50375c23378f22924e79bfb6b9db",
+      "bytes": 15318,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    },
+    "Code/HA-Models/FromPandemicCode/Figures/Baseline/recession_taxcut_relrecession.svg": {
+      "sha256": "1fdb4c3ee9d447c1a1e1ff68b50b6ed5481cfd6853135301f1151bdafe2642be",
+      "bytes": 19772,
+      "mtime_utc": "2026-06-11T13:33:37Z"
+    }
+  },
+  "log_file": "./reproduce/logs/comp_min_20260613-1046.log"
+}

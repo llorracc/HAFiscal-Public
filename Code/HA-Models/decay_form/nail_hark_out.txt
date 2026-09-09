@@ -1,0 +1,72 @@
+======================================================================
+(1) case A: Gamma=1.01, R=1.04, beta=0.96  -> q* > 1
+
+[caseA] R=1.04 G=1.01 beta=0.96 rho=2.0 sigma_theta=0.1
+  kappa_min=0.039231  h=33.6667  q*=2.7226  Pthorn_G=0.989307
+  clean window m in [20, 286354]  (177 pts)
+  local log-log slope: at m=20 -> -1.165;  at m=286354 -> -0.984
+  TWO-term fit g=A*m^-q* + B*m^-1 : A=92.63  B=0.6179  R2=0.987492
+  one-term m^-q* only : A=243.2  R2=0.879819
+  one-term m^-1   only : B=0.9169  R2=0.955445
+  implied m_cross=(A/B)^(1/(q*-1)) = 18.33
+
+======================================================================
+(2) impatient low-growth: Gamma=1.0, R=1.01, beta=0.90 -> q* < 1
+
+[impatient] R=1.01 G=1.0 beta=0.9 rho=2.0 sigma_theta=0.1
+  kappa_min=0.056025  h=96.0201  q*=0.2086  Pthorn_G=0.953415
+  clean window m in [20, 1000000]  (200 pts)
+  local log-log slope: at m=20 -> -0.114;  at m=1000000 -> -0.349
+  TWO-term fit g=A*m^-q* + B*m^-1 : A=7.348  B=-7.997  R2=0.994011
+  one-term m^-q* only : A=7.081  R2=0.990538
+  one-term m^-1   only : B=119.5  R2=-0.533520
+  implied m_cross=(A/B)^(1/(q*-1)) = 1.113
+
+======================================================================
+(3) Gamma=1 near-knife-edge: Gamma=1.0, R=1.04, beta=0.96 -> q* huge
+
+[gamma1] R=1.04 G=1.0 beta=0.96 rho=2.0 sigma_theta=0.1
+  kappa_min=0.039231  h=25.0000  q*=48.9867  Pthorn_G=0.999200
+  clean window m in [20, 185353]  (169 pts)
+  local log-log slope: at m=20 -> -0.471;  at m=185353 -> -1.001
+  TWO-term fit g=A*m^-q* + B*m^-1 : A=3.293e-66  B=0.008071  R2=0.951381
+  one-term m^-q* only : A=1.864e+60  R2=-0.290407
+  one-term m^-1   only : B=0.008071  R2=0.951381
+  implied m_cross=(A/B)^(1/(q*-1)) = 0.04776
+
+======================================================================
+(4) sigma sweep on case A: is B proportional to sigma^2 ?
+
+[caseA_sig0.05] R=1.04 G=1.01 beta=0.96 rho=2.0 sigma_theta=0.05
+  kappa_min=0.039231  h=33.6667  q*=2.7226  Pthorn_G=0.989307
+  clean window m in [20, 141233]  (164 pts)
+  local log-log slope: at m=20 -> -1.170;  at m=141233 -> -0.992
+  TWO-term fit g=A*m^-q* + B*m^-1 : A=92.16  B=0.5914  R2=0.986813
+  one-term m^-q* only : A=236.3  R2=0.881003
+  one-term m^-1   only : B=0.8889  R2=0.952782
+  implied m_cross=(A/B)^(1/(q*-1)) = 18.74
+
+[caseA_sig0.1] R=1.04 G=1.01 beta=0.96 rho=2.0 sigma_theta=0.1
+  kappa_min=0.039231  h=33.6667  q*=2.7226  Pthorn_G=0.989307
+  clean window m in [20, 286354]  (177 pts)
+  local log-log slope: at m=20 -> -1.165;  at m=286354 -> -0.984
+  TWO-term fit g=A*m^-q* + B*m^-1 : A=92.63  B=0.6179  R2=0.987492
+  one-term m^-q* only : A=243.2  R2=0.879819
+  one-term m^-1   only : B=0.9169  R2=0.955445
+  implied m_cross=(A/B)^(1/(q*-1)) = 18.33
+
+[caseA_sig0.15] R=1.04 G=1.01 beta=0.96 rho=2.0 sigma_theta=0.15
+  kappa_min=0.039231  h=33.6667  q*=2.7226  Pthorn_G=0.989307
+  clean window m in [20, 418980]  (184 pts)
+  local log-log slope: at m=20 -> -1.155;  at m=418980 -> -1.002
+  TWO-term fit g=A*m^-q* + B*m^-1 : A=92.74  B=0.6584  R2=0.988358
+  one-term m^-q* only : A=253.2  R2=0.876299
+  one-term m^-1   only : B=0.9577  R2=0.958908
+  implied m_cross=(A/B)^(1/(q*-1)) = 17.68
+
+  sigma   A        B        B/sigma^2
+  0.05   92.16   0.5914   236.6
+  0.10   92.63   0.6179   61.79
+  0.15   92.74   0.6584   29.26
+
+(B/sigma^2 ~ constant  => Jensen channel amplitude proportional to variance, confirming p=1 forcing)

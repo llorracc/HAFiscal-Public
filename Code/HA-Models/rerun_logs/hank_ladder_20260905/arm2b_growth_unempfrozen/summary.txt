@@ -1,0 +1,29 @@
+arm dir: /home/shared/github/llorracc/HAFiscal-Latest/Code/HA-Models/rerun_logs/hank_ladder_20260905/arm2b_growth_unempfrozen
+engine: package
+steady state used by the GE: C_ss=0.691050, A_ss=1.432403, B_ss=0.078497, G_ss=0.258787, Y_ss=1.155314, N_ss=0.956000, tau_ss=0.300000, qb_ss=18.247851, U_ss=0.044000
+policy         regime         IRFpeak%   q  cum(h=20)  cum peak  h*
+transfers      taylor           2.5319   1     1.4633    1.4633  20
+transfers      fixed_nominal    3.8590   1     1.8341    1.8341  20
+transfers      fixed_real       3.3796   1     1.7572    1.7572  20
+UI_extensions  taylor           0.1600   1     1.7035    1.7035  20
+UI_extensions  fixed_nominal    0.2454   1     1.9671    1.9671  20
+UI_extensions  fixed_real       0.2133   1     1.9182    1.9182  20
+tax_cut        taylor           3.2060   8     1.6026    1.6026  20
+tax_cut        fixed_nominal    6.4767   1     1.8583    1.8583  20
+tax_cut        fixed_real       3.7422   4     1.7943    1.7943  20
+emitted pickle (multipliers_across_horizon_w_splurge.obj):
+  transfers      h20=1.4633 peak=1.4633 (h=20) == regime ['taylor']
+  UI_extensions  h20=1.9182 peak=1.9182 (h=20) == regime ['fixed_real']
+  tax_cut        h20=1.6026 peak=1.6026 (h=20) == regime ['taylor']
+printed NPV output multipliers (NPV(Y)/NPV(cost), bigT):
+  2Q UI extension (active taylor rule): 1.4671
+  2Q UI extension (fixed nominal rate): 1.3530
+  2Q UI extension (fixed real rate): 1.3976
+  transfers: 1.4182
+  transfers (fixed nominal rate): 1.2697
+  transfers (active taylor rule): 1.4182
+  transfers (fixed real rate): 1.3344
+  tax cut: -1.3829
+  tax cut (fixed real rate): -1.3511
+  tax cut (fixed nominal rate): -1.2704
+wrote summary.json

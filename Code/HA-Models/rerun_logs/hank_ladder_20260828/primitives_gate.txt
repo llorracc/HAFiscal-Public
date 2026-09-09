@@ -1,0 +1,89 @@
+=== primitives gate: QE code (HARK 0.14.1) vs today's code under env_base.sh (PLVL_GROWS off, as arms 0-1 ran)
+compare_primitives: A=prim_qe_0141.json
+                    B=prim_mac_repro.json
+  numeric/scalar leaves compared: 352, equal within 1e-12: 345, DIFFERENCES: 43
+  DIFF /__agents__/init_college/PermGroFac: max|A-B|=4.895e-03 (max|A|=1.0049)
+  DIFF /__agents__/init_dropout/PermGroFac: max|A-B|=3.553e-03 (max|A|=1.00355)
+  DIFF /__agents__/init_highschool/PermGroFac: max|A-B|=4.530e-03 (max|A|=1.00453)
+  DIFF /convergence_tol_solvingAD: max|A-B|=9.000e-04 (max|A|=0.0001)
+  DIFF /init_college/PermGroFac: max|A-B|=4.895e-03 (max|A|=1.0049)
+  DIFF /init_college/PermGroFac_unemp: only-in-B
+  DIFF /init_college/aNrmInitMean: only-in-A
+  DIFF /init_college/aNrmInitStd: only-in-A
+  DIFF /init_college/kLogInitMean: only-in-B
+  DIFF /init_college/kLogInitStd: only-in-B
+  DIFF /init_college/pLogInitMean: only-in-B
+  DIFF /init_college/pLogInitStd: only-in-B
+  DIFF /init_college/pLvlInitMean: only-in-A
+  DIFF /init_college/pLvlInitStd: only-in-A
+  DIFF /init_college/perm_shocks_during_unemployment: only-in-B
+  DIFF /init_college/tran_shocks_during_unemployment: only-in-B
+  DIFF /init_college/unemp_pLvl_grows_like_employed: only-in-B
+  DIFF /init_dropout/PermGroFac: max|A-B|=3.553e-03 (max|A|=1.00355)
+  DIFF /init_dropout/PermGroFac_unemp: only-in-B
+  DIFF /init_dropout/aNrmInitMean: only-in-A
+  DIFF /init_dropout/aNrmInitStd: only-in-A
+  DIFF /init_dropout/kLogInitMean: only-in-B
+  DIFF /init_dropout/kLogInitStd: only-in-B
+  DIFF /init_dropout/pLogInitMean: only-in-B
+  DIFF /init_dropout/pLogInitStd: only-in-B
+  DIFF /init_dropout/pLvlInitMean: only-in-A
+  DIFF /init_dropout/pLvlInitStd: only-in-A
+  DIFF /init_dropout/perm_shocks_during_unemployment: only-in-B
+  DIFF /init_dropout/tran_shocks_during_unemployment: only-in-B
+  DIFF /init_dropout/unemp_pLvl_grows_like_employed: only-in-B
+  DIFF /init_highschool/PermGroFac: max|A-B|=4.530e-03 (max|A|=1.00453)
+  DIFF /init_highschool/PermGroFac_unemp: only-in-B
+  DIFF /init_highschool/aNrmInitMean: only-in-A
+  DIFF /init_highschool/aNrmInitStd: only-in-A
+  DIFF /init_highschool/kLogInitMean: only-in-B
+  DIFF /init_highschool/kLogInitStd: only-in-B
+  DIFF /init_highschool/pLogInitMean: only-in-B
+  DIFF /init_highschool/pLogInitStd: only-in-B
+  DIFF /init_highschool/pLvlInitMean: only-in-A
+  DIFF /init_highschool/pLvlInitStd: only-in-A
+  DIFF /init_highschool/perm_shocks_during_unemployment: only-in-B
+  DIFF /init_highschool/tran_shocks_during_unemployment: only-in-B
+  DIFF /init_highschool/unemp_pLvl_grows_like_employed: only-in-B
+
+=== with HAFISCAL_PLVL_GROWS_DURING_UNEMP=on (the package arms)
+compare_primitives: A=prim_qe_0141.json
+                    B=prim_mac_repro_pgu_on.json
+  numeric/scalar leaves compared: 352, equal within 1e-12: 351, DIFFERENCES: 37
+  DIFF /convergence_tol_solvingAD: max|A-B|=9.000e-04 (max|A|=0.0001)
+  DIFF /init_college/PermGroFac_unemp: only-in-B
+  DIFF /init_college/aNrmInitMean: only-in-A
+  DIFF /init_college/aNrmInitStd: only-in-A
+  DIFF /init_college/kLogInitMean: only-in-B
+  DIFF /init_college/kLogInitStd: only-in-B
+  DIFF /init_college/pLogInitMean: only-in-B
+  DIFF /init_college/pLogInitStd: only-in-B
+  DIFF /init_college/pLvlInitMean: only-in-A
+  DIFF /init_college/pLvlInitStd: only-in-A
+  DIFF /init_college/perm_shocks_during_unemployment: only-in-B
+  DIFF /init_college/tran_shocks_during_unemployment: only-in-B
+  DIFF /init_college/unemp_pLvl_grows_like_employed: only-in-B
+  DIFF /init_dropout/PermGroFac_unemp: only-in-B
+  DIFF /init_dropout/aNrmInitMean: only-in-A
+  DIFF /init_dropout/aNrmInitStd: only-in-A
+  DIFF /init_dropout/kLogInitMean: only-in-B
+  DIFF /init_dropout/kLogInitStd: only-in-B
+  DIFF /init_dropout/pLogInitMean: only-in-B
+  DIFF /init_dropout/pLogInitStd: only-in-B
+  DIFF /init_dropout/pLvlInitMean: only-in-A
+  DIFF /init_dropout/pLvlInitStd: only-in-A
+  DIFF /init_dropout/perm_shocks_during_unemployment: only-in-B
+  DIFF /init_dropout/tran_shocks_during_unemployment: only-in-B
+  DIFF /init_dropout/unemp_pLvl_grows_like_employed: only-in-B
+  DIFF /init_highschool/PermGroFac_unemp: only-in-B
+  DIFF /init_highschool/aNrmInitMean: only-in-A
+  DIFF /init_highschool/aNrmInitStd: only-in-A
+  DIFF /init_highschool/kLogInitMean: only-in-B
+  DIFF /init_highschool/kLogInitStd: only-in-B
+  DIFF /init_highschool/pLogInitMean: only-in-B
+  DIFF /init_highschool/pLogInitStd: only-in-B
+  DIFF /init_highschool/pLvlInitMean: only-in-A
+  DIFF /init_highschool/pLvlInitStd: only-in-A
+  DIFF /init_highschool/perm_shocks_during_unemployment: only-in-B
+  DIFF /init_highschool/tran_shocks_during_unemployment: only-in-B
+  DIFF /init_highschool/unemp_pLvl_grows_like_employed: only-in-B

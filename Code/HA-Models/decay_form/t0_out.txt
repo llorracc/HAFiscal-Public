@@ -1,0 +1,33 @@
+== T0 part 1: local PowerLawDecayLinearInterp vs worktree HARK powerlaw ==
+   Q local=1.508193728752 worktree=1.508193728752 (|dQ|=0.00e+00)
+   max|value diff|      = 0.000e+00   (ladder m in [21.5, 5000])
+   max|derivative diff| = 0.000e+00
+   IDENTITY: PASS
+
+== T0 part 2: College GIC-cap atom — flag OFF vs '1' (exp) vs 'powerlaw' ==
+   solved [off     ]  MPCmin=0.005418  (HALT count: 0 — solve completed)
+   solved [exp     ]  MPCmin=0.005418  (HALT count: 0 — solve completed)
+   solved [pl      ]  MPCmin=0.005418  (HALT count: 0 — solve completed)
+
+   per-state decay slices (pl solve): count engaged, Q_emp range
+     state 0: engaged=3  powerlaw=3  Q_emp in [1.5084, 1.5084]
+     state 1: engaged=3  powerlaw=3  Q_emp in [1.5067, 1.5067]
+     state 2: engaged=3  powerlaw=3  Q_emp in [1.5059, 1.5059]
+     state 3: engaged=3  powerlaw=3  Q_emp in [1.5059, 1.5059]
+   grid top (endogenous m at aXtra top) ~ 40.961; Q_emp overall [1.5059, 1.5084]
+
+   in-sample |dC/C| on m in [0.5, 39.5] at C=1 (max over states):
+     exp vs powerlaw   : max|dC/C| = 5.209e-03
+     OFF vs exp        : max|dC/C| = 1.051e-02
+
+   tail (production TM-a range), state 0, C=1:  PFline = MPCmin*(m+h), h=190.22
+          m      c_OFF      c_exp       c_pl     PFline gap_exp/ln  gap_pl/ln d(exp,pl)%
+         50     1.0489     1.0360     1.0297     1.3015   2.04e-01   2.09e-01     0.6126
+        100     1.4301     1.3859     1.3686     1.5724   1.19e-01   1.30e-01     1.2695
+        200     2.1925     2.0228     1.9847     2.1142   4.32e-02   6.13e-02     1.9230
+        400     3.7172     3.1772     3.1296     3.1977   6.42e-03   2.13e-02     1.5217
+        700     6.0043     4.8230     4.7877     4.8231   2.92e-05   7.35e-03     0.7371
+       1000     8.2915     6.4508     6.4266     6.4485  -3.67e-04   3.40e-03     0.3777
+       1300    10.5786     8.0765     8.0590     8.0738  -3.31e-04   1.84e-03     0.2172
+
+   tail summary across ALL states at C=1 (m=1300): max |c_exp-c_pl|/c = 2.172e-03

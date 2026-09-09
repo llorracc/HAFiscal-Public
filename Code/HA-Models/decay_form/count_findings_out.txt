@@ -1,0 +1,105 @@
+# count_findings_out.txt — 2026-07-23 count-convergence evidence (regenerated from the run outputs)
+# See conclusions_private/2026-07-23_solve_grid_count_convergence.md for interpretation.
+
+== [1] count_sweep report (speed + in-sample accuracy vs count; T=default strand, L=local2 K=3 strand) ==
+arm          count  wall_s  bulk[0.05,6]   mid(6,40]  upper(40,aMax]
+L24_cap         31     5.1      2.37e-02    3.29e-02        3.63e-02
+L48_cap         61     4.4      1.19e-02    1.72e-02        1.98e-02
+L96_cap        121     8.0      4.46e-03    6.77e-03        8.60e-03
+L192_cap       241     9.7      9.79e-04    1.50e-03        1.86e-03
+L384_cap (ref)   482    16.2      0.00e+00    0.00e+00        0.00e+00
+
+L24_cen         31     4.7      1.03e-02    2.32e-02        2.91e-02
+L48_cen         61     2.7      2.53e-03    8.70e-03        1.40e-02
+L96_cen        121     5.8      6.05e-04    2.38e-03        5.32e-03
+L192_cen       241     9.0      1.62e-04    4.90e-04        1.09e-03
+L384_cen (ref)   482    12.6      0.00e+00    0.00e+00        0.00e+00
+
+T24_cap         24     2.7      4.41e-03    1.03e-02               -
+T48_cap         48     4.4      2.72e-03    6.01e-03               -
+T96_cap         96     6.9      1.29e-03    2.68e-03               -
+T192_cap       192     8.2      4.25e-04    8.51e-04               -
+T384_cap (ref)   384    16.3      0.00e+00    0.00e+00               -
+
+T24_cen         24     2.2      1.25e-02    1.79e-02               -
+T48_cen         48     1.4      2.97e-03    7.01e-03               -
+T96_cen         96     1.3      7.59e-04    2.05e-03               -
+T192_cen       192     2.7      1.85e-04    4.28e-04               -
+T384_cen (ref)   384     4.2      0.00e+00    0.00e+00               -
+
+
+== [2] Q/drift vs count at fixed aMax=591 (local2 K=3) + dense-count deep arms ==
+[qc192_cap] beta=1.005369 grid=591/241 slices=12 Q=[0.5766612649541897, 0.5768376810053748] drift=[0.03736400485771822, 0.03857766672841146] advisories=1 wall=8.0s
+[qc192_cen] beta=0.991926 grid=591/241 slices=12 Q=[0.40891974789430424, 0.4091770995200653] drift=[-0.013296597429052107, -0.013228936986252425] advisories=1 wall=5.4s
+[qc384_cap] beta=1.005369 grid=591/482 slices=12 Q=[0.5925202527924228, 0.5926375256996466] drift=[0.007273355470879328, 0.008059319218397844] advisories=1 wall=15.1s
+[qc384_cen] beta=0.991926 grid=591/482 slices=12 Q=[0.42117565330669, 0.4214206558522506] drift=[-0.019287447677635537, -0.01909987034461607] advisories=1 wall=10.4s
+[qc48_cap] beta=1.005369 grid=591/61 slices=12 Q=[0.4971748478618092, 0.4975315706401526] drift=[0.19106422904397405, 0.19246877704772775] advisories=1 wall=3.8s
+[qc48_cen] beta=0.991926 grid=591/61 slices=12 Q=[0.3413593507571986, 0.34169823374868213] drift=[0.06337221268213354, 0.06389219322422988] advisories=1 wall=2.4s
+[qc96_cap] beta=1.005369 grid=591/121 slices=12 Q=[0.533725024069991, 0.5339515304652411] drift=[0.11720702712085494, 0.11856239294885661] advisories=1 wall=5.5s
+[qc96_cen] beta=0.991926 grid=591/121 slices=12 Q=[0.37544668120316255, 0.3757432161467165] drift=[0.026982120374619566, 0.02734969875813477] advisories=1 wall=3.7s
+[qdeep384_cap] beta=1.005369 grid=5000/559 slices=12 Q=[0.6907858150112037, 0.6914411528999937] drift=[0.06435996177361243, 0.0655781138820268] advisories=1 wall=19.6s
+[qdeep384_cen] beta=0.991926 grid=5000/559 slices=12 Q=[0.4438475906393935, 0.44398639733143125] drift=[0.028252168190891887, 0.02831123079993619] advisories=1 wall=16.5s
+
+== [3] Step-2 objective at fixed production per-edType TM_a (beta,nabla), config x base count ==
+--- def_C48:
+===== dropout production distance = 0.109748
+===== highschool production distance = 2.093737
+===== college production distance = 4.127453
+--- def_C96:
+===== dropout production distance = 0.584268
+===== highschool production distance = 2.189409
+===== college production distance = 5.036195
+--- def_C192:
+===== dropout production distance = 0.584325
+===== highschool production distance = 2.188393
+===== college production distance = 4.960630
+--- l2_C48:
+===== dropout production distance = 0.619028
+===== highschool production distance = 2.312771
+===== college production distance = 1.697698
+--- l2_C96:
+===== dropout production distance = 0.600492
+===== highschool production distance = 2.298581
+===== college production distance = 3.700978
+--- l2_C192:
+===== dropout production distance = 0.595101
+===== highschool production distance = 2.269114
+===== college production distance = 3.749365
+
+== [3b] Tail-regime decomposition at C192 (objective at fixed production TM_a params; added on owner question) ==
+--- exp_C192 (HAFISCAL_PF_DECAY_EXTRAP=exp, solve top 40):
+===== dropout production distance = 0.585698
+===== highschool production distance = 2.198483
+===== college production distance = 4.350618
+--- pl40_C192 (HAFISCAL_PF_DECAY_EXTRAP=1, slope-Q, solve top 40):
+===== dropout production distance = 0.587594
+===== highschool production distance = 2.211685
+===== college production distance = 4.141666
+# College chain: linear@40 4.961 -> exp@40 4.351 -> pl-slope@40 4.142 -> pl-local2@591 3.749
+
+== [4] Tier-2 warm re-estimation @C192 (quarantined; warm source = the AGGREGATE ESC file; ALL 6 COMPLETE) ==
+def edType0: start=saved start β=0.7278, ∇=0.3160, GICx=7.6004 (from DiscFacEstim_CRRA_2.0_R_1.01_ESC.txt) | final='beta': 0.7249410872396729, 'nabla': 0.31905644674940914 | best=1.0643
+def edType1: start=saved start β=0.9354, ∇=0.0761, GICx=7.6004 (from DiscFacEstim_CRRA_2.0_R_1.01_ESC.txt) | final='beta': 0.9361828071371796, 'nabla': 0.07571911432929257 | best=2.119
+def edType2: start=saved start β=0.9917, ∇=0.0239, GICx=7.6004 (from DiscFacEstim_CRRA_2.0_R_1.01_ESC.txt) | final='beta': 0.9922617925612424, 'nabla': 0.022924918873191986 | best=4.0137
+l2 edType0: start=saved start β=0.7278, ∇=0.3160, GICx=7.6004 (from DiscFacEstim_CRRA_2.0_R_1.01_ESC.txt) | final='beta': 0.7249404885534056, 'nabla': 0.31898109963916443 | best=1.0643
+l2 edType1: start=saved start β=0.9354, ∇=0.0761, GICx=7.6004 (from DiscFacEstim_CRRA_2.0_R_1.01_ESC.txt) | final='beta': 0.9337446577150975, 'nabla': 0.07826186527781 | best=2.1607
+l2 edType2: start=saved start β=0.9917, ∇=0.0239, GICx=7.6004 (from DiscFacEstim_CRRA_2.0_R_1.01_ESC.txt) | final='beta': 0.9922297779065803, 'nabla': 0.022927436351976346 | best=2.1046
+# NOTE: the dropout rows are basin-locked to the aggregate start (0.316-nabla basin);
+# the TM_a point (nabla=0.468) scores 0.584 (def-C192) at fixed params. Multi-start redo: see [5] below.
+
+== [5] Dropout multi-start redo @C192 (4 grid starts + saved; both configs; COMPLETE) ==
+def: best-of-4 obj~0.581 at (beta,nabla)=(0.72891, 0.31451)  [min eval 0.58118 @ (0.72901, 0.31439)]
+l2 : best-of-4 obj~0.582 at (beta,nabla)=(0.73171, 0.31123)  [min eval 0.58176]
+ridge: obj 0.581-0.584 for nabla in [0.31, 0.47] at beta~0.729-0.732 -> dropout nabla WEAKLY
+IDENTIFIED; the single-start obj=1.064 rows in [4] were a ridge-adjacent local trap; both configs
+agree (config-robust); def-config beta returns to the TM_a 0.729 exactly.
+
+== [6] POST-FLIP RERUN (2026-07-23/24; four-regime vocabulary; flip-regression certificate) ==
+All phase-A arms (count sweep accuracy, Q/drift ladder, objective incl. exp/pl-slope columns)
+reproduced their pre-flip values EXACTLY under explicit regime spellings (legacy arms pin
+EXTRAP=0). Phase B: HS_Only pipeline walls (6-way co-run): default C48/C96/C192 =
+12.61/12.92/13.20 min; as-shipped 12.01; exp 11.83; as-corrected 13.15. Tier-2 @C192
+(as-shipped vs default, dropout multi-start): as-shipped (0.7289,0.3145)/0.581,
+(0.9362,0.0757)/2.119, (0.99226,0.02292)/4.014; default (0.7317,0.3112)/0.582,
+(0.9337,0.0783)/2.161, (0.99223,0.02293)/2.105 — exact reproduction of the pre-flip Tier-2.
+Tables of record: the replaced conclusions doc.

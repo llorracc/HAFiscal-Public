@@ -1,0 +1,24 @@
+{
+ "label": "baseline",
+ "K_add": 0,
+ "span": 0.0,
+ "wall_s": 1.0677051544189453,
+ "beta_mode": "hs_central",
+ "DiscFac": 0.9356,
+ "aXtraMax": 550.9305301645252,
+ "n_knots": 243,
+ "alk_knots": [],
+ "n_slices": 12,
+ "h_used": 201.32424143404978,
+ "mpc_min": 0.04054857876859108,
+ "Q_attach": 0.16822253757060918,
+ "prod": {
+  "ok": true,
+  "Q": 0.1372565364686053,
+  "Q1": 0.1482436442471943,
+  "Q2": 0.1372565364686053,
+  "drift": -0.060177273800639995,
+  "drift_window": "interior",
+  "reason": null
+ }
+}

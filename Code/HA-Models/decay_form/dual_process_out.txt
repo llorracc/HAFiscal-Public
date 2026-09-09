@@ -1,0 +1,18 @@
+# dual_process_out.txt — 2026-07-23 dual-process arc raw outputs (see the conclusions doc)
+== [1] sliding-window fits (top-591 / top-5000, count base 384):
+[top5000_c384] grid 5000/559  decay-active slices: 12
+[top5000_c384] per-slice dual-process fits (12 usable slices):
+top591_c384: Q(A)=0.5938 Q(B)=0.5945-0.5950, driftB 0.018-0.033, p_hat -11 (window 0.24 efolds: unidentified)
+top5000_c384: Q(A)=0.6934 Q(B)=0.6961-0.6974, driftB 0.044-0.057, drift-law fit p=-0.73 R2 0.51-0.54 over 2.02 efolds (accelerating)
+
+== [2] endpoint-free profiles (5-knot centered, top-50000, count 644):
+-- cap:
+  (see conclusions doc table; run log: prof50000)
+-- central: see conclusions doc table (run log: prof50000_central)
+
+== [3] continued Kesten roots (kesten_roots.py):
+cap 1.005369: PG=0.999635 root=1.3739 | Ctop 0.9986: PG=0.996259 root=0.8070 | central 0.991926: PG=0.992929 root=0.5470
+
+== [4] bridge test (rel c-error vs 50000-top truth; anchors at top-591):
+central: Q_hat=0.4214 gap/c=0.0629 | m=1300/3000/8000/20000/45000: T1 3.0e-6/5.1e-5/6.0e-5/3.5e-5/1.7e-5 | T2(root .547) 2.6e-4/3.1e-4/1.7e-4/6.9e-5/2.8e-5
+cap:     Q_hat=0.5926 gap/c=0.0378 | T1 2.9e-4/2.5e-4/1.2e-4/4.6e-5/1.6e-5 | T2(root 1.374) worse everywhere | T2b(plateau .69) 2.1e-4/1.5e-4/6.8e-5/2.3e-5/6.9e-6

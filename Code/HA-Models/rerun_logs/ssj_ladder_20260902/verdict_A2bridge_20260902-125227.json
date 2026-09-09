@@ -1,0 +1,185 @@
+{
+ "rung": "A2-bridge",
+ "stamp": "20260902-125227",
+ "model": {
+  "beta": 0.95,
+  "R": 1.01,
+  "crra": 2.0,
+  "wage_ss": 1.0,
+  "tau_ss": 0.3,
+  "EU": 0.0306834,
+  "jf": 0.6666666666666666,
+  "livprb": 1.0,
+  "gamma": 0.99,
+  "T": 40,
+  "a_max": 20.0,
+  "a_min_step4": 0.0001,
+  "m_fac": 3,
+  "ue_rr": 0.7,
+  "nb_rr": 0.5
+ },
+ "alpha_LGamma": 0.99,
+ "ladder": [
+  50,
+  150
+ ],
+ "gates": {
+  "n50": {
+   "A_ss_step4": 0.06740437335375732,
+   "A_ss_twin": 0.04033337020052576,
+   "A_ss_ratio": 1.6711812828593895,
+   "tier": 0.63,
+   "C_transfers": {
+    "raw_relgap": 0.12776874556206483,
+    "bridged_relgap": 0.13256540988914628,
+    "threshold": 0.63,
+    "gated": true,
+    "PASS": true
+   },
+   "A_transfers": {
+    "raw_relgap": 0.14177148903209197,
+    "bridged_relgap": 0.13785950919892967,
+    "threshold": 0.63,
+    "gated": true,
+    "PASS": true
+   },
+   "C_w": {
+    "raw_relgap": 0.1587217940890226,
+    "bridged_relgap": 0.15917160300195088,
+    "threshold": 0.63,
+    "gated": true,
+    "PASS": true
+   },
+   "A_w": {
+    "raw_relgap": 0.16828870197193663,
+    "bridged_relgap": 0.1509572588898012,
+    "threshold": 0.63,
+    "gated": true,
+    "PASS": true
+   },
+   "C_tau": {
+    "raw_relgap": 0.1587388523733286,
+    "bridged_relgap": 0.1592078265687479,
+    "threshold": 0.63,
+    "gated": true,
+    "PASS": true
+   },
+   "A_tau": {
+    "raw_relgap": 0.1682452396225942,
+    "bridged_relgap": 0.15093156031101437,
+    "threshold": 0.63,
+    "gated": true,
+    "PASS": true
+   },
+   "C_UI_extend": {
+    "raw_relgap": 0.36363769730430706,
+    "bridged_relgap": 0.3562876216807492,
+    "threshold": null,
+    "gated": false,
+    "PASS": true
+   },
+   "A_UI_extend": {
+    "raw_relgap": 0.9999999999999736,
+    "bridged_relgap": 0.9999999999999735,
+    "threshold": null,
+    "gated": false,
+    "PASS": true
+   },
+   "C_UI_rr": {
+    "raw_relgap": 0.26865119967107076,
+    "bridged_relgap": 0.2574026998287117,
+    "threshold": null,
+    "gated": false,
+    "PASS": true
+   },
+   "A_UI_rr": {
+    "raw_relgap": 0.26634952416744184,
+    "bridged_relgap": 0.25693425591768293,
+    "threshold": null,
+    "gated": false,
+    "PASS": true
+   },
+   "twin_A_UI_extend_absmax": 3.45803017850772e-17,
+   "corner_signature": true
+  },
+  "n150": {
+   "A_ss_step4": 0.05114602913001162,
+   "A_ss_twin": 0.039963676160699985,
+   "A_ss_ratio": 1.2798129212224048,
+   "tier": 0.045,
+   "C_transfers": {
+    "raw_relgap": 0.03243686118573568,
+    "bridged_relgap": 0.02288981150830188,
+    "threshold": 0.045,
+    "gated": true,
+    "PASS": true
+   },
+   "A_transfers": {
+    "raw_relgap": 0.012153487170835283,
+    "bridged_relgap": 0.019021576696107233,
+    "threshold": 0.045,
+    "gated": true,
+    "PASS": true
+   },
+   "C_w": {
+    "raw_relgap": 0.035987265486245396,
+    "bridged_relgap": 0.017340065933032844,
+    "threshold": 0.045,
+    "gated": true,
+    "PASS": true
+   },
+   "A_w": {
+    "raw_relgap": 0.015912133312370846,
+    "bridged_relgap": 0.013560982931013026,
+    "threshold": 0.045,
+    "gated": true,
+    "PASS": true
+   },
+   "C_tau": {
+    "raw_relgap": 0.035926599534876716,
+    "bridged_relgap": 0.017299864629707912,
+    "threshold": 0.045,
+    "gated": true,
+    "PASS": true
+   },
+   "A_tau": {
+    "raw_relgap": 0.015851713714493888,
+    "bridged_relgap": 0.013589827076229329,
+    "threshold": 0.045,
+    "gated": true,
+    "PASS": true
+   },
+   "C_UI_extend": {
+    "raw_relgap": 0.4871895850102633,
+    "bridged_relgap": 0.4807521464947493,
+    "threshold": null,
+    "gated": false,
+    "PASS": true
+   },
+   "A_UI_extend": {
+    "raw_relgap": 1.0,
+    "bridged_relgap": 1.0,
+    "threshold": null,
+    "gated": false,
+    "PASS": true
+   },
+   "C_UI_rr": {
+    "raw_relgap": 0.07659115412205102,
+    "bridged_relgap": 0.06461440336504452,
+    "threshold": null,
+    "gated": false,
+    "PASS": true
+   },
+   "A_UI_rr": {
+    "raw_relgap": 0.0636076096815698,
+    "bridged_relgap": 0.05521412425609435,
+    "threshold": null,
+    "gated": false,
+    "PASS": true
+   },
+   "twin_A_UI_extend_absmax": 2.6821049205981174e-47,
+   "corner_signature": true
+  }
+ },
+ "ok": true
+}

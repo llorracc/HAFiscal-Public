@@ -1,0 +1,22 @@
+compare_cols arm1 (ZEROTH_FIX=1) vs arm0
+  A=arm0_published/HA_Fiscal_Jacs.obj
+  B=arm1_zeroth_mono/HA_Fiscal_Jacs.obj
+  C  transfers  col0 max|dJ|=5.956e-02 (A[0,0]=+0.254301 B[0,0]=+0.194743)   cols>=1 max|dJ|=0.000e+00   max|A|=2.543e-01
+  C  r          col0 max|dJ|=3.572e-02 (A[0,0]=+0.069943 B[0,0]=+0.105660)   cols>=1 max|dJ|=0.000e+00   max|A|=2.014e-01
+  C  w          col0 max|dJ|=2.948e-02 (A[0,0]=+0.148275 B[0,0]=+0.118793)   cols>=1 max|dJ|=0.000e+00   max|A|=1.483e-01
+  C  tau        col0 max|dJ|=4.213e-02 (A[0,0]=-0.211857 B[0,0]=-0.169729)   cols>=1 max|dJ|=0.000e+00   max|A|=2.119e-01
+  C  eta        col0 max|dJ|=1.578e-03 (A[0,0]=+0.009547 B[0,0]=+0.007969)   cols>=1 max|dJ|=0.000e+00   max|A|=9.547e-03
+  C  DiscFac    col0 max|dJ|=5.218e-02 (A[0,0]=+0.000000 B[0,0]=+0.052178)   cols>=1 max|dJ|=0.000e+00   max|A|=2.834e-01
+  C  UI_extend  col0 max|dJ|=7.587e-04 (A[0,0]=+0.001745 B[0,0]=+0.000986)   cols>=1 max|dJ|=0.000e+00   max|A|=1.745e-03
+  C  UI_rr      col0 max|dJ|=2.166e-03 (A[0,0]=+0.008852 B[0,0]=+0.006685)   cols>=1 max|dJ|=0.000e+00   max|A|=8.852e-03
+  A  transfers  col0 max|dJ|=1.006e-01 (A[0,0]=+0.739451 B[0,0]=+0.638813)   cols>=1 max|dJ|=0.000e+00   max|A|=7.395e-01
+  A  r          col0 max|dJ|=1.665e-01 (A[0,0]=+1.698220 B[0,0]=+1.864707)   cols>=1 max|dJ|=0.000e+00   max|A|=3.717e+00
+  A  w          col0 max|dJ|=5.412e-02 (A[0,0]=+0.516744 B[0,0]=+0.462623)   cols>=1 max|dJ|=0.000e+00   max|A|=5.167e-01
+  A  tau        col0 max|dJ|=7.731e-02 (A[0,0]=-0.738166 B[0,0]=-0.660855)   cols>=1 max|dJ|=0.000e+00   max|A|=7.382e-01
+  A  eta        col0 max|dJ|=3.121e-03 (A[0,0]=+0.020043 B[0,0]=+0.016922)   cols>=1 max|dJ|=0.000e+00   max|A|=2.284e-02
+  A  DiscFac    col0 max|dJ|=2.323e-01 (A[0,0]=+0.000002 B[0,0]=+0.232276)   cols>=1 max|dJ|=0.000e+00   max|A|=3.433e+00
+  A  UI_extend  col0 max|dJ|=6.036e-04 (A[0,0]=+0.001280 B[0,0]=+0.000676)   cols>=1 max|dJ|=0.000e+00   max|A|=4.614e-03
+  A  UI_rr      col0 max|dJ|=3.699e-03 (A[0,0]=+0.018357 B[0,0]=+0.014659)   cols>=1 max|dJ|=0.000e+00   max|A|=1.836e-02
+  C_ss_weighted: A=0.698573583240228 B=0.698573583240228
+  A_ss_weighted: A=1.7792840539974195 B=1.7792840539974195
+  OVERALL column-0 max|dJ| = 2.323e-01;  columns>=1 max|dJ| = 0.000e+00

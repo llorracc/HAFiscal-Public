@@ -1,0 +1,26 @@
+
+=== GATE S5b (C4): FAIL ===
+  [ok] C4 band check_norec [Baseline]: value=0.9629499105997973 ref=0.9628954380549485 delta=5.657e-05 (rel) tol=5.0e-03
+  [ok] C4 band check_norec [Baseline_rerun_seed1]: value=0.9627273810367616 ref=0.9628954380549485 delta=1.745e-04 (rel) tol=5.0e-03
+  [ok] C4 band check_norec [Baseline_rerun_seed2]: value=0.9630090225282867 ref=0.9628954380549485 delta=1.180e-04 (rel) tol=5.0e-03
+  [ok] C4 band check_rec [Baseline]: value=1.0163400266247538 ref=1.0132729357404962 delta=3.027e-03 (rel) tol=5.0e-03
+  [ok] C4 band check_rec [Baseline_rerun_seed1]: value=1.0125483948719936 ref=1.0132729357404962 delta=7.151e-04 (rel) tol=5.0e-03
+  [ok] C4 band check_rec [Baseline_rerun_seed2]: value=1.0109303857247414 ref=1.0132729357404962 delta=2.312e-03 (rel) tol=5.0e-03
+  [XX] C4 band check_rec_AD [Baseline]: value=1.3891810941664633 ref=1.3784757261385596 delta=7.766e-03 (rel) tol=5.0e-03
+  [ok] C4 band check_rec_AD [Baseline_rerun_seed1]: value=1.3771101376914663 ref=1.3784757261385596 delta=9.907e-04 (rel) tol=5.0e-03
+  [XX] C4 band check_rec_AD [Baseline_rerun_seed2]: value=1.3691359465577486 ref=1.3784757261385596 delta=6.775e-03 (rel) tol=5.0e-03
+  [ok] C4 band taxcut_norec [Baseline]: value=0.9850980046486537 ref=0.9851648098029595 delta=6.781e-05 (rel) tol=5.0e-03
+  [ok] C4 band taxcut_norec [Baseline_rerun_seed1]: value=0.9851364950783987 ref=0.9851648098029595 delta=2.874e-05 (rel) tol=5.0e-03
+  [ok] C4 band taxcut_norec [Baseline_rerun_seed2]: value=0.9852599296818262 ref=0.9851648098029595 delta=9.655e-05 (rel) tol=5.0e-03
+  [ok] C4 band taxcut_rec [Baseline]: value=0.9862624622141042 ref=0.9858773255007177 delta=3.907e-04 (rel) tol=5.0e-03
+  [ok] C4 band taxcut_rec [Baseline_rerun_seed1]: value=0.9854448085362619 ref=0.9858773255007177 delta=4.387e-04 (rel) tol=5.0e-03
+  [ok] C4 band taxcut_rec [Baseline_rerun_seed2]: value=0.985924705751787 ref=0.9858773255007177 delta=4.806e-05 (rel) tol=5.0e-03
+  [ok] C4 band taxcut_rec_AD [Baseline]: value=1.1617365300129818 ref=1.159615247711406 delta=1.829e-03 (rel) tol=5.0e-03
+  [ok] C4 band taxcut_rec_AD [Baseline_rerun_seed1]: value=1.1599436136915506 ref=1.159615247711406 delta=2.832e-04 (rel) tol=5.0e-03
+  [ok] C4 band taxcut_rec_AD [Baseline_rerun_seed2]: value=1.157165599429685 ref=1.159615247711406 delta=2.112e-03 (rel) tol=5.0e-03
+  [ok] C4 band ui_rec [Baseline]: value=1.7992528773182133 ref=1.7685672073375833 delta=1.735e-02 (rel) tol=3.0e-02
+  [ok] C4 band ui_rec [Baseline_rerun_seed1]: value=1.7365336652183123 ref=1.7685672073375833 delta=1.811e-02 (rel) tol=3.0e-02
+  [ok] C4 band ui_rec [Baseline_rerun_seed2]: value=1.7699150794762235 ref=1.7685672073375833 delta=7.621e-04 (rel) tol=3.0e-02
+  [ok] C4 band ui_rec_AD [Baseline]: value=2.1368083650930356 ref=2.111058454437807 delta=1.220e-02 (rel) tol=3.0e-02
+  [ok] C4 band ui_rec_AD [Baseline_rerun_seed1]: value=2.0788929363130046 ref=2.111058454437807 delta=1.524e-02 (rel) tol=3.0e-02
+  [ok] C4 band ui_rec_AD [Baseline_rerun_seed2]: value=2.1174740619073793 ref=2.111058454437807 delta=3.039e-03 (rel) tol=3.0e-02

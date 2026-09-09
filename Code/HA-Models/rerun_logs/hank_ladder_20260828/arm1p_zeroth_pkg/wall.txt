@@ -1,0 +1,6 @@
+ARM=arm1p_zeroth_pkg ENGINE=package deltas: HAFISCAL_STEP4_FAST_BACKWARD=1 HAFISCAL_PLVL_GROWS_DURING_UNEMP=on HAFISCAL_STEP4_ZEROTH_FIX=1 ; start 2026-08-28 13:34:32
+jacobians rc=0 wall_s=806  22121594880 maximum resident set size
+9ac518165ecad394121ba53fcc23b853e255679b0a740a71171694b64356ea3a  /Users/ccarroll/ui_ext_20260826/hank_ladder_20260828/arm1p_zeroth_pkg/HA_Fiscal_Jacs.obj
+ge rc=0 wall_s=6
+end 2026-08-28 13:48:05
+DONE

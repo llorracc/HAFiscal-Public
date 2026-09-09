@@ -1,0 +1,66 @@
+{
+ "transfers/taylor": {
+  "max_abs_dev_C": 0.0,
+  "max_rel_dev_C": 0.0,
+  "max_abs_dev_A": 0.0,
+  "max_rel_dev_A": 0.0,
+  "unknown_theta_max_abs": -1.0,
+  "unknown_r_ante_max_abs": -1.0,
+  "live_inputs": [
+   "tau",
+   "transfers"
+  ],
+  "drop_one_input_dev_C": {
+   "tau": 0.0019127552386119075,
+   "transfers": 0.014279490609828211
+  }
+ },
+ "transfers/fixed_real": {
+  "max_abs_dev_C": 0.0,
+  "max_rel_dev_C": 0.0,
+  "max_abs_dev_A": 0.0,
+  "max_rel_dev_A": 0.0,
+  "unknown_theta_max_abs": -1.0,
+  "unknown_r_ante_max_abs": -1.0,
+  "live_inputs": [
+   "tau",
+   "transfers"
+  ],
+  "drop_one_input_dev_C": {
+   "tau": 0.0019127552386119075,
+   "transfers": 0.014279490609828211
+  }
+ },
+ "UI_extend/taylor": {
+  "max_abs_dev_C": 0.0,
+  "max_rel_dev_C": 0.0,
+  "max_abs_dev_A": 0.0,
+  "max_rel_dev_A": 0.0,
+  "unknown_theta_max_abs": -1.0,
+  "unknown_r_ante_max_abs": -1.0,
+  "live_inputs": [
+   "UI_extend",
+   "tau"
+  ],
+  "drop_one_input_dev_C": {
+   "UI_extend": 0.0007022789399843679,
+   "tau": 0.00011625074777651823
+  }
+ },
+ "UI_extend/fixed_real": {
+  "max_abs_dev_C": 0.0,
+  "max_rel_dev_C": 0.0,
+  "max_abs_dev_A": 0.0,
+  "max_rel_dev_A": 0.0,
+  "unknown_theta_max_abs": -1.0,
+  "unknown_r_ante_max_abs": -1.0,
+  "live_inputs": [
+   "UI_extend",
+   "tau"
+  ],
+  "drop_one_input_dev_C": {
+   "UI_extend": 0.0007022789399843679,
+   "tau": 0.00011625074777651823
+  }
+ }
+}

@@ -1,0 +1,12 @@
+# Files pulled from econ-ark/econ-ark-tools at build time by @local/econark-sync.sh.
+# Paths are relative to the repo root. DEFAULT-DENY: nothing is synced unless listed here.
+#
+# Before adding a file, check it carries no LOCAL fix. As of 2026-08-30 eight vendored files
+# differ from upstream, and at least one differs deliberately -- econark-bibfilesfind.sty holds
+# the kpsewhich-pipe fix CLAUDE.md says must not be reverted. That file is additionally hardcoded
+# into the script's PROTECTED list so it cannot be synced even if someone lists it here.
+#
+# This is the sanctioned alternative to @resources/scripts/@resources-update-from-remote.sh,
+# which rewrites ~30 files wholesale and is banned by CLAUDE.md for exactly that reason.
+
+@resources/texlive/texmf-local/tex/latex/econark-shortcuts.sty

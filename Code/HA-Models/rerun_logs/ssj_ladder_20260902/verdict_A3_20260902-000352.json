@@ -1,0 +1,581 @@
+{
+ "rung": "A3",
+ "title": "psi/theta risk on the 6-state chain (S-only; the plan's fallback scope)",
+ "stamp": "20260902-000352",
+ "quick": false,
+ "env_fingerprint": {
+  "HAFISCAL_HANK_BIGT": "40",
+  "HAFISCAL_STEP4_FAST_BACKWARD": "0",
+  "HAFISCAL_STEP4_FAST_TRANMAT": "0",
+  "HAFISCAL_STEP4_ZEROTH_COLUMN": "unanticipated",
+  "HAFISCAL_STEP4_FAKENEWS_INDEX": "legacy",
+  "HAFISCAL_EARNINGS_PHASE_HAZARD": "0",
+  "HAFISCAL_QUIET_BETADISTR": "1"
+ },
+ "model": {
+  "beta": 0.9874053877248548,
+  "R": 1.01,
+  "crra": 2.0,
+  "wage_ss": 1.0,
+  "tau_ss": 0.3,
+  "EU": 0.0306834,
+  "jf": 0.6666666666666666,
+  "livprb": 1.0,
+  "gamma": 1.0,
+  "T": 40,
+  "a_max": 20.0,
+  "a_min_step4": 0.0001,
+  "m_fac": 3,
+  "ue_rr": 0.7,
+  "nb_rr": 0.5,
+  "psi_std": 0.05477225575051661,
+  "theta_std": 0.34641016151377546,
+  "shk_count": 7
+ },
+ "ladder": [
+  50,
+  150
+ ],
+ "gates": {
+  "S_step4_n50": {
+   "transfers": {
+    "off_delivery_rel": {
+     "measured": 0.023842528193975414,
+     "threshold": 3.3e-10,
+     "PASS": false
+    },
+    "cash_spread_rel": {
+     "measured": 0.004739382578126568,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "announce_row0": {
+     "measured": 5.171300887507613e-12,
+     "threshold": 1e-10,
+     "PASS": true
+    },
+    "pv_identity": {
+     "measured": 0.36762580530675987,
+     "threshold": 1e-08,
+     "PASS": false
+    },
+    "col0_cash_rel": {
+     "measured": 0.004430878541174594,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "terminal_populated": {
+     "measured": 0.005447773626654495,
+     "threshold": 1e-06,
+     "PASS": true
+    },
+    "delivery_row_is_s": {
+     "measured": true,
+     "threshold": true,
+     "PASS": true
+    },
+    "_cash_median": 0.9274373106021758
+   },
+   "w": {
+    "off_delivery_rel": {
+     "measured": 0.02413617760600914,
+     "threshold": 3.3e-10,
+     "PASS": false
+    },
+    "cash_spread_rel": {
+     "measured": 0.004743339797828834,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "announce_row0": {
+     "measured": 6.444684196027506e-12,
+     "threshold": 1e-10,
+     "PASS": true
+    },
+    "pv_identity": {
+     "measured": 0.2465769800873432,
+     "threshold": 1e-08,
+     "PASS": false
+    },
+    "col0_cash_rel": {
+     "measured": 0.004437160808841008,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "terminal_populated": {
+     "measured": 0.003595291059310668,
+     "threshold": 1e-06,
+     "PASS": true
+    },
+    "delivery_row_is_s": {
+     "measured": true,
+     "threshold": true,
+     "PASS": true
+    },
+    "_cash_median": 0.6168714961450856
+   },
+   "tau": {
+    "off_delivery_rel": {
+     "measured": 0.024136177556459058,
+     "threshold": 3.3e-10,
+     "PASS": false
+    },
+    "cash_spread_rel": {
+     "measured": 0.004743343434444951,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "announce_row0": {
+     "measured": 8.429056064240825e-12,
+     "threshold": 1e-10,
+     "PASS": true
+    },
+    "pv_identity": {
+     "measured": 0.3522528283871608,
+     "threshold": 1e-08,
+     "PASS": false
+    },
+    "col0_cash_rel": {
+     "measured": 0.0044371642485884375,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "terminal_populated": {
+     "measured": 0.0051361300923424835,
+     "threshold": 1e-06,
+     "PASS": true
+    },
+    "delivery_row_is_s": {
+     "measured": true,
+     "threshold": true,
+     "PASS": true
+    },
+    "_cash_median": -0.8812449974432789
+   },
+   "r": {
+    "off_delivery_rel": {
+     "measured": 0.03086087514692266,
+     "threshold": 3.3e-10,
+     "PASS": false
+    },
+    "cash_spread_rel": {
+     "measured": 0.005606788852433322,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "announce_row0": {
+     "measured": 7.703671034420267e-12,
+     "threshold": 1e-10,
+     "PASS": true
+    },
+    "pv_identity": {
+     "measured": 5.073349440473796,
+     "threshold": 1e-08,
+     "PASS": false
+    },
+    "col0_cash_rel": {
+     "measured": 0.005079780791827376,
+     "threshold": 0.001,
+     "PASS": false
+    },
+    "terminal_populated": {
+     "measured": 0.052119026706654026,
+     "threshold": 1e-06,
+     "PASS": true
+    },
+    "delivery_row_is_s": {
+     "measured": true,
+     "threshold": true,
+     "PASS": true
+    },
+    "_cash_median": 10.577220982764771
+   },
+   "UI_extend": {
+    "off_delivery_rel": {
+     "measured": 0.01858856183318275,
+     "threshold": 3.3e-10,
+     "PASS": false
+    },
+    "cash_spread_rel": {
+     "measured": 0.004833412002054582,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "announce_row0": {
+     "measured": 7.88068617524687e-12,
+     "threshold": 1e-10,
+     "PASS": true
+    },
+    "pv_identity": {
+     "measured": 0.0010322612294793288,
+     "threshold": 1e-08,
+     "PASS": false
+    },
+    "col0_cash_rel": {
+     "measured": 0.0042659230396173585,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "_terminal_diag": {
+     "measured": 1.8521530975590395e-05,
+     "threshold": 1e-06,
+     "PASS": true
+    },
+    "delivery_row_is_s": {
+     "measured": true,
+     "threshold": true,
+     "PASS": true
+    },
+    "_cash_median": 0.0028921942012905886
+   },
+   "UI_rr": {
+    "off_delivery_rel": {
+     "measured": 0.021374332996794903,
+     "threshold": 3.3e-10,
+     "PASS": false
+    },
+    "cash_spread_rel": {
+     "measured": 0.004748268940730182,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "announce_row0": {
+     "measured": 5.413327663732204e-12,
+     "threshold": 1e-10,
+     "PASS": true
+    },
+    "pv_identity": {
+     "measured": 0.009886344995537708,
+     "threshold": 1e-08,
+     "PASS": false
+    },
+    "col0_cash_rel": {
+     "measured": 0.0044075257373818455,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "_terminal_diag": {
+     "measured": 0.00015622676041715522,
+     "threshold": 1e-06,
+     "PASS": true
+    },
+    "delivery_row_is_s": {
+     "measured": true,
+     "threshold": true,
+     "PASS": true
+    },
+    "_cash_median": 0.025819475081704353
+   }
+  },
+  "S_step4_n150": {
+   "transfers": {
+    "off_delivery_rel": {
+     "measured": 0.041229538434585336,
+     "threshold": 3.3e-10,
+     "PASS": false
+    },
+    "cash_spread_rel": {
+     "measured": 0.005340483642416295,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "announce_row0": {
+     "measured": 8.248131344590348e-12,
+     "threshold": 1e-10,
+     "PASS": true
+    },
+    "pv_identity": {
+     "measured": 0.41555898923949564,
+     "threshold": 1e-08,
+     "PASS": false
+    },
+    "col0_cash_rel": {
+     "measured": 0.005100310163337077,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "terminal_populated": {
+     "measured": 0.004892971340320074,
+     "threshold": 1e-06,
+     "PASS": true
+    },
+    "delivery_row_is_s": {
+     "measured": true,
+     "threshold": true,
+     "PASS": true
+    },
+    "_cash_median": 0.9291403291769829
+   },
+   "w": {
+    "off_delivery_rel": {
+     "measured": 0.04210349143210069,
+     "threshold": 3.3e-10,
+     "PASS": false
+    },
+    "cash_spread_rel": {
+     "measured": 0.0053476291158110305,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "announce_row0": {
+     "measured": 6.57543377385883e-12,
+     "threshold": 1e-10,
+     "PASS": true
+    },
+    "pv_identity": {
+     "measured": 0.27874298143791465,
+     "threshold": 1e-08,
+     "PASS": false
+    },
+    "col0_cash_rel": {
+     "measured": 0.005110798781656623,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "terminal_populated": {
+     "measured": 0.0032231109470259867,
+     "threshold": 1e-06,
+     "PASS": true
+    },
+    "delivery_row_is_s": {
+     "measured": true,
+     "threshold": true,
+     "PASS": true
+    },
+    "_cash_median": 0.6178477819983659
+   },
+   "tau": {
+    "off_delivery_rel": {
+     "measured": 0.04210349143031918,
+     "threshold": 3.3e-10,
+     "PASS": false
+    },
+    "cash_spread_rel": {
+     "measured": 0.005347633145685065,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "announce_row0": {
+     "measured": 4.8078867276313275e-12,
+     "threshold": 1e-10,
+     "PASS": true
+    },
+    "pv_identity": {
+     "measured": 0.39820352154296257,
+     "threshold": 1e-08,
+     "PASS": false
+    },
+    "col0_cash_rel": {
+     "measured": 0.005110802571305186,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "terminal_populated": {
+     "measured": 0.004604454203471775,
+     "threshold": 1e-06,
+     "PASS": true
+    },
+    "delivery_row_is_s": {
+     "measured": true,
+     "threshold": true,
+     "PASS": true
+    },
+    "_cash_median": -0.8826396919070991
+   },
+   "r": {
+    "off_delivery_rel": {
+     "measured": 0.047641070226720865,
+     "threshold": 3.3e-10,
+     "PASS": false
+    },
+    "cash_spread_rel": {
+     "measured": 0.005164673140282742,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "announce_row0": {
+     "measured": 5.915656853261453e-12,
+     "threshold": 1e-10,
+     "PASS": true
+    },
+    "pv_identity": {
+     "measured": 6.483742548099173,
+     "threshold": 1e-08,
+     "PASS": false
+    },
+    "col0_cash_rel": {
+     "measured": 0.004899076110446133,
+     "threshold": 0.001,
+     "PASS": false
+    },
+    "terminal_populated": {
+     "measured": 0.057948679800245984,
+     "threshold": 1e-06,
+     "PASS": true
+    },
+    "delivery_row_is_s": {
+     "measured": true,
+     "threshold": true,
+     "PASS": true
+    },
+    "_cash_median": 12.660088556585336
+   },
+   "UI_extend": {
+    "off_delivery_rel": {
+     "measured": 0.029651358814586675,
+     "threshold": 3.3e-10,
+     "PASS": false
+    },
+    "cash_spread_rel": {
+     "measured": 0.005372543140404575,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "announce_row0": {
+     "measured": 9.364720668847068e-12,
+     "threshold": 1e-10,
+     "PASS": true
+    },
+    "pv_identity": {
+     "measured": 0.0011578621591693747,
+     "threshold": 1e-08,
+     "PASS": false
+    },
+    "col0_cash_rel": {
+     "measured": 0.0048054348202819265,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "_terminal_diag": {
+     "measured": 1.7120206363685497e-05,
+     "threshold": 1e-06,
+     "PASS": true
+    },
+    "delivery_row_is_s": {
+     "measured": true,
+     "threshold": true,
+     "PASS": true
+    },
+    "_cash_median": 0.0029094030945341254
+   },
+   "UI_rr": {
+    "off_delivery_rel": {
+     "measured": 0.03675628433302862,
+     "threshold": 3.3e-10,
+     "PASS": false
+    },
+    "cash_spread_rel": {
+     "measured": 0.005354813902712387,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "announce_row0": {
+     "measured": 5.077291506064979e-12,
+     "threshold": 1e-10,
+     "PASS": true
+    },
+    "pv_identity": {
+     "measured": 0.011167835357050161,
+     "threshold": 1e-08,
+     "PASS": false
+    },
+    "col0_cash_rel": {
+     "measured": 0.005074195977564436,
+     "threshold": 1e-06,
+     "PASS": false
+    },
+    "_terminal_diag": {
+     "measured": 0.0001409576089184128,
+     "threshold": 1e-06,
+     "PASS": true
+    },
+    "delivery_row_is_s": {
+     "measured": true,
+     "threshold": true,
+     "PASS": true
+    },
+    "_cash_median": 0.025848925823278877
+   }
+  },
+  "R": {
+   "SKIPPED": "A3 is S-only (no twin); convergence owned by A1's R tier"
+  },
+  "eta_chain_dy": {
+   "n50": {
+    "frob_rel_gap": 0.10557399573867547,
+    "threshold": 0.01,
+    "PASS": false
+   },
+   "n150": {
+    "frob_rel_gap": 0.11932861120352752,
+    "threshold": 0.01,
+    "PASS": false
+   }
+  }
+ },
+ "dPi_probe": "jacobian(inputs=['Pi']) raised: AttributeError: 'int' object has no attribute 'T'",
+ "versions": {
+  "numpy": "1.26.4",
+  "HARK": "0.17.2",
+  "sequence_jacobian": "1.0.0 (no __version__ attr)"
+ },
+ "wall_s": 14.3,
+ "config_hash": "bc1475da636c0f4f",
+ "summary": {
+  "pass": 32,
+  "fail": 50,
+  "failures": [
+   "S_step4_n50/transfers/off_delivery_rel",
+   "S_step4_n50/transfers/cash_spread_rel",
+   "S_step4_n50/transfers/pv_identity",
+   "S_step4_n50/transfers/col0_cash_rel",
+   "S_step4_n50/w/off_delivery_rel",
+   "S_step4_n50/w/cash_spread_rel",
+   "S_step4_n50/w/pv_identity",
+   "S_step4_n50/w/col0_cash_rel",
+   "S_step4_n50/tau/off_delivery_rel",
+   "S_step4_n50/tau/cash_spread_rel",
+   "S_step4_n50/tau/pv_identity",
+   "S_step4_n50/tau/col0_cash_rel",
+   "S_step4_n50/r/off_delivery_rel",
+   "S_step4_n50/r/cash_spread_rel",
+   "S_step4_n50/r/pv_identity",
+   "S_step4_n50/r/col0_cash_rel",
+   "S_step4_n50/UI_extend/off_delivery_rel",
+   "S_step4_n50/UI_extend/cash_spread_rel",
+   "S_step4_n50/UI_extend/pv_identity",
+   "S_step4_n50/UI_extend/col0_cash_rel",
+   "S_step4_n50/UI_rr/off_delivery_rel",
+   "S_step4_n50/UI_rr/cash_spread_rel",
+   "S_step4_n50/UI_rr/pv_identity",
+   "S_step4_n50/UI_rr/col0_cash_rel",
+   "S_step4_n150/transfers/off_delivery_rel",
+   "S_step4_n150/transfers/cash_spread_rel",
+   "S_step4_n150/transfers/pv_identity",
+   "S_step4_n150/transfers/col0_cash_rel",
+   "S_step4_n150/w/off_delivery_rel",
+   "S_step4_n150/w/cash_spread_rel",
+   "S_step4_n150/w/pv_identity",
+   "S_step4_n150/w/col0_cash_rel",
+   "S_step4_n150/tau/off_delivery_rel",
+   "S_step4_n150/tau/cash_spread_rel",
+   "S_step4_n150/tau/pv_identity",
+   "S_step4_n150/tau/col0_cash_rel",
+   "S_step4_n150/r/off_delivery_rel",
+   "S_step4_n150/r/cash_spread_rel",
+   "S_step4_n150/r/pv_identity",
+   "S_step4_n150/r/col0_cash_rel",
+   "S_step4_n150/UI_extend/off_delivery_rel",
+   "S_step4_n150/UI_extend/cash_spread_rel",
+   "S_step4_n150/UI_extend/pv_identity",
+   "S_step4_n150/UI_extend/col0_cash_rel",
+   "S_step4_n150/UI_rr/off_delivery_rel",
+   "S_step4_n150/UI_rr/cash_spread_rel",
+   "S_step4_n150/UI_rr/pv_identity",
+   "S_step4_n150/UI_rr/col0_cash_rel",
+   "eta_chain_dy/n50",
+   "eta_chain_dy/n150"
+  ],
+  "VERDICT": "FAIL"
+ }
+}

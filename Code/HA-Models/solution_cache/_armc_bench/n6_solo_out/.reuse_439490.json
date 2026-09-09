@@ -1,0 +1,26 @@
+{
+ "schema_version": "2",
+ "pid": 439490,
+ "label": "welfare6_scenario-recessionCheck_AD",
+ "argv": [
+  "/home/shared/github/llorracc/HAFiscal-Latest/Code/HA-Models/FromPandemicCode/welfare6_scenario.py"
+ ],
+ "events": [
+  {
+   "kind": "platform",
+   "outcome": "observed",
+   "byte_effect": "none",
+   "t_utc": "2026-08-07T02:32:14Z",
+   "jax_backend": "cpu",
+   "panel_dtype": "float64"
+  },
+  {
+   "kind": "ad_belief_seed",
+   "outcome": "published",
+   "byte_effect": "none",
+   "t_utc": "2026-08-07T03:25:42Z",
+   "shock_type": "recessionCheck",
+   "engine": "jax_mc_replay_ad"
+  }
+ ]
+}

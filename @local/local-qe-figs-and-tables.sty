@@ -1,0 +1,424 @@
+% HAFiscal local-qe-figs-and-tables.sty - Minimal packages for standalone figures/tables
+% This file contains ONLY the packages needed for Figures/ and Tables/ .tex files
+% to compile as standalone documents in the HAFiscal-QE submission
+%
+% Usage in standalone figures/tables:
+%   \documentclass{econsocart}
+%   \usepackage{@local/local-qe-figs-and-tables}
+%
+% This file is also sourced by local-qe.sty to avoid duplication
+
+\providecommand{\pregenmark}{}
+\ProvidesPackage{local-qe-figs-and-tables}[2025/10/11 HAFiscal QE figures/tables minimal package]
+
+% ═══════════════════════════════════════════════════════════════════════════
+% ADD PARENT DIRECTORY TO INPUT SEARCH PATH
+\makeatletter
+\@ifundefined{input@path}{%
+  % input@path doesnt exist yet - define it with parent directory and @local
+  \def\input@path{{../@local}{..}}%
+}{%
+  % input@path exists - prepend parent directory and @local to the existing path list
+  \protected@edef\input@path{{../@local}{..}\input@path}%
+}
+\makeatother
+
+
+%% MINIMAL PACKAGE SET FOR STANDALONE FIGURES AND TABLES
+% These are the core packages that standalone figure/table .tex files require
+
+% Math and symbols
+% NOTE: amsmath and amssymb are provided by econsocart.cls
+% We include them here for clarity, but they may be redundant
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+
+% Figure and table support
+\RequirePackage{graphicx}     % Include graphics (\includegraphics)
+\RequirePackage{subcaption}   % Subfigure/subcaption environments
+\RequirePackage{float}        % Float placement options ([H] specifier)
+\RequirePackage{placeins}     % Float barriers (\FloatBarrier command)
+\RequirePackage{booktabs}     % Professional table formatting (\toprule, \midrule, etc.)
+
+% Color support
+\RequirePackage{xcolor}       % Color support (\textcolor, etc.)
+
+% Citations (if figures/tables have embedded citations)
+% NOTE: natbib is loaded by econsocart.cls, but we include for completeness
+\RequirePackage{natbib}
+
+% Catchfile package for reading external files into macros
+% Required by: \fetchgeneratedtabular for standalone tables
+\RequirePackage{catchfile}
+
+% ═══════════════════════════════════════════════════════════════════════════
+% BIBLIOGRAPHY DETECTION FOR STANDALONE FIGURES/TABLES
+% ═══════════════════════════════════════════════════════════════════════════
+% 
+% Standalone figures/tables in QE may contain citations that need bibliography support.
+% Provide simple bibliography path detection for compilation from Tables/ or Figures/ subdirectories.
+%
+% Load econark-bibfilesfind (provides \bibfilesfind and \texname)
+\RequirePackage{econark-bibfilesfind}
+% Ensure \texname is defined (provides fallback to \jobname if not already set)
+\providecommand{\texname}{\jobname}
+
+% Only do bibliography detection if it hasn't been done already
+% (local.sty handles main document mode, this is only for standalone figs/tables)
+\makeatletter
+\@ifundefined{bibfilesfound}{%
+  % No bibliography detection done yet - we're likely a standalone figure/table
+  \providecommand{\bibfilesfound}{}% Define it first
+}{}
+% Only proceed if bibfilesfound is empty (not already set by local.sty)
+\ifx\bibfilesfound\@empty
+  % For standalone figures/tables, try to find bibliography in parent directory
+  \@ifclassloaded{subfiles}{%
+  % If using subfiles package (development mode in Latest/Public)
+  \IfFileExists{../\texname.bib}{%
+    \renewcommand{\bibfilesfound}{../\texname}%
+    \typeout{Subfile mode: Using ../\texname.bib for bibliography}%
+  }{%
+    \IfFileExists{../../\texname.bib}{%
+      \renewcommand{\bibfilesfound}{../../\texname}%
+      \typeout{Subfile mode: Using ../../\texname.bib for bibliography}%
+    }{%
+      \renewcommand{\bibfilesfound}{}%
+      \typeout{Subfile mode: No bibliography found (OK for standalone preview)}%
+    }%
+  }%
+}{%
+  % Not using subfiles - likely a QE standalone figure/table
+  % Try parent directory for bibliography (explicitly check for HAFiscal.bib)
+  \IfFileExists{../HAFiscal.bib}{%
+    \renewcommand{\bibfilesfound}{../HAFiscal}%
+    \typeout{Standalone figure/table: Using ../HAFiscal.bib for bibliography}%
+  }{%
+    % Fallback: try using \texname in parent directory
+    \IfFileExists{../\texname.bib}{%
+      \renewcommand{\bibfilesfound}{../\texname}%
+      \typeout{Standalone figure/table: Using ../\texname.bib for bibliography}%
+    }{%
+      % If not found, try current directory (main document context)
+      \IfFileExists{\texname.bib}{%
+        \bibfilesfind{\texname}%
+        \typeout{Main document mode: Using \bibfilesfound for bibliography}%
+      }{%
+        \renewcommand{\bibfilesfound}{}%
+        \typeout{No bibliography found (standalone figure/table without parent .bib)}%
+      }%
+    }%
+  }%
+  }
+\fi
+\makeatother
+% ═══════════════════════════════════════════════════════════════════════════
+
+% Standalone figures/tables use \smartbib for conditional bibliography
+% In QE integrated context, this should do nothing (main doc handles bibliography)
+\providecommand{\smartbib}{}  % No-op in integrated mode
+
+% ═══════════════════════════════════════════════════════════════════════════
+% CONDITIONAL COMMANDS FOR STANDALONE COMPILATION
+% ═══════════════════════════════════════════════════════════════════════════
+% Redefine \whenintegrated to be a no-op for standalone compilation
+% This ensures content intended for integrated mode doesn't execute when
+% compiling standalone figures/tables/subfiles
+\providecommand{\whenintegrated}[1]{}  % No-op for standalone compilation
+\providecommand{\whenstandalone}[1]{#1}  % Execute content in standalone mode
+% --- The paper's WEB EDITION: one base URL and label-named HTML anchors (2026-09-09) --------------
+% Every "click this heading to read it online" link in the paper carries \WebBase\#<label>. The
+% base is the paper's public front door, econ-ark.github.io/HAFiscal (GitHub Pages on the archival
+% repo econ-ark/HAFiscal forwards to the served edition, llorracc.github.io/HAFiscal-Public, and
+% keeps the fragment). \webanchor{<label>} makes the fragment RESOLVE: in the HTML build (tex4ht
+% defines \HCode) it emits <a id="<label>"></a> just before the heading; in the PDF build it is
+% nothing. Before this the 15 links were literal and every one was a 404 (link checker, 2026-09-01:
+% no site at the host, and the tex4ht ids are x1-2000-style, never the LaTeX label).
+\providecommand{\WebBase}{https://econ-ark.github.io/HAFiscal/}
+\providecommand{\webanchor}[1]{\ifdefined\HCode\HCode{<a id="#1"></a>}\fi}
+
+
+% PDF/Web conditional compilation macros
+% For standalone compilation, we're always in PDF mode, so \pdfonly always executes
+\RequirePackage{ifthen}
+% Only define Web boolean if not already defined (avoid conflict with local-qe-standalone.sty)
+\ifdefined\ifWeb
+  % Boolean already exists (likely from local-qe-standalone.sty in subfiles mode)
+  % Don't redefine to avoid "Command \ifWeb already defined" error
+\else
+  \newboolean{Web}
+  \setboolean{Web}{false}  % Always false for standalone QE compilation
+\fi
+\providecommand{\pdfonly}[1]{#1}  % Always execute in standalone PDF mode
+\providecommand{\webonly}[1]{}    % Never execute in standalone PDF mode
+\providecommand{\pdfortext}[1]{#1}  % Alias for \pdfonly (text version)
+
+% Fancy header/footer commands (no-op for standalone compilation)
+% These are used in integrated mode but not needed for standalone
+\providecommand{\chead}[2]{}  % Center header (no-op for standalone)
+\providecommand{\lhead}[2]{}  % Left header (no-op for standalone)
+\providecommand{\rhead}[2]{}  % Right header (no-op for standalone)
+\providecommand{\cfoot}[2]{}  % Center footer (no-op for standalone)
+\providecommand{\lfoot}[2]{}  % Left footer (no-op for standalone)
+\providecommand{\rfoot}[2]{}  % Right footer (no-op for standalone)
+
+% Subfile package for proper nested document handling
+% The subfiles package correctly strips \documentclass and \begin{document}...\end{document}
+% from included files, allowing standalone compilation of each file while also
+% supporting inclusion via \subfile{path} without nested document environment errors.
+%
+% In Latest/Public: subfiles package is loaded by \documentclass{subfiles}
+% In QE: subfiles package is loaded here (since documentclass is econsocart)
+\RequirePackage{subfiles}
+
+% (moved END marker below path macros)
+
+% ═══════════════════════════════════════════════════════════════════════════
+% PATH MACROS FOR STANDALONE FIGURES/TABLES  
+% ═══════════════════════════════════════════════════════════════════════════
+% DEPRECATED: \figurepath macro (as of 2025-11-15)
+% 
+% This macro is no longer used in the codebase. All figure/table .tex files
+% now use direct full paths for Windows compatibility:
+%   CURRENT:  \includegraphics{\latexroot/Code/HA-Models/.../figure.pdf}
+%   OLD:      \includegraphics{\latexroot/\figurepath{figure.pdf}}
+%
+% The macro is kept for backward compatibility only. It should be removed
+% in a future cleanup when we confirm no external dependencies exist.
+%
+% Historical usage: \figurepath{foo.pdf} expanded to images/foo.pdf
+% See commit 9073b5a2 (2025-11-15) for the full-path migration.
+\providecommand{\figurepath}[1]{images/#1}  % DEPRECATED - DO NOT USE
+
+% Note: \latexroot should be defined by \input{./relpath-to-latexroot.ltx}
+% which should be present at the top of each figure/table file
+% ═══════════════════════════════════════════════════════════════════════════
+
+% ═══════════════════════════════════════════════════════════════════════════
+% TABULAR DATA INCLUSION MACRO (for standalone tables)
+% ═══════════════════════════════════════════════════════════════════════════
+% Fetch dynamically-generated tabular content from external .ltx files
+% This allows standalone tables to compile independently while still
+% loading generated content from Code/HA-Models/.../*.ltx files
+%
+% QE-BASELINE FREEZE (plans/20260611_qe-baseline-freeze-and-candidate-lock_plan.md):
+% The canonical generated files hold the frozen QE-published numbers
+% (LOCKED_TABLES.manifest). Pipeline runs write `_candidate` siblings
+% (see Code/HA-Models/FromPandemicCode/generated_output.py). By default the
+% build reads the FROZEN canonical files. To preview candidate results,
+% `make pdf-candidate` creates the gitignored flag file
+% @local/use-candidate-tables.ltx (containing \usecandidatetablestrue);
+% then these macros read `<base>_candidate.<ext>` siblings when they exist,
+% falling back to the frozen file when they do not.
+% NOTE: this file does \makeatother at the end of its earlier sections, so we
+% must re-enable @-names for the internal macros below.
+\makeatletter
+\newif\ifusecandidatetables
+\usecandidatetablesfalse
+\providecommand{\latexroot}{.}% normally defined by relpath-to-latexroot.ltx
+\InputIfFileExists{\latexroot/@local/use-candidate-tables.ltx}{}{}
+
+% --- Annotated build (U3, owner ruling 2026-08-23: text stays FROZEN; the
+% annotated VARIANT badges each exhibit that current code changes, linking to
+% UPDATES.md). `make pdf-annotated` creates the flag file; the annotations map
+% (@local/updates-annotations.ltx) is GENERATED by Code/HA-Models/updates_report.py
+% alongside UPDATES.md -- never hand-edit either. Frozen bytes are read, never
+% written; the default build is untouched (flag absent => \annotatedtablesfalse).
+\newif\ifannotatedtables
+\annotatedtablesfalse
+\InputIfFileExists{\latexroot/@local/use-annotated-tables.ltx}{}{}
+\InputIfFileExists{\latexroot/@local/updates-annotations.ltx}{}{}
+% Badge: typeset AFTER the frozen exhibit when the annotations map knows it.
+% #1 = the edef'd include path (key), matched exactly as generated.
+\def\hafiscal@updatesbadge#1{%
+  \typeout{HFANNOT key check: [#1] \ifcsname HFupd@#1\endcsname FOUND\else absent\fi}%
+  \ifcsname HFupd@#1\endcsname
+    \par\nobreak\vspace{2pt}%
+    {\footnotesize\sffamily\bfseries
+     \@ifundefined{textcolor}{}{\color{red!65!black}}%
+     [UPDATED\ --- the bug-fixed and improved code change this exhibit; see
+      \csname HFupd@#1\endcsname]}\par
+    % A FIGURE-LEVEL note (map key HFupdfig@<same path>) is not typeset here: six
+    % copies of a 46-word note in the narrow panel badges of a 2x3 figure overflowed
+    % the page by 197pt (2026-09-05). It is stored once and fired at \end{figure}.
+    \ifcsname HFupdfig@#1\endcsname
+      \ifx\hafiscal@fignote\@empty
+        \global\expandafter\let\expandafter\hafiscal@fignote\csname HFupdfig@#1\endcsname
+      \fi
+    \fi
+  \fi
+  % A note on the TEXT (map key HFupdtext@<same key>): one full-width box, typeset
+  % wherever the exhibit badge would go (under the section head for a keyed subfile).
+  \ifcsname HFupdtext@#1\endcsname
+    \par\nobreak\vspace{2pt}\noindent
+    \begin{minipage}{\linewidth}\raggedright\footnotesize\sffamily
+      \@ifundefined{textcolor}{}{\color{red!65!black}}%
+      {\bfseries [NOTE ON THE TEXT\ --- prose in this section is keyed to results the
+       bug-fixed and improved code changes; see UPDATES.md, ``Notes on the text'':]}
+      \csname HFupdtext@#1\endcsname
+    \end{minipage}\par
+  \fi}
+\def\hafiscal@fignote{}
+\def\hafiscal@fignote@fire{%
+  \ifx\hafiscal@fignote\@empty\else
+    \par\nobreak\vspace{2pt}\noindent
+    \begin{minipage}{\linewidth}\raggedright\footnotesize\sffamily\bfseries
+      \@ifundefined{textcolor}{}{\color{red!65!black}}%
+      [UPDATED\ --- \hafiscal@fignote]%
+    \end{minipage}\par
+    \global\let\hafiscal@fignote\@empty
+  \fi}
+
+% Hand-maintained wrapper tables render via \subfile{../Tables/<name>} (no
+% extension), which bypasses \fetchgeneratedtabular -- so in the annotated
+% build we also wrap \subfile: badge the call when the annotations map has a
+% key for its arg (checked with and without .tex; unknown args no-op, so
+% section-level \subfile{Subfiles/...} calls are untouched unless the map names
+% them). Deferred to \AtBeginDocument so the subfiles package has already
+% defined \subfile.
+%
+% Section-head badge (C10 rescoped, owner 2026-08-28 17:10: the online
+% appendix's hand-typed tables are never replaced; the annotated build badges
+% the appendix at its section head, pointing to the UPDATES.md section, with NO
+% hook in the appendix source). A keyed \subfile ARMS a pending badge
+% (\hafiscal@headbadge := its key, globally) before the file is read; the first
+% \section (starred or not) inside it typesets the badge right under the
+% heading and disarms; a keyed file with no \section (a table wrapper) is badged
+% after the file, as before. The enclosing file's pending key travels as a
+% macro argument through nested \subfile calls, so a keyed table inside a keyed
+% section file restores it on return. A standalone compile of a section file
+% (Subfiles/X.tex on its own -- how the tracked Subfiles/Appendix-Robustness.pdf
+% is made; the subfiles class exposes only \jobname) arms from
+% \latexroot/Subfiles/<jobname minus the annotated builds' "-annotated"
+% suffix>.tex when the map has that key.
+\def\hafiscal@headbadge{}
+% A key is "known" when the map carries an exhibit badge (HFupd@) OR a note on the
+% TEXT (HFupdtext@, 2026-09-09: prose keyed to changed results, one box under the
+% section head; generated from updates_report.TEXT_NOTES). Same arming path.
+\newif\ifhafiscal@keyed
+\def\hafiscal@ifkeyed#1{%
+  \hafiscal@keyedfalse
+  \ifcsname HFupd@#1\endcsname\hafiscal@keyedtrue\fi
+  \ifcsname HFupdtext@#1\endcsname\hafiscal@keyedtrue\fi}
+\let\hafiscal@nil\relax
+\begingroup
+  \edef\x{\endgroup\long\def\noexpand\hafiscal@stripannot##1\detokenize{-annotated}##2\noexpand\hafiscal@nil{##1}}%
+\x
+\def\hafiscal@subfile@keyed#1#2{%  #1 = the \subfile arg, #2 = its key in the map
+  \expandafter\hafiscal@subfile@keyed@aux\expandafter{\hafiscal@headbadge}{#1}{#2}}
+\def\hafiscal@subfile@keyed@aux#1#2#3{%  #1 = the enclosing file's pending key, #2 = arg, #3 = key
+  \gdef\hafiscal@headbadge{#3}%
+  \hafiscal@orig@subfile{#2}%
+  \ifx\hafiscal@headbadge\@empty\else\hafiscal@updatesbadge{#3}\fi
+  \gdef\hafiscal@headbadge{#1}}
+\def\hafiscal@headbadge@fire{%
+  \ifx\hafiscal@headbadge\@empty\else
+    \expandafter\hafiscal@updatesbadge\expandafter{\hafiscal@headbadge}%
+    \global\let\hafiscal@headbadge\@empty
+  \fi}
+\def\hafiscal@section@star#1{\hafiscal@orig@section*{#1}\hafiscal@headbadge@fire}
+\def\hafiscal@section@plain{\@ifnextchar[\hafiscal@section@opt\hafiscal@section@noopt}
+\def\hafiscal@section@opt[#1]#2{\hafiscal@orig@section[#1]{#2}\hafiscal@headbadge@fire}
+\def\hafiscal@section@noopt#1{\hafiscal@orig@section{#1}\hafiscal@headbadge@fire}
+\def\hafiscal@arm@standalone{%
+  \edef\hafiscal@tmp{\jobname\detokenize{-annotated}}%
+  \edef\hafiscal@jobstem{\expandafter\hafiscal@stripannot\hafiscal@tmp\hafiscal@nil}%
+  \hafiscal@ifkeyed{\latexroot/Subfiles/\hafiscal@jobstem.tex}%
+  \ifhafiscal@keyed
+    \xdef\hafiscal@headbadge{\latexroot/Subfiles/\hafiscal@jobstem.tex}%
+  \fi}
+\AtBeginDocument{%
+  \ifannotatedtables
+    \@ifundefined{subfile}{}{%
+      \let\hafiscal@orig@subfile\subfile
+      \renewcommand{\subfile}[1]{%
+        \hafiscal@ifkeyed{#1.tex}%
+        \ifhafiscal@keyed
+          \expandafter\@firstoftwo
+        \else
+          \expandafter\@secondoftwo
+        \fi
+        {\hafiscal@subfile@keyed{#1}{#1.tex}}%
+        {\hafiscal@ifkeyed{#1}%
+         \ifhafiscal@keyed
+           \expandafter\@firstoftwo
+         \else
+           \expandafter\@secondoftwo
+         \fi
+         {\hafiscal@subfile@keyed{#1}{#1}}%
+         {\hafiscal@orig@subfile{#1}}}}}%
+    \@ifundefined{section}{}{%
+      \let\hafiscal@orig@section\section
+      \renewcommand{\section}{\@ifstar{\hafiscal@section@star}{\hafiscal@section@plain}}}%
+    % Figure-level notes fire once, full width, at the end of the enclosing figure.
+    \@ifundefined{endfigure}{}{%
+      \let\hafiscal@orig@endfigure\endfigure
+      \def\endfigure{\hafiscal@fignote@fire\hafiscal@orig@endfigure}}%
+    % float.sty rebinds \endfigure to \float@endH inside every [H] figure
+    % (float.sty:79), so hook that end macro as well.
+    \@ifundefined{float@endH}{}{%
+      \let\hafiscal@orig@floatendH\float@endH
+      \def\float@endH{\hafiscal@fignote@fire\hafiscal@orig@floatendH}}%
+    \hafiscal@arm@standalone
+  \fi}
+
+\providecommand{\candidatesuffix}{_candidate}
+
+% \hafiscal@setcandidate{<canonical path>} -> defines \fetched@cand as the
+% `_candidate` sibling path (extension preserved).
+\def\hafiscal@setcandidate#1{%
+  \edef\fetched@arg{#1}%
+  \expandafter\filename@parse\expandafter{\fetched@arg}%
+  \edef\fetched@cand{\filename@area\filename@base\candidatesuffix.\filename@ext}%
+}
+
+% Usage: \fetchgeneratedtabular{\latexroot/Code/HA-Models/.../table.ltx}
+\providecommand{\fetchgeneratedtabular}{}
+\renewcommand{\fetchgeneratedtabular}[1]{%
+  \ifusecandidatetables
+    \begingroup
+      \hafiscal@setcandidate{#1}%
+      \IfFileExists{\fetched@cand}{%
+        \CatchFileDef{\fetchedcontent}{\fetched@cand}{}%
+      }{%
+        \CatchFileDef{\fetchedcontent}{#1}{}%
+      }%
+      \fetchedcontent
+    \endgroup
+  \else
+    \CatchFileDef{\fetchedcontent}{#1}{}%
+    \fetchedcontent
+    \ifannotatedtables
+      \begingroup\edef\fetched@arg{#1}%
+      \expandafter\hafiscal@updatesbadge\expandafter{\fetched@arg}%
+      \endgroup
+    \fi
+  \fi
+}
+
+% Candidate-aware \includegraphics for code-generated figures.
+% Usage: \frozenORcandidate[width=.9\textwidth]{\latexroot/Code/.../fig.pdf}
+\providecommand{\frozenORcandidate}{}
+\renewcommand{\frozenORcandidate}[2][]{%
+  \ifusecandidatetables
+    \begingroup
+      \hafiscal@setcandidate{#2}%
+      \IfFileExists{\fetched@cand}{%
+        \includegraphics[#1]{\fetched@cand}%
+      }{%
+        \includegraphics[#1]{#2}%
+      }%
+    \endgroup
+  \else
+    \includegraphics[#1]{#2}%
+    % Annotated build: badge the panel when the map knows this figure (its key is the
+    % same manifest path the tables use); the value links to UPDATES-figures.pdf.
+    \ifannotatedtables
+      \begingroup\edef\fetched@arg{#2}%
+      \expandafter\hafiscal@updatesbadge\expandafter{\fetched@arg}%
+      \endgroup
+    \fi
+  \fi
+}
+\makeatother
+% ═══════════════════════════════════════════════════════════════════════════

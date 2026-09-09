@@ -1,0 +1,1417 @@
+{
+ "tol": 1e-09,
+ "rows": [
+  {
+   "educ": "dropout",
+   "field": "DiscFacDstn/atoms",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "DiscFacDstn/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "CRRA",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "Rfree",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*1.01 by literal; PE from the calibration"
+  },
+  {
+   "educ": "dropout",
+   "field": "LivPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*0.99375 by literal; PE from the calibration"
+  },
+  {
+   "educ": "dropout",
+   "field": "MrkvArray(base, lumped to HANK states)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "PermGroFac(lumped)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "PermShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "TranShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "solve_grid/aXtraMax",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "solve_grid/aXtraCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "solve_grid/aXtraMin",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "solve_grid/aXtraNestFac",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "PermShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "TranShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "UnempPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "IncUnemp",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "dist_grid/mCount",
+   "status": "EXPECTED",
+   "value": 50.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "dropout",
+   "field": "dist_grid/mMax",
+   "status": "EXPECTED",
+   "value": 1300.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/employed/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/employed/PermShk",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/employed/TranShk",
+   "status": "EXPECTED",
+   "value": 0.49435139884747015,
+   "note": "the HANK block scales the employed transitory shock by wage_ss*(1-tau_ss) (net income level; HAFISCAL_HANK_INCOME_LEVEL=net, the R-e item-2 arm) \u2014 the PE's own level is gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/employed/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE median ratio; = wage_ss*(1-tau_ss) = 0.7 under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp1/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp1/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp1/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp2/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp2/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp2/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp3/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp3/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp3/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp4/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp4/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp4/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp5/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp5/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp5/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[0]/state0",
+   "status": "FAIL",
+   "value": 0.5313279469054546,
+   "note": "beta=0.496024; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[0]/state1",
+   "status": "FAIL",
+   "value": 0.5152560506860402,
+   "note": "beta=0.496024; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[0]/state2",
+   "status": "FAIL",
+   "value": 0.5073904379679277,
+   "note": "beta=0.496024; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[0]/state3",
+   "status": "FAIL",
+   "value": 0.5073904379679277,
+   "note": "beta=0.496024; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[0]/state4",
+   "status": "FAIL",
+   "value": 0.5073904379679277,
+   "note": "beta=0.496024; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[0]/state5",
+   "status": "FAIL",
+   "value": 0.5073904379679277,
+   "note": "beta=0.496024; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[0]/WORST",
+   "status": "FAIL",
+   "value": 0.5313279469054546,
+   "note": "beta=0.496024, worst at state 0"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[3]/state0",
+   "status": "FAIL",
+   "value": 0.5089453180859937,
+   "note": "beta=0.745146; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[3]/state1",
+   "status": "FAIL",
+   "value": 0.5005195082835545,
+   "note": "beta=0.745146; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[3]/state2",
+   "status": "FAIL",
+   "value": 0.49650055512243085,
+   "note": "beta=0.745146; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[3]/state3",
+   "status": "FAIL",
+   "value": 0.49650055512243085,
+   "note": "beta=0.745146; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[3]/state4",
+   "status": "FAIL",
+   "value": 0.49650055512243085,
+   "note": "beta=0.745146; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[3]/state5",
+   "status": "FAIL",
+   "value": 0.49650055512243085,
+   "note": "beta=0.745146; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[3]/WORST",
+   "status": "FAIL",
+   "value": 0.5089453180859937,
+   "note": "beta=0.745146, worst at state 0"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[6]/state0",
+   "status": "EXPECTED",
+   "value": 0.2598628406951452,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[6]/state1",
+   "status": "EXPECTED",
+   "value": 0.25914228298844577,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[6]/state2",
+   "status": "EXPECTED",
+   "value": 0.2588683249814585,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[6]/state3",
+   "status": "EXPECTED",
+   "value": 0.2588683249814585,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[6]/state4",
+   "status": "EXPECTED",
+   "value": 0.2588683249814585,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[6]/state5",
+   "status": "EXPECTED",
+   "value": 0.2588683249814585,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[6]/WORST",
+   "status": "EXPECTED",
+   "value": 0.2598628406951452,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "dropout",
+   "field": "h2/beta[3]/A_ss",
+   "status": "EXPECTED",
+   "value": 0.08518084890780506,
+   "note": "steady-state assets of this atom"
+  },
+  {
+   "educ": "dropout",
+   "field": "h2/beta[3]/C_ss",
+   "status": "EXPECTED",
+   "value": 0.6830120470481214,
+   "note": "steady-state consumption of this atom"
+  },
+  {
+   "educ": "dropout",
+   "field": "h2/beta[3]/mass_above_solve_top",
+   "status": "EXPECTED",
+   "value": 9.242395154625178e-18,
+   "note": "the solve grid tops at aXtraMax (356/375/383 by education) while the distribution grid runs to dist mMax = 1300, so the ergodic distribution is evaluated on an extrapolated policy above the solve top. Mass there is ~1e-16 at the low/middle atoms; at the CAP atoms it is 0.017 %/0.029 %/0.52 % of households holding 1.4 %/2.0 %/12.0 % of that atom's wealth. Consequence measured by rebuilding with a covering solve grid (aXtraMax 1400): A_ss -0.10 %/-0.12 %/-0.07 %, C_ss -0.002 %/-0.002 %/-0.009 % \u2014 immaterial, so the production grids stand; the number is reported here so a change in it shows up"
+  },
+  {
+   "educ": "dropout",
+   "field": "h2/beta[3]/wealth_share_above_solve_top",
+   "status": "EXPECTED",
+   "value": 1.1311126419272032e-14,
+   "note": "the solve grid tops at aXtraMax (356/375/383 by education) while the distribution grid runs to dist mMax = 1300, so the ergodic distribution is evaluated on an extrapolated policy above the solve top. Mass there is ~1e-16 at the low/middle atoms; at the CAP atoms it is 0.017 %/0.029 %/0.52 % of households holding 1.4 %/2.0 %/12.0 % of that atom's wealth. Consequence measured by rebuilding with a covering solve grid (aXtraMax 1400): A_ss -0.10 %/-0.12 %/-0.07 %, C_ss -0.002 %/-0.002 %/-0.009 % \u2014 immaterial, so the production grids stand; the number is reported here so a change in it shows up"
+  },
+  {
+   "educ": "dropout",
+   "field": "h2/cap/A_ss",
+   "status": "EXPECTED",
+   "value": 6.949002661833087,
+   "note": "steady-state assets of this atom"
+  },
+  {
+   "educ": "dropout",
+   "field": "h2/cap/C_ss",
+   "status": "EXPECTED",
+   "value": 0.6979316537455305,
+   "note": "steady-state consumption of this atom"
+  },
+  {
+   "educ": "dropout",
+   "field": "h2/cap/mass_above_solve_top",
+   "status": "EXPECTED",
+   "value": 0.0001680561792847442,
+   "note": "the solve grid tops at aXtraMax (356/375/383 by education) while the distribution grid runs to dist mMax = 1300, so the ergodic distribution is evaluated on an extrapolated policy above the solve top. Mass there is ~1e-16 at the low/middle atoms; at the CAP atoms it is 0.017 %/0.029 %/0.52 % of households holding 1.4 %/2.0 %/12.0 % of that atom's wealth. Consequence measured by rebuilding with a covering solve grid (aXtraMax 1400): A_ss -0.10 %/-0.12 %/-0.07 %, C_ss -0.002 %/-0.002 %/-0.009 % \u2014 immaterial, so the production grids stand; the number is reported here so a change in it shows up"
+  },
+  {
+   "educ": "dropout",
+   "field": "h2/cap/wealth_share_above_solve_top",
+   "status": "EXPECTED",
+   "value": 0.013934894986955711,
+   "note": "the solve grid tops at aXtraMax (356/375/383 by education) while the distribution grid runs to dist mMax = 1300, so the ergodic distribution is evaluated on an extrapolated policy above the solve top. Mass there is ~1e-16 at the low/middle atoms; at the CAP atoms it is 0.017 %/0.029 %/0.52 % of households holding 1.4 %/2.0 %/12.0 % of that atom's wealth. Consequence measured by rebuilding with a covering solve grid (aXtraMax 1400): A_ss -0.10 %/-0.12 %/-0.07 %, C_ss -0.002 %/-0.002 %/-0.009 % \u2014 immaterial, so the production grids stand; the number is reported here so a change in it shows up"
+  },
+  {
+   "educ": "highschool",
+   "field": "DiscFacDstn/atoms",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "DiscFacDstn/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "CRRA",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "Rfree",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*1.01 by literal; PE from the calibration"
+  },
+  {
+   "educ": "highschool",
+   "field": "LivPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*0.99375 by literal; PE from the calibration"
+  },
+  {
+   "educ": "highschool",
+   "field": "MrkvArray(base, lumped to HANK states)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "PermGroFac(lumped)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "PermShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "TranShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "solve_grid/aXtraMax",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "solve_grid/aXtraCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "solve_grid/aXtraMin",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "solve_grid/aXtraNestFac",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "PermShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "TranShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "UnempPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "IncUnemp",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "dist_grid/mCount",
+   "status": "EXPECTED",
+   "value": 50.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "highschool",
+   "field": "dist_grid/mMax",
+   "status": "EXPECTED",
+   "value": 1300.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/employed/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/employed/PermShk",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/employed/TranShk",
+   "status": "EXPECTED",
+   "value": 0.49435139884747015,
+   "note": "the HANK block scales the employed transitory shock by wage_ss*(1-tau_ss) (net income level; HAFISCAL_HANK_INCOME_LEVEL=net, the R-e item-2 arm) \u2014 the PE's own level is gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/employed/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE median ratio; = wage_ss*(1-tau_ss) = 0.7 under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp1/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp1/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp1/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp2/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp2/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp2/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp3/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp3/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp3/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp4/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp4/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp4/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp5/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp5/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp5/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[0]/state0",
+   "status": "FAIL",
+   "value": 0.46560440936831426,
+   "note": "beta=0.872013; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[0]/state1",
+   "status": "FAIL",
+   "value": 0.45993339304084957,
+   "note": "beta=0.872013; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[0]/state2",
+   "status": "FAIL",
+   "value": 0.45761217084223604,
+   "note": "beta=0.872013; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[0]/state3",
+   "status": "FAIL",
+   "value": 0.45761217084223604,
+   "note": "beta=0.872013; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[0]/state4",
+   "status": "FAIL",
+   "value": 0.45761217084223604,
+   "note": "beta=0.872013; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[0]/state5",
+   "status": "FAIL",
+   "value": 0.45761217084223604,
+   "note": "beta=0.872013; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[0]/WORST",
+   "status": "FAIL",
+   "value": 0.46560440936831426,
+   "note": "beta=0.872013, worst at state 0"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[3]/state0",
+   "status": "FAIL",
+   "value": 0.4191442976552069,
+   "note": "beta=0.933852; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[3]/state1",
+   "status": "FAIL",
+   "value": 0.41554510501362785,
+   "note": "beta=0.933852; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[3]/state2",
+   "status": "FAIL",
+   "value": 0.4141375900133366,
+   "note": "beta=0.933852; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[3]/state3",
+   "status": "FAIL",
+   "value": 0.4141375900133366,
+   "note": "beta=0.933852; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[3]/state4",
+   "status": "FAIL",
+   "value": 0.4141375900133366,
+   "note": "beta=0.933852; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[3]/state5",
+   "status": "FAIL",
+   "value": 0.4141375900133366,
+   "note": "beta=0.933852; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[3]/WORST",
+   "status": "FAIL",
+   "value": 0.4191442976552069,
+   "note": "beta=0.933852, worst at state 0"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[6]/state0",
+   "status": "EXPECTED",
+   "value": 0.2574871266196914,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[6]/state1",
+   "status": "EXPECTED",
+   "value": 0.2566534834983015,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[6]/state2",
+   "status": "EXPECTED",
+   "value": 0.25639484901472265,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[6]/state3",
+   "status": "EXPECTED",
+   "value": 0.25639484901472265,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[6]/state4",
+   "status": "EXPECTED",
+   "value": 0.25639484901472265,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[6]/state5",
+   "status": "EXPECTED",
+   "value": 0.25639484901472265,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[6]/WORST",
+   "status": "EXPECTED",
+   "value": 0.2574871266196914,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "highschool",
+   "field": "h2/beta[3]/A_ss",
+   "status": "EXPECTED",
+   "value": 0.30905391748447997,
+   "note": "steady-state assets of this atom"
+  },
+  {
+   "educ": "highschool",
+   "field": "h2/beta[3]/C_ss",
+   "status": "EXPECTED",
+   "value": 0.6925582266765953,
+   "note": "steady-state consumption of this atom"
+  },
+  {
+   "educ": "highschool",
+   "field": "h2/beta[3]/mass_above_solve_top",
+   "status": "EXPECTED",
+   "value": 1.7810804872111476e-15,
+   "note": "the solve grid tops at aXtraMax (356/375/383 by education) while the distribution grid runs to dist mMax = 1300, so the ergodic distribution is evaluated on an extrapolated policy above the solve top. Mass there is ~1e-16 at the low/middle atoms; at the CAP atoms it is 0.017 %/0.029 %/0.52 % of households holding 1.4 %/2.0 %/12.0 % of that atom's wealth. Consequence measured by rebuilding with a covering solve grid (aXtraMax 1400): A_ss -0.10 %/-0.12 %/-0.07 %, C_ss -0.002 %/-0.002 %/-0.009 % \u2014 immaterial, so the production grids stand; the number is reported here so a change in it shows up"
+  },
+  {
+   "educ": "highschool",
+   "field": "h2/beta[3]/wealth_share_above_solve_top",
+   "status": "EXPECTED",
+   "value": 1.2497085594070823e-12,
+   "note": "the solve grid tops at aXtraMax (356/375/383 by education) while the distribution grid runs to dist mMax = 1300, so the ergodic distribution is evaluated on an extrapolated policy above the solve top. Mass there is ~1e-16 at the low/middle atoms; at the CAP atoms it is 0.017 %/0.029 %/0.52 % of households holding 1.4 %/2.0 %/12.0 % of that atom's wealth. Consequence measured by rebuilding with a covering solve grid (aXtraMax 1400): A_ss -0.10 %/-0.12 %/-0.07 %, C_ss -0.002 %/-0.002 %/-0.009 % \u2014 immaterial, so the production grids stand; the number is reported here so a change in it shows up"
+  },
+  {
+   "educ": "highschool",
+   "field": "h2/cap/A_ss",
+   "status": "EXPECTED",
+   "value": 8.469972168672772,
+   "note": "steady-state assets of this atom"
+  },
+  {
+   "educ": "highschool",
+   "field": "h2/cap/C_ss",
+   "status": "EXPECTED",
+   "value": 0.7061211987036042,
+   "note": "steady-state consumption of this atom"
+  },
+  {
+   "educ": "highschool",
+   "field": "h2/cap/mass_above_solve_top",
+   "status": "EXPECTED",
+   "value": 0.0002861442037515691,
+   "note": "the solve grid tops at aXtraMax (356/375/383 by education) while the distribution grid runs to dist mMax = 1300, so the ergodic distribution is evaluated on an extrapolated policy above the solve top. Mass there is ~1e-16 at the low/middle atoms; at the CAP atoms it is 0.017 %/0.029 %/0.52 % of households holding 1.4 %/2.0 %/12.0 % of that atom's wealth. Consequence measured by rebuilding with a covering solve grid (aXtraMax 1400): A_ss -0.10 %/-0.12 %/-0.07 %, C_ss -0.002 %/-0.002 %/-0.009 % \u2014 immaterial, so the production grids stand; the number is reported here so a change in it shows up"
+  },
+  {
+   "educ": "highschool",
+   "field": "h2/cap/wealth_share_above_solve_top",
+   "status": "EXPECTED",
+   "value": 0.019838984805859283,
+   "note": "the solve grid tops at aXtraMax (356/375/383 by education) while the distribution grid runs to dist mMax = 1300, so the ergodic distribution is evaluated on an extrapolated policy above the solve top. Mass there is ~1e-16 at the low/middle atoms; at the CAP atoms it is 0.017 %/0.029 %/0.52 % of households holding 1.4 %/2.0 %/12.0 % of that atom's wealth. Consequence measured by rebuilding with a covering solve grid (aXtraMax 1400): A_ss -0.10 %/-0.12 %/-0.07 %, C_ss -0.002 %/-0.002 %/-0.009 % \u2014 immaterial, so the production grids stand; the number is reported here so a change in it shows up"
+  },
+  {
+   "educ": "college",
+   "field": "DiscFacDstn/atoms",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "DiscFacDstn/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "CRRA",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "Rfree",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*1.01 by literal; PE from the calibration"
+  },
+  {
+   "educ": "college",
+   "field": "LivPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*0.99375 by literal; PE from the calibration"
+  },
+  {
+   "educ": "college",
+   "field": "MrkvArray(base, lumped to HANK states)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "PermGroFac(lumped)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "PermShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "TranShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "solve_grid/aXtraMax",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "solve_grid/aXtraCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "solve_grid/aXtraMin",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "solve_grid/aXtraNestFac",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "PermShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "TranShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "UnempPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "IncUnemp",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "dist_grid/mCount",
+   "status": "EXPECTED",
+   "value": 50.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "college",
+   "field": "dist_grid/mMax",
+   "status": "EXPECTED",
+   "value": 1300.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/employed/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/employed/PermShk",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/employed/TranShk",
+   "status": "EXPECTED",
+   "value": 0.49435139884747015,
+   "note": "the HANK block scales the employed transitory shock by wage_ss*(1-tau_ss) (net income level; HAFISCAL_HANK_INCOME_LEVEL=net, the R-e item-2 arm) \u2014 the PE's own level is gross"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/employed/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE median ratio; = wage_ss*(1-tau_ss) = 0.7 under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp1/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp1/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp1/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp2/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp2/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp2/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp3/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp3/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp3/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp4/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp4/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp4/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp5/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp5/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp5/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[0]/state0",
+   "status": "FAIL",
+   "value": 0.3658593731482669,
+   "note": "beta=0.974033; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[0]/state1",
+   "status": "FAIL",
+   "value": 0.3637089445524859,
+   "note": "beta=0.974033; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[0]/state2",
+   "status": "FAIL",
+   "value": 0.3629693248332102,
+   "note": "beta=0.974033; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[0]/state3",
+   "status": "FAIL",
+   "value": 0.3629693248332102,
+   "note": "beta=0.974033; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[0]/state4",
+   "status": "FAIL",
+   "value": 0.3629693248332102,
+   "note": "beta=0.974033; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[0]/state5",
+   "status": "FAIL",
+   "value": 0.3629693248332102,
+   "note": "beta=0.974033; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[0]/WORST",
+   "status": "FAIL",
+   "value": 0.3658593731482669,
+   "note": "beta=0.974033, worst at state 0"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[3]/state0",
+   "status": "FAIL",
+   "value": 0.3266181773756278,
+   "note": "beta=0.987514; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[3]/state1",
+   "status": "FAIL",
+   "value": 0.3252440162411636,
+   "note": "beta=0.987514; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[3]/state2",
+   "status": "FAIL",
+   "value": 0.3248156504951978,
+   "note": "beta=0.987514; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[3]/state3",
+   "status": "FAIL",
+   "value": 0.3248156504951978,
+   "note": "beta=0.987514; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[3]/state4",
+   "status": "FAIL",
+   "value": 0.3248156504951978,
+   "note": "beta=0.987514; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[3]/state5",
+   "status": "FAIL",
+   "value": 0.3248156504951978,
+   "note": "beta=0.987514; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[3]/WORST",
+   "status": "FAIL",
+   "value": 0.3266181773756278,
+   "note": "beta=0.987514, worst at state 0"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[6]/state0",
+   "status": "EXPECTED",
+   "value": 0.2041185231644137,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[6]/state1",
+   "status": "EXPECTED",
+   "value": 0.20344594199332755,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[6]/state2",
+   "status": "EXPECTED",
+   "value": 0.20325644983194702,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[6]/state3",
+   "status": "EXPECTED",
+   "value": 0.20325644983194702,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[6]/state4",
+   "status": "EXPECTED",
+   "value": 0.20325644983194702,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[6]/state5",
+   "status": "EXPECTED",
+   "value": 0.20325644983194702,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[6]/WORST",
+   "status": "EXPECTED",
+   "value": 0.2041185231644137,
+   "note": "the GIC-cap atom has no finite wealth target (GPF_in > 1), so its policy approaches the perfect-foresight limit slowly and the two solvers' upper-region treatments separate: the PE's `solve_agg_cons_markov_alt` carries the PF-decay tail machinery, the HANK block's HARK `_solve_ConsMarkov` does not. Measured 2026-08-30 (rung H1): identical to 1e-15 inside the grid at the low/middle atoms, and at the cap atom 0.002 % of consumption at m=10 rising to 0.15 % at the solve-grid top and 0.3-0.4 % beyond it. Aggregate effect measured at rung H2 and immaterial (see below)"
+  },
+  {
+   "educ": "college",
+   "field": "h2/beta[3]/A_ss",
+   "status": "EXPECTED",
+   "value": 1.0530142559936848,
+   "note": "steady-state assets of this atom"
+  },
+  {
+   "educ": "college",
+   "field": "h2/beta[3]/C_ss",
+   "status": "EXPECTED",
+   "value": 0.6974913628036421,
+   "note": "steady-state consumption of this atom"
+  },
+  {
+   "educ": "college",
+   "field": "h2/beta[3]/mass_above_solve_top",
+   "status": "EXPECTED",
+   "value": 1.3532087791661307e-09,
+   "note": "the solve grid tops at aXtraMax (356/375/383 by education) while the distribution grid runs to dist mMax = 1300, so the ergodic distribution is evaluated on an extrapolated policy above the solve top. Mass there is ~1e-16 at the low/middle atoms; at the CAP atoms it is 0.017 %/0.029 %/0.52 % of households holding 1.4 %/2.0 %/12.0 % of that atom's wealth. Consequence measured by rebuilding with a covering solve grid (aXtraMax 1400): A_ss -0.10 %/-0.12 %/-0.07 %, C_ss -0.002 %/-0.002 %/-0.009 % \u2014 immaterial, so the production grids stand; the number is reported here so a change in it shows up"
+  },
+  {
+   "educ": "college",
+   "field": "h2/beta[3]/wealth_share_above_solve_top",
+   "status": "EXPECTED",
+   "value": 4.6358786195914136e-07,
+   "note": "the solve grid tops at aXtraMax (356/375/383 by education) while the distribution grid runs to dist mMax = 1300, so the ergodic distribution is evaluated on an extrapolated policy above the solve top. Mass there is ~1e-16 at the low/middle atoms; at the CAP atoms it is 0.017 %/0.029 %/0.52 % of households holding 1.4 %/2.0 %/12.0 % of that atom's wealth. Consequence measured by rebuilding with a covering solve grid (aXtraMax 1400): A_ss -0.10 %/-0.12 %/-0.07 %, C_ss -0.002 %/-0.002 %/-0.009 % \u2014 immaterial, so the production grids stand; the number is reported here so a change in it shows up"
+  },
+  {
+   "educ": "college",
+   "field": "h2/cap/A_ss",
+   "status": "EXPECTED",
+   "value": 27.693468209910094,
+   "note": "steady-state assets of this atom"
+  },
+  {
+   "educ": "college",
+   "field": "h2/cap/C_ss",
+   "status": "EXPECTED",
+   "value": 0.71811269348415,
+   "note": "steady-state consumption of this atom"
+  },
+  {
+   "educ": "college",
+   "field": "h2/cap/mass_above_solve_top",
+   "status": "EXPECTED",
+   "value": 0.0051723162060557356,
+   "note": "the solve grid tops at aXtraMax (356/375/383 by education) while the distribution grid runs to dist mMax = 1300, so the ergodic distribution is evaluated on an extrapolated policy above the solve top. Mass there is ~1e-16 at the low/middle atoms; at the CAP atoms it is 0.017 %/0.029 %/0.52 % of households holding 1.4 %/2.0 %/12.0 % of that atom's wealth. Consequence measured by rebuilding with a covering solve grid (aXtraMax 1400): A_ss -0.10 %/-0.12 %/-0.07 %, C_ss -0.002 %/-0.002 %/-0.009 % \u2014 immaterial, so the production grids stand; the number is reported here so a change in it shows up"
+  },
+  {
+   "educ": "college",
+   "field": "h2/cap/wealth_share_above_solve_top",
+   "status": "EXPECTED",
+   "value": 0.12020499522960135,
+   "note": "the solve grid tops at aXtraMax (356/375/383 by education) while the distribution grid runs to dist mMax = 1300, so the ergodic distribution is evaluated on an extrapolated policy above the solve top. Mass there is ~1e-16 at the low/middle atoms; at the CAP atoms it is 0.017 %/0.029 %/0.52 % of households holding 1.4 %/2.0 %/12.0 % of that atom's wealth. Consequence measured by rebuilding with a covering solve grid (aXtraMax 1400): A_ss -0.10 %/-0.12 %/-0.07 %, C_ss -0.002 %/-0.002 %/-0.009 % \u2014 immaterial, so the production grids stand; the number is reported here so a change in it shows up"
+  }
+ ],
+ "summary": {
+  "match": 87,
+  "expected": 72,
+  "fail": 42
+ }
+}

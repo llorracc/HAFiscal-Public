@@ -1,0 +1,68 @@
+[
+ {
+  "gap": 0.0,
+  "beta": 1.0059090025717796,
+  "S": 252,
+  "routed": true,
+  "kind": "ROUTED (installed; passed the PF-line gate)",
+  "fallback": "",
+  "iters": 54,
+  "fnorm": 1.3005374555064009e-11,
+  "wall_s": 162.1
+ },
+ {
+  "gap": 0.0001,
+  "beta": 1.0058090025717796,
+  "S": 252,
+  "routed": true,
+  "kind": "ROUTED (installed; passed the PF-line gate)",
+  "fallback": "",
+  "iters": 55,
+  "fnorm": 1.0154210805524144e-11,
+  "wall_s": 165.7
+ },
+ {
+  "gap": 0.0003,
+  "beta": 1.0056090025717797,
+  "S": 252,
+  "routed": true,
+  "kind": "ROUTED (installed; passed the PF-line gate)",
+  "fallback": "",
+  "iters": 55,
+  "fnorm": 1.0266454353313748e-11,
+  "wall_s": 168.8
+ },
+ {
+  "gap": 0.001,
+  "beta": 1.0049090025717797,
+  "S": 252,
+  "routed": true,
+  "kind": "ROUTED (installed; passed the PF-line gate)",
+  "fallback": "",
+  "iters": 52,
+  "fnorm": 1.1868173110940461e-11,
+  "wall_s": 156.4
+ },
+ {
+  "gap": 0.003,
+  "beta": 1.0029090025717797,
+  "S": 252,
+  "routed": true,
+  "kind": "ROUTED (installed; passed the PF-line gate)",
+  "fallback": "",
+  "iters": 49,
+  "fnorm": 1.3224865647032402e-11,
+  "wall_s": 148.7
+ },
+ {
+  "gap": 0.01,
+  "beta": 0.9959090025717796,
+  "S": 252,
+  "routed": true,
+  "kind": "ROUTED (installed; passed the PF-line gate)",
+  "fallback": "",
+  "iters": 39,
+  "fnorm": 1.8774759524831097e-11,
+  "wall_s": 97.6
+ }
+]

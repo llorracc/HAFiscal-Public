@@ -1,0 +1,18 @@
+===== gap=0
+[step5-ati] ROUTED: beta=1.005909 S=252 iters=54 inner=1086 fnorm=1.30e-11 ee=6.57e-12 fell_back_to_direct=True tail=measured wall=162.04s
+
+===== gap=0.0001
+[step5-ati] ROUTED: beta=1.005809 S=252 iters=55 inner=1117 fnorm=1.02e-11 ee=5.13e-12 fell_back_to_direct=True tail=measured wall=165.71s
+
+===== gap=0.0003
+[step5-ati] ROUTED: beta=1.005609 S=252 iters=55 inner=1070 fnorm=1.03e-11 ee=5.18e-12 fell_back_to_direct=True tail=measured wall=168.83s
+
+===== gap=0.001
+[step5-ati] ROUTED: beta=1.004909 S=252 iters=52 inner=1091 fnorm=1.19e-11 ee=5.99e-12 fell_back_to_direct=True tail=measured wall=156.41s
+
+===== gap=0.003
+[step5-ati] ROUTED: beta=1.002909 S=252 iters=49 inner=1028 fnorm=1.32e-11 ee=6.66e-12 fell_back_to_direct=True tail=measured wall=148.66s
+
+===== gap=0.01
+[step5-ati] ROUTED: beta=0.995909 S=252 iters=39 inner=683 fnorm=1.88e-11 ee=9.38e-12 fell_back_to_direct=False tail=measured wall=97.54s
+

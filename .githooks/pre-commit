@@ -1,0 +1,451 @@
+#!/bin/bash
+set -eu
+
+# HAFiscal Combined Pre-Commit Hook
+# Part 1: Technical validation (symlinks, shellcheck, etc.)
+# Part 2: Safety checks (SST, large changes, etc.)
+
+fail() { echo "Pre-commit error: $*" >&2; exit 1; }
+
+# ============================================================================
+# SKIP CHECKS ON GH-PAGES BRANCH
+# ============================================================================
+# The gh-pages branch is used for web builds where symlinks are materialized
+# to actual files (87+ images), which would trigger false positive warnings
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '[:space:]')
+
+# Also check git symbolic-ref as fallback
+if [ -z "$CURRENT_BRANCH" ]; then
+    CURRENT_BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null | tr -d '[:space:]')
+fi
+
+# Debug: Log branch detection for troubleshooting
+echo "DEBUG: Detected branch = '$CURRENT_BRANCH'" >&2
+
+if [ "$CURRENT_BRANCH" = "gh-pages" ]; then
+    echo "🌐 Detected gh-pages branch - skipping pre-commit safety checks"
+    echo "   (Web build workflow expects large file changes from symlink materialization)"
+    exit 0
+fi
+
+echo "🔍 HAFiscal Pre-Commit Safety Check..."
+echo ""
+
+# ============================================================================
+# CLEANUP: Delete backup files
+# ============================================================================
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "🧹 Cleaning up backup files..."
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# Find and delete backup files matching patterns
+# Pattern 1: *.bak* (e.g., file.bak, file.bak1, file.bak.old)
+# Pattern 2: *backup* (e.g., file.backup, backup_file.txt)
+BACKUP_FILES=$(find . -type f \( -name "*.bak*" -o -name "*backup*" \) \
+    ! -path "./.git/*" \
+    ! -path "./@resources/*" \
+    ! -path "./docs/*" \
+    ! -path "./history/*" \
+    2>/dev/null || true)
+
+if [ -n "$BACKUP_FILES" ]; then
+    BACKUP_COUNT=0
+    echo "$BACKUP_FILES" | while IFS= read -r file; do
+        [ -f "$file" ] || continue
+        echo "   🗑️  Deleting: $file"
+        rm -f "$file"
+        # Also remove from git index if tracked
+        git rm --cached "$file" 2>/dev/null || true
+    done
+    # Count files separately (since pipe creates subshell)
+    BACKUP_COUNT=$(echo "$BACKUP_FILES" | wc -l | tr -d ' ' || echo "0")
+    if [ "$BACKUP_COUNT" -gt 0 ]; then
+        echo "   ✅ Deleted $BACKUP_COUNT backup file(s)"
+    fi
+else
+    echo "   ℹ️  No backup files found"
+fi
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+# ============================================================================
+# PART 1: TECHNICAL VALIDATION
+# ============================================================================
+
+# 1) Required symlinks (must exist, be symlinks, be recorded as 120000, and not broken)
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "🔗 Validating required symlinks..."
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+req_links="
+Subfiles/.latexmkrc
+reproduce/.latexmkrc
+"
+for p in $req_links; do
+	[ -e "$p" ] || fail "$p does not exist"
+	[ -L "$p" ] || fail "$p must be a symlink (found regular file)"
+	mode=$(git ls-files -s -- "$p" | awk '{print $1}')
+	[ "$mode" = "120000" ] || fail "$p is not recorded as a symlink in Git (mode=$mode, expected=120000)"
+	tgt=$(readlink "$p" || true)
+	if [ -n "$tgt" ]; then
+		linkdir=$(dirname -- "$p")
+		resolved="$linkdir/$tgt"
+		[ -e "$resolved" ] || fail "$p is a broken symlink (target $tgt not found from $linkdir)"
+	fi
+	# Enforce specific targets for latexmk links
+	case "$p" in
+		Subfiles/.latexmkrc)
+			expected='../.latexmkrc'
+			[ "${tgt:-}" = "$expected" ] || fail "Subfiles/.latexmkrc must point to $expected (found ${tgt:-})"
+			;;
+		reproduce/.latexmkrc)
+			expected='../.latexmkrc'
+			[ "${tgt:-}" = "$expected" ] || fail "reproduce/.latexmkrc must point to $expected (found ${tgt:-})"
+			;;
+	esac
+done
+echo "   ✅ All required symlinks OK"
+echo ""
+
+# Collect staged files (text list and NUL-separated)
+staged_list=$(git diff --cached --name-only || true)
+staged_nul=$(git diff --cached --name-only -z || true)
+
+# 2) Block huge files in the index (>10MB), except top-level PDFs
+max_bytes=10485760
+case "${staged_nul:-}" in
+	"") : ;;
+	*)
+		# Read NUL-separated file list safely
+		printf %s "$staged_nul" | tr '\0' '\n' | while IFS= read -r file; do
+			[ -n "$file" ] || continue
+			[ -f "$file" ] || continue
+			size=$(wc -c < "$file" 2>/dev/null || echo 0)
+			base=$(basename -- "$file")
+			case "$base" in
+				HAFiscal.pdf|HAFiscal-Slides.pdf|HAFiscal-online-appendix.pdf) : ;;
+				*)
+					[ "$size" -le "$max_bytes" ] || fail "File too large (>10MB): $file ($size bytes)"
+				;;
+			esac
+		done
+	;;
+esac
+
+# 3) Disallow merge conflict markers in staged content
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "🔀 Checking for merge conflict markers..."
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+if [ -n "${staged_list:-}" ]; then
+	echo "$staged_list" | while IFS= read -r f; do
+		[ -f "$f" ] || continue
+		if grep -nE '^(<<<<<<<[[:space:]]|^=======$|^>>>>>>>)' -- "$f" >/dev/null 2>&1; then
+			fail "Merge conflict markers present in staged file: $f"
+		fi
+	done
+fi
+echo "   ✅ No conflict markers found"
+echo ""
+
+# 3b) LOCKED TABLES: protect frozen QE-baseline result files
+# (plans/20260611_qe-baseline-freeze-and-candidate-lock_plan.md)
+# Reject a commit that stages a manifest-listed frozen file whose staged
+# content hash differs from the manifest hash, unless HAFISCAL_UNLOCK=1 is set
+# AND LOCKED_TABLES.manifest is updated in the same commit.
+if [ -f LOCKED_TABLES.manifest ] && [ -n "${staged_list:-}" ]; then
+	echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	echo "🧊 Checking frozen result files (LOCKED_TABLES.manifest)..."
+	echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	manifest_staged=0
+	if printf '%s\n' "$staged_list" | grep -qxF "LOCKED_TABLES.manifest"; then
+		manifest_staged=1
+	fi
+	# Validate against the STAGED manifest when it is part of this commit
+	# (so a promote commit checks files against the updated rows).
+	if [ "$manifest_staged" = "1" ]; then
+		manifest_content=$(git show :LOCKED_TABLES.manifest)
+	else
+		manifest_content=$(cat LOCKED_TABLES.manifest)
+	fi
+	locked_violations=""
+	while IFS="$(printf '\t')" read -r lpath lsha _ldate _lrev _lreason; do
+		case "$lpath" in ''|'#'*) continue ;; esac
+		if printf '%s\n' "$staged_list" | grep -qxF "$lpath"; then
+			staged_sha=$(git show ":$lpath" 2>/dev/null | shasum -a 256 | awk '{print $1}')
+			if [ "$staged_sha" != "$lsha" ]; then
+				locked_violations="${locked_violations}${lpath}\n"
+			fi
+		fi
+	done <<EOF_LOCKED
+$manifest_content
+EOF_LOCKED
+	if [ -n "$locked_violations" ]; then
+		if [ "${HAFISCAL_UNLOCK:-}" = "1" ] && [ "$manifest_staged" = "1" ]; then
+			echo "   🔓 HAFISCAL_UNLOCK=1 + manifest update staged - allowing frozen-file change:"
+			printf "      %b" "$locked_violations"
+		else
+			echo "   ❌ Commit stages changes to FROZEN result file(s):"
+			printf "      %b" "$locked_violations"
+			echo ""
+			echo "   These files carry the frozen QE-published numbers."
+			echo "   A normal pipeline run writes _candidate siblings instead"
+			echo "   (Code/HA-Models/FromPandemicCode/generated_output.py)."
+			echo "   To change frozen numbers deliberately:"
+			echo "     1. Review + promote: make promote-tables   (updates the manifest)"
+			echo "     2. Commit with:      HAFISCAL_UNLOCK=1 git commit ..."
+			fail "frozen result file(s) changed without unlock + manifest update"
+		fi
+	else
+		echo "   ✅ No frozen-file violations"
+	fi
+	echo ""
+fi
+
+# 4) shellcheck on staged shell scripts (if available)
+if command -v shellcheck >/dev/null 2>&1; then
+	sh_files=$(printf '%s\n' "$staged_list" | grep -E '\.sh$' | grep -v '@resources' | grep -v '^docs/' | grep -v '^Tools/' || true)
+	if [ -n "$sh_files" ]; then
+		echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+		echo "🐚 Running shellcheck on shell scripts..."
+		echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+		# Run shellcheck per-file to avoid long argv
+		printf '%s\n' "$sh_files" | while IFS= read -r shf; do
+			[ -f "$shf" ] || continue
+			# Capture shellcheck output
+			shellcheck_output=$(shellcheck -x -f gcc "$shf" 2>&1 || true)
+			if [ -n "$shellcheck_output" ]; then
+				# Check if shellcheck found errors
+				if echo "$shellcheck_output" | grep -q "^$shf:"; then
+					# Display the shellcheck output
+					echo "$shellcheck_output" | sed 's/^/  /'
+					echo ""
+					fail "shellcheck failed on $shf - fix errors above"
+				fi
+			fi
+		done
+		echo "   ✅ Shellcheck passed"
+		echo ""
+	fi
+fi
+
+# 5) Ensure shebang files are executable in the index
+if [ -n "${staged_nul:-}" ]; then
+	printf %s "$staged_nul" | tr '\0' '\n' | while IFS= read -r file; do
+		[ -f "$file" ] || continue
+		head -c 2 "$file" | grep -q "^#!" || continue
+		mode=$(git ls-files -s -- "$file" | awk '{print $1}')
+		[ "$mode" = "100755" ] || fail "Script not executable (fix with: git update-index --chmod=+x $file)"
+	done
+fi
+
+# ============================================================================
+# PART 2: SAFETY CHECKS AND VALIDATIONS
+# ============================================================================
+
+# Color codes for output
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+# ============================================================================
+# SST Validation: Ensure Single Source of Truth pattern is maintained
+# ============================================================================
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "🔐 Validating Single Source of Truth (SST) pattern..."
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# Check if SST-related files are being modified
+SST_FILES_MODIFIED=$(git diff --cached --name-only | grep -E '(\.devcontainer/setup\.sh|\.github/workflows/push-build-docs\.yml|@resources/environment/setup-latex-minimal\.sh)' | wc -l)
+
+if [ "$SST_FILES_MODIFIED" -gt 0 ]; then
+    echo "   📝 SST-related files detected in commit"
+    echo ""
+    
+    # Run SST validation
+    if bash @resources/environment/validate-sst.sh; then
+        echo -e "${GREEN}   ✅ SST validation passed${NC}"
+    else
+        echo ""
+        echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+        echo -e "${RED}❌ SST VALIDATION FAILED${NC}"
+        echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+        echo ""
+        echo "Your commit modifies SST-related files but violates the SST pattern."
+        echo ""
+        echo "Common issues:"
+        echo "  • Direct LaTeX installation in .devcontainer/setup.sh"
+        echo "  • Direct LaTeX installation in .github/workflows/push-build-docs.yml"
+        echo "  • Missing call to @resources/environment/setup-latex-minimal.sh"
+        echo ""
+        echo "To fix:"
+        echo "  1. Remove direct LaTeX setup from .devcontainer/setup.sh or workflows"
+        echo "  2. Put LaTeX changes in @resources/environment/setup-latex-minimal.sh"
+        echo "  3. Ensure both files call the SST script"
+        echo ""
+        echo "Documentation: @resources/environment/README.md"
+        echo ""
+        echo "To bypass this check: git commit --no-verify"
+        echo ""
+        exit 1
+    fi
+else
+    echo "   ℹ️  No SST-related files in this commit (skipping SST validation)"
+fi
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+# ============================================================================
+# Equation snippet indentation check: Prevent indentation ping-pong
+# ============================================================================
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "📏 Checking equation snippet indentation..."
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# Check if any Equations/*.tex files are being modified
+EQUATIONS_FILES=$(git diff --cached --name-only | grep "^Equations/.*\.tex$" || true)
+
+if [ -n "$EQUATIONS_FILES" ]; then
+    echo "   📝 Equation snippet files detected in commit"
+    
+    INDENTATION_ISSUES=0
+    for file in $EQUATIONS_FILES; do
+        # Check if file starts with spaces (State B - incorrect)
+        if git diff --cached "$file" | grep "^+.*\\\\begin{" | head -1 | grep -E "^\+  \\\\" >/dev/null 2>&1; then
+            echo -e "${RED}   ❌ VIOLATION: $file has file-level indentation (State B)${NC}"
+            echo "      File should NOT have leading spaces at the start"
+            echo "      Run: sed 's/^  //' $file > /tmp/fix && mv /tmp/fix $file"
+            INDENTATION_ISSUES=$((INDENTATION_ISSUES + 1))
+        fi
+    done
+    
+    if [ "$INDENTATION_ISSUES" -gt 0 ]; then
+        echo ""
+        echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+        echo -e "${RED}❌ INDENTATION PING-PONG DETECTED${NC}"
+        echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+        echo ""
+        echo "Equation snippet files should NOT have file-level indentation."
+        echo "This causes indentation ping-pong between latexindent and editors."
+        echo ""
+        echo "To fix:"
+        echo "  1. Remove leading spaces: sed 's/^  //' <file> > /tmp/fix && mv /tmp/fix <file>"
+        echo "  2. Run latexindent: latexindent -w <file> -l .latexindent.yaml"
+        echo "  3. Re-stage: git add <file>"
+        echo ""
+        echo "To bypass this check: git commit --no-verify"
+        echo ""
+        exit 1
+    fi
+    
+    echo -e "${GREEN}   ✅ Equation snippet indentation OK${NC}"
+else
+    echo "   ℹ️  No equation snippet files in this commit"
+fi
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+# Get staging statistics
+ADDED=$(git diff --cached --numstat | awk '{sum += $1} END {print sum+0}')
+DELETED=$(git diff --cached --numstat | awk '{sum += $2} END {print sum+0}')
+FILES_CHANGED=$(git diff --cached --name-only | wc -l)
+CRITICAL_FILES=$(git diff --cached --name-only | grep -E '\.(tex|sty|bib)$' | wc -l)
+
+echo "📊 Change Summary:"
+echo "   Files changed: $FILES_CHANGED"
+echo "   Lines added: $ADDED"
+echo "   Lines deleted: $DELETED"
+echo "   Critical LaTeX files: $CRITICAL_FILES"
+
+# Define thresholds for safety checks
+LARGE_CHANGE_THRESHOLD=500
+MASSIVE_CHANGE_THRESHOLD=2000
+MANY_FILES_THRESHOLD=15
+CRITICAL_FILES_THRESHOLD=10
+
+# Check for potentially dangerous patterns
+DANGEROUS_PATTERNS=0
+if [ "$DELETED" -gt "$LARGE_CHANGE_THRESHOLD" ]; then
+    echo -e "${YELLOW}⚠️  WARNING: Large deletion detected ($DELETED lines)${NC}"
+    DANGEROUS_PATTERNS=$((DANGEROUS_PATTERNS + 1))
+fi
+
+if [ "$FILES_CHANGED" -gt "$MANY_FILES_THRESHOLD" ]; then
+    echo -e "${YELLOW}⚠️  WARNING: Many files changed ($FILES_CHANGED files)${NC}"
+    DANGEROUS_PATTERNS=$((DANGEROUS_PATTERNS + 1))
+fi
+
+if [ "$CRITICAL_FILES" -gt "$CRITICAL_FILES_THRESHOLD" ]; then
+    echo -e "${YELLOW}⚠️  WARNING: Many critical LaTeX files modified ($CRITICAL_FILES files)${NC}"
+    DANGEROUS_PATTERNS=$((DANGEROUS_PATTERNS + 1))
+fi
+
+# Show files being modified
+if [ "$FILES_CHANGED" -gt 0 ]; then
+    echo -e "\n📁 Files being modified:"
+    git diff --cached --name-status | head -15
+    if [ "$FILES_CHANGED" -gt 15 ]; then
+        echo "   ... and $((FILES_CHANGED - 15)) more files"
+    fi
+fi
+
+# CRITICAL: Require confirmation for dangerous changes
+if [ "$DELETED" -gt "$MASSIVE_CHANGE_THRESHOLD" ] || [ "$FILES_CHANGED" -gt 30 ] || [ "$DANGEROUS_PATTERNS" -gt 2 ]; then
+    echo -e "\n${RED}🚨 CRITICAL WARNING: POTENTIALLY MASSIVE RESTORATION/DELETION DETECTED! 🚨${NC}"
+    echo -e "${RED}This commit could accidentally delete important functionality.${NC}"
+    echo ""
+    # Non-interactive aware: prefer an explicit env opt-in; only read /dev/tty
+    # when it is actually openable (else a non-interactive `git commit` over ssh
+    # hangs/errors on /dev/tty). Set HAFISCAL_ALLOW_LARGE_COMMIT=1 to confirm a
+    # large commit non-interactively (audited opt-in; --no-verify still bypasses
+    # ALL checks). This is a git-hook control flag, NOT part of the Python
+    # HAFISCAL_* env registry (docs/ENV_FLAGS.md scans only Code/HA-Models/**.py).
+    if [ "${HAFISCAL_ALLOW_LARGE_COMMIT:-}" = "1" ]; then
+        echo -e "${GREEN}✅ HAFISCAL_ALLOW_LARGE_COMMIT=1 set — proceeding (non-interactive override).${NC}"
+    elif ( : < /dev/tty ) 2>/dev/null; then
+        echo "Are you ABSOLUTELY SURE you want to proceed?"
+        echo ""
+        echo -e "${YELLOW}Type 'CONFIRM_MASSIVE_CHANGE' to proceed (case-sensitive):${NC}"
+        read -r confirmation < /dev/tty
+        if [ "$confirmation" != "CONFIRM_MASSIVE_CHANGE" ]; then
+            echo -e "${RED}❌ Commit blocked for safety. Use 'git commit --no-verify' to override.${NC}"
+            exit 1
+        fi
+        echo -e "${GREEN}✅ User confirmed massive change.${NC}"
+    else
+        echo -e "${RED}❌ Non-interactive shell: cannot prompt for confirmation.${NC}"
+        echo -e "${YELLOW}   This is a large commit. To proceed non-interactively re-run with${NC}"
+        echo -e "${YELLOW}   HAFISCAL_ALLOW_LARGE_COMMIT=1 git commit ...   (or use --no-verify).${NC}"
+        exit 1
+    fi
+fi
+
+# Standard safety confirmation for moderate changes
+if [ "$DANGEROUS_PATTERNS" -gt 0 ] && [ "$DELETED" -gt "$LARGE_CHANGE_THRESHOLD" ]; then
+    echo -e "\n${YELLOW}⚠️  This commit has potentially risky changes.${NC}"
+    if [ "${HAFISCAL_ALLOW_LARGE_COMMIT:-}" = "1" ]; then
+        echo -e "${GREEN}✅ HAFISCAL_ALLOW_LARGE_COMMIT=1 set — proceeding (non-interactive override).${NC}"
+    elif ( : < /dev/tty ) 2>/dev/null; then
+        echo -e "Continue? ${GREEN}[y/N]${NC}: "
+        read -r response < /dev/tty
+        case "$response" in
+            [yY][eE][sS]|[yY])
+                echo -e "${GREEN}✅ Proceeding with commit...${NC}"
+                ;;
+            *)
+                echo -e "${RED}❌ Commit cancelled. Use 'git commit --no-verify' to override.${NC}"
+                exit 1
+                ;;
+        esac
+    else
+        echo -e "${RED}❌ Non-interactive shell: cannot prompt. Set HAFISCAL_ALLOW_LARGE_COMMIT=1 or use --no-verify.${NC}"
+        exit 1
+    fi
+fi
+
+echo -e "${GREEN}✅ All pre-commit safety checks passed!${NC}"
+echo ""
+exit 0

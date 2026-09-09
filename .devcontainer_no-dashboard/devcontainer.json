@@ -1,0 +1,82 @@
+{
+  "name": "HAFiscal Development (TeX Live 2025) - ${localWorkspaceFolderBasename}",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "remoteUser": "vscode",
+  "runArgs": [
+    "--name", "hafiscal-latest-devcontainer"
+  ],
+  
+  "onCreateCommand": [
+    "/bin/bash", "-c", 
+    "sudo apt-get update && sudo apt-get install -y wget perl build-essential fontconfig curl git zsh && if [ ! -d /home/vscode/.oh-my-zsh ]; then sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\" \"\" --unattended || true && chsh -s $(which zsh) vscode || true; fi && mkdir -p ~/.texlive2025/texmf-var/fonts/tfm ~/.texlive2025/texmf-var/fonts/pk && chmod -R u+w ~/.texlive2025/texmf-var 2>/dev/null || true"
+  ],
+  
+  "postCreateCommand": [
+    "bash", "-c",
+    "set -e; SCRIPT=\"${workspaceFolder}/reproduce/docker/run-setup.sh\"; if [ ! -f \"$SCRIPT\" ]; then SCRIPT=$(find /workspaces -name run-setup.sh -path '*/reproduce/docker/run-setup.sh' 2>/dev/null | head -1); fi; if [ -f \"$SCRIPT\" ]; then bash \"$SCRIPT\"; else echo '❌ run-setup.sh not found, trying direct setup.sh...'; bash -c 'find /workspaces -name setup.sh -path \"*/reproduce/docker/setup.sh\" -exec bash {} \\;' || (echo '❌ setup.sh not found'; exit 1); fi"
+  ],
+  
+  "postStartCommand": [
+    "bash", "-c",
+    "export PATH=\"$HOME/.local/bin:$HOME/.cargo/bin:$PATH\"; if command -v uv >/dev/null 2>&1; then echo \"✅ UV found: $(which uv)\"; else echo \"⚠️  UV not in PATH - checking installation...\"; [ -f \"$HOME/.local/bin/uv\" ] && export PATH=\"$HOME/.local/bin:$PATH\" || [ -f \"$HOME/.cargo/bin/uv\" ] && export PATH=\"$HOME/.cargo/bin:$PATH\" || echo \"❌ UV not found\"; fi; PLATFORM_VENV=\"${workspaceFolder}/.venv-linux\"; if [ -f \"$PLATFORM_VENV/bin/activate\" ]; then source \"$PLATFORM_VENV/bin/activate\" && echo \"✅ Virtual environment activated (.venv-linux): $(which python)\"; elif [ -f \"${workspaceFolder}/.venv/bin/activate\" ]; then source \"${workspaceFolder}/.venv/bin/activate\" && echo \"✅ Virtual environment activated (.venv): $(which python)\"; else echo \"⚠️  .venv not found - checking if setup completed...\"; if [ -d \"$PLATFORM_VENV\" ] && [ ! -f \"$PLATFORM_VENV/bin/python\" ]; then echo \"⚠️  Incomplete venv detected - run: ./reproduce/reproduce_environment_comp_uv.sh\"; else echo \"⚠️  .venv not found - run: uv sync --all-groups\"; fi; fi"
+  ],
+  
+  "containerEnv": {
+    "PYTHONUNBUFFERED": "1",
+    "PATH": "/home/vscode/.local/bin:/home/vscode/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  },
+  
+  "forwardPorts": [8888, 8866],
+  
+  "portsAttributes": {
+    "8888": {
+      "label": "Jupyter Lab",
+      "onAutoForward": "notify"
+    },
+    "8866": {
+      "label": "Voila Dashboard",
+      "onAutoForward": "ignore"
+    }
+  },
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.debugpy", 
+        "ms-toolsai.jupyter",
+        "ms-python.black-formatter",
+        "ms-python.isort",
+        "James-Yu.latex-workshop",
+        "streetsidesoftware.code-spell-checker",
+        "charliermarsh.ruff"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+        "python.terminal.activateEnvironment": true,
+        "latex-workshop.latex.outDir": "%DIR%",
+        "latex-workshop.latex.tools": [
+          {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+              "-pdf",
+              "-file-line-error",
+              "-synctex=1",
+              "-interaction=nonstopmode",
+              "%DOC%"
+            ]
+          }
+        ],
+        "latex-workshop.latex.recipes": [
+          {
+            "name": "latexmk (HAFiscal)",
+            "tools": ["latexmk"]
+          }
+        ],
+        "latex-workshop.view.pdf.viewer": "tab"
+      }
+    }
+  }
+}
+

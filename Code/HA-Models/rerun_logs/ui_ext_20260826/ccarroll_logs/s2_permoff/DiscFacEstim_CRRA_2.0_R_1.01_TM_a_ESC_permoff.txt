@@ -1,0 +1,5 @@
+{'EducationGroup': 0, 'beta': 0.7481034556807712, 'nabla': 0.2916330547966477, 'GICx': 7.60040233450051}
+{'EducationGroup': 1, 'beta': 0.9387597363325278, 'nabla': 0.07177320535999333, 'GICx': 7.60040233450051}
+{'EducationGroup': 2, 'beta': 0.9929756890873465, 'nabla': 0.01466501005840651, 'GICx': 7.60040233450051}
+
+Parameters: R = 1.01, CRRA = 2.0, IncUnemp = 0.7, IncUnempNoBenefits = 0.5, Splurge = shared; matched re-estimation under HAFISCAL_PERM_DURING_UNEMP=off, default world, 2026-08-26

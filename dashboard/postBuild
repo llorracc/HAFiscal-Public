@@ -1,0 +1,3 @@
+#!/bin/bash
+# Enable Jupyter widgets for Voila dashboard
+jupyter nbextension enable --py widgetsnbextension --sys-prefix 

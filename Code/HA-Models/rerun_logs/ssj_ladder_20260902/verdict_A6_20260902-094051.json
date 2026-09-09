@@ -1,0 +1,31 @@
+{
+ "rung": "A6",
+ "stamp": "20260902-094051",
+ "gates": {
+  "by_educ_leaf_spot_college": {
+   "measured": 0.0,
+   "threshold": 1e-09,
+   "PASS": true
+  }
+ },
+ "kernel_equivalence": "certified by Phase B rung B9 (rerun_logs/phase_b_20260902/verdict_B9.json: kernels ON, budget floors green, exit identity = production goldens)",
+ "leaf_diffs": {
+  "C_by_educ.DiscFac": 0.0,
+  "C_by_educ.UI_extend": 0.0,
+  "C_by_educ.UI_rr": 0.0,
+  "C_by_educ.eta": 0.0,
+  "C_by_educ.r": 0.0,
+  "C_by_educ.tau": 0.0,
+  "C_by_educ.transfers": 0.0,
+  "C_by_educ.w": 0.0,
+  "A_by_educ.DiscFac": 0.0,
+  "A_by_educ.UI_extend": 0.0,
+  "A_by_educ.UI_rr": 0.0,
+  "A_by_educ.eta": 0.0,
+  "A_by_educ.r": 0.0,
+  "A_by_educ.tau": 0.0,
+  "A_by_educ.transfers": 0.0,
+  "A_by_educ.w": 0.0
+ },
+ "PASS": true
+}

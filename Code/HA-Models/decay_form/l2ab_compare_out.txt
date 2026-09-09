@@ -1,0 +1,73 @@
+==============================================================================
+T1c decay-form comparison  (exp vs powerlaw)
+  dir_a (exp) : /home/shared/github/llorracc/HAFiscal-Latest/Code/HA-Models/FromPandemicCode/Figures/Reduced_Run_l2ab_default
+  dir_b (pl)  : /home/shared/github/llorracc/HAFiscal-Latest/Code/HA-Models/FromPandemicCode/Figures/Reduced_Run_l2ab_local2k3
+==============================================================================
+  result files to compare: 28
+
+file                                            fmt       leaves     max|abs|     max|rel|
+------------------------------------------------------------------------------------------
+Check_results.csv                               pickle       500    6.382e+01    2.620e-05
+TaxCut_results.csv                              pickle       500    6.525e+01    2.439e-05
+UI_results.csv                                  pickle       500    6.294e+01    1.262e-05
+base_results.csv                                pickle   1380728    6.238e+01    1.000e+00
+recessionCheck_all_results.csv                  pickle      5500    6.365e+01    2.093e-05
+recessionCheck_all_results_AD.csv               pickle      5500    6.435e+01    2.293e-05
+recessionCheck_all_results_firstRoundAD.csv     pickle      5500    6.423e+01    2.260e-05
+recessionCheck_results.csv                      pickle       400    6.328e+01    2.093e-05
+recessionCheck_results_AD.csv                   pickle       400    6.357e+01    2.293e-05
+recessionCheck_results_firstRoundAD.csv         pickle       400    6.346e+01    2.260e-05
+recessionTaxCut_all_results.csv                 pickle      5500    6.506e+01    2.734e-05
+recessionTaxCut_all_results_AD.csv              pickle      5500    6.457e+01    2.694e-05
+recessionTaxCut_all_results_firstRoundAD.csv    pickle      5500    6.463e+01    2.713e-05
+recessionTaxCut_results.csv                     pickle       400    6.465e+01    2.497e-05
+recessionTaxCut_results_AD.csv                  pickle       400    6.413e+01    2.481e-05
+recessionTaxCut_results_firstRoundAD.csv        pickle       400    6.427e+01    2.490e-05
+recessionUI_all_results.csv                     pickle      5500    6.277e+01    1.505e-05
+recessionUI_all_results_AD.csv                  pickle      5500    6.238e+01    1.324e-05
+recessionUI_all_results_firstRoundAD.csv        pickle      5500    6.240e+01    1.348e-05
+recessionUI_results.csv                         pickle       400    6.241e+01    1.338e-05
+recessionUI_results_AD.csv                      pickle       400    6.109e+01    1.276e-05
+recessionUI_results_firstRoundAD.csv            pickle       400    6.146e+01    1.285e-05
+recession_all_results.csv                       pickle      5500    6.277e+01    1.505e-05
+recession_all_results_AD.csv                    pickle      5500    6.238e+01    1.324e-05
+recession_all_results_firstRoundAD.csv          pickle      5500    6.240e+01    1.348e-05
+recession_results.csv                           pickle       400    6.241e+01    1.338e-05
+recession_results_AD.csv                        pickle       400    6.109e+01    1.276e-05
+recession_results_firstRoundAD.csv              pickle       400    6.146e+01    1.285e-05
+
+Top 8 numeric leaves by |abs| diff:
+    6.525e+01  (rel 1.782e-05)  TaxCut_results.csv.NPV_AggCons
+    6.506e+01  (rel 1.739e-05)  recessionTaxCut_all_results.csv[0].NPV_AggCons
+    6.494e+01  (rel 1.707e-05)  recessionTaxCut_all_results.csv[1].NPV_AggCons
+    6.482e+01  (rel 1.676e-05)  recessionTaxCut_all_results.csv[2].NPV_AggCons
+    6.472e+01  (rel 1.650e-05)  recessionTaxCut_all_results.csv[3].NPV_AggCons
+    6.465e+01  (rel 1.614e-05)  recessionTaxCut_results.csv.NPV_AggCons
+    6.463e+01  (rel 1.694e-05)  recessionTaxCut_all_results_firstRoundAD.csv[0].NPV_AggCons
+    6.463e+01  (rel 1.623e-05)  recessionTaxCut_all_results.csv[4].NPV_AggCons
+
+------------------------------------------------------------------------------------------
+Per-type TranMatrix decomposition (from base_results.csv):
+type       A_nrm   nnz(D)      max|Dp|    statmass@D     max|Dpi|
+   0      0.0777    10530    6.896e-02     1.000e+00    4.844e-04
+   1      0.2984    10760    4.697e-02     1.000e+00    1.636e-03
+   2      0.9306    10584    2.219e-02     1.000e+00    3.998e-04  <-GIC-cap College atom
+
+  worst max|Dp| over types = 6.896e-02; worst stationary-mass-on-differing-cols = 1.000e+00
+
+------------------------------------------------------------------------------------------
+Multiplier gate (AUTHORITATIVE): |Delta| > 0.001 on the LAST-ELEMENT
+AD cumulative multiplier, from C_Multiplier_Baseline_Results.csv (pre-crash pickle):
+  source: rebuilt from scenario pickles (non-Baseline run; see _mult_from_scenarios)
+    C_Multiplier_Rec_Check_AD    last: exp=1.350572  pl=1.351035  |Delta|=4.631e-04   (full-array max|Delta|=6.904e-04)
+    C_Multiplier_Rec_TaxCut_AD   last: exp=1.112197  pl=1.112452  |Delta|=2.546e-04   (full-array max|Delta|=4.910e-04)
+  headline worst last-element |Delta multiplier| = 4.631e-04  -> within gate
+  [info] Multiplier_candidate.tex: 10 floats, worst |Delta| = 1.000e-03 (informational, NOT part of gate).
+
+==============================================================================
+SUMMARY
+  global max |abs| leaf diff : 6.525e+01   at TaxCut_results.csv.NPV_AggCons
+  global max |rel| leaf diff : 1.000e+00
+==============================================================================
+VERDICT: PASS   (multiplier gate ok)
+==============================================================================

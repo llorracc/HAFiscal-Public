@@ -1,0 +1,25 @@
+# EditorConfig for HAFiscal project
+# Prevents indentation ping-pong in equation snippet files
+
+root = true
+
+# Default for all files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# LaTeX files - use latexindent for formatting
+[*.tex]
+indent_style = space
+indent_size = 2
+
+# Equation snippet files - DO NOT auto-indent at file level
+# These files are included in other documents and should start at column 0
+[Equations/*.tex]
+indent_style = space
+indent_size = 2
+# Disable auto-indent for these snippet files
+trim_trailing_whitespace = true
+insert_final_newline = true

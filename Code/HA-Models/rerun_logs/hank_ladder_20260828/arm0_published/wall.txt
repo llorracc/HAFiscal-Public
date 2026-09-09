@@ -1,0 +1,7 @@
+ARM=arm0_published ENGINE=monolith deltas:  ; start 2026-08-28 12:54:06
+jacobians rc=0 wall_s=861  15027748864 maximum resident set size
+8bb425e08dfcb87487c09ae87bd908395ff97834bd561ec6a1222ea36e57435f  /Users/ccarroll/ui_ext_20260826/hank_ladder_20260828/arm0_published/HA_Fiscal_Jacs.obj
+ge rc=0 wall_s=5
+ge_dump rc=0
+end 2026-08-28 13:08:37
+DONE

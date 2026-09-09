@@ -1,0 +1,10 @@
+{
+ "rung": "B10",
+ "kind": "stamp",
+ "note": "the {ZEROTH_COLUMN x SPLURGE_DIAG} 2x2 at full config \u2014 already measured, both rows independently reproduced",
+ "start": "2026-09-01 23:57:33",
+ "gates": {},
+ "walls": {},
+ "evidence": "rerun_logs/splurge2x2_20260901/",
+ "pass": true
+}

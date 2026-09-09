@@ -1,0 +1,111 @@
+{
+  "_comment": "Calibration values for the HANK-SAM model, as resolved and used by the LIVE GE stage (Code/HA-Models/step4/ge.py). Regenerate with: python Code/HA-Models/step4/write_calibration_json.py",
+  "_generated_from": "step4/write_calibration_json.py at commit 8f57ed02 on 2026-09-03 (HAFISCAL_HANK_SS_DUMP of a run_ge.py run at current defaults)",
+  "labor_market": {
+    "job_find": 0.6666666666666666,
+    "EU_prob": 0.02875789176481714,
+    "job_sep": 0.08627367529445142,
+    "seps_by_educ": [
+      0.1857923497267759,
+      0.09205020920502081,
+      0.055498458376156294
+    ],
+    "N_ss": 0.958647,
+    "U_ss": 0.04135299999999997,
+    "ss_dstn": [
+      0.958647,
+      0.02756866666666666,
+      0.009189555555555534,
+      0.003063185185185175,
+      0.0010210617283949095,
+      0.0005105308641975604
+    ],
+    "ss_dstn_by_educ": [
+      [
+        0.9149999999999997,
+        0.05666666666666659,
+        0.01888888888888902,
+        0.006296296296296425,
+        0.002098765432098719,
+        0.001049382716049506
+      ],
+      [
+        0.9560000000000001,
+        0.029333333333333315,
+        0.00977777777777764,
+        0.003259259259259284,
+        0.0010864197530863042,
+        0.000543209876543245
+      ],
+      [
+        0.973,
+        0.018000000000000026,
+        0.006000000000000099,
+        0.001999999999999907,
+        0.0006666666666664376,
+        0.0003333333333333324
+      ]
+    ]
+  },
+  "matching": {
+    "alpha": 0.65,
+    "phi_ss": 0.71,
+    "v_ss": 0.11648732394366194,
+    "theta_ss": 0.938967136150236,
+    "chi_ss": 0.6815239206907979,
+    "eta_ss": 0.6666666666666676
+  },
+  "household": {
+    "R": 1.01,
+    "r_ss": 0.010000000000000009,
+    "C_ss": 0.7025643493052071,
+    "A_ss": 1.4324029855872642,
+    "ss_source": "jacs_c"
+  },
+  "bonds": {
+    "delta": 0.9551990250932076,
+    "qb_ss": 18.24785054829479,
+    "B_ss": 0.07849708006958213
+  },
+  "wages_taxes": {
+    "wage_ss": 1.0,
+    "tau_ss": 0.3,
+    "tau_mode": "legacy",
+    "inc_ui_exhaust": 0.5,
+    "UI": 0.35,
+    "ui_rr_booked": 0.5
+  },
+  "government": {
+    "G_ss": 0.2604046923663495,
+    "Y_priv": 0.0067543233333332816
+  },
+  "firms": {
+    "kappa": 0.0497,
+    "HC_ss": 1.0066724329411996,
+    "epsilon_p": 6.0,
+    "MC_ss": 0.8333333333333334,
+    "Z_ss": 1.2080069195294394,
+    "Y_ss": 1.1580522093861385
+  },
+  "inflation": {
+    "pi_ss": 0.0,
+    "varphi": 96.9,
+    "kappa_p_ss": 0.06191950464396284
+  },
+  "policy_defaults": {
+    "phi_pi": 1.5,
+    "phi_y": 0.0,
+    "rho_r": 0.7,
+    "phi_b": 0.015,
+    "phi_w": 1.0,
+    "real_wage_rigidity": 0.837
+  },
+  "fiscal_experiments": {
+    "UI_extension_length": 4,
+    "stimulus_check_length": 1,
+    "tax_cut_length": 8
+  },
+  "computation": {
+    "bigT": 300
+  }
+}

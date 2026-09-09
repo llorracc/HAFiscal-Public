@@ -1,0 +1,58 @@
+per-atom tail-bucket battery analysis
+  arms:     /tmp/claude-1000/-home-shared-github-llorracc-HAFiscal-Latest/a227ed17-1648-45f6-bd16-31aacaa4b28b/scratchpad/peratom
+  recorded: /tmp/claude-1000/-home-shared-github-llorracc-HAFiscal-Latest/a227ed17-1648-45f6-bd16-31aacaa4b28b/scratchpad/disttop
+
+== 1) DEFAULT-OFF PARITY (must match recorded moments to 1e-12) ==
+  parity_top1300 vs recorded top1300: PASS (worst min(abs,rel) diff 0.000e+00 at -, 48 moments; groups-serialization byte-equal: True)
+  parity_top2900 vs recorded top2900: PASS (worst min(abs,rel) diff 0.000e+00 at -, 48 moments; groups-serialization byte-equal: True)
+  VERDICT: PASS — default path reproduces the recorded run
+
+== 2) PER-GROUP CONSISTENCY of corrected ('pile') arms across tops (ref = top 6000; global top mode) ==
+  CAVEAT: the reference arm is a finite-T proxy for the T->inf limit, not the limit itself.
+  (Lorenz rel-deltas use an abs floor of 0.05 Lorenz-percent units for zero-valued points.)
+  -- dropout (distance echo, not gated: ref=0.3939)
+     top    worstLorenz%   medianLWPI%      E_a%     top1%    top10%
+       500        0.209        0.532     0.209     1.021     0.028
+       800        0.203        4.572     0.116     0.681     0.017
+      1300        0.069        4.912     0.066     0.428     0.011
+      2900        0.129        2.203     0.024     0.179     0.004
+  -- highschool (distance echo, not gated: ref=2.2605)
+     top    worstLorenz%   medianLWPI%      E_a%     top1%    top10%
+       500        0.422        0.879     0.419     1.602     0.096
+       800        0.252        0.492     0.237     1.020     0.054
+      1300        0.134        0.157     0.134     0.626     0.031
+      2900        0.051        0.379     0.050     0.267     0.010
+  -- college (distance echo, not gated: ref=3.6072)
+     top    worstLorenz%   medianLWPI%      E_a%     top1%    top10%
+       500        5.706        0.847     5.363    17.452     2.353
+       800        3.736        1.261     3.567    11.523     1.540
+      1300        2.382        0.010     2.289     7.445     0.983
+      2900        1.032        0.795     1.004     3.166     0.415
+
+== 3) TIER VERDICTS — College worst-Lorenz-target delta vs ref (top 6000); owner epsilon ruling 4%/2%/1% ==
+  top   500: College worst-Lorenz  5.706%   FAST(<= 4%): FAIL  STANDARD(<= 2%): FAIL  REFERENCE(<= 1%): FAIL
+  top   800: College worst-Lorenz  3.736%   FAST(<= 4%): PASS  STANDARD(<= 2%): FAIL  REFERENCE(<= 1%): FAIL
+  top  1300: College worst-Lorenz  2.382%   FAST(<= 4%): PASS  STANDARD(<= 2%): FAIL  REFERENCE(<= 1%): FAIL
+  top  2900: College worst-Lorenz  1.032%   FAST(<= 4%): PASS  STANDARD(<= 2%): PASS  REFERENCE(<= 1%): FAIL
+  R-d CONSISTENCY GATE (corrected top-1300 vs corrected top-6000, College): 2.382% — FAIL at the 1% REFERENCE tier
+
+== 6) INERT-DIAL CHECK (sweep arms) ==
+  ok: dist-top dial is live (College E_a spread 5.602e-01 across tops [500, 800, 1300, 2900, 6000])
+
+== 4) VARIANT AGREEMENT (pile vs anchored; per-atom theory: should nearly agree) ==
+  top  1300    dropout: worstLorenz  0.041%  E_a  0.041%   AGREE(<=1%)
+  top  1300 highschool: worstLorenz  0.096%  E_a  0.096%   AGREE(<=1%)
+  top  1300    college: worstLorenz  2.391%  E_a  2.449%   DISAGREE(>2%)
+  top  2900    dropout: worstLorenz  0.016%  E_a  0.016%   AGREE(<=1%)
+  top  2900 highschool: worstLorenz  0.039%  E_a  0.039%   AGREE(<=1%)
+  top  2900    college: worstLorenz  1.116%  E_a  1.129%   NEAR(<=2%)
+  (pooled-prototype history: pile under-corrected, anchored over-corrected — per-atom agreement here is the evidence the mixture artifact is gone.)
+
+== 5) CROSS-MODE: R-c x R-d composite (per-atom tops + bucket) vs corrected global-top ref ==
+  peratom_pile (pile)    dropout: worstLorenz  0.104% vs pile_top6000  E_a  0.042%   AGREE(<=1%)
+  peratom_pile (pile) highschool: worstLorenz  0.042% vs pile_top6000  E_a  0.037%   AGREE(<=1%)
+  peratom_pile (pile)    college: worstLorenz  0.464% vs pile_top6000  E_a  0.478%   AGREE(<=1%)
+  peratom_anch (anchored)    dropout: worstLorenz  0.084% vs pile_top6000  E_a  0.022%   AGREE(<=1%)
+  peratom_anch (anchored) highschool: worstLorenz  0.043% vs pile_top6000  E_a  0.002%   AGREE(<=1%)
+  peratom_anch (anchored)    college: worstLorenz  0.658% vs pile_top6000  E_a  0.675%   AGREE(<=1%)
+  (per-atom tops are derived per agent — TM_AMAX is not consulted in that mode; agreement here says the composite end-state sits on the same corrected answer as bucket-at-global-top.)

@@ -1,0 +1,22 @@
+compare_cols arm1p (package, kernel, ghost) vs arm1 (monolith, python)
+  A=arm1_zeroth_mono/HA_Fiscal_Jacs.obj
+  B=arm1p_zeroth_pkg/HA_Fiscal_Jacs.obj
+  C  transfers  col0 max|dJ|=2.216e-06 (A[0,0]=+0.194743 B[0,0]=+0.194745)   cols>=1 max|dJ|=2.247e-06   max|A|=1.947e-01
+  C  r          col0 max|dJ|=2.216e-06 (A[0,0]=+0.105660 B[0,0]=+0.105663)   cols>=1 max|dJ|=2.247e-06   max|A|=2.014e-01
+  C  w          col0 max|dJ|=2.216e-06 (A[0,0]=+0.118793 B[0,0]=+0.118796)   cols>=1 max|dJ|=2.247e-06   max|A|=1.188e-01
+  C  tau        col0 max|dJ|=2.216e-06 (A[0,0]=-0.169729 B[0,0]=-0.169727)   cols>=1 max|dJ|=2.247e-06   max|A|=1.697e-01
+  C  eta        col0 max|dJ|=2.216e-06 (A[0,0]=+0.007969 B[0,0]=+0.007971)   cols>=1 max|dJ|=2.247e-06   max|A|=7.971e-03
+  C  DiscFac    col0 max|dJ|=2.216e-06 (A[0,0]=+0.052178 B[0,0]=+0.052180)   cols>=1 max|dJ|=2.247e-06   max|A|=2.834e-01
+  C  UI_extend  col0 max|dJ|=2.216e-06 (A[0,0]=+0.000986 B[0,0]=+0.000989)   cols>=1 max|dJ|=2.247e-06   max|A|=1.357e-03
+  C  UI_rr      col0 max|dJ|=2.216e-06 (A[0,0]=+0.006685 B[0,0]=+0.006687)   cols>=1 max|dJ|=2.247e-06   max|A|=6.687e-03
+  A  transfers  col0 max|dJ|=1.767e-04 (A[0,0]=+0.638813 B[0,0]=+0.638808)   cols>=1 max|dJ|=1.764e-04   max|A|=6.388e-01
+  A  r          col0 max|dJ|=1.767e-04 (A[0,0]=+1.864707 B[0,0]=+1.864703)   cols>=1 max|dJ|=1.764e-04   max|A|=3.717e+00
+  A  w          col0 max|dJ|=1.767e-04 (A[0,0]=+0.462623 B[0,0]=+0.462618)   cols>=1 max|dJ|=1.764e-04   max|A|=4.626e-01
+  A  tau        col0 max|dJ|=1.767e-04 (A[0,0]=-0.660855 B[0,0]=-0.660859)   cols>=1 max|dJ|=1.764e-04   max|A|=6.609e-01
+  A  eta        col0 max|dJ|=1.767e-04 (A[0,0]=+0.016922 B[0,0]=+0.016918)   cols>=1 max|dJ|=1.764e-04   max|A|=2.055e-02
+  A  DiscFac    col0 max|dJ|=1.767e-04 (A[0,0]=+0.232276 B[0,0]=+0.232272)   cols>=1 max|dJ|=1.764e-04   max|A|=3.433e+00
+  A  UI_extend  col0 max|dJ|=1.767e-04 (A[0,0]=+0.000676 B[0,0]=+0.000672)   cols>=1 max|dJ|=1.764e-04   max|A|=4.614e-03
+  A  UI_rr      col0 max|dJ|=1.767e-04 (A[0,0]=+0.014659 B[0,0]=+0.014654)   cols>=1 max|dJ|=1.764e-04   max|A|=1.773e-02
+  C_ss_weighted: A=0.698573583240228 B=0.698573583240228
+  A_ss_weighted: A=1.7792840539974195 B=1.7792840539974195
+  OVERALL column-0 max|dJ| = 1.767e-04;  columns>=1 max|dJ| = 1.764e-04

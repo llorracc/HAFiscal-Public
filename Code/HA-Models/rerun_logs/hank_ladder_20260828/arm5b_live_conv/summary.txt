@@ -1,0 +1,29 @@
+arm dir: /Users/ccarroll/ui_ext_20260826/hank_ladder_20260828/arm5b_live_conv
+engine: package
+steady state used by the GE: C_ss=0.692123, A_ss=1.432403, B_ss=0.078497, G_ss=0.260405, Y_ss=1.158052, N_ss=0.958647, tau_ss=0.300000, qb_ss=18.247851, U_ss=0.041353
+policy         regime         IRFpeak%   q  cum(h=20)  cum peak  h*
+transfers      taylor           1.9181   1     1.1274    1.1274  20
+transfers      fixed_nominal    3.2782   1     1.6118    1.6118  20
+transfers      fixed_real       2.8532   1     1.5332    1.5332  20
+UI_extensions  taylor           0.1151   1     1.4673    1.4673  20
+UI_extensions  fixed_nominal    0.1967   1     1.8200    1.8200  20
+UI_extensions  fixed_real       0.1688   1     1.7656    1.7656  20
+tax_cut        taylor           2.6479   8     1.1589    1.1589  20
+tax_cut        fixed_nominal    6.1462   1     1.8411    1.8411  20
+tax_cut        fixed_real       3.6972   4     1.7314    1.7314  20
+emitted pickle (multipliers_across_horizon_w_splurge.obj):
+  transfers      h20=1.1274 peak=1.1274 (h=20) == regime ['taylor']
+  UI_extensions  h20=1.4673 peak=1.4673 (h=20) == regime ['taylor']
+  tax_cut        h20=1.1589 peak=1.1589 (h=20) == regime ['taylor']
+printed NPV output multipliers (NPV(Y)/NPV(cost), bigT):
+  2Q UI extension (active taylor rule): 1.5379
+  2Q UI extension (fixed nominal rate): 1.3618
+  2Q UI extension (fixed real rate): 1.4071
+  transfers: 1.5160
+  transfers (fixed nominal rate): 1.2850
+  transfers (active taylor rule): 1.5160
+  transfers (fixed real rate): 1.3488
+  tax cut: -1.6036
+  tax cut (fixed real rate): -1.3632
+  tax cut (fixed nominal rate): -1.2712
+wrote summary.json

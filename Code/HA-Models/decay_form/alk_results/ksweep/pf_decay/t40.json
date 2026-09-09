@@ -1,0 +1,27 @@
+{
+ "label": "t40",
+ "beta_mode": "cap",
+ "DiscFac": 1.0053691243346485,
+ "aXtraMax": 40.0,
+ "aXtraCount": 48,
+ "env": {
+  "HAFISCAL_PF_DECAY_EXTRAP": null,
+  "HAFISCAL_PF_DECAY_Q": null,
+  "HAFISCAL_PF_DECAY_AMAX_MULT": null,
+  "HAFISCAL_SOLVE_AMAX": null
+ },
+ "n_powerlaw_slices": 0,
+ "n_decay_active": 0,
+ "Q_range": null,
+ "drift_range": null,
+ "advisories": [],
+ "n_warnings_total": 0,
+ "wall_sec": 9.74718427658081,
+ "lqt_DIAG": {
+  "n_slices": 0,
+  "n_local2": 0,
+  "n_fallback": 0,
+  "max_abs_drift": 0.0,
+  "worst": null
+ }
+}

@@ -1,0 +1,38 @@
+Econ-9 step 0c (2026-08-28): pin the vintage of the published HANK Jacobian pickle (HAFiscal-QE HA_Fiscal_Jacs.obj)
+Read-only w.r.t. both repos. All work in this directory. VENV: ../venv310 (Python 3.10.19, econ-ark 0.14.1, numpy 1.26.4, scipy 1.15.3)
+D=/tmp/claude-1000/-home-shared-github-llorracc-HAFiscal-Latest/f91dfb72-4520-415e-95d4-8c433281596b/scratchpad/econ9_0c
+V=$D/../venv310/bin/python
+
+# 0. provenance of the pickle and the calibration (git, Latest repo)
+git -C /home/shared/github/llorracc/HAFiscal-Latest log --format='%h %ad %s' --date=short -- Code/HA-Models/FromPandemicCode/HA_Fiscal_Jacs.obj
+git hash-object /home/shared/github/llorracc/HAFiscal-QE/Code/HA-Models/FromPandemicCode/HA_Fiscal_Jacs.obj     # 63c6c111...
+for h in 71078b39 bf30aac6 d38bf6be ca079869; do git ls-tree $h Code/HA-Models/FromPandemicCode/HA_Fiscal_Jacs.obj; done
+git -C /home/shared/github/llorracc/HAFiscal-Latest log --format='%h %ad %s' --date=short -- Code/HA-Models/Results/DiscFacEstim_CRRA_2.0_R_1.01.txt
+git -C /home/shared/github/llorracc/HAFiscal-Latest log -S'1.4324029855872642' --format='%h %ad %s' --date=short -- Code/HA-Models/FromPandemicCode/
+git -C /home/shared/github/llorracc/HAFiscal-Latest show ca079869:Code/HA-Models/FromPandemicCode/HA_Fiscal_Jacs.obj > $D/HA_Fiscal_Jacs_20251116_3c68804f.obj
+
+# 1. pickle fingerprints (QE blob + the prior 2025-11-16 blob), internal aggregation check, 10x10 transfers blocks -> p5a_pickle_blocks.npz
+cd $D && $V p5a_pickle_fingerprint.py $D | tee p5a_pickle_fingerprint.out
+
+# 2. per-cell transfers Jacobian blocks under HARK 0.14.1, QE code verbatim, COMMITTED calibration (bigT=300 semantics; validation vs verbatim bigT=10 on cell 2:0)
+export OUT_DIR=$D S_BLOCK=10 PYTHONUNBUFFERED=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1; ulimit -v 12000000
+CELLS="2:0,2:1,2:2,2:3,2:4,2:5,2:6,0:6,1:6" VALIDATE_CELL="2:0" nice -n 10 /usr/bin/time -v $V p5b_cells_0141.py > p5b_cells.out 2> p5b_cells.time
+CELLS="0:0,0:1,0:2,0:3,0:4,0:5,1:0,1:1,1:2,1:3,1:4,1:5" VALIDATE_CELL="" nice -n 10 /usr/bin/time -v $V p5b_cells_0141.py > p5b_cells_batch2.out 2> p5b_cells_batch2.time
+
+# 3. comparison (per education 7-atom means and the 21-cell aggregate vs both pickles; 21-cell weighted SS vs the GE-script literals)
+$V p5c_compare.py $D | tee p5c_compare_21cells.out     # (p5c_compare_9cells.out = the run after batch 1)
+
+# 4. beta atoms per DiscFacEstim vintage (QE rule), to attribute the pickle-vs-pickle differences
+$V p5d_vintage_atoms.py > p5d_vintage_atoms.out
+
+# 5. the prior blob's vintage: rerun the 21 cells with the c06f7f0a (2025-07-29 == b380836b 2025-06-02) calibration substituted for DiscFacDstns
+mkdir -p alt_c06f7f0a && ln -sf $D/p5a_pickle_blocks.npz alt_c06f7f0a/
+OUT_DIR=$D/alt_c06f7f0a CELLS=<all 21> ALT_ESTIM="0.7189577469131356,0.317501135258091,6.048792843705771;0.9245692668531436,0.076769351773881,7.039418110187595;0.982568954290878,0.013904864881855435,5.485093753301717" \
+  nice -n 10 /usr/bin/time -v $V p5b_cells_0141.py > p5b_cells_alt_c06f7f0a.out 2> p5b_cells_alt_c06f7f0a.time
+$V p5c_compare.py $D/alt_c06f7f0a | tee p5c_compare_alt_c06f7f0a.out
+
+# 6. the GE-script literals' vintage: 21 cells with the fd2890ff (2024-01-26; in force when Will's notebook entered at 52bc2020 2024-09-25) calibration
+mkdir -p alt_fd2890ff && ln -sf $D/p5a_pickle_blocks.npz alt_fd2890ff/
+OUT_DIR=$D/alt_fd2890ff CELLS=<all 21> ALT_ESTIM="0.734957225906162,0.2983675991190151,6.387042414747095;0.9233503915004295,0.13152852940397675,4.116510342530347;0.9838288205923613,0.009618457146131559,7.031814336738526" \
+  nice -n 10 /usr/bin/time -v $V p5b_cells_0141.py > p5b_cells_alt_fd2890ff.out 2> p5b_cells_alt_fd2890ff.time
+$V p5c_compare.py $D/alt_fd2890ff | tee p5c_compare_alt_fd2890ff.out

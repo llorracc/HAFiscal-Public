@@ -1,0 +1,19 @@
+{
+ "schema_version": "2",
+ "pid": 508217,
+ "label": "welfare6_scenario-base",
+ "argv": [
+  "/home/shared/github/llorracc/HAFiscal-Latest/Code/HA-Models/FromPandemicCode/welfare6_scenario.py"
+ ],
+ "events": [
+  {
+   "kind": "solve_cache",
+   "outcome": "miss_solved_saved",
+   "byte_effect": "none",
+   "t_utc": "2026-08-06T04:51:41Z",
+   "tag": "AC132-132-132-132-132-132-132-752-752-752-752-752-752-752-542-542-542-542-542-542-542__mc-hark_solve_only__noshuf__seed0",
+   "shock_type": "base",
+   "entry": "AC132-132-132-132-132-132-132-752-752-752-752-752-752-752-542-542-542-542-542-542-542__mc-hark_solve_only__noshuf__seed0__ce9df9b4.pkl"
+  }
+ ]
+}

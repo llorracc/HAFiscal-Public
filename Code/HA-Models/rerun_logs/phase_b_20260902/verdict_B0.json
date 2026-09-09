@@ -1,0 +1,10 @@
+{
+ "rung": "B0",
+ "kind": "stamp",
+ "note": "monolith pair on the QE calibration vs the PUBLISHED 0.14.1 pickle: C 2.03e-8 / A 8.5e-7 rel<=1.2e-5 per leaf; verified twice (arm0 2026-08-28, Mac; jacobians wall 861 s)",
+ "start": "2026-09-01 22:14:31",
+ "gates": {},
+ "walls": {},
+ "evidence": "rerun_logs/hank_ladder_20260828/arm0_vs_published_pickle.txt",
+ "pass": true
+}

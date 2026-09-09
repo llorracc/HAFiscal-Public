@@ -1,0 +1,172 @@
+{
+ "rung": "B1",
+ "kind": "build",
+ "note": "the package at published-shaped settings; col0=unanticipated (the ladder pin \u2014 the monolith cannot express it); s>=1 gated vs the published pickle at the ghost budget; col0 residual vs published RECORDED (the BUG-112 content, 5.8e-2..2.9e-1)",
+ "start": "2026-09-01 22:32:52",
+ "gates": {
+  "build": true,
+  "budget_suite": true,
+  "by_educ_identity": true,
+  "published_s_ge_1": true,
+  "ge": true
+ },
+ "walls": {
+  "build": 0.0,
+  "ge": 13.4,
+  "pe_anchor": 1.6,
+  "diagnose": 1.6
+ },
+ "build_reused": true,
+ "budget": {
+  "transfers": {
+   "present": true,
+   "off": 3.6760150187774374e-10,
+   "scale": 0.9937499999709807,
+   "off_over_scale": 3.6991346101985246e-10,
+   "floor": 0.0001455,
+   "cash_s1": 0.9937499999720746,
+   "cash_s5": 0.99374999997239,
+   "pass": true
+  },
+  "tau": {
+   "present": true,
+   "off": 3.8102230993529353e-10,
+   "scale": 0.9500250041531046,
+   "off_over_scale": 4.010655596111958e-10,
+   "floor": 0.000147,
+   "cash_s1": -0.9500250041510936,
+   "cash_s5": -0.9500250041511566,
+   "pass": true
+  },
+  "w": {
+   "present": true,
+   "off": 2.487064057303534e-10,
+   "scale": 0.6650175029040327,
+   "off_over_scale": 3.7398475174606603e-10,
+   "floor": 0.000147,
+   "cash_s1": 0.6650175029065833,
+   "cash_s5": 0.6650175029069706,
+   "pass": true
+  },
+  "UI_extend": {
+   "present": true,
+   "off": 1.4304893318010768e-11,
+   "scale": 0.0064322102516319885,
+   "off_over_scale": 2.2239467863136646e-09,
+   "floor": 5.1e-05,
+   "cash_s1": 0.003022962674169569,
+   "cash_s5": 0.0030229626742124356,
+   "pass": true
+  },
+  "UI_rr": {
+   "present": true,
+   "off": 1.4784498302125365e-11,
+   "scale": 0.027206664066649205,
+   "off_over_scale": 5.434145937887576e-10,
+   "floor": 0.0001005,
+   "cash_s1": 0.02720666406576628,
+   "cash_s5": 0.027206664065899007,
+   "pass": true
+  },
+  "r": {
+   "present": true,
+   "off": 4.833209959614893e-07,
+   "scale": 3.918801165897425,
+   "off_over_scale": 1.2333389102960683e-07,
+   "floor": 0.00195,
+   "cash_s1": 1.7681805851075791,
+   "cash_s5": 1.7681805944757025,
+   "pass": true
+  },
+  "DiscFac": {
+   "present": true,
+   "off": 1.4238453574511034e-07,
+   "scale": 3.7163547201320166,
+   "off_over_scale": 3.8312956234719275e-08,
+   "floor": 0.00108,
+   "cash_s1": -1.637371881135774e-08,
+   "cash_s5": -2.5903482914202414e-08,
+   "pass": true
+  },
+  "eta": {
+   "present": true,
+   "skipped": "eta gated by the chain-implied dY path (G-ETA, Phase C), not the delivery-row form"
+  }
+ },
+ "by_educ_worst": 8.881784197001252e-16,
+ "published_gate": {
+  "s_ge_1": {
+   "C.DiscFac": 2.2468585984189438e-06,
+   "C.UI_extend": 2.246858712413793e-06,
+   "C.UI_rr": 2.246858793305984e-06,
+   "C.eta": 2.2468587919664618e-06,
+   "C.r": 2.2468586786294673e-06,
+   "C.tau": 2.2468587172330684e-06,
+   "C.transfers": 2.2468587731292266e-06,
+   "C.w": 2.246858697968151e-06,
+   "A.DiscFac": 0.00017643254523469487,
+   "A.UI_extend": 0.0001764325560370154,
+   "A.UI_rr": 0.0001764325493934697,
+   "A.eta": 0.00017643255229095602,
+   "A.r": 0.00017643255069418884,
+   "A.tau": 0.00017643254390656282,
+   "A.transfers": 0.0001764325453724215,
+   "A.w": 0.00017643255245720219
+  },
+  "col0": {
+   "C.DiscFac": 2.2796919607603883e-06,
+   "C.UI_extend": 2.279686530183765e-06,
+   "C.UI_rr": 2.2796815665352264e-06,
+   "C.eta": 2.2796789016827585e-06,
+   "C.r": 2.2796765606980865e-06,
+   "C.tau": 2.279677747209425e-06,
+   "C.transfers": 2.2796766840915694e-06,
+   "C.w": 2.279676176243845e-06,
+   "A.DiscFac": 0.0001759395123516779,
+   "A.UI_extend": 0.00017593950414608893,
+   "A.UI_rr": 0.00017593950311985617,
+   "A.eta": 0.000175939498971622,
+   "A.r": 0.000175939492527033,
+   "A.tau": 0.0001759394988765893,
+   "A.transfers": 0.00017593949806186948,
+   "A.w": 0.00017593949841659962
+  },
+  "budgets": {
+   "C.DiscFac": 3.2e-05,
+   "C.UI_extend": 3.2e-05,
+   "C.UI_rr": 3.2e-05,
+   "C.eta": 3.2e-05,
+   "C.r": 3.2e-05,
+   "C.tau": 3.2e-05,
+   "C.transfers": 3.2e-05,
+   "C.w": 3.2e-05,
+   "A.DiscFac": 0.000192,
+   "A.UI_extend": 0.000192,
+   "A.UI_rr": 0.000192,
+   "A.eta": 0.000192,
+   "A.r": 0.000192,
+   "A.tau": 0.000192,
+   "A.transfers": 0.000192,
+   "A.w": 0.000192
+  },
+  "pass": true
+ },
+ "h20": {
+  "transfers.taylor": 0.8805336272836904,
+  "transfers.fixed_real": 1.2385119312326827,
+  "UI_extensions.taylor": 1.151672380568503,
+  "UI_extensions.fixed_real": 1.418221860201789,
+  "tax_cut.taylor": 0.95835530094129,
+  "tax_cut.fixed_real": 1.3100328648946569
+ },
+ "g11_lines": [
+  "[hank-g11] transfers/taylor: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['tau', 'transfers']  drop-one bite={'tau': '1.545e-03', 'transfers': '8.787e-03'}\n",
+  "[hank-g11] transfers/fixed_real: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['tau', 'transfers']  drop-one bite={'tau': '1.545e-03', 'transfers': '8.787e-03'}\n",
+  "[hank-g11] UI_extend/taylor: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['UI_extend', 'tau']  drop-one bite={'UI_extend': '1.057e-03', 'tau': '1.015e-04'}\n",
+  "[hank-g11] UI_extend/fixed_real: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['UI_extend', 'tau']  drop-one bite={'UI_extend': '1.057e-03', 'tau': '1.015e-04'}\n"
+ ],
+ "pe_anchor_rc": 1,
+ "diagnose_rc": 0,
+ "pass": true,
+ "end": "2026-09-01 22:33:09"
+}

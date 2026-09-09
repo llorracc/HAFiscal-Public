@@ -1,0 +1,10 @@
+== published: /home/shared/github/llorracc/HAFiscal-Latest/../HAFiscal-QE/Code/HA-Models/FromPandemicCode/HA_Fiscal_Jacs.obj
+  transfers col 0: cash rows 0..3 =   0.9938   0.0000   0.0000   0.0000   dC rows 0..1 =  0.2543  0.1293
+  transfers col 1: cash rows 0..3 =  -0.0000   0.9937  -0.0000  -0.0000   dC rows 0..1 =  0.1596  0.1947
+  r         col 0: cash rows 0..3 =   1.7682   0.0000   0.0000   0.0000   dC rows 0..1 =  0.0699  0.0609
+  r         col 1: cash rows 0..3 =   0.0000   1.7682  -0.0000  -0.0000   dC rows 0..1 = -0.2014  0.1057
+== current_production_20260903: /home/econ-ark/hank_ladder_20260905_backup/HA_Fiscal_Jacs.obj
+  transfers col 0: cash rows 0..3 =   1.0000  -0.0000  -0.0000  -0.0000   dC rows 0..1 =  0.2529  0.1257
+  transfers col 1: cash rows 0..3 =  -0.0000   1.0000  -0.0000  -0.0000   dC rows 0..1 =  0.1551  0.1948
+  r         col 0: cash rows 0..3 =   3.8234  -0.0061  -0.0060  -0.0058   dC rows 0..1 =  0.0834  0.0746
+  r         col 1: cash rows 0..3 =   0.0000   3.8237  -0.0061  -0.0059   dC rows 0..1 = -0.1914  0.1179

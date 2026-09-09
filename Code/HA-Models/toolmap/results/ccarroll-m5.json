@@ -1,0 +1,76 @@
+{
+  "env": {
+    "hostname": "ccarroll-m5",
+    "arch": "arm64",
+    "platform": "macOS-26.4-arm64-arm-64bit",
+    "system": "Darwin",
+    "python_version": "3.11.13",
+    "numpy_version": "1.26.4",
+    "numba_version": "0.65.1",
+    "hark_version": "0.17.1"
+  },
+  "parametrization": "HS_Only",
+  "solve_seconds": 0.2082647504284978,
+  "anderson_solve_seconds": 0.2199932080693543,
+  "sim_seconds": 0.49107383424416184,
+  "tm_ergodic_seconds": 0.04429275030270219,
+  "build_seconds": 2.023719707969576,
+  "total_seconds": 3.0054516666568816,
+  "tool_seconds": {
+    "solve": 0.2082647504284978,
+    "anderson_solve": 0.2199932080693543,
+    "sim": 0.49107383424416184,
+    "tm_ergodic": 0.04429275030270219
+  },
+  "fingerprint": {
+    "cfunc_m_points": [
+      0.5,
+      1.0,
+      1.5,
+      2.0,
+      3.0,
+      5.0,
+      8.0,
+      12.0
+    ],
+    "cfunc_cratio": 1.0,
+    "cfunc_at_points": [
+      0.5,
+      0.8942249177140367,
+      1.0443296479555402,
+      1.1415898573377925,
+      1.284640740988814,
+      1.4969711087837974,
+      1.7482850943302664,
+      2.03247670406762
+    ],
+    "anderson_cfunc_at_points": [
+      0.5,
+      0.8942249177140367,
+      1.0443296479555402,
+      1.1415898573377925,
+      1.284640740988814,
+      1.4969711087837974,
+      1.7482850943302664,
+      2.03247670406762
+    ],
+    "anderson_engaged": false,
+    "agg_moments": {
+      "agg_cons_mean": 20499.878329312003,
+      "agg_cons_var": 528280.8427867551,
+      "agg_income_mean": 20578.770460989985,
+      "cLvl_splurge_mean": 13.66658555287467,
+      "cLvl_splurge_var": 72.2595174571251,
+      "aNrm_mean": 0.4072120969993773,
+      "aNrm_var": 0.13257504375704596
+    },
+    "tm_moments": {
+      "aNrm_mean": 0.409952908565174,
+      "aNrm_var": 0.13568422278341083,
+      "A_nrm_household": 0.30042141986292487,
+      "interpretation": "ESC",
+      "mCount": 200
+    }
+  },
+  "notes": "Phase-A tool map. SOLVE = default HARK EGM/markov solver (AggregateDemandEconomy.solve, solve_agg_cons_markov_alt) on the HS_Only economy (single HS cohort, DiscFacCount=1, AgentCountTotal=1500, T_age=100), built per test_tm_baseline.py. ANDERSON_SOLVE = the SAME solve() on an independent copy of that economy with HAFISCAL_STEP2_ANDERSON=1 (the opt-in multi-state Anderson base solver, hark_fti.global_newton_markov.solve_stationary_NAMG_markov, homed in the sibling fast-time-iteration repo); fingerprint.anderson_cfunc_at_points is its cFunc at the SAME cfunc_m_points, and fingerprint.anderson_engaged records whether the Anderson path actually fired (vs falling back to EGM, e.g. if hark_fti is absent). anderson_solve_seconds vs solve_seconds is the Anderson-vs-EGM solve speedup; anderson_cfunc_at_points vs cfunc_at_points is the policy delta (same fixed point \u21d2 ~solver-tol). SIM = run_experiment(base, Full_Output=True) MC forward sim over act_T=100. TM_ERGODIC = a-indexed TM ergodic moments off the SAME solved economy (tm_methods.compute_baseline_tm_data, neutral_measure=False / P-measure); deterministic, no RNG. fingerprint.cfunc_at_points are c(mNrm, Cratio=1.0) at the base Markov micro-state on cfunc_m_points; agg_moments are MC sim aggregates; tm_moments.aNrm_mean/aNrm_var are the RAW-KERNEL TM ergodic asset moments (the direct analog of the raw MC aNrm_all; tm_moments.A_nrm_household is the interpretation-aware household mean, NOT the MC analog). The tm_ergodic-vs-sim seconds give the per-eval speedup; tm_moments.aNrm_* vs agg_moments.aNrm_* give the TM-vs-MC agreement (expected within MC sampling noise, a few %). Compare cfunc_at_points / *_moments across platforms with a tolerance (NOT a byte hash) for the x86-vs-arm64 FP delta. Default deps only; no GPU/JAX."
+}

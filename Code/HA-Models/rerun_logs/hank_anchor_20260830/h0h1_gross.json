@@ -1,0 +1,1249 @@
+{
+ "tol": 1e-09,
+ "rows": [
+  {
+   "educ": "dropout",
+   "field": "DiscFacDstn/atoms",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "DiscFacDstn/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "CRRA",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "Rfree",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*1.01 by literal; PE from the calibration"
+  },
+  {
+   "educ": "dropout",
+   "field": "LivPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*0.99375 by literal; PE from the calibration"
+  },
+  {
+   "educ": "dropout",
+   "field": "MrkvArray(base, lumped to HANK states)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "PermGroFac(lumped)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "PermShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "TranShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "solve_grid/aXtraMax",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "solve_grid/aXtraCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "solve_grid/aXtraMin",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "solve_grid/aXtraNestFac",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "PermShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "TranShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "UnempPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "IncUnemp",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "dist_grid/mCount",
+   "status": "EXPECTED",
+   "value": 50.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "dropout",
+   "field": "dist_grid/mMax",
+   "status": "EXPECTED",
+   "value": 1300.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/employed/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/employed/PermShk",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/employed/TranShk",
+   "status": "EXPECTED",
+   "value": 0.0,
+   "note": "the HANK block scales the employed transitory shock by wage_ss*(1-tau_ss) (net income level; HAFISCAL_HANK_INCOME_LEVEL=net, the R-e item-2 arm) \u2014 the PE's own level is gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/employed/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE median ratio; = wage_ss*(1-tau_ss) = 0.7 under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp1/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp1/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp1/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp2/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp2/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp2/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp3/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp3/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp3/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp4/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp4/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp4/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp5/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp5/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp5/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[0]/state0",
+   "status": "MATCH",
+   "value": 2.6645352591003757e-15,
+   "note": "beta=0.496024; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[0]/state1",
+   "status": "MATCH",
+   "value": 3.552713678800501e-15,
+   "note": "beta=0.496024; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[0]/state2",
+   "status": "MATCH",
+   "value": 1.7763568394002505e-15,
+   "note": "beta=0.496024; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[0]/state3",
+   "status": "MATCH",
+   "value": 1.7763568394002505e-15,
+   "note": "beta=0.496024; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[0]/state4",
+   "status": "MATCH",
+   "value": 1.7763568394002505e-15,
+   "note": "beta=0.496024; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[0]/state5",
+   "status": "MATCH",
+   "value": 1.7763568394002505e-15,
+   "note": "beta=0.496024; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[0]/WORST",
+   "status": "MATCH",
+   "value": 3.552713678800501e-15,
+   "note": "beta=0.496024, worst at state 1"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[3]/state0",
+   "status": "MATCH",
+   "value": 1.7763568394002505e-15,
+   "note": "beta=0.745146; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[3]/state1",
+   "status": "MATCH",
+   "value": 8.881784197001252e-16,
+   "note": "beta=0.745146; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[3]/state2",
+   "status": "MATCH",
+   "value": 1.7763568394002505e-15,
+   "note": "beta=0.745146; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[3]/state3",
+   "status": "MATCH",
+   "value": 1.7763568394002505e-15,
+   "note": "beta=0.745146; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[3]/state4",
+   "status": "MATCH",
+   "value": 1.7763568394002505e-15,
+   "note": "beta=0.745146; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[3]/state5",
+   "status": "MATCH",
+   "value": 1.7763568394002505e-15,
+   "note": "beta=0.745146; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[3]/WORST",
+   "status": "MATCH",
+   "value": 1.7763568394002505e-15,
+   "note": "beta=0.745146, worst at state 0"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[6]/state0",
+   "status": "FAIL",
+   "value": 1.4177923141067694e-05,
+   "note": "beta=0.994267; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[6]/state1",
+   "status": "FAIL",
+   "value": 1.4169421726828446e-05,
+   "note": "beta=0.994267; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[6]/state2",
+   "status": "FAIL",
+   "value": 1.4168769622013855e-05,
+   "note": "beta=0.994267; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[6]/state3",
+   "status": "FAIL",
+   "value": 1.4168769622013855e-05,
+   "note": "beta=0.994267; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[6]/state4",
+   "status": "FAIL",
+   "value": 1.4168769622013855e-05,
+   "note": "beta=0.994267; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[6]/state5",
+   "status": "FAIL",
+   "value": 1.4168769622013855e-05,
+   "note": "beta=0.994267; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "dropout",
+   "field": "cFunc/beta[6]/WORST",
+   "status": "FAIL",
+   "value": 1.4177923141067694e-05,
+   "note": "beta=0.994267, worst at state 0"
+  },
+  {
+   "educ": "highschool",
+   "field": "DiscFacDstn/atoms",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "DiscFacDstn/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "CRRA",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "Rfree",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*1.01 by literal; PE from the calibration"
+  },
+  {
+   "educ": "highschool",
+   "field": "LivPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*0.99375 by literal; PE from the calibration"
+  },
+  {
+   "educ": "highschool",
+   "field": "MrkvArray(base, lumped to HANK states)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "PermGroFac(lumped)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "PermShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "TranShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "solve_grid/aXtraMax",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "solve_grid/aXtraCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "solve_grid/aXtraMin",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "solve_grid/aXtraNestFac",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "PermShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "TranShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "UnempPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "IncUnemp",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "dist_grid/mCount",
+   "status": "EXPECTED",
+   "value": 50.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "highschool",
+   "field": "dist_grid/mMax",
+   "status": "EXPECTED",
+   "value": 1300.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/employed/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/employed/PermShk",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/employed/TranShk",
+   "status": "EXPECTED",
+   "value": 0.0,
+   "note": "the HANK block scales the employed transitory shock by wage_ss*(1-tau_ss) (net income level; HAFISCAL_HANK_INCOME_LEVEL=net, the R-e item-2 arm) \u2014 the PE's own level is gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/employed/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE median ratio; = wage_ss*(1-tau_ss) = 0.7 under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp1/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp1/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp1/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp2/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp2/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp2/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp3/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp3/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp3/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp4/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp4/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp4/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp5/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp5/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp5/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[0]/state0",
+   "status": "MATCH",
+   "value": 1.3322676295501878e-15,
+   "note": "beta=0.872013; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[0]/state1",
+   "status": "MATCH",
+   "value": 8.881784197001252e-16,
+   "note": "beta=0.872013; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[0]/state2",
+   "status": "MATCH",
+   "value": 8.881784197001252e-16,
+   "note": "beta=0.872013; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[0]/state3",
+   "status": "MATCH",
+   "value": 8.881784197001252e-16,
+   "note": "beta=0.872013; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[0]/state4",
+   "status": "MATCH",
+   "value": 8.881784197001252e-16,
+   "note": "beta=0.872013; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[0]/state5",
+   "status": "MATCH",
+   "value": 8.881784197001252e-16,
+   "note": "beta=0.872013; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[0]/WORST",
+   "status": "MATCH",
+   "value": 1.3322676295501878e-15,
+   "note": "beta=0.872013, worst at state 0"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[3]/state0",
+   "status": "MATCH",
+   "value": 1.3322676295501878e-15,
+   "note": "beta=0.933852; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[3]/state1",
+   "status": "MATCH",
+   "value": 8.881784197001252e-16,
+   "note": "beta=0.933852; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[3]/state2",
+   "status": "MATCH",
+   "value": 1.3322676295501878e-15,
+   "note": "beta=0.933852; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[3]/state3",
+   "status": "MATCH",
+   "value": 1.3322676295501878e-15,
+   "note": "beta=0.933852; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[3]/state4",
+   "status": "MATCH",
+   "value": 1.3322676295501878e-15,
+   "note": "beta=0.933852; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[3]/state5",
+   "status": "MATCH",
+   "value": 1.3322676295501878e-15,
+   "note": "beta=0.933852; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[3]/WORST",
+   "status": "MATCH",
+   "value": 1.3322676295501878e-15,
+   "note": "beta=0.933852, worst at state 0"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[6]/state0",
+   "status": "FAIL",
+   "value": 1.3357407360747864e-05,
+   "note": "beta=0.995692; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[6]/state1",
+   "status": "FAIL",
+   "value": 1.3345048258006642e-05,
+   "note": "beta=0.995692; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[6]/state2",
+   "status": "FAIL",
+   "value": 1.3344202158149798e-05,
+   "note": "beta=0.995692; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[6]/state3",
+   "status": "FAIL",
+   "value": 1.3344202158149798e-05,
+   "note": "beta=0.995692; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[6]/state4",
+   "status": "FAIL",
+   "value": 1.3344202158149798e-05,
+   "note": "beta=0.995692; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[6]/state5",
+   "status": "FAIL",
+   "value": 1.3344202158149798e-05,
+   "note": "beta=0.995692; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "highschool",
+   "field": "cFunc/beta[6]/WORST",
+   "status": "FAIL",
+   "value": 1.3357407360747864e-05,
+   "note": "beta=0.995692, worst at state 0"
+  },
+  {
+   "educ": "college",
+   "field": "DiscFacDstn/atoms",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "DiscFacDstn/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "CRRA",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "Rfree",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*1.01 by literal; PE from the calibration"
+  },
+  {
+   "educ": "college",
+   "field": "LivPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*0.99375 by literal; PE from the calibration"
+  },
+  {
+   "educ": "college",
+   "field": "MrkvArray(base, lumped to HANK states)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "PermGroFac(lumped)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "PermShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "TranShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "solve_grid/aXtraMax",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "solve_grid/aXtraCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "solve_grid/aXtraMin",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "solve_grid/aXtraNestFac",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "PermShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "TranShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "UnempPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "IncUnemp",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "dist_grid/mCount",
+   "status": "EXPECTED",
+   "value": 50.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "college",
+   "field": "dist_grid/mMax",
+   "status": "EXPECTED",
+   "value": 1300.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/employed/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/employed/PermShk",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/employed/TranShk",
+   "status": "EXPECTED",
+   "value": 0.0,
+   "note": "the HANK block scales the employed transitory shock by wage_ss*(1-tau_ss) (net income level; HAFISCAL_HANK_INCOME_LEVEL=net, the R-e item-2 arm) \u2014 the PE's own level is gross"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/employed/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE median ratio; = wage_ss*(1-tau_ss) = 0.7 under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp1/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp1/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp1/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp2/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp2/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp2/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp3/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp3/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp3/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp4/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp4/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp4/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp5/E[psi]",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-16,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp5/E[1/psi]",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "both sides now build this through income_process_sst (BUG-105)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp5/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 1.0,
+   "note": "HANK/PE benefit-level ratio; = wage_ss*(1-tau_ss) under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[0]/state0",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-15,
+   "note": "beta=0.974033; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[0]/state1",
+   "status": "MATCH",
+   "value": 1.3322676295501878e-15,
+   "note": "beta=0.974033; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[0]/state2",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-15,
+   "note": "beta=0.974033; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[0]/state3",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-15,
+   "note": "beta=0.974033; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[0]/state4",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-15,
+   "note": "beta=0.974033; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[0]/state5",
+   "status": "MATCH",
+   "value": 1.1102230246251565e-15,
+   "note": "beta=0.974033; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[0]/WORST",
+   "status": "MATCH",
+   "value": 1.3322676295501878e-15,
+   "note": "beta=0.974033, worst at state 1"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[3]/state0",
+   "status": "MATCH",
+   "value": 5.039426653752344e-10,
+   "note": "beta=0.987514; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[3]/state1",
+   "status": "MATCH",
+   "value": 4.819311616444111e-10,
+   "note": "beta=0.987514; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[3]/state2",
+   "status": "MATCH",
+   "value": 4.716362855816669e-10,
+   "note": "beta=0.987514; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[3]/state3",
+   "status": "MATCH",
+   "value": 4.716362855816669e-10,
+   "note": "beta=0.987514; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[3]/state4",
+   "status": "MATCH",
+   "value": 4.716362855816669e-10,
+   "note": "beta=0.987514; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[3]/state5",
+   "status": "MATCH",
+   "value": 4.716362855816669e-10,
+   "note": "beta=0.987514; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[3]/WORST",
+   "status": "MATCH",
+   "value": 5.039426653752344e-10,
+   "note": "beta=0.987514, worst at state 0"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[6]/state0",
+   "status": "FAIL",
+   "value": 0.00020208381490649518,
+   "note": "beta=1.000995; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[6]/state1",
+   "status": "FAIL",
+   "value": 0.00020079954959517643,
+   "note": "beta=1.000995; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[6]/state2",
+   "status": "FAIL",
+   "value": 0.00020030922520430927,
+   "note": "beta=1.000995; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[6]/state3",
+   "status": "FAIL",
+   "value": 0.00020030922520430927,
+   "note": "beta=1.000995; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[6]/state4",
+   "status": "FAIL",
+   "value": 0.00020030922520430927,
+   "note": "beta=1.000995; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[6]/state5",
+   "status": "FAIL",
+   "value": 0.00020030922520430927,
+   "note": "beta=1.000995; PE 7 states vs HANK 6; identical inputs => identical policy"
+  },
+  {
+   "educ": "college",
+   "field": "cFunc/beta[6]/WORST",
+   "status": "FAIL",
+   "value": 0.00020208381490649518,
+   "note": "beta=1.000995, worst at state 0"
+  }
+ ],
+ "summary": {
+  "match": 129,
+  "expected": 27,
+  "fail": 21
+ }
+}

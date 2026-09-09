@@ -1,0 +1,10 @@
+zeroth_column,policy,regime,mult_h20
+unanticipated,transfers,taylor,1.219266
+unanticipated,transfers,fixed_real,1.413612
+unanticipated,transfers,fixed_nominal,1.713499
+unanticipated,UI_extensions,taylor,1.397131
+unanticipated,UI_extensions,fixed_real,1.562030
+unanticipated,UI_extensions,fixed_nominal,1.810771
+unanticipated,tax_cut,taylor,1.164439
+unanticipated,tax_cut,fixed_real,1.424832
+unanticipated,tax_cut,fixed_nominal,1.766460

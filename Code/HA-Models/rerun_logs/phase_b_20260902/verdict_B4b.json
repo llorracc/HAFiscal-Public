@@ -1,0 +1,131 @@
+{
+ "rung": "B4b",
+ "kind": "build",
+ "note": "QMETHOD bst->doob; BUG-108 directional: A_ss +22.97%, C_ss +1.07%, +30.1% at the cap atom",
+ "start": "2026-09-01 23:30:43",
+ "gates": {
+  "build": true,
+  "budget_suite": true,
+  "by_educ_identity": true,
+  "ge": true
+ },
+ "walls": {
+  "build": 599.3,
+  "ge": 13.4,
+  "pe_anchor": 1.4,
+  "diagnose": 1.3
+ },
+ "budget": {
+  "transfers": {
+   "present": true,
+   "off": 8.987844630398644e-05,
+   "scale": 0.9956053972190044,
+   "off_over_scale": 9.027516981631606e-05,
+   "floor": 0.000291,
+   "cash_s1": 0.9956059044416056,
+   "cash_s5": 0.9956061720227027,
+   "pass": true
+  },
+  "tau": {
+   "present": true,
+   "off": 8.766681127729157e-05,
+   "scale": 0.9545139671402832,
+   "off_over_scale": 9.184445099314857e-05,
+   "floor": 0.000294,
+   "cash_s1": -0.9545144605110951,
+   "cash_s5": -0.9545147205164951,
+   "pass": true
+  },
+  "w": {
+   "present": true,
+   "off": 6.136688540863647e-05,
+   "scale": 0.6681597770008633,
+   "off_over_scale": 9.184462687067317e-05,
+   "floor": 0.000294,
+   "cash_s1": 0.66816012235936,
+   "cash_s5": 0.6681603043638759,
+   "pass": true
+  },
+  "UI_extend": {
+   "present": true,
+   "off": 1.6700710109549966e-07,
+   "scale": 0.00560153351472539,
+   "off_over_scale": 2.9814532155608648e-05,
+   "floor": 0.000102,
+   "cash_s1": 0.002840904023974355,
+   "cash_s5": 0.0028409045335047326,
+   "pass": true
+  },
+  "UI_rr": {
+   "present": true,
+   "off": 1.5723968730228516e-06,
+   "scale": 0.025969753962442242,
+   "off_over_scale": 6.054723796370463e-05,
+   "floor": 0.000201,
+   "cash_s1": 0.025567994492008264,
+   "cash_s5": 0.025567999158866223,
+   "pass": true
+  },
+  "r": {
+   "present": true,
+   "off": 0.00796989687033084,
+   "scale": 6.237645331447409,
+   "off_over_scale": 0.0012777092070544948,
+   "floor": 0.0039,
+   "cash_s1": 4.1567656631303445,
+   "cash_s5": 4.1568684542838445,
+   "pass": true
+  },
+  "DiscFac": {
+   "present": true,
+   "off": 0.003691897768304392,
+   "scale": 5.329335908874789,
+   "off_over_scale": 0.0006927500595630276,
+   "floor": 0.00216,
+   "cash_s1": -0.00035048312989487823,
+   "cash_s5": -0.0004752589688086367,
+   "pass": true
+  },
+  "eta": {
+   "present": true,
+   "skipped": "eta gated by the chain-implied dY path (G-ETA, Phase C), not the delivery-row form"
+  }
+ },
+ "by_educ_worst": 1.7763568394002505e-15,
+ "attribution_vs_prev": {
+  "C.DiscFac": 0.007244153826486285,
+  "C.UI_extend": 7.970167621857522e-06,
+  "C.UI_rr": 2.8625157334447125e-05,
+  "C.eta": 3.347687502650541e-05,
+  "C.r": 0.008235615705111624,
+  "C.tau": 0.0006244120842535117,
+  "C.transfers": 0.0008147678713041201,
+  "C.w": 0.0004370560317738803,
+  "A.DiscFac": 0.6658350675686533,
+  "A.UI_extend": 4.272069726076708e-05,
+  "A.UI_rr": 0.00038733890019940795,
+  "A.eta": 0.0009464448702854828,
+  "A.r": 0.7963628627056982,
+  "A.tau": 0.017971703734989575,
+  "A.transfers": 0.018568136210418612,
+  "A.w": 0.012580190862379277
+ },
+ "h20": {
+  "transfers.taylor": 0.9618946884167398,
+  "transfers.fixed_real": 1.170178405891152,
+  "UI_extensions.taylor": 1.2140460436194125,
+  "UI_extensions.fixed_real": 1.370287682027865,
+  "tax_cut.taylor": 1.0386626672026973,
+  "tax_cut.fixed_real": 1.2419730204033785
+ },
+ "g11_lines": [
+  "[hank-g11] transfers/taylor: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['tau', 'transfers']  drop-one bite={'tau': '1.496e-03', 'transfers': '8.645e-03'}\n",
+  "[hank-g11] transfers/fixed_real: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['tau', 'transfers']  drop-one bite={'tau': '1.496e-03', 'transfers': '8.645e-03'}\n",
+  "[hank-g11] UI_extend/taylor: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['UI_extend', 'tau']  drop-one bite={'UI_extend': '9.828e-04', 'tau': '9.238e-05'}\n",
+  "[hank-g11] UI_extend/fixed_real: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['UI_extend', 'tau']  drop-one bite={'UI_extend': '9.828e-04', 'tau': '9.238e-05'}\n"
+ ],
+ "pe_anchor_rc": 0,
+ "diagnose_rc": 0,
+ "pass": true,
+ "end": "2026-09-01 23:40:58"
+}

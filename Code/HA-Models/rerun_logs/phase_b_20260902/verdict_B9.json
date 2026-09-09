@@ -1,0 +1,132 @@
+{
+ "rung": "B9",
+ "kind": "build",
+ "note": "kernels ON (FAST_BACKWARD 0->1); equivalence lanes; EXIT IDENTITY: the chain's GE h20 must reproduce the committed production goldens to 1e-3",
+ "start": "2026-09-01 23:52:31",
+ "gates": {
+  "build": true,
+  "budget_suite": true,
+  "by_educ_identity": true,
+  "ge": true,
+  "exit_identity_vs_production": true
+ },
+ "walls": {
+  "build": 287.4,
+  "ge": 11.3,
+  "pe_anchor": 1.4,
+  "diagnose": 1.3
+ },
+ "budget": {
+  "transfers": {
+   "present": true,
+   "off": 9.627965137869372e-05,
+   "scale": 0.9956051618523907,
+   "off_over_scale": 9.670465267532253e-05,
+   "floor": 0.000291,
+   "cash_s1": 0.9956056745189449,
+   "cash_s5": 0.9956059565996862,
+   "pass": true
+  },
+  "tau": {
+   "present": true,
+   "off": 9.383445271774415e-05,
+   "scale": 0.9545125272167352,
+   "off_over_scale": 9.830615108987223e-05,
+   "floor": 0.000294,
+   "cash_s1": -0.9545130256940739,
+   "cash_s5": -0.954513299694482,
+   "pass": true
+  },
+  "w": {
+   "present": true,
+   "off": 6.568417697996084e-05,
+   "scale": 0.6681587690480971,
+   "off_over_scale": 9.830624100547066e-05,
+   "floor": 0.000294,
+   "cash_s1": 0.6681591179831208,
+   "cash_s5": 0.6681593097837634,
+   "pass": true
+  },
+  "UI_extend": {
+   "present": true,
+   "off": 1.8739134087498655e-07,
+   "scale": 0.005558648968492816,
+   "off_over_scale": 3.37116702164764e-05,
+   "floor": 0.000102,
+   "cash_s1": 0.002840972753622239,
+   "cash_s5": 0.0028409733021952472,
+   "pass": true
+  },
+  "UI_rr": {
+   "present": true,
+   "off": 1.7339564724367619e-06,
+   "scale": 0.025916715241022518,
+   "off_over_scale": 6.690494749474086e-05,
+   "floor": 0.000201,
+   "cash_s1": 0.025568760084313705,
+   "cash_s5": 0.02556876504538335,
+   "pass": true
+  },
+  "r": {
+   "present": true,
+   "off": 0.008410952551775902,
+   "scale": 6.310405565807071,
+   "off_over_scale": 0.0013328703621444942,
+   "floor": 0.0039,
+   "cash_s1": 4.266745687387868,
+   "cash_s5": 4.266854462942199,
+   "pass": true
+  },
+  "DiscFac": {
+   "present": true,
+   "off": 0.0038738987790411517,
+   "scale": 5.366814822820626,
+   "off_over_scale": 0.0007218245657682586,
+   "floor": 0.00216,
+   "cash_s1": -0.00035453785299553037,
+   "cash_s5": -0.0004868199135638629,
+   "pass": true
+  },
+  "eta": {
+   "present": true,
+   "skipped": "eta gated by the chain-implied dY path (G-ETA, Phase C), not the delivery-row form"
+  }
+ },
+ "by_educ_worst": 2.6645352591003757e-15,
+ "attribution_vs_prev": {
+  "C.DiscFac": 1.7154604770100446e-06,
+  "C.UI_extend": 1.624527496649981e-10,
+  "C.UI_rr": 1.5177394261998544e-09,
+  "C.eta": 2.5501137709435203e-09,
+  "C.r": 6.5206452818716495e-06,
+  "C.tau": 8.046479228957567e-08,
+  "C.transfers": 8.25499627385342e-08,
+  "C.w": 5.632475581172089e-08,
+  "A.DiscFac": 0.0001249538233544234,
+  "A.UI_extend": 1.9759214765383915e-08,
+  "A.UI_rr": 1.831276914088329e-07,
+  "A.eta": 3.0895566631352483e-07,
+  "A.r": 0.0004335824879622141,
+  "A.tau": 9.96786882952877e-06,
+  "A.transfers": 1.0223400352588063e-05,
+  "A.w": 6.977557706691617e-06
+ },
+ "h20": {
+  "transfers.taylor": 1.1894854115765954,
+  "transfers.fixed_real": 1.3807720069524458,
+  "UI_extensions.taylor": 1.372442441242046,
+  "UI_extensions.fixed_real": 1.5349064320862986,
+  "tax_cut.taylor": 1.1370153737457824,
+  "tax_cut.fixed_real": 1.3942893989171528
+ },
+ "g11_lines": [
+  "[hank-g11] transfers/taylor: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['tau', 'transfers']  drop-one bite={'tau': '1.855e-03', 'transfers': '1.667e-02'}\n",
+  "[hank-g11] transfers/fixed_real: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['tau', 'transfers']  drop-one bite={'tau': '1.855e-03', 'transfers': '1.667e-02'}\n",
+  "[hank-g11] UI_extend/taylor: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['UI_extend', 'tau']  drop-one bite={'UI_extend': '8.534e-04', 'tau': '1.132e-04'}\n",
+  "[hank-g11] UI_extend/fixed_real: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['UI_extend', 'tau']  drop-one bite={'UI_extend': '8.534e-04', 'tau': '1.132e-04'}\n"
+ ],
+ "pe_anchor_rc": 0,
+ "diagnose_rc": 0,
+ "pass": true,
+ "end": "2026-09-01 23:57:33"
+}

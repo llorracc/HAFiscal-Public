@@ -1,0 +1,5 @@
+{'EducationGroup': 0, 'beta': 0.7476103472704604, 'nabla': 0.291616666762039, 'GICx': 7.60040233450051}
+{'EducationGroup': 1, 'beta': 0.9383992972767311, 'nabla': 0.07189859575524146, 'GICx': 7.60040233450051}
+{'EducationGroup': 2, 'beta': 0.992758853970242, 'nabla': 0.014811415971343363, 'GICx': 7.60040233450051}
+
+Parameters: R = 1.01, CRRA = 2.0, IncUnemp = 0.7, IncUnempNoBenefits = 0.5, Splurge = 0.299869842312644

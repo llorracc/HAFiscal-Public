@@ -1,0 +1,5 @@
+
+=== GATE S5a (C3): FAIL ===
+  [XX] C3 multiplier check: value=1.258 ref=1.236 delta=2.200e-02 (abs) tol=5.0e-03
+  [XX] C3 multiplier ui: value=1.258 ref=1.247 delta=1.100e-02 (abs) tol=5.0e-03
+  [XX] C3 multiplier taxcut: value=1.027 ref=1.015 delta=1.200e-02 (abs) tol=5.0e-03

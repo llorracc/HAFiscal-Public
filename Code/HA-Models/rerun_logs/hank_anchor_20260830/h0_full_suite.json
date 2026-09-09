@@ -1,0 +1,703 @@
+{
+ "tol": 1e-12,
+ "rows": [
+  {
+   "educ": "dropout",
+   "field": "DiscFacDstn/atoms",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "DiscFacDstn/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "CRRA",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "Rfree",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*1.01 by literal; PE from the calibration"
+  },
+  {
+   "educ": "dropout",
+   "field": "LivPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*0.99375 by literal; PE from the calibration"
+  },
+  {
+   "educ": "dropout",
+   "field": "MrkvArray(base, lumped to HANK states)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "PermGroFac(lumped)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "PermShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "TranShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "solve_grid/aXtraMax",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "solve_grid/aXtraCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "solve_grid/aXtraMin",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "solve_grid/aXtraNestFac",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "PermShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "TranShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "UnempPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "IncUnemp",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "dist_grid/mCount",
+   "status": "EXPECTED",
+   "value": 50.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "dropout",
+   "field": "dist_grid/mMax",
+   "status": "EXPECTED",
+   "value": 1300.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/employed/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/employed/PermShk",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/employed/TranShk",
+   "status": "EXPECTED",
+   "value": 0.49435139884747015,
+   "note": "the HANK block scales the employed transitory shock by wage_ss*(1-tau_ss) (net income level; HAFISCAL_HANK_INCOME_LEVEL=net, the R-e item-2 arm) \u2014 the PE's own level is gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/employed/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE median ratio; = wage_ss*(1-tau_ss) = 0.7 under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp1/TranShk:level",
+   "status": "EXPECTED",
+   "value": 0.48999999999999994,
+   "note": "HANK unemployment slots are built from the replacement rates (0.7 with UI, 0.5 after); the PE's per-state distributions live in its Markov income spec, compared at H4"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp1/PermShk:degenerate",
+   "status": "EXPECTED",
+   "value": 0.08904784840984381,
+   "note": "0 \u21d2 psi\u22611 in unemployment (HAFISCAL_HANK_UNEMP_PSI=one); >0 \u21d2 the employed marginal is kept (=main, the PE semantics the estimation used)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp2/TranShk:level",
+   "status": "EXPECTED",
+   "value": 0.48999999999999994,
+   "note": "HANK unemployment slots are built from the replacement rates (0.7 with UI, 0.5 after); the PE's per-state distributions live in its Markov income spec, compared at H4"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp2/PermShk:degenerate",
+   "status": "EXPECTED",
+   "value": 0.08904784840984381,
+   "note": "0 \u21d2 psi\u22611 in unemployment (HAFISCAL_HANK_UNEMP_PSI=one); >0 \u21d2 the employed marginal is kept (=main, the PE semantics the estimation used)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp3/TranShk:level",
+   "status": "EXPECTED",
+   "value": 0.35,
+   "note": "HANK unemployment slots are built from the replacement rates (0.7 with UI, 0.5 after); the PE's per-state distributions live in its Markov income spec, compared at H4"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp3/PermShk:degenerate",
+   "status": "EXPECTED",
+   "value": 0.08904784840984381,
+   "note": "0 \u21d2 psi\u22611 in unemployment (HAFISCAL_HANK_UNEMP_PSI=one); >0 \u21d2 the employed marginal is kept (=main, the PE semantics the estimation used)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp4/TranShk:level",
+   "status": "EXPECTED",
+   "value": 0.35,
+   "note": "HANK unemployment slots are built from the replacement rates (0.7 with UI, 0.5 after); the PE's per-state distributions live in its Markov income spec, compared at H4"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp4/PermShk:degenerate",
+   "status": "EXPECTED",
+   "value": 0.08904784840984381,
+   "note": "0 \u21d2 psi\u22611 in unemployment (HAFISCAL_HANK_UNEMP_PSI=one); >0 \u21d2 the employed marginal is kept (=main, the PE semantics the estimation used)"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp5/TranShk:level",
+   "status": "EXPECTED",
+   "value": 0.35,
+   "note": "HANK unemployment slots are built from the replacement rates (0.7 with UI, 0.5 after); the PE's per-state distributions live in its Markov income spec, compared at H4"
+  },
+  {
+   "educ": "dropout",
+   "field": "IncShkDstn/unemp5/PermShk:degenerate",
+   "status": "EXPECTED",
+   "value": 0.08904784840984381,
+   "note": "0 \u21d2 psi\u22611 in unemployment (HAFISCAL_HANK_UNEMP_PSI=one); >0 \u21d2 the employed marginal is kept (=main, the PE semantics the estimation used)"
+  },
+  {
+   "educ": "highschool",
+   "field": "DiscFacDstn/atoms",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "DiscFacDstn/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "CRRA",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "Rfree",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*1.01 by literal; PE from the calibration"
+  },
+  {
+   "educ": "highschool",
+   "field": "LivPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*0.99375 by literal; PE from the calibration"
+  },
+  {
+   "educ": "highschool",
+   "field": "MrkvArray(base, lumped to HANK states)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "PermGroFac(lumped)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "PermShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "TranShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "solve_grid/aXtraMax",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "solve_grid/aXtraCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "solve_grid/aXtraMin",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "solve_grid/aXtraNestFac",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "PermShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "TranShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "UnempPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "IncUnemp",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "dist_grid/mCount",
+   "status": "EXPECTED",
+   "value": 50.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "highschool",
+   "field": "dist_grid/mMax",
+   "status": "EXPECTED",
+   "value": 1300.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/employed/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/employed/PermShk",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/employed/TranShk",
+   "status": "EXPECTED",
+   "value": 0.49435139884747015,
+   "note": "the HANK block scales the employed transitory shock by wage_ss*(1-tau_ss) (net income level; HAFISCAL_HANK_INCOME_LEVEL=net, the R-e item-2 arm) \u2014 the PE's own level is gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/employed/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE median ratio; = wage_ss*(1-tau_ss) = 0.7 under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp1/TranShk:level",
+   "status": "EXPECTED",
+   "value": 0.48999999999999994,
+   "note": "HANK unemployment slots are built from the replacement rates (0.7 with UI, 0.5 after); the PE's per-state distributions live in its Markov income spec, compared at H4"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp1/PermShk:degenerate",
+   "status": "EXPECTED",
+   "value": 0.08904784840984381,
+   "note": "0 \u21d2 psi\u22611 in unemployment (HAFISCAL_HANK_UNEMP_PSI=one); >0 \u21d2 the employed marginal is kept (=main, the PE semantics the estimation used)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp2/TranShk:level",
+   "status": "EXPECTED",
+   "value": 0.48999999999999994,
+   "note": "HANK unemployment slots are built from the replacement rates (0.7 with UI, 0.5 after); the PE's per-state distributions live in its Markov income spec, compared at H4"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp2/PermShk:degenerate",
+   "status": "EXPECTED",
+   "value": 0.08904784840984381,
+   "note": "0 \u21d2 psi\u22611 in unemployment (HAFISCAL_HANK_UNEMP_PSI=one); >0 \u21d2 the employed marginal is kept (=main, the PE semantics the estimation used)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp3/TranShk:level",
+   "status": "EXPECTED",
+   "value": 0.35,
+   "note": "HANK unemployment slots are built from the replacement rates (0.7 with UI, 0.5 after); the PE's per-state distributions live in its Markov income spec, compared at H4"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp3/PermShk:degenerate",
+   "status": "EXPECTED",
+   "value": 0.08904784840984381,
+   "note": "0 \u21d2 psi\u22611 in unemployment (HAFISCAL_HANK_UNEMP_PSI=one); >0 \u21d2 the employed marginal is kept (=main, the PE semantics the estimation used)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp4/TranShk:level",
+   "status": "EXPECTED",
+   "value": 0.35,
+   "note": "HANK unemployment slots are built from the replacement rates (0.7 with UI, 0.5 after); the PE's per-state distributions live in its Markov income spec, compared at H4"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp4/PermShk:degenerate",
+   "status": "EXPECTED",
+   "value": 0.08904784840984381,
+   "note": "0 \u21d2 psi\u22611 in unemployment (HAFISCAL_HANK_UNEMP_PSI=one); >0 \u21d2 the employed marginal is kept (=main, the PE semantics the estimation used)"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp5/TranShk:level",
+   "status": "EXPECTED",
+   "value": 0.35,
+   "note": "HANK unemployment slots are built from the replacement rates (0.7 with UI, 0.5 after); the PE's per-state distributions live in its Markov income spec, compared at H4"
+  },
+  {
+   "educ": "highschool",
+   "field": "IncShkDstn/unemp5/PermShk:degenerate",
+   "status": "EXPECTED",
+   "value": 0.08904784840984381,
+   "note": "0 \u21d2 psi\u22611 in unemployment (HAFISCAL_HANK_UNEMP_PSI=one); >0 \u21d2 the employed marginal is kept (=main, the PE semantics the estimation used)"
+  },
+  {
+   "educ": "college",
+   "field": "DiscFacDstn/atoms",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "DiscFacDstn/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "CRRA",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "Rfree",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*1.01 by literal; PE from the calibration"
+  },
+  {
+   "educ": "college",
+   "field": "LivPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": "HANK sets np.ones(n)*0.99375 by literal; PE from the calibration"
+  },
+  {
+   "educ": "college",
+   "field": "MrkvArray(base, lumped to HANK states)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "PermGroFac(lumped)",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "PermShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "TranShkStd",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "solve_grid/aXtraMax",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "solve_grid/aXtraCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "solve_grid/aXtraMin",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "solve_grid/aXtraNestFac",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "PermShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "TranShkCount",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "UnempPrb",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "IncUnemp",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "dist_grid/mCount",
+   "status": "EXPECTED",
+   "value": 50.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "college",
+   "field": "dist_grid/mMax",
+   "status": "EXPECTED",
+   "value": 1300.0,
+   "note": "documented R-e residual: the fake-news distribution grid lives on market resources m (mCount/mMax), the PE transition matrix's on end-of-period assets a (dist_aGrid_count/max); exp-mult spacing; mMin=1e-4"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/employed/pmv",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/employed/PermShk",
+   "status": "MATCH",
+   "value": 0.0,
+   "note": ""
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/employed/TranShk",
+   "status": "EXPECTED",
+   "value": 0.49435139884747015,
+   "note": "the HANK block scales the employed transitory shock by wage_ss*(1-tau_ss) (net income level; HAFISCAL_HANK_INCOME_LEVEL=net, the R-e item-2 arm) \u2014 the PE's own level is gross"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/employed/TranShk:level_ratio",
+   "status": "EXPECTED",
+   "value": 0.7,
+   "note": "HANK/PE median ratio; = wage_ss*(1-tau_ss) = 0.7 under INCOME_LEVEL=net, 1.0 under gross"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp1/TranShk:level",
+   "status": "EXPECTED",
+   "value": 0.48999999999999994,
+   "note": "HANK unemployment slots are built from the replacement rates (0.7 with UI, 0.5 after); the PE's per-state distributions live in its Markov income spec, compared at H4"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp1/PermShk:degenerate",
+   "status": "EXPECTED",
+   "value": 0.08904784840984381,
+   "note": "0 \u21d2 psi\u22611 in unemployment (HAFISCAL_HANK_UNEMP_PSI=one); >0 \u21d2 the employed marginal is kept (=main, the PE semantics the estimation used)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp2/TranShk:level",
+   "status": "EXPECTED",
+   "value": 0.48999999999999994,
+   "note": "HANK unemployment slots are built from the replacement rates (0.7 with UI, 0.5 after); the PE's per-state distributions live in its Markov income spec, compared at H4"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp2/PermShk:degenerate",
+   "status": "EXPECTED",
+   "value": 0.08904784840984381,
+   "note": "0 \u21d2 psi\u22611 in unemployment (HAFISCAL_HANK_UNEMP_PSI=one); >0 \u21d2 the employed marginal is kept (=main, the PE semantics the estimation used)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp3/TranShk:level",
+   "status": "EXPECTED",
+   "value": 0.35,
+   "note": "HANK unemployment slots are built from the replacement rates (0.7 with UI, 0.5 after); the PE's per-state distributions live in its Markov income spec, compared at H4"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp3/PermShk:degenerate",
+   "status": "EXPECTED",
+   "value": 0.08904784840984381,
+   "note": "0 \u21d2 psi\u22611 in unemployment (HAFISCAL_HANK_UNEMP_PSI=one); >0 \u21d2 the employed marginal is kept (=main, the PE semantics the estimation used)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp4/TranShk:level",
+   "status": "EXPECTED",
+   "value": 0.35,
+   "note": "HANK unemployment slots are built from the replacement rates (0.7 with UI, 0.5 after); the PE's per-state distributions live in its Markov income spec, compared at H4"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp4/PermShk:degenerate",
+   "status": "EXPECTED",
+   "value": 0.08904784840984381,
+   "note": "0 \u21d2 psi\u22611 in unemployment (HAFISCAL_HANK_UNEMP_PSI=one); >0 \u21d2 the employed marginal is kept (=main, the PE semantics the estimation used)"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp5/TranShk:level",
+   "status": "EXPECTED",
+   "value": 0.35,
+   "note": "HANK unemployment slots are built from the replacement rates (0.7 with UI, 0.5 after); the PE's per-state distributions live in its Markov income spec, compared at H4"
+  },
+  {
+   "educ": "college",
+   "field": "IncShkDstn/unemp5/PermShk:degenerate",
+   "status": "EXPECTED",
+   "value": 0.08904784840984381,
+   "note": "0 \u21d2 psi\u22611 in unemployment (HAFISCAL_HANK_UNEMP_PSI=one); >0 \u21d2 the employed marginal is kept (=main, the PE semantics the estimation used)"
+  }
+ ],
+ "summary": {
+  "match": 57,
+  "expected": 42,
+  "fail": 0
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "rung": "B4",
+ "kind": "build",
+ "note": "the Gamma-bundle in ONE rung (the split intermediate IS the BUG-097 defect config); null SSTs gate byte-inertness at Gamma==1 BEFORE the flip; econ-9 bundle exit directional: +18.9/+19.5/+27.5%. TRANSITIONAL budget ceiling 20x: this config runs Gamma-on with the BST kernel -- the biased construction BUG-093/108 identified (measured 1.5e-3 vs the doob-config 9.7e-5, ~15x); B4b's doob flip must RESTORE the standard floors, making the pair a measured demonstration of what the Q-construction fixes",
+ "start": "2026-09-01 23:29:36",
+ "gates": {
+  "null:test_step4_tranmat_growth.py": true,
+  "null:test_pweighted_survival.py": true,
+  "build": true,
+  "budget_suite": true,
+  "by_educ_identity": true,
+  "ge": true
+ },
+ "walls": {
+  "null:test_step4_tranmat_growth.py": 4.1,
+  "null:test_pweighted_survival.py": 25.5,
+  "build": 0.0,
+  "ge": 11.1,
+  "pe_anchor": 1.4,
+  "diagnose": 1.3
+ },
+ "build_reused": true,
+ "budget": {
+  "transfers": {
+   "present": true,
+   "off": 0.001473518711860744,
+   "scale": 0.9937150105683696,
+   "off_over_scale": 0.0014828383351258262,
+   "floor": 0.0058200000000000005,
+   "cash_s1": 0.9940104373733417,
+   "cash_s5": 0.9943315464901221,
+   "pass": true
+  },
+  "tau": {
+   "present": true,
+   "off": 0.0014920449012321563,
+   "scale": 0.952622120058762,
+   "off_over_scale": 0.0015662505308402038,
+   "floor": 0.00588,
+   "cash_s1": -0.9528444365405132,
+   "cash_s5": -0.9530948197056892,
+   "pass": true
+  },
+  "w": {
+   "present": true,
+   "off": 0.0010444367812103283,
+   "scale": 0.6668354840431561,
+   "off_over_scale": 0.0015662585543254246,
+   "floor": 0.00588,
+   "cash_s1": 0.6669910993480409,
+   "cash_s5": 0.6671663513322128,
+   "pass": true
+  },
+  "UI_extend": {
+   "present": true,
+   "off": 6.120169196719273e-06,
+   "scale": 0.005591524094106068,
+   "off_over_scale": 0.0010945440087024648,
+   "floor": 0.00204,
+   "cash_s1": 0.0028425346499025925,
+   "cash_s5": 0.0028457817976578165,
+   "pass": true
+  },
+  "UI_rr": {
+   "present": true,
+   "off": 2.3670955037464417e-05,
+   "scale": 0.025757496044547298,
+   "off_over_scale": 0.0009189928631465485,
+   "floor": 0.00402,
+   "cash_s1": 0.02557922837590507,
+   "cash_s5": 0.02559058506017692,
+   "pass": true
+  },
+  "r": {
+   "present": true,
+   "off": 0.01425891650581268,
+   "scale": 5.471834025234026,
+   "off_over_scale": 0.0026058751855513084,
+   "floor": 0.078,
+   "cash_s1": 3.360806613360977,
+   "cash_s5": 3.360047962466325,
+   "pass": true
+  },
+  "DiscFac": {
+   "present": true,
+   "off": 0.010618385950235704,
+   "scale": 4.679107179625743,
+   "off_over_scale": 0.002269318812886225,
+   "floor": 0.0432,
+   "cash_s1": -0.0007418081124482764,
+   "cash_s5": -0.002018196432999192,
+   "pass": true
+  },
+  "eta": {
+   "present": true,
+   "skipped": "eta gated by the chain-implied dY path (G-ETA, Phase C), not the delivery-row form"
+  }
+ },
+ "by_educ_worst": 1.7763568394002505e-15,
+ "attribution_vs_prev": {
+  "C.DiscFac": 0.01948107593921318,
+  "C.UI_extend": 7.515597989758488e-05,
+  "C.UI_rr": 0.00041089286455488205,
+  "C.eta": 0.00042390177961608433,
+  "C.r": 0.02649796433872452,
+  "C.tau": 0.010987847480697865,
+  "C.transfers": 0.01355672412766909,
+  "C.w": 0.007736589160884627,
+  "A.DiscFac": 1.4833775173407293,
+  "A.UI_extend": 0.00019748579531079493,
+  "A.UI_rr": 0.0009240654969326035,
+  "A.eta": 0.002664066972292817,
+  "A.r": 2.9180310953068735,
+  "A.tau": 0.046437873793074264,
+  "A.transfers": 0.04808795116497874,
+  "A.w": 0.03251080662482439
+ },
+ "h20": {
+  "transfers.taylor": 0.9311731819285236,
+  "transfers.fixed_real": 1.1789890768362004,
+  "UI_extensions.taylor": 1.2013751145597342,
+  "UI_extensions.fixed_real": 1.3874488699758498,
+  "tax_cut.taylor": 1.008434052767665,
+  "tax_cut.fixed_real": 1.2500330767779462
+ },
+ "g11_lines": [
+  "[hank-g11] transfers/taylor: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['tau', 'transfers']  drop-one bite={'tau': '1.497e-03', 'transfers': '8.650e-03'}\n",
+  "[hank-g11] transfers/fixed_real: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['tau', 'transfers']  drop-one bite={'tau': '1.497e-03', 'transfers': '8.650e-03'}\n",
+  "[hank-g11] UI_extend/taylor: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['UI_extend', 'tau']  drop-one bite={'UI_extend': '9.884e-04', 'tau': '9.243e-05'}\n",
+  "[hank-g11] UI_extend/fixed_real: max_abs_dev_C=0.000e+00  max_rel_dev_C=0.000e+00  max_abs_dev_A=0.000e+00  max_rel_dev_A=0.000e+00  unknown_theta_max_abs=-1.000e+00  unknown_r_ante_max_abs=-1.000e+00  live=['UI_extend', 'tau']  drop-one bite={'UI_extend': '9.884e-04', 'tau': '9.243e-05'}\n"
+ ],
+ "pe_anchor_rc": 0,
+ "diagnose_rc": 0,
+ "pass": true,
+ "end": "2026-09-01 23:30:20"
+}

@@ -1,0 +1,6 @@
+ARM=arm2b_growth_unempfrozen ENGINE=package deltas: HAFISCAL_STEP4_FAST_BACKWARD=1 HAFISCAL_PLVL_GROWS_DURING_UNEMP=on HAFISCAL_STEP4_ZEROTH_FIX=1 HAFISCAL_HANK_PERMGROFAC=main HAFISCAL_STEP4_TRANMAT_GROWTH=1 HAFISCAL_UI_STATE_ENCODING=bug_fix HAFISCAL_PLVL_GROWS_DURING_UNEMP=off ; start 2026-09-05 16:12:18
+jacobians rc=0 wall_s=508 12582105088 maximum resident set size
+d5dec5d9aaba5915be917400d5324d807896af97eff5e813d1636a9d69f4c460  /home/shared/github/llorracc/HAFiscal-Latest/Code/HA-Models/rerun_logs/hank_ladder_20260905/arm2b_growth_unempfrozen/HA_Fiscal_Jacs.obj
+ge rc=0 wall_s=13
+end 2026-09-05 16:20:59
+DONE

@@ -1,0 +1,60 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  Welfare and Spending Effects of Consumption Stimulus
+  Policies
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+version: 1.0.7
+authors:
+  - given-names: Christopher D.
+    family-names: Carroll
+    orcid: 'https://orcid.org/0000-0003-3732-9312'
+  - given-names: Edmund
+    family-names: Crawley
+  - given-names: William
+    family-names: Du
+  - given-names: Ivan
+    family-names: Frankovic
+  - given-names: Håkon
+    family-names: Tretvoll
+repository-code: 'https://github.com/econ-ark/HAFiscal'
+doi: 10.5281/zenodo.19120432
+keywords:
+  - stimulus checks
+  - unemployment insurance extensions
+  - payroll tax cuts
+  - HANK
+  - heterogeneous agent models
+  - marginal propensity to consume
+  - spending multipliers
+  - fiscal policy
+  - REMARK
+  - Reproduction
+preferred-citation:
+  type: article
+  title: Welfare and Spending Effects of Consumption Stimulus Policies
+  authors:
+    - given-names: Christopher D.
+      family-names: Carroll
+    - given-names: Edmund
+      family-names: Crawley
+    - given-names: William
+      family-names: Du
+    - given-names: Ivan
+      family-names: Frankovic
+    - given-names: Håkon
+      family-names: Tretvoll
+  journal: Quantitative Economics
+  volume: 17
+  issue: 3
+  start: 741
+  end: 790
+  year: 2026
+  month: 7
+  doi: 10.3982/QE2442
+  url: 'https://doi.org/10.3982/QE2442'

@@ -1,0 +1,55 @@
+{
+ "schema_version": "2",
+ "pid": 974298,
+ "label": "welfare6_scenario-recessionCheck_AD",
+ "argv": [
+  "/home/shared/github/llorracc/HAFiscal-Latest/Code/HA-Models/FromPandemicCode/welfare6_scenario.py"
+ ],
+ "events": [
+  {
+   "kind": "solve_cache",
+   "outcome": "miss_solved_saved",
+   "byte_effect": "none",
+   "t_utc": "2026-08-07T15:33:13Z",
+   "tag": "AC132-132-132-132-132-132-132-752-752-752-752-752-752-752-542-542-542-542-542-542-542__mc-hark_solve_only__noshuf__seed0",
+   "shock_type": "base",
+   "entry": "AC132-132-132-132-132-132-132-752-752-752-752-752-752-752-542-542-542-542-542-542-542__mc-hark_solve_only__noshuf__seed0__fc0b880a.pkl"
+  },
+  {
+   "kind": "solve_cache",
+   "outcome": "saved",
+   "byte_effect": "none",
+   "t_utc": "2026-08-07T15:34:23Z",
+   "tag": "base_aggcons",
+   "shock_type": "base",
+   "entry": "base_aggcons__503494e9.pkl"
+  },
+  {
+   "kind": "platform",
+   "outcome": "observed",
+   "byte_effect": "none",
+   "t_utc": "2026-08-07T15:48:08Z",
+   "jax_backend": "cpu",
+   "panel_dtype": "float64"
+  },
+  {
+   "kind": "ad_full",
+   "outcome": "saved",
+   "byte_effect": "none",
+   "t_utc": "2026-08-07T15:51:49Z",
+   "engine": "jax_mc_replay_ad",
+   "shock_type": "recessionCheck",
+   "iterations": 5,
+   "final_step": 0.0006248740968501586,
+   "entry": "ad_full__f3a77206.pkl"
+  },
+  {
+   "kind": "ad_belief_seed",
+   "outcome": "published",
+   "byte_effect": "none",
+   "t_utc": "2026-08-07T15:51:49Z",
+   "shock_type": "recessionCheck",
+   "engine": "jax_mc_replay_ad"
+  }
+ ]
+}

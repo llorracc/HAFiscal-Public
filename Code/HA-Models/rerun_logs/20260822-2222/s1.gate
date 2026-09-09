@@ -1,0 +1,10 @@
+
+=== GATE S1 (A1-A3, C1): PASS ===
+  [ok] C1 continuation fallback fired (ALLOWED by flag; A1/A2 informational, A3 gates): battery fallback
+  [ok] A1 unanimity spread beta (informational; waived): 1.319e-04
+  [ok] A1 unanimity spread nabla (informational; waived): 1.588e-03
+  [ok] A2 splurge0 beta: value=0.9263754327132292 ref=0.9263754327132292 delta=0.000e+00 (rel) tol=1.0e-04
+  [ok] A2 splurge0 nabla: value=0.09001127614153807 ref=0.09001127614153807 delta=0.000e+00 (rel) tol=2.0e-03
+  [ok] A3 endpoint splurge: value=0.2998442497534829 ref=0.299869842312644 delta=8.535e-05 (rel) tol=1.0e-03
+  [ok] A3 endpoint beta: value=0.9795230843093873 ref=0.9795228226132132 delta=2.672e-07 (rel) tol=6.0e-05
+  [ok] A3 endpoint nabla: value=0.029389574810491082 ref=0.029390125527173155 delta=1.874e-05 (rel) tol=2.0e-03

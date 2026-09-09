@@ -1,0 +1,29 @@
+compare_jacs ghost vs static differencing (BUG-075 alone)
+  A=arm1_col0_ghost/HA_Fiscal_Jacs.obj
+  B=arm1h_col0_static/HA_Fiscal_Jacs.obj
+  keys A=['A', 'A_by_educ', 'A_ss_weighted', 'C', 'C_by_educ', 'C_ss_weighted', 'Uprime_ss_by_educ', 'Uprime_ss_weighted', 'W', 'W_by_educ', 'dx'] B=['A', 'A_by_educ', 'A_ss_weighted', 'C', 'C_by_educ', 'C_ss_weighted', 'Uprime_ss_by_educ', 'Uprime_ss_weighted', 'W', 'W_by_educ', 'dx']
+  C  transfers  max|dJ|=2.261e-06  max|A|=2.5430e-01  rel=8.892e-06  A[0,0]=+0.2543009 B[0,0]=+0.2543009
+  C  r          max|dJ|=2.261e-06  max|A|=2.0144e-01  rel=1.123e-05  A[0,0]=+0.0699425 B[0,0]=+0.0699425
+  C  w          max|dJ|=2.261e-06  max|A|=1.4828e-01  rel=1.525e-05  A[0,0]=+0.1482754 B[0,0]=+0.1482754
+  C  tau        max|dJ|=2.261e-06  max|A|=2.1186e-01  rel=1.067e-05  A[0,0]=-0.2118569 B[0,0]=-0.2118569
+  C  eta        max|dJ|=2.261e-06  max|A|=9.5467e-03  rel=2.369e-04  A[0,0]=+0.0095467 B[0,0]=+0.0095467
+  C  DiscFac    max|dJ|=2.261e-06  max|A|=2.8341e-01  rel=7.979e-06  A[0,0]=+0.0000000 B[0,0]=+0.0000000
+  C  UI_extend  max|dJ|=2.261e-06  max|A|=1.7452e-03  rel=1.296e-03  A[0,0]=+0.0017452 B[0,0]=+0.0017452
+  C  UI_rr      max|dJ|=2.261e-06  max|A|=8.8515e-03  rel=2.555e-04  A[0,0]=+0.0088515 B[0,0]=+0.0088515
+  A  transfers  max|dJ|=1.748e-04  max|A|=7.3945e-01  rel=2.364e-04  A[0,0]=+0.7394491 B[0,0]=+0.7394513
+  A  r          max|dJ|=1.748e-04  max|A|=3.7174e+00  rel=4.702e-05  A[0,0]=+1.6982181 B[0,0]=+1.6982203
+  A  w          max|dJ|=1.748e-04  max|A|=5.1674e-01  rel=3.382e-04  A[0,0]=+0.5167421 B[0,0]=+0.5167443
+  A  tau        max|dJ|=1.748e-04  max|A|=7.3817e-01  rel=2.368e-04  A[0,0]=-0.7381681 B[0,0]=-0.7381658
+  A  eta        max|dJ|=1.748e-04  max|A|=2.2833e-02  rel=7.654e-03  A[0,0]=+0.0200406 B[0,0]=+0.0200428
+  A  DiscFac    max|dJ|=1.748e-04  max|A|=3.4329e+00  rel=5.091e-05  A[0,0]=+0.0000000 B[0,0]=+0.0000022
+  A  UI_extend  max|dJ|=1.748e-04  max|A|=4.6870e-03  rel=3.729e-02  A[0,0]=+0.0012778 B[0,0]=+0.0012800
+  A  UI_rr      max|dJ|=1.748e-04  max|A|=1.8355e-02  rel=9.522e-03  A[0,0]=+0.0183552 B[0,0]=+0.0183574
+  C_by_educ dropout    max over instruments |dJ|=8.825e-07 (w)
+  C_by_educ highschool max over instruments |dJ|=4.558e-07 (r)
+  C_by_educ college    max over instruments |dJ|=5.107e-06 (r)
+  A_by_educ dropout    max over instruments |dJ|=5.710e-05 (r)
+  A_by_educ highschool max over instruments |dJ|=2.730e-05 (r)
+  A_by_educ college    max over instruments |dJ|=4.083e-04 (transfers)
+  C_ss_weighted: A=0.6985735832401649 B=0.6985735832401649
+  A_ss_weighted: A=1.7792840540393056 B=1.7792840540393056
+  OVERALL max|dJ| = 4.083e-04

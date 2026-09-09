@@ -1,0 +1,66 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [ gh-pages ]
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Remove problematic symlinks
+        run: |
+          echo "🧹 Removing broken symlinks that cause tar failures..."
+          
+          # Find and remove broken symlinks (symlinks with non-existent targets)
+          find . -type l ! -exec test -e {} \; -print -delete || true
+          
+          # Specifically remove known problematic symlinks
+          rm -f .devcontainer_no-dashboard || true
+          rm -f tabular/MPC_WealthQuartiles_Table.ltx.relpath || true
+          rm -f tabular/MPC_WealthQuartiles_Table.ltx || true
+          
+          echo "✅ Cleanup completed"
+          
+          # List remaining symlinks for debugging
+          echo ""
+          echo "📋 Remaining symlinks (if any):"
+          find . -type l -ls | head -10 || echo "  (none found)"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Deployment summary
+        run: |
+          echo "🎉 GitHub Pages deployed!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📦 Commit: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 URL: ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY

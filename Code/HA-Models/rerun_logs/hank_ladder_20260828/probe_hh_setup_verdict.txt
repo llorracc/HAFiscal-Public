@@ -1,0 +1,28 @@
+=== hh_setup.build() inputs: a_legacy_ones vs b_bugfix_ones
+compare_primitives: A=mac/probe_a_legacy_ones.json
+                    B=mac/probe_b_bugfix_ones.json
+  numeric/scalar leaves compared: 295, equal within 1e-12: 295, DIFFERENCES: 0
+=== hh_setup.build() inputs: d_legacy_main_pe vs e_bugfix_main_pe
+compare_primitives: A=mac/probe_d_legacy_main_pe.json
+                    B=mac/probe_e_bugfix_main_pe.json
+  numeric/scalar leaves compared: 295, equal within 1e-12: 295, DIFFERENCES: 0
+=== hh_setup.build() inputs: b_bugfix_ones vs c_bugfix_main
+compare_primitives: A=mac/probe_b_bugfix_ones.json
+                    B=mac/probe_c_bugfix_main.json
+  numeric/scalar leaves compared: 295, equal within 1e-12: 292, DIFFERENCES: 3
+  DIFF /BaseTypeList[0]/PermGroFac: max|A-B|=3.553e-03 (max|A|=1)
+  DIFF /BaseTypeList[1]/PermGroFac: max|A-B|=4.530e-03 (max|A|=1)
+  DIFF /BaseTypeList[2]/PermGroFac: max|A-B|=4.895e-03 (max|A|=1)
+=== hh_setup.build() inputs: b_bugfix_ones vs f_legacy_main_legacychains
+compare_primitives: A=mac/probe_b_bugfix_ones.json
+                    B=mac/probe_f_legacy_main_legacychains.json
+  numeric/scalar leaves compared: 295, equal within 1e-12: 292, DIFFERENCES: 3
+  DIFF /BaseTypeList[0]/PermGroFac: shape A(1, 6) B(1, 4)
+  DIFF /BaseTypeList[1]/PermGroFac: shape A(1, 6) B(1, 4)
+  DIFF /BaseTypeList[2]/PermGroFac: shape A(1, 6) B(1, 4)
+a_legacy_ones PermGroFac per agent: [[[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]], [[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]], [[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]]]
+b_bugfix_ones PermGroFac per agent: [[[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]], [[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]], [[1.0, 1.0, 1.0, 1.0, 1.0, 1.0]]]
+c_bugfix_main PermGroFac per agent: [[[1.0035525, 1.0035525, 1.0035525, 1.0035525, 1.0035525, 1.0035525]], [[1.00453, 1.00453, 1.00453, 1.00453, 1.00453, 1.00453]], [[1.004895, 1.004895, 1.004895, 1.004895, 1.004895, 1.004895]]]
+d_legacy_main_pe PermGroFac per agent: [[[1.0035525, 1.0035525, 1.0035525, 1.0035525, 1.0035525, 1.0035525]], [[1.00453, 1.00453, 1.00453, 1.00453, 1.00453, 1.00453]], [[1.004895, 1.004895, 1.004895, 1.004895, 1.004895, 1.004895]]]
+e_bugfix_main_pe PermGroFac per agent: [[[1.0035525, 1.0035525, 1.0035525, 1.0035525, 1.0035525, 1.0035525]], [[1.00453, 1.00453, 1.00453, 1.00453, 1.00453, 1.00453]], [[1.004895, 1.004895, 1.004895, 1.004895, 1.004895, 1.004895]]]
+f_legacy_main_legacychains PermGroFac per agent: [[[1.0035525, 1.0035525, 1.0035525, 1.0035525]], [[1.00453, 1.00453, 1.00453, 1.00453]], [[1.004895, 1.004895, 1.004895, 1.004895]]]
